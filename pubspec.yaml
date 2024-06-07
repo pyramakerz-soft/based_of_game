@@ -10,12 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bloc: ^8.1.4
-  dartz: ^0.10.1
-  flame_rive: ^1.10.2
-  games_models:
-    git:
-      url: https://github.com/moataz-mohamed194/games_models
 
 dev_dependencies:
   flutter_test:

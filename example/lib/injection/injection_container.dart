@@ -1,0 +1,11 @@
+import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import '../apis_connections/api_connection.dart';
+import '../bloc/contact_lesson_bloc.dart';
+import '../data/data_sources/data_source_remotely_of_contact_lesson.dart';
+import '../data/repositories/contact_lesson_repository_impl.dart';
+import '../domain/repositories/repositories_contact_lesson.dart';
+import '../domain/use_cases/contact_lesson_use_cases.dart';
+import '../domain/use_cases/game_use_cases.dart';
+import '../network/network_info.dart';
+part 'injection_import.dart';

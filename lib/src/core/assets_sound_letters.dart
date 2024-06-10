@@ -1,5 +1,5 @@
 abstract class AssetsSoundLetters {
-  static const String mainPathOfSound = 'assets/';
+  static const String mainPathOfSound = 'letters/';
 
   static String getPathOfLetter({required String letter}) {
     return "$mainPathOfSound$letter.mp3";

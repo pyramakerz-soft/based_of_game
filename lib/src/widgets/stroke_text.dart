@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../phonetics_color.dart';
-import '../theme_text.dart';
+import '../core/phonetics_color.dart';
+import '../core/theme_text.dart';
 
 class StrokeText extends StatelessWidget {
   final String text;

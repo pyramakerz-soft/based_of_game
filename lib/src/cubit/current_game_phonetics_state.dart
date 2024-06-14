@@ -1,10 +1,5 @@
 part of 'current_game_phonetics_cubit.dart';
 
-enum StateOfMainGame {
-  increaseIndex,
-  currentIndex,
-}
-
 class CurrentGamePhoneticsState extends Equatable {
   Artboard? avatarArtboardIdle;
   Artboard? avatarArtboardSuccess;
@@ -22,8 +17,7 @@ class CurrentGamePhoneticsState extends Equatable {
   List<GameModel>? gameData;
   List<int>? statesOfAddStars;
   int? countOfStar = 0;
-  MainDataOfPhonetics? basicData;
-  String? currentStringOfDice;
+  MainDataOfChapters? basicData;
   CurrentGamePhoneticsState(
       {this.basicData,
       this.gameData,
@@ -32,7 +26,6 @@ class CurrentGamePhoneticsState extends Equatable {
       this.stateOfStringWillSay,
       this.actionWhenTriesBeZero,
       this.stateOfAvatar,
-      this.currentStringOfDice,
       this.avatarArtboardIdle,
       this.avatarArtboardSad,
       this.touchPositions,
@@ -44,7 +37,7 @@ class CurrentGamePhoneticsState extends Equatable {
       this.countOfStar});
 
   CurrentGamePhoneticsState copyWith(
-      {MainDataOfPhonetics? basicData,
+      {MainDataOfChapters? basicData,
       Artboard? avatarArtboardSuccess,
       Artboard? avatarArtboardIdle,
       Artboard? avatarArtboardSad,
@@ -52,7 +45,6 @@ class CurrentGamePhoneticsState extends Equatable {
       bool? stateOfStringIsWord,
       Artboard? avatarCurrentArtboard,
       String? stateOfStringWillSay,
-      String? currentStringOfDice,
       void Function()? actionWhenTriesBeZero,
       String? currentAvatar,
       String? stateOfAvatar,
@@ -69,7 +61,6 @@ class CurrentGamePhoneticsState extends Equatable {
         actionWhenTriesBeZero:
             actionWhenTriesBeZero ?? this.actionWhenTriesBeZero,
         stateOfStringWillSay: stateOfStringWillSay ?? this.stateOfStringWillSay,
-        currentStringOfDice: currentStringOfDice ?? this.currentStringOfDice,
         avatarCurrentArtboard:
             avatarCurrentArtboard ?? this.avatarCurrentArtboard,
         gameData: gameData ?? this.gameData,
@@ -83,27 +74,6 @@ class CurrentGamePhoneticsState extends Equatable {
             avatarArtboardSuccess ?? this.avatarArtboardSuccess,
         avatarArtboardIdle: avatarArtboardIdle ?? this.avatarArtboardIdle,
         countOfStar: countOfStar ?? this.countOfStar);
-  }
-
-  clearCurrentStringOfDice() {
-    return CurrentGamePhoneticsState(
-        basicData: basicData ?? basicData,
-        index: index ?? index,
-        avatarCurrentArtboard: avatarCurrentArtboard,
-        gameData: gameData ?? gameData,
-        statesOfAddStars: statesOfAddStars ?? statesOfAddStars,
-        stateOfStringWillSay: stateOfStringWillSay ?? stateOfStringWillSay,
-        currentStringOfDice: null,
-        stateOfAvatar: stateOfAvatar ?? stateOfAvatar,
-        touchPositions: touchPositions,
-        currentAvatar: currentAvatar ?? currentAvatar,
-        actionWhenTriesBeZero: actionWhenTriesBeZero,
-        stateOfStringIsWord: stateOfStringIsWord ?? stateOfStringIsWord,
-        countOfTries: countOfTries ?? countOfTries,
-        avatarArtboardSad: avatarArtboardSad ?? avatarArtboardSad,
-        avatarArtboardSuccess: avatarArtboardSuccess ?? avatarArtboardSuccess,
-        avatarArtboardIdle: avatarArtboardIdle ?? avatarArtboardIdle,
-        countOfStar: countOfStar ?? countOfStar);
   }
 
   CurrentGamePhoneticsState clearAllData() {
@@ -124,7 +94,6 @@ class CurrentGamePhoneticsState extends Equatable {
         actionWhenTriesBeZero,
         gameData,
         avatarCurrentArtboard,
-        currentStringOfDice,
         touchPositions,
         countOfTries,
         stateOfAvatar,

@@ -275,10 +275,10 @@ packages:
     dependency: "direct main"
     description:
       name: games_models
-      sha256: c6459c5cac6117f29530b8f9e628cfd44aebc460f7a56315e6a53d9ba207161d
+      sha256: "21c0747638f08cad2d11ebf800364f5ebeba5f65c7d4db6754d40a447eebba96"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3"
   get_it:
     dependency: "direct main"
     description:

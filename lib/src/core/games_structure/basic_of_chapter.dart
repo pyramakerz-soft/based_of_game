@@ -1,8 +1,12 @@
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'assets_images_phonetics.dart';
-import 'basic_of_every_game.dart';
 
-enum MainDataOfPhoneticsTypes {
+import '../assets_images_phonetics.dart';
+import '../game_types/assets_images_arabic.dart';
+import 'basic_of_game.dart';
+import '../game_types/game_phonatics_types.dart';
+
+enum MainDataOfChaptersTypes {
   s,
   a,
   f,
@@ -17,173 +21,82 @@ enum MainDataOfPhoneticsTypes {
   u,
   l,
   b,
+  video,
   o,
   g,
   d,
   w,
   e,
-  n
+  n,
+  redUnit
 }
 
-extension TypeExtensionOfMainDataOfPhoneticsTypes on MainDataOfPhoneticsTypes {
+extension TypeExtension on MainDataOfChaptersTypes {
   String text() {
     switch (this) {
-      case MainDataOfPhoneticsTypes.a:
+      case MainDataOfChaptersTypes.a:
         return "a".toLowerCase();
-      case MainDataOfPhoneticsTypes.b:
+      case MainDataOfChaptersTypes.b:
         return 'b'.toLowerCase();
-      case MainDataOfPhoneticsTypes.f:
+      case MainDataOfChaptersTypes.f:
         return 'f'.toLowerCase();
-      case MainDataOfPhoneticsTypes.m:
+      case MainDataOfChaptersTypes.m:
         return 'm'.toLowerCase();
-      case MainDataOfPhoneticsTypes.t:
+      case MainDataOfChaptersTypes.t:
         return 't'.toLowerCase();
-      case MainDataOfPhoneticsTypes.c:
+      case MainDataOfChaptersTypes.c:
         return 'c'.toLowerCase();
-      case MainDataOfPhoneticsTypes.i:
+      case MainDataOfChaptersTypes.i:
         return 'i'.toLowerCase();
-      case MainDataOfPhoneticsTypes.g:
+      case MainDataOfChaptersTypes.g:
         return 'g'.toLowerCase();
-      case MainDataOfPhoneticsTypes.o:
+      case MainDataOfChaptersTypes.o:
         return 'o'.toLowerCase();
-      case MainDataOfPhoneticsTypes.j:
+      case MainDataOfChaptersTypes.j:
         return 'j'.toLowerCase();
-      case MainDataOfPhoneticsTypes.l:
+      case MainDataOfChaptersTypes.l:
         return 'l'.toLowerCase();
-      case MainDataOfPhoneticsTypes.u:
+      case MainDataOfChaptersTypes.u:
         return 'u'.toLowerCase();
-      case MainDataOfPhoneticsTypes.h:
+      case MainDataOfChaptersTypes.h:
         return 'h'.toLowerCase();
-      case MainDataOfPhoneticsTypes.p:
+      case MainDataOfChaptersTypes.p:
         return 'p'.toLowerCase();
-      case MainDataOfPhoneticsTypes.r:
+      case MainDataOfChaptersTypes.r:
         return 'r'.toLowerCase();
-      case MainDataOfPhoneticsTypes.s:
+      case MainDataOfChaptersTypes.s:
         return 's'.toLowerCase();
-      case MainDataOfPhoneticsTypes.d:
+      case MainDataOfChaptersTypes.d:
         return 'd'.toLowerCase();
-      case MainDataOfPhoneticsTypes.w:
+      case MainDataOfChaptersTypes.w:
         return 'w'.toLowerCase();
-      case MainDataOfPhoneticsTypes.e:
+      case MainDataOfChaptersTypes.e:
         return 'e'.toLowerCase();
-      case MainDataOfPhoneticsTypes.n:
+      case MainDataOfChaptersTypes.n:
         return 'n'.toLowerCase();
+      case MainDataOfChaptersTypes.video:
+        return 'video'.toLowerCase();
+      case MainDataOfChaptersTypes.redUnit:
+        return "المجموعة الحمراء".toLowerCase();
     }
   }
 }
 
-abstract class MainDataOfPhonetics {
+abstract class MainDataOfChapters {
   late String basicAvatar;
   late String winAvatar;
   late String idelAvatar;
   late String sadAvatar;
   late String background;
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
   late Color backGroundOfStarBar;
   CustomPainter? Function(List<Color?>? colorsOfPaths)? get tracingOfLetter;
   int? Function(Offset point, Size size)? get checkTheIndexOfPath;
   late int? countOfPartsOfLettersForTracing = 0;
-
-  static getGameDataType(
-      {required String subLetter,
-      required String subGame,
-      required int audioFlag}) {
-    if (BasicOfEveryGame.isConnectGame(game: subGame.toLowerCase()) == true) {
-      if (subGame.toLowerCase() == GameTypes.sortingCups.text()) {
-        return ConnectionSortingCups(mineGameData: SortingCupsGame());
-      } else if (subGame.toLowerCase() == GameTypes.spelling.text()) {
-        return SpellTheWord(mineGameData: SpellingGame());
-      } else {
-        return ConnectionWithoutSortingCups(
-            mineGameData: BasicOfEveryGame.getTheGameType(
-                gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-      }
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.s.text()) {
-      return SPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.a.text()) {
-      return APhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.f.text()) {
-      return FPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.m.text()) {
-      return MPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.t.text()) {
-      return TPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.c.text()) {
-      return CPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.r.text()) {
-      return RPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.i.text()) {
-      return IPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.p.text()) {
-      return PPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.h.text()) {
-      return HPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.j.text()) {
-      return JPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.u.text()) {
-      return UPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.l.text()) {
-      return LPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.b.text()) {
-      return BPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.o.text()) {
-      return OPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.g.text()) {
-      return GPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.d.text()) {
-      return DPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.n.text()) {
-      return NPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.w.text()) {
-      return WPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.e.text()) {
-      return EPhonetics(
-          mineGameData: BasicOfEveryGame.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    }
-  }
 }
 
-class SPhonetics implements MainDataOfPhonetics {
-  final BasicOfEveryGame mineGameData;
+class SPhonetics implements MainDataOfChapters {
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -197,7 +110,7 @@ class SPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -224,13 +137,13 @@ class SPhonetics implements MainDataOfPhonetics {
       };
 }
 
-class APhonetics implements MainDataOfPhonetics {
+class APhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -249,7 +162,7 @@ class APhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -264,13 +177,13 @@ class APhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing = 0;
 }
 
-class FPhonetics implements MainDataOfPhonetics {
+class FPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -289,7 +202,7 @@ class FPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -305,8 +218,8 @@ class FPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class MPhonetics implements MainDataOfPhonetics {
-  final BasicOfEveryGame mineGameData;
+class MPhonetics implements MainDataOfChapters {
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -320,7 +233,7 @@ class MPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -348,13 +261,13 @@ class MPhonetics implements MainDataOfPhonetics {
       };
 }
 
-class TPhonetics implements MainDataOfPhonetics {
+class TPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -374,7 +287,7 @@ class TPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -390,13 +303,13 @@ class TPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class CPhonetics implements MainDataOfPhonetics {
+class CPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -416,7 +329,7 @@ class CPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -432,13 +345,13 @@ class CPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class RPhonetics implements MainDataOfPhonetics {
+class RPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -458,7 +371,7 @@ class RPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -474,13 +387,13 @@ class RPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class IPhonetics implements MainDataOfPhonetics {
+class IPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -500,7 +413,7 @@ class IPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -516,13 +429,13 @@ class IPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class PPhonetics implements MainDataOfPhonetics {
+class PPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -542,7 +455,7 @@ class PPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -558,13 +471,13 @@ class PPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class HPhonetics implements MainDataOfPhonetics {
+class HPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -584,7 +497,7 @@ class HPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -600,13 +513,13 @@ class HPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class JPhonetics implements MainDataOfPhonetics {
+class JPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -626,7 +539,7 @@ class JPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -642,13 +555,13 @@ class JPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class UPhonetics implements MainDataOfPhonetics {
+class UPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -668,7 +581,7 @@ class UPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -684,13 +597,13 @@ class UPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class LPhonetics implements MainDataOfPhonetics {
+class LPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -710,7 +623,7 @@ class LPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -726,13 +639,13 @@ class LPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class BPhonetics implements MainDataOfPhonetics {
+class BPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -752,7 +665,7 @@ class BPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -768,13 +681,13 @@ class BPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class OPhonetics implements MainDataOfPhonetics {
+class OPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = Colors.white.withOpacity(.1);
 
@@ -794,7 +707,7 @@ class OPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -810,13 +723,13 @@ class OPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class GPhonetics implements MainDataOfPhonetics {
+class GPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -836,7 +749,7 @@ class GPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -852,13 +765,13 @@ class GPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class DPhonetics implements MainDataOfPhonetics {
+class DPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -878,7 +791,7 @@ class DPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -894,13 +807,13 @@ class DPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class WPhonetics implements MainDataOfPhonetics {
+class WPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -920,7 +833,7 @@ class WPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -936,13 +849,13 @@ class WPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class EPhonetics implements MainDataOfPhonetics {
+class EPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -962,7 +875,7 @@ class EPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -978,13 +891,13 @@ class EPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class NPhonetics implements MainDataOfPhonetics {
+class NPhonetics implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -1004,7 +917,7 @@ class NPhonetics implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -1020,13 +933,13 @@ class NPhonetics implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class ConnectionWithoutSortingCups implements MainDataOfPhonetics {
+class ConnectionWithoutSortingCups implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -1041,7 +954,7 @@ class ConnectionWithoutSortingCups implements MainDataOfPhonetics {
   @override
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -1060,13 +973,13 @@ class ConnectionWithoutSortingCups implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class ConnectionSortingCups implements MainDataOfPhonetics {
+class ConnectionSortingCups implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -1080,7 +993,7 @@ class ConnectionSortingCups implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -1102,13 +1015,13 @@ class ConnectionSortingCups implements MainDataOfPhonetics {
   int? countOfPartsOfLettersForTracing;
 }
 
-class SpellTheWord implements MainDataOfPhonetics {
+class SpellTheWord implements MainDataOfChapters {
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfEveryGame mineGameData;
+  final BasicOfGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -1116,7 +1029,7 @@ class SpellTheWord implements MainDataOfPhonetics {
   String background = AppImagesPhonetics.backGroundOfConnect;
 
   @override
-  BasicOfEveryGame? gameData;
+  BasicOfGame? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -1141,4 +1054,46 @@ class SpellTheWord implements MainDataOfPhonetics {
 
   @override
   int? countOfPartsOfLettersForTracing;
+}
+
+class RedPhonetics implements MainDataOfChapters {
+  final BasicOfGame mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesArabic.bgOfRedUnit;
+
+  @override
+  String basicAvatar = AppImagesArabic.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesArabic.beeFailureRiv;
+
+  @override
+  BasicOfGame? gameData;
+
+  @override
+  String winAvatar = AppImagesArabic.beeSuccess;
+
+  RedPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesArabic.beeIdleRiv;
+
+  @override
+  int? countOfPartsOfLettersForTracing = 14;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+      (Offset point, Size size) {
+        return null;
+      };
 }

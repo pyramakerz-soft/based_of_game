@@ -3,40 +3,45 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flame_rive/flame_rive.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:games_models/games_models.dart';
 import '../../based_of_game.dart';
-import '../core/assets_game_sound.dart';
 import '../core/audio_player_game.dart';
-import '../core/basic_of_every_game.dart';
-import '../core/basic_of_phonetics.dart';
+import '../core/games_structure/base_of_games.dart';
+import '../core/games_structure/basic_of_chapter.dart';
+import '../core/games_structure/basic_of_game.dart';
 
 part 'current_game_phonetics_state.dart';
 
 class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
-  final MainDataOfPhonetics _basicData;
+  final MainDataOfChapters _basicData;
   final List<GameModel> _gameData;
   CurrentGamePhoneticsCubit(
-      {required MainDataOfPhonetics basicData,
+      {required MainDataOfChapters basicData,
       required List<GameModel> gameData})
       : _gameData = gameData,
         _basicData = basicData,
         super(CurrentGamePhoneticsState(index: 0)) {
-    checkDataOfCubit();
+    _checkDataOfCubit();
     updateDataOfCurrentGame(
         basicData: _basicData, gameData: _gameData, gameIndex: 0);
+    _getTheBackGround();
+    _getTheBackGroundSuccess();
+    _getTheBackGroundSad();
   }
-  checkDataOfCubit() {
+  _checkDataOfCubit() {
     if (state.actionWhenTriesBeZero == null) {
       return Exception("actionWhenTriesBeZero can't be null");
     }
     if (state.index > (state.gameData?.length ?? 0)) {
       return Exception("check the game data");
     }
+    if (state.statesOfAddStars?.isEmpty == true) {
+      return Exception("check the statesOfAddStars");
+    }
   }
 
-  getTheBackGround() {
+  _getTheBackGround() {
     rootBundle.load(state.basicData?.idelAvatar ?? '').then(
       (data) async {
         try {
@@ -58,15 +63,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     );
   }
 
-  saveTheStringWillSay(
-      {required bool stateOfStringIsWord,
-      required String stateOfStringWillSay}) {
-    emit(state.copyWith(
-        stateOfStringIsWord: stateOfStringIsWord,
-        stateOfStringWillSay: stateOfStringWillSay));
-  }
-
-  getTheBackGroundSuccess() {
+  _getTheBackGroundSuccess() {
     rootBundle.load(state.basicData?.winAvatar ?? '').then(
       (data) async {
         try {
@@ -87,7 +84,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     );
   }
 
-  getTheBackGroundSad() {
+  _getTheBackGroundSad() {
     rootBundle.load(state.basicData?.sadAvatar ?? '').then(
       (data) async {
         try {
@@ -108,6 +105,14 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     );
   }
 
+  saveTheStringWillSay(
+      {required bool stateOfStringIsWord,
+      required String stateOfStringWillSay}) {
+    emit(state.copyWith(
+        stateOfStringIsWord: stateOfStringIsWord,
+        stateOfStringWillSay: stateOfStringWillSay));
+  }
+
   updateIndexOfCurrentGame({required int nextIndex}) {
     int currentIndex = state.index;
     currentIndex = currentIndex + 1;
@@ -115,7 +120,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   updateDataOfCurrentGame(
-      {required MainDataOfPhonetics basicData,
+      {required MainDataOfChapters basicData,
       required List<GameModel> gameData,
       required int gameIndex}) async {
     emit(state.clearAllData());
@@ -124,13 +129,10 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         currentAvatar: basicData.basicAvatar,
         index: gameIndex,
         gameData: gameData));
-    saveCountOfTries();
-    getTheBackGround();
-    getTheBackGroundSuccess();
-    getTheBackGroundSad();
+    _saveCountOfTries();
   }
 
-  saveCountOfTries() {
+  _saveCountOfTries() {
     int countOfTries = state.gameData?[state.index].numOfTrials ?? 0;
     emit(state.copyWith(countOfTries: countOfTries, countOfStar: 0));
   }
@@ -143,12 +145,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     }
   }
 
-  increaseCountOfTries() {
-    int countOfTries = state.gameData?[state.index].numOfTrials ?? 0;
-    emit(state.copyWith(countOfTries: countOfTries));
-  }
-
-  bool checkIfIsTheLastGameOfLesson() {
+  bool _checkIfIsTheLastGameOfLesson() {
     int currentIndex = state.index;
     currentIndex = currentIndex + 1;
     if ((state.gameData?.length ?? 0) > currentIndex) {
@@ -158,13 +155,17 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     }
   }
 
-  addStarToStudent(
-      {required int stateOfCountOfCorrectAnswer,
-      required int mainCountOfQuestion}) {
-    print('addStarToStudent');
-    int countOfStar = state.countOfStar ?? 0;
+  getStateOfStars({required int mainCountOfQuestion}) {
     List<int> stateOfStarsAdd =
-        BasicOfEveryGame.getTheStarsAddState(mainCountOfQuestion);
+        BaseOfGames.getTheStarsAddState(mainCountOfQuestion);
+    emit(state.copyWith(statesOfAddStars: stateOfStarsAdd));
+  }
+
+  addStarToStudent({required int stateOfCountOfCorrectAnswer}) {
+    int countOfStar = state.countOfStar ?? 0;
+    List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
+    int mainCountOfQuestion = stateOfStarsAdd.fold(
+        0, (previousValue, element) => previousValue + element);
     if ((mainCountOfQuestion) > 2) {
       if (stateOfStarsAdd[0] == stateOfCountOfCorrectAnswer) {
         emit(state.copyWith(countOfStar: (countOfStar + 1)));
@@ -195,30 +196,26 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     emit(state.copyWith(countOfStar: (countOfStar + 1)));
   }
 
-  addSuccessAnswer(
-      {required void Function() actionInEndOfLesson, int? nextGameId}) async {
-    await animationOfCorrectAnswer();
+  addSuccessAnswer() async {
+    await _animationOfCorrectAnswer();
     await AudioPlayerGame.startPlaySound(
         soundPath: AppGameSound.getRandomSoundOfCorrect());
-    bool isLastLesson = nextGameId == null;
-    // checkIfIsTheLastGameOfLesson();
+    bool isLastLesson = _checkIfIsTheLastGameOfLesson();
 
     if (isLastLesson == true) {
       await Future.delayed(const Duration(seconds: 2));
-      actionInEndOfLesson.call();
+      if (state.actionWhenTriesBeZero != null) {
+        state.actionWhenTriesBeZero?.call();
+      }
     } else {
       await backToMainAvatar();
-      if (nextGameId != null)
-        updateIndexOfCurrentGame(
-            nextIndex: state.gameData!
-                .indexWhere((element) => element.id == nextGameId));
     }
   }
 
   Future<void> addWrongAnswer({void Function()? actionOfWrongAnswer}) async {
+    await _animationOfWrongAnswer();
     await AudioPlayerGame.startPlaySound(
         soundPath: AppGameSound.getRandomSoundOfWrong());
-    await animationOfWrongAnswer();
     if (actionOfWrongAnswer != null) {
       AudioPlayerGame.player.onPlayerComplete.listen((event) {
         actionOfWrongAnswer.call();
@@ -227,29 +224,27 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     await backToMainAvatar();
   }
 
-  animationOfWrongAnswer() {
+  _animationOfWrongAnswer() {
     emit(state.copyWith(
         avatarCurrentArtboard: state.avatarArtboardSad,
-        stateOfAvatar: BasicOfEveryGame.stateOfSad));
+        stateOfAvatar: BasicOfGame.stateOfSad));
     decreaseCountOfTries();
   }
 
-  Future<void> animationOfCorrectAnswer() async {
-    print('animationOfCorrectAnswer');
+  Future<void> _animationOfCorrectAnswer() async {
     emit(state.copyWith(
         avatarCurrentArtboard: state.avatarArtboardSuccess,
-        stateOfAvatar: BasicOfEveryGame.stateOfWin));
-    print('animationOfCorrectAnswer:${state.stateOfAvatar}');
+        stateOfAvatar: BasicOfGame.stateOfWin));
 
     await AudioPlayerGame.startPlaySound(
         soundPath: AppGameSound.getRandomSoundOfCorrect());
   }
 
   backToMainAvatar() async {
-    await Future.delayed(const Duration(seconds: 2));
+    // await Future.delayed(const Duration(seconds: 2));
     emit(state.copyWith(
         avatarCurrentArtboard: state.avatarArtboardIdle,
-        stateOfAvatar: BasicOfEveryGame.stateOIdle));
+        stateOfAvatar: BasicOfGame.stateOIdle));
   }
 
   Map<int, Offset> touchPositions = <int, Offset>{};
@@ -261,14 +256,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   clearPointerPosition(int index) {
     touchPositions.remove(index);
     emit(state.copyWith(touchPositions: !(state.touchPositions ?? false)));
-  }
-
-  saveCurrentStringOfDice({required String letter}) {
-    emit(state.copyWith(currentStringOfDice: letter));
-  }
-
-  clearCurrentStringOfDice() {
-    emit(state.clearCurrentStringOfDice());
   }
 
   sendStars(

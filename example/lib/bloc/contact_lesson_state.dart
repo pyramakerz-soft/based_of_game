@@ -11,25 +11,21 @@ class ContactLessonInitial extends ContactLessonState {}
 class GetContactInitial extends ContactLessonState {
   final List<GameModel> data;
 
-
   GetContactInitial({required this.data});
 
-  MainDataOfPhonetics? getMainContactData({required int index}) {
-    log( data[index].toJson().toString());
-    print( 'data[index].toJson()');
-    String subProgram = data[index].lesson?.unit?.program?.course?.name ?? '';
-    print("subProgram:$data");
-
-    if (subProgram == BasicOfEveryGame.phonics) {
-      String subLetter = data[index].mainLetter ?? '';
-      String subGame = data[index].gameTypes?.name ?? '';
-      int audioFlag = data[index].audioFlag ?? 0;
-      print("subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag");
-     return MainDataOfPhonetics.getGameDataType(
-         subLetter: subLetter,
-         subGame: subGame,
-         audioFlag:audioFlag );
-    }
+  MainDataOfChapters? getMainContactData({required int index}) {
+    log(data[index].toJson().toString());
+    String subLetter = data[index].mainLetter ?? '';
+    String unitName = data[index].lesson?.unit?.name ?? '';
+    String subGame = data[index].gameTypes?.name ?? '';
+    int audioFlag = data[index].audioFlag ?? 0;
+    print(
+        "subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
+    return BaseOfGames.getGameDataType(
+        subLetter: subLetter,
+        subGame: subGame,
+        unitName: unitName,
+        audioFlag: audioFlag);
     return null;
   }
 }

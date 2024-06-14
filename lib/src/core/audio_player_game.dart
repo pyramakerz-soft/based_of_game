@@ -5,7 +5,6 @@ import 'package:audioplayers/audioplayers.dart';
 abstract class AudioPlayerGame {
   static AudioPlayer player = AudioPlayer();
   static startPlaySound({required String soundPath}) async {
-    print('soundPath:$soundPath');
     try {
       await player.play(AssetSource(soundPath));
       await player.setVolume(1);

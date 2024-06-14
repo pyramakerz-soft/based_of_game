@@ -1,51 +1,12 @@
-import 'assets_images_phonetics.dart';
-import 'basic_of_phonetics.dart';
+import '../assets_images_phonetics.dart';
+import '../game_types/assets_images_arabic.dart';
+import '../game_types/game_phonatics_types.dart';
 
-enum GameTypes {
-  dragOut,
-  clickPicture,
-  clickTheSound,
-  bingo,
-  sortingCups,
-  sortingPictures,
-  dice,
-  xOut,
-  spelling,
-  tracing
-}
-
-extension TypeExtension on GameTypes {
-  String text() {
-    switch (this) {
-      case GameTypes.dragOut:
-        return "Drag Out".toLowerCase();
-      case GameTypes.clickPicture:
-        return 'Click the picture'.toLowerCase();
-      case GameTypes.clickTheSound:
-        return 'Click the sound'.toLowerCase();
-      case GameTypes.bingo:
-        return 'Bingo'.toLowerCase();
-      case GameTypes.sortingCups:
-        return 'Sorting Cups'.toLowerCase();
-      case GameTypes.sortingPictures:
-        return 'Sorting Pictures'.toLowerCase();
-      case GameTypes.dice:
-        return 'Dice'.toLowerCase();
-      case GameTypes.xOut:
-        return 'X-Out'.toLowerCase();
-      case GameTypes.spelling:
-        return 'Spelling'.toLowerCase();
-      case GameTypes.tracing:
-        return 'trace'.toLowerCase();
-    }
-  }
-}
-
-abstract class BasicOfEveryGame {
+abstract class BasicOfGame {
   late bool isRound;
-  late String titleImage;
+  late String titleImageEn;
+  late String? titleImageAr;
   late String? completeBasket;
-  static String phonics = 'Phonics';
   static String connect = 'Connect';
   static String stateOIdle = 'idle';
   static String stateOfWin = 'win';
@@ -57,9 +18,9 @@ abstract class BasicOfEveryGame {
     gameType.toLowerCase();
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
-    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 1) {
+    } else if ((gameType == GameTypes.clickPicture.text()) && audioFlag == 1) {
       ///audio flag == 1 say the word
-      return ClickPictureS();
+      return ClickPicture();
     } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
       return ClickPictureOfWord();
     } else if (gameType == GameTypes.clickTheSound.text()) {
@@ -78,29 +39,8 @@ abstract class BasicOfEveryGame {
       return DiceGame();
     } else if (gameType == GameTypes.tracing.text()) {
       return Tracking();
-    }
-  }
-
-  static List<int> getTheStarsAddState(int number) {
-    if (number % 3 == 0) {
-      return List.generate(3, (index) => (number / 3).round()).toList();
-    } else {
-      int lower = (number ~/ 3) * 3;
-      int upper = lower + 3;
-      int result = (number - lower < upper - number) ? lower : upper;
-      if (result < number) {
-        return [
-          (result / 3).round(),
-          (result / 3 + 1).round(),
-          (result / 3).round()
-        ];
-      } else {
-        return [
-          (result / 3 - 1).round(),
-          (result / 3).round(),
-          (result / 3).round()
-        ];
-      }
+    } else if (gameType == GameTypes.video.text()) {
+      return Video();
     }
   }
 
@@ -122,6 +62,7 @@ abstract class BasicOfEveryGame {
   }
 
   static List<String> customOrderOfGamesPhonetics = [
+    "${GameTypes.video.text().toLowerCase()}_0",
     "${GameTypes.tracing.text().toLowerCase()}_1",
     "${GameTypes.clickTheSound.text().toLowerCase()}_1",
     "${GameTypes.clickPicture.text().toLowerCase()}_1",
@@ -139,12 +80,12 @@ abstract class BasicOfEveryGame {
   ];
 }
 
-class BasicDragOutGame implements BasicOfEveryGame {
+class BasicDragOutGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.dragOut;
+  String titleImageEn = AppImagesPhonetics.dragOut;
 
   // @override
   // String keyGame = BasicOfEveryGame.;
@@ -154,14 +95,17 @@ class BasicDragOutGame implements BasicOfEveryGame {
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr;
 }
 
-class ClickPictureS implements BasicOfEveryGame {
+class ClickPicture implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.clickPicture;
+  String titleImageEn = AppImagesPhonetics.clickPicture;
 
   // @override
   // String keyGame = 'Click the picture';
@@ -197,14 +141,17 @@ class ClickPictureS implements BasicOfEveryGame {
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr = AppImagesArabic.titleOfClickThePicture;
 }
 
-class Tracking implements BasicOfEveryGame {
+class Tracking implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.tracingWithFinger;
+  String titleImageEn = AppImagesPhonetics.tracingWithFinger;
 
   // @override
   // String keyGame = 'Click the picture';
@@ -214,28 +161,54 @@ class Tracking implements BasicOfEveryGame {
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr;
 }
 
-class BasicClickTheSoundGame implements BasicOfEveryGame {
+class Video implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.clickTheSound;
+  String titleImageEn = AppImagesPhonetics.tracingWithFinger;
+
+  // @override
+  // String keyGame = 'Click the picture';
 
   @override
   String? completeBasket;
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr;
 }
 
-class ClickPictureOfWord implements BasicOfEveryGame {
+class BasicClickTheSoundGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.clickPicture;
+  String titleImageEn = AppImagesPhonetics.clickTheSound;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+}
+
+class ClickPictureOfWord implements BasicOfGame {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = AppImagesPhonetics.clickPicture;
 
   @override
   String? completeBasket;
@@ -268,42 +241,51 @@ class ClickPictureOfWord implements BasicOfEveryGame {
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr;
 }
 
-class BingoGame implements BasicOfEveryGame {
+class BingoGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.bingoNameGame;
+  String titleImageEn = AppImagesPhonetics.bingoNameGame;
 
   @override
   String? completeBasket;
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }
 
-class SortingCupsGame implements BasicOfEveryGame {
+class SortingCupsGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.sortingCupsNameGame;
+  String titleImageEn = AppImagesPhonetics.sortingCupsNameGame;
 
   @override
   String? completeBasket;
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }
 
-class SortingPicturesGame implements BasicOfEveryGame {
+class SortingPicturesGame implements BasicOfGame {
   @override
   bool isRound = true;
 
   @override
-  String titleImage = AppImagesPhonetics.sortingGame;
+  String titleImageEn = AppImagesPhonetics.sortingGame;
   String woodenBackground = AppImagesPhonetics.woodBackground;
 
   @override
@@ -311,14 +293,17 @@ class SortingPicturesGame implements BasicOfEveryGame {
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }
 
-class SpellingGame implements BasicOfEveryGame {
+class SpellingGame implements BasicOfGame {
   @override
   bool isRound = true;
 
   @override
-  String titleImage = AppImagesPhonetics.spellingNameGame;
+  String titleImageEn = AppImagesPhonetics.spellingNameGame;
 
   String woodenBackground = AppImagesPhonetics.woodBackground;
 
@@ -327,32 +312,41 @@ class SpellingGame implements BasicOfEveryGame {
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }
 
-class XOutGame implements BasicOfEveryGame {
+class XOutGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.xOutGameName;
+  String titleImageEn = AppImagesPhonetics.xOutGameName;
 
   @override
   String? completeBasket;
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }
 
-class DiceGame implements BasicOfEveryGame {
+class DiceGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.diceNameGame;
+  String titleImageEn = AppImagesPhonetics.diceNameGame;
 
   @override
   String? completeBasket;
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }

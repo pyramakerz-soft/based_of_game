@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:games_models/games_models.dart';
 
-import '../based_of_games/based_of_game_phonetics.dart';
-import '../core/basic_of_phonetics.dart';
+import '../core/games_structure/basic_of_chapter.dart';
+import '../widgets/based_of_game_phonetics.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
+import '../widgets/based_of_games.dart';
 
 class MainScreenOfGames extends StatefulWidget {
   final List<GameModel> stateOfGameData;
-  final MainDataOfPhonetics? dataOfBasesGame;
+  final MainDataOfChapters? dataOfBasesGame;
   final void Function(int countOfStars) actionOfCompleteGame;
 
   const MainScreenOfGames(
@@ -23,6 +25,25 @@ class MainScreenOfGames extends StatefulWidget {
 }
 
 class _MainScreenOfGames extends State<MainScreenOfGames> {
+  @override
+  void initState() {
+    super.initState();
+    // context.read<CurrentGameCubit>().getTheBackGround();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,55 +64,31 @@ class _MainScreenOfGames extends State<MainScreenOfGames> {
               // }
             }, builder: (context, stateOfGame) {
               return Listener(
-                  onPointerDown: (opm) {
-                    context
-                        .read<CurrentGamePhoneticsCubit>()
-                        .savePointerPosition(opm.pointer, opm.position);
-                  },
-                  onPointerMove: (opm) {
-                    context
-                        .read<CurrentGamePhoneticsCubit>()
-                        .savePointerPosition(opm.pointer, opm.position);
-                  },
-                  onPointerCancel: (opm) {
-                    context
-                        .read<CurrentGamePhoneticsCubit>()
-                        .clearPointerPosition(opm.pointer);
-                  },
-                  onPointerUp: (opm) {
-                    context
-                        .read<CurrentGamePhoneticsCubit>()
-                        .clearPointerPosition(opm.pointer);
-                  },
-                  child: Center(
-                    child: Column(
-                      // alignment: Alignment.center,
-                      children: [
-                        // if (stateOfGame.countOfTries != 0) ...{
-                        //   if (stateOfGame.basicData?.gameData?.isConnect ==
-                        //       true) ...{
-                        //     if (stateOfGame.basicData
-                        //         is ConnectionSortingCups) ...{
-                        //       BasedOfGameConnectSortingCups(
-                        //         stateOfGame: stateOfGame,
-                        //         gamesData: widget.stateOfGameData,
-                        //       ),
-                        //     } else ...{
-                        //       BasedOfGameConnect(
-                        //         stateOfGame: stateOfGame,
-                        //         gamesData: widget.stateOfGameData,
-                        //       ),
-                        //     }
-                        //   } else ...{
-                        BasedOfGamePhonetics(
-                          stateOfGame: stateOfGame,
-                          gamesData: widget.stateOfGameData,
-                        ),
-                        //   },
-                        // }
-                      ],
-                    ),
-                  ));
+                onPointerDown: (opm) {
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .savePointerPosition(opm.pointer, opm.position);
+                },
+                onPointerMove: (opm) {
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .savePointerPosition(opm.pointer, opm.position);
+                },
+                onPointerCancel: (opm) {
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .clearPointerPosition(opm.pointer);
+                },
+                onPointerUp: (opm) {
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .clearPointerPosition(opm.pointer);
+                },
+                child: BasedOfGames(
+                  stateOfGame: stateOfGame,
+                  gamesData: widget.stateOfGameData,
+                ),
+              );
             })));
   }
 }

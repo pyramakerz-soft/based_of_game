@@ -74,4 +74,7 @@ abstract class AppImagesPhonetics {
   static const String woodBackground = "${mainPathOfImages}wood.png";
   static const String bubbleSelected = '${mainPathOfImages}bubbleSelected.png';
   static const String sortingGame = "${mainPathOfImages}sorting_game.png";
+
+  static const String bubble = '${mainPathOfImages}bubble.png';
+  static const String bubbleDisabled = '${mainPathOfImages}bubbleDisabled.png';
 }

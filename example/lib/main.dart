@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
                         Navigator.of(context).pop();
                       } else if (state is GetContactInitial) {
                         try {
-                          MainDataOfPhonetics? dataType =
+                          MainDataOfChapters? dataType =
                               state.getMainContactData(index: 0);
 
                           print('dataType:$dataType');

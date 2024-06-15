@@ -6,38 +6,33 @@ abstract class TalkTts {
   static FlutterTts flutterTts = FlutterTts();
 
   static String data = '';
-  static startTalk(
+  static Future startTalk(
       {required String text,
       Function? actionOfStart,
       Function? actionPause,
       Function? actionCancel,
       Function? actionComplete}) async {
     await flutterTts.setLanguage("en-US");
-    log('start talk:$text');
     data = text;
     flutterTts.setPitch(1.0);
     flutterTts.setSpeechRate(0.4);
     flutterTts.setStartHandler(() {
-      log('tts start:$data');
-      if(actionOfStart != null) {
+      if (actionOfStart != null) {
         actionOfStart();
       }
     });
     flutterTts.setCompletionHandler(() {
-      log('tts completion');
-      if(actionComplete != null) {
+      if (actionComplete != null) {
         actionComplete();
       }
     });
     flutterTts.setCancelHandler(() {
-      log('tts Cancel');
-      if(actionCancel != null) {
+      if (actionCancel != null) {
         actionCancel();
       }
     });
     flutterTts.setPauseHandler(() {
-      log('tts Pause');
-      if(actionPause != null) {
+      if (actionPause != null) {
         actionPause();
       }
     });

@@ -164,8 +164,6 @@ abstract class BaseOfGames {
           mineGameData: BasicOfGame.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     }
-    print(
-        '${(unitName.toLowerCase() == MainDataOfChaptersTypes.redUnit.text())}');
     return null;
   }
 }

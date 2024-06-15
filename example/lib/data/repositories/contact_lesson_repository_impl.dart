@@ -22,11 +22,8 @@ class ContactLessonRepositoryImpl implements ProgramContactLessonRepository {
         final res = await remoteDataSource.getContactLessonDataRemotely(
             lessonId: lessonId, gameId: gameId);
         // final res = await localRemoteDataSource.getContactLessonDataRemotely(programId: programId);
-        log('res:$res');
         return Right(res);
       } catch (e, s) {
-        log('error:${e.toString()}');
-        log('error:${e.runtimeType}');
         return Left(LoginFailure());
       }
     } else {
@@ -41,11 +38,8 @@ class ContactLessonRepositoryImpl implements ProgramContactLessonRepository {
       try {
         final res = await remoteDataSource.getGameById(gameId: gameId);
         // final res = await localRemoteDataSource.getContactLessonDataRemotely(programId: programId);
-        log('res:$res');
         return Right(res);
       } catch (e, s) {
-        log('error:${e.toString()}');
-        log('error:${e.runtimeType}');
         return Left(LoginFailure());
       }
     } else {

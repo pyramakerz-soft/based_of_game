@@ -16,10 +16,13 @@ part 'current_game_phonetics_state.dart';
 class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   final MainDataOfChapters _basicData;
   final List<GameModel> _gameData;
+  final void Function(int countOfStars) _actionOfCompleteGame;
   CurrentGamePhoneticsCubit(
       {required MainDataOfChapters basicData,
+      required void Function(int) actionOfCompleteGame,
       required List<GameModel> gameData})
-      : _gameData = gameData,
+      : _actionOfCompleteGame = actionOfCompleteGame,
+        _gameData = gameData,
         _basicData = basicData,
         super(CurrentGamePhoneticsState(index: 0)) {
     _checkDataOfCubit();
@@ -28,16 +31,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     _getTheBackGround();
     _getTheBackGroundSuccess();
     _getTheBackGroundSad();
+    emit(state.copyWith(actionWhenTriesBeZero: _actionOfCompleteGame));
   }
   _checkDataOfCubit() {
-    if (state.actionWhenTriesBeZero == null) {
-      return Exception("actionWhenTriesBeZero can't be null");
-    }
     if (state.index > (state.gameData?.length ?? 0)) {
       return Exception("check the game data");
-    }
-    if (state.statesOfAddStars?.isEmpty == true) {
-      return Exception("check the statesOfAddStars");
     }
   }
 
@@ -56,7 +54,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
           emit(state.copyWith(avatarArtboardIdle: artboard));
           emit(state.copyWith(avatarCurrentArtboard: state.avatarArtboardIdle));
         } catch (e) {
-          log('###');
           log(e.toString());
         }
       },
@@ -77,7 +74,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
           }
           emit(state.copyWith(avatarArtboardSuccess: artboard));
         } catch (e) {
-          log('###');
           log(e.toString());
         }
       },
@@ -98,7 +94,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
           }
           emit(state.copyWith(avatarArtboardSad: artboard));
         } catch (e) {
-          log('###');
           log(e.toString());
         }
       },
@@ -133,7 +128,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   _saveCountOfTries() {
-    int countOfTries = state.gameData?[state.index].numOfTrials ?? 0;
+    int countOfTries = 5; //state.gameData?[state.index].numOfTrials ?? 0;
     emit(state.copyWith(countOfTries: countOfTries, countOfStar: 0));
   }
 
@@ -141,17 +136,16 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int countOfTries = (state.countOfTries ?? 1) - 1;
     emit(state.copyWith(countOfTries: countOfTries));
     if (state.countOfTries == 0) {
-      state.actionWhenTriesBeZero!();
+      state.actionWhenTriesBeZero!(state.countOfStar ?? 0);
     }
   }
 
-  bool _checkIfIsTheLastGameOfLesson() {
-    int currentIndex = state.index;
-    currentIndex = currentIndex + 1;
-    if ((state.gameData?.length ?? 0) > currentIndex) {
-      return false;
-    } else {
+  bool checkIfIsTheLastQuestionOfGame({required int queations}) {
+    int countOfCorrectAnswers = state.countOfCorrectAnswers;
+    if (queations <= countOfCorrectAnswers) {
       return true;
+    } else {
+      return false;
     }
   }
 
@@ -162,21 +156,23 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   addStarToStudent({required int stateOfCountOfCorrectAnswer}) {
-    int countOfStar = state.countOfStar ?? 0;
     List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
     int mainCountOfQuestion = stateOfStarsAdd.fold(
         0, (previousValue, element) => previousValue + element);
+    emit(state.copyWith(countOfCorrectAnswers: stateOfCountOfCorrectAnswer));
     if ((mainCountOfQuestion) > 2) {
-      if (stateOfStarsAdd[0] == stateOfCountOfCorrectAnswer) {
-        emit(state.copyWith(countOfStar: (countOfStar + 1)));
-      } else if ((stateOfStarsAdd[1] + stateOfStarsAdd[0]) ==
+      if (stateOfStarsAdd[0] <= stateOfCountOfCorrectAnswer) {
+        emit(state.copyWith(countOfStar: 1));
+      } else {
+        emit(state.copyWith(countOfStar: (0)));
+      }
+      if ((stateOfStarsAdd[1] + stateOfStarsAdd[0]) <=
           stateOfCountOfCorrectAnswer) {
-        emit(state.copyWith(countOfStar: (countOfStar + 1)));
-      } else if ((stateOfStarsAdd[2] +
-              stateOfStarsAdd[0] +
-              stateOfStarsAdd[1]) ==
+        emit(state.copyWith(countOfStar: 2));
+      }
+      if ((stateOfStarsAdd[2] + stateOfStarsAdd[0] + stateOfStarsAdd[1]) <=
           stateOfCountOfCorrectAnswer) {
-        emit(state.copyWith(countOfStar: (countOfStar + 1)));
+        emit(state.copyWith(countOfStar: 3));
       }
     } else {
       if (mainCountOfQuestion == 1) {
@@ -196,32 +192,46 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     emit(state.copyWith(countOfStar: (countOfStar + 1)));
   }
 
-  addSuccessAnswer() async {
+  Future addSuccessAnswer(
+      {required int correctAnswers, required int questions}) async {
     await _animationOfCorrectAnswer();
-    await AudioPlayerGame.startPlaySound(
+    await AudioPlayerGame.startPlaySoundOfCorrect(
         soundPath: AppGameSound.getRandomSoundOfCorrect());
-    bool isLastLesson = _checkIfIsTheLastGameOfLesson();
-
+    await addStarToStudent(stateOfCountOfCorrectAnswer: correctAnswers);
+    bool isLastLesson = checkIfIsTheLastQuestionOfGame(queations: questions);
     if (isLastLesson == true) {
       await Future.delayed(const Duration(seconds: 2));
       if (state.actionWhenTriesBeZero != null) {
-        state.actionWhenTriesBeZero?.call();
+        state.actionWhenTriesBeZero!(state.countOfStar ?? 0);
       }
     } else {
-      await backToMainAvatar();
+      AudioPlayerGame.playerCorrect.onPlayerComplete.listen((event) {
+        backToMainAvatar();
+      });
     }
   }
 
   Future<void> addWrongAnswer({void Function()? actionOfWrongAnswer}) async {
     await _animationOfWrongAnswer();
-    await AudioPlayerGame.startPlaySound(
+    await _increaseCountOfWrongAnswer();
+    await AudioPlayerGame.startPlaySoundOfWrong(
         soundPath: AppGameSound.getRandomSoundOfWrong());
     if (actionOfWrongAnswer != null) {
-      AudioPlayerGame.player.onPlayerComplete.listen((event) {
+      AudioPlayerGame.playerWrong.onPlayerComplete.listen((event) {
         actionOfWrongAnswer.call();
       });
     }
-    await backToMainAvatar();
+    // AudioPlayerGame.playerWrong.state.
+    AudioPlayerGame.playerWrong.onPlayerComplete.listen((event) {
+      backToMainAvatar();
+    });
+  }
+
+  _increaseCountOfWrongAnswer() {
+    int countOfWrongAnswers = state.countOfWrongAnswers ?? 0;
+    countOfWrongAnswers++;
+    emit(state.copyWith(countOfWrongAnswers: countOfWrongAnswers));
+    _updateTheStarState();
   }
 
   _animationOfWrongAnswer() {
@@ -231,13 +241,23 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     decreaseCountOfTries();
   }
 
+  _updateTheStarState() {
+    int countOfWrongAnswers = state.countOfWrongAnswers ?? 0;
+    List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
+    int countOfAllStars = stateOfStarsAdd.fold(
+        0, (previousValue, element) => previousValue + element);
+    countOfWrongAnswers = countOfWrongAnswers + countOfAllStars;
+
+    List<int> listStateOfStarsAdd =
+        BaseOfGames.getTheStarsAddState(countOfWrongAnswers);
+    emit(state.copyWith(statesOfAddStars: listStateOfStarsAdd));
+    addStarToStudent(stateOfCountOfCorrectAnswer: state.countOfCorrectAnswers);
+  }
+
   Future<void> _animationOfCorrectAnswer() async {
     emit(state.copyWith(
         avatarCurrentArtboard: state.avatarArtboardSuccess,
         stateOfAvatar: BasicOfGame.stateOfWin));
-
-    await AudioPlayerGame.startPlaySound(
-        soundPath: AppGameSound.getRandomSoundOfCorrect());
   }
 
   backToMainAvatar() async {
@@ -258,10 +278,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     emit(state.copyWith(touchPositions: !(state.touchPositions ?? false)));
   }
 
-  sendStars(
-      {required List<int> gamesId,
-      required void Function(int countOfStars, List<int> listOfIds)
-          actionOfStars}) {
-    actionOfStars.call((state.countOfStar ?? 0), gamesId);
+  beeTalkingTrue() {
+    emit(state.copyWith(beeTalking: true));
+  }
+
+  beeTalkingFalse() {
+    emit(state.copyWith(beeTalking: false));
   }
 }

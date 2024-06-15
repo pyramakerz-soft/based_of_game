@@ -14,7 +14,6 @@ abstract class BasicOfGame {
   bool isConnect = false;
 
   static getTheGameType({required String gameType, required int audioFlag}) {
-    print("gameType:$gameType");
     gameType.toLowerCase();
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();

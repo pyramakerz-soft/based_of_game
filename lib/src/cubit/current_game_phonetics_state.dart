@@ -9,8 +9,11 @@ class CurrentGamePhoneticsState extends Equatable {
   String? stateOfAvatar;
   String? stateOfStringWillSay;
   bool? stateOfStringIsWord;
+  bool beeTalking;
+  int countOfWrongAnswers;
+  int countOfCorrectAnswers;
 
-  void Function()? actionWhenTriesBeZero;
+  void Function(int x)? actionWhenTriesBeZero;
   String? currentAvatar;
   int index;
   int? countOfTries;
@@ -28,8 +31,11 @@ class CurrentGamePhoneticsState extends Equatable {
       this.stateOfAvatar,
       this.avatarArtboardIdle,
       this.avatarArtboardSad,
+      this.beeTalking = false,
       this.touchPositions,
       this.avatarArtboardSuccess,
+      this.countOfWrongAnswers = 0,
+      this.countOfCorrectAnswers = 0,
       this.statesOfAddStars,
       this.countOfTries,
       this.currentAvatar,
@@ -43,15 +49,18 @@ class CurrentGamePhoneticsState extends Equatable {
       Artboard? avatarArtboardSad,
       bool? touchPositions,
       bool? stateOfStringIsWord,
+      bool? beeTalking,
       Artboard? avatarCurrentArtboard,
       String? stateOfStringWillSay,
-      void Function()? actionWhenTriesBeZero,
+      void Function(int x)? actionWhenTriesBeZero,
       String? currentAvatar,
       String? stateOfAvatar,
       List<GameModel>? gameData,
       List<int>? statesOfAddStars,
       int? index,
       int? countOfTries,
+      int? countOfWrongAnswers,
+      int? countOfCorrectAnswers,
       int? countOfCorrectAnswer,
       int? countOfStar}) {
     return CurrentGamePhoneticsState(
@@ -64,6 +73,10 @@ class CurrentGamePhoneticsState extends Equatable {
         avatarCurrentArtboard:
             avatarCurrentArtboard ?? this.avatarCurrentArtboard,
         gameData: gameData ?? this.gameData,
+        countOfWrongAnswers: countOfWrongAnswers ?? this.countOfWrongAnswers,
+        beeTalking: beeTalking ?? this.beeTalking,
+        countOfCorrectAnswers:
+            countOfCorrectAnswers ?? this.countOfCorrectAnswers,
         stateOfStringIsWord: stateOfStringIsWord ?? this.stateOfStringIsWord,
         statesOfAddStars: statesOfAddStars ?? this.statesOfAddStars,
         stateOfAvatar: stateOfAvatar ?? this.stateOfAvatar,
@@ -90,6 +103,9 @@ class CurrentGamePhoneticsState extends Equatable {
         stateOfStringIsWord,
         stateOfStringWillSay,
         avatarArtboardSad,
+        countOfWrongAnswers,
+        beeTalking,
+        countOfCorrectAnswers,
         avatarArtboardSuccess,
         actionWhenTriesBeZero,
         gameData,

@@ -3,18 +3,30 @@ import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
 
 abstract class AudioPlayerGame {
-  static AudioPlayer player = AudioPlayer();
-  static startPlaySound({required String soundPath}) async {
+  static AudioPlayer playerWrong = AudioPlayer();
+  static AudioPlayer playerCorrect = AudioPlayer();
+  static Future startPlaySoundOfWrong({required String soundPath}) async {
     try {
-      await player.play(AssetSource(soundPath));
-      await player.setVolume(1);
-      await player.resume();
+      await playerWrong.play(AssetSource(soundPath));
+      await playerWrong.setVolume(1);
+      await playerWrong.resume();
+    } catch (e) {
+      log('error:$e');
+    }
+  }
+
+  static Future startPlaySoundOfCorrect({required String soundPath}) async {
+    try {
+      await playerCorrect.play(AssetSource(soundPath));
+      await playerCorrect.setVolume(1);
+      await playerCorrect.resume();
     } catch (e) {
       log('error:$e');
     }
   }
 
   static forceStopSound() async {
-    await player.stop();
+    await playerCorrect.stop();
+    await playerWrong.stop();
   }
 }

@@ -19,9 +19,7 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
   })  : _gameData = gameData,
         super(ClickTheSoundInitial(gameData: gameData, correctIndexes: [])) {
     generateRandomLetters();
-    getRandomPosition();
-    TalkTts.startTalk(text: _gameData.inst ?? '');
-    Future.delayed(const Duration(seconds: 2), () {
+    TalkTts.startTalk(text: _gameData.inst ?? '').whenComplete(() {
       sayTheLetter();
     });
   }
@@ -44,21 +42,5 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
     List<int> correctIndexes = state.correctIndexes ?? [];
     correctIndexes.add(index);
     emit(state.copyWith(correctIndexes: correctIndexes));
-  }
-
-  getRandomPosition() {
-    List<StaggeredTile> data = [
-      const StaggeredTile.count(3, 2),
-      const StaggeredTile.count(2, 2),
-      const StaggeredTile.count(2, 3)
-    ];
-
-    List<StaggeredTile> finalList = [];
-    (state.gameData.gameLetters)?.forEach((element) {
-      Random random = Random();
-      int randomIndex = random.nextInt(data.length);
-      finalList.add(data[randomIndex]);
-    });
-    emit(state.copyWith(finalListOfPosition: finalList));
   }
 }

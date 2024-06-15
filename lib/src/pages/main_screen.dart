@@ -49,12 +49,11 @@ class _MainScreenOfGames extends State<MainScreenOfGames> {
     return Scaffold(
         body: BlocProvider<CurrentGamePhoneticsCubit>(
             create: (_) => CurrentGamePhoneticsCubit(
-                  basicData: widget.dataOfBasesGame!,
-                  gameData: widget.stateOfGameData,
-                ),
+                basicData: widget.dataOfBasesGame!,
+                gameData: widget.stateOfGameData,
+                actionOfCompleteGame: widget.actionOfCompleteGame),
             child: BlocConsumer<CurrentGamePhoneticsCubit,
                 CurrentGamePhoneticsState>(listener: (context, state) {
-              print('widget.dataOfBasesGame:${widget.dataOfBasesGame}');
               // if (widget.dataOfBasesGame != null) {
               //   context
               //       .read<CurrentGamePhoneticsCubit>()

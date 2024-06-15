@@ -23,7 +23,6 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
       {required this.programContactUserUseCases, required this.getGameUseCases})
       : super(ContactLessonInitial()) {
     on<ContactLessonEvent>((event, emit) async {
-      log('event##:$event');
       if (event is GetContactLessonRequest) {
         emit(GetContactLoadingInitial());
         final failureOrDoneMessage = await programContactUserUseCases(

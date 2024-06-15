@@ -93,7 +93,15 @@ class MyApp extends StatelessWidget {
                           stateOfGameData: stateOfGameData.data,
                           dataOfBasesGame:
                               stateOfGameData.getMainContactData(index: 0),
-                          actionOfCompleteGame: (int countOfStars) {},
+                          actionOfCompleteGame: (int countOfStars) {
+                            // List<int> listOfIds = stateOfGameData.data;
+                            List<int> listOfIds = stateOfGameData.data
+                                .map((game) => game.id ?? 0)
+                                .toList();
+                            print('#########################################');
+                            print('the stars send: $listOfIds , $countOfStars');
+                            print('#########################################');
+                          },
                         );
                       } else {
                         return CircularProgressIndicator();

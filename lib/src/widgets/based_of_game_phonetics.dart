@@ -73,19 +73,34 @@ class BasedOfGamePhonetics extends StatelessWidget {
                   children: [
                     const SizedBox(),
                     GestureDetector(
-                      onTap: () async {
-                        await TalkTts.startTalk(
-                            text: gamesData[stateOfGame.index].inst ?? '');
-                        if (stateOfGame.stateOfStringIsWord == true) {
-                          await TalkTts.startTalk(
-                              text: stateOfGame.stateOfStringWillSay ?? '');
-                        } else {
-                          await AudioPlayerLetters.startPlaySound(
-                              soundPath: AssetsSoundLetters.getSoundOfLetter(
-                                  mainGameLetter:
-                                      stateOfGame.stateOfStringWillSay ?? ''));
-                        }
-                      },
+                      onTap: stateOfGame.beeTalking == true
+                          ? null
+                          : () async {
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .beeTalkingTrue();
+                              await TalkTts.startTalk(
+                                  text:
+                                      gamesData[stateOfGame.index].inst ?? '');
+                              TalkTts.flutterTts.setCompletionHandler(() async {
+                                if (stateOfGame.stateOfStringIsWord == true) {
+                                  await TalkTts.startTalk(
+                                      text: stateOfGame.stateOfStringWillSay ??
+                                          '');
+                                } else {
+                                  await AudioPlayerLetters.startPlaySound(
+                                      soundPath:
+                                          AssetsSoundLetters.getSoundOfLetter(
+                                              mainGameLetter: stateOfGame
+                                                      .stateOfStringWillSay ??
+                                                  ''));
+                                }
+                              });
+
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .beeTalkingFalse();
+                            },
                       child: Container(
                           child: stateOfGame.avatarCurrentArtboard == null
                               ? Image.asset(

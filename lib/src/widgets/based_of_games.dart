@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:games_models/games_models.dart';
 import '../../based_of_game.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
+import 'based_of_game_connect_sorting_cups.dart';
 import 'based_of_game_phonetics.dart';
 
 class BasedOfGames extends StatelessWidget {
@@ -107,7 +108,14 @@ class BasedOfGames extends StatelessWidget {
             height: MediaQuery.of(context).size.height - (50.h + 5),
             child: Column(
               children: [
-                if (BaseOfGames.isPhonetics(
+                if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
+                  if (stateOfGame.basicData is ConnectionSortingCups) ...{
+                    BasedOfGameConnectSortingCups(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
+                  }
+                } else if (BaseOfGames.isPhonetics(
                     chapter: stateOfGame.basicData.runtimeType)) ...{
                   BasedOfGamePhonetics(
                     stateOfGame: stateOfGame,

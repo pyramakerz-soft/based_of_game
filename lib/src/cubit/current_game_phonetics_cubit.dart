@@ -196,7 +196,9 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   Future addSuccessAnswer(
-      {required int correctAnswers, required int questions}) async {
+      {required int correctAnswers,
+      required int questions,
+      void Function()? subAction}) async {
     await _animationOfCorrectAnswer();
     await AudioPlayerGame.startPlaySoundOfCorrect(
         soundPath: AppGameSound.getRandomSoundOfCorrect());
@@ -210,6 +212,9 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     } else {
       AudioPlayerGame.playerCorrect.onPlayerComplete.listen((event) {
         backToMainAvatar();
+        if (subAction != null) {
+          subAction();
+        }
       });
     }
   }

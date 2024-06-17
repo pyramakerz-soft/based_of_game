@@ -1,4 +1,3 @@
-import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,11 +41,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                           index: stateOfGame.index,
                           gameData: gamesData[stateOfGame.index],
                           allGameData: gamesData),
-                      child: DragOutGame(
-                          // index: foo,
-                          // gameData: gamesData[foo],
-                          // allGameData: gamesData,
-                          ))
+                      child: const DragOutGame())
                 } else if ((stateOfGame.basicData?.gameData
                     is ClickPicture)) ...{
                   const Text('in click picture')

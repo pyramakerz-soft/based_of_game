@@ -129,81 +129,86 @@ class _DragOutGame extends State<DragOutGame> {
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(
                             color: AppColorPhonetics.boarderColor, width: 5)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: List.generate(
-                          gameState.gameData.gameImages?.length ?? 0,
-                          (index) => Draggable<GameImagesModel>(
-                              data: gameState.gameData.gameImages?[index],
-                              childWhenDragging: SizedBox(
-                                width: (MediaQuery.of(context).size.width -
-                                        (130 + 50 + 130)) /
-                                    4,
-                                height: 130.h,
-                              ),
-                              feedback: CachedNetworkImage(
-                                imageUrl: gameState
-                                        .gameData.gameImages?[index].image ??
-                                    '',
-                                width: (MediaQuery.of(context).size.width -
-                                        (130 + 50 + 130)) /
-                                    4,
-                                height: 130.h,
-                                placeholder: (context, url) => const Center(
-                                  child: CupertinoActivityIndicator(),
+                    child: FittedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: List.generate(
+                            gameState.gameData.gameImages?.length ?? 0,
+                            (index) => Draggable<GameImagesModel>(
+                                data: gameState.gameData.gameImages?[index],
+                                childWhenDragging: SizedBox(
+                                  width: (MediaQuery.of(context).size.width -
+                                          (130 + 50 + 130)) /
+                                      4,
+                                  height: 130.h,
                                 ),
-                                errorWidget: (context, url, error) => Text(
-                                    '${gameState.gameData.gameImages?[index].word}'),
-                                // height: ,
-                              ),
-                              child: ((stateOfCurrentGamePhoneticsCubit
-                                              .stateOfAvatar ==
-                                          BasicOfGame.stateOfWin) &&
-                                      (gameState
-                                              .gameData.gameImages?[index].word
-                                              .toString()
-                                              .split('')
-                                              .first
-                                              .toLowerCase() !=
-                                          (gameState.gameData.mainLetter
-                                                  ?.toLowerCase() ??
-                                              '')))
-                                  ? SizedBox(
-                                      width:
-                                          (MediaQuery.of(context).size.width -
-                                                  (130 + 50 + 130)) /
-                                              4,
-                                      height: 130.h,
-                                      // height: ,
-                                    )
-                                  : GestureDetector(
-                                      onTap: () {
-                                        TalkTts.startTalk(
-                                            text: gameState.gameData
-                                                    .gameImages?[index].word ??
-                                                '');
-                                      },
-                                      child: CachedNetworkImage(
-                                        imageUrl: gameState.gameData
-                                                .gameImages?[index].image ??
-                                            '',
+                                feedback: CachedNetworkImage(
+                                  imageUrl: gameState
+                                          .gameData.gameImages?[index].image ??
+                                      '',
+                                  width: (MediaQuery.of(context).size.width -
+                                          (130 + 50 + 130)) /
+                                      4,
+                                  height: 130.h,
+                                  placeholder: (context, url) => const Center(
+                                    child: CupertinoActivityIndicator(),
+                                  ),
+                                  errorWidget: (context, url, error) => Text(
+                                      '${gameState.gameData.gameImages?[index].word}'),
+                                  // height: ,
+                                ),
+                                child: ((stateOfCurrentGamePhoneticsCubit
+                                                .stateOfAvatar ==
+                                            BasicOfGame.stateOfWin) &&
+                                        (gameState.gameData.gameImages?[index]
+                                                .word
+                                                .toString()
+                                                .split('')
+                                                .first
+                                                .toLowerCase() !=
+                                            (gameState.gameData.mainLetter
+                                                    ?.toLowerCase() ??
+                                                '')))
+                                    ? SizedBox(
                                         width:
                                             (MediaQuery.of(context).size.width -
                                                     (130 + 50 + 130)) /
                                                 4,
                                         height: 130.h,
-                                        placeholder: (context, url) =>
-                                            const Center(
-                                          child: CupertinoActivityIndicator(),
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            Center(
-                                          child: Text(
-                                              '${gameState.gameData.gameImages?[index].word}'),
-                                        ),
                                         // height: ,
-                                      ),
-                                    ))),
+                                      )
+                                    : GestureDetector(
+                                        onTap: () {
+                                          TalkTts.startTalk(
+                                              text: gameState
+                                                      .gameData
+                                                      .gameImages?[index]
+                                                      .word ??
+                                                  '');
+                                        },
+                                        child: CachedNetworkImage(
+                                          imageUrl: gameState.gameData
+                                                  .gameImages?[index].image ??
+                                              '',
+                                          width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  (130 + 50 + 130)) /
+                                              4,
+                                          height: 130.h,
+                                          placeholder: (context, url) =>
+                                              const Center(
+                                            child: CupertinoActivityIndicator(),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Center(
+                                            child: Text(
+                                                '${gameState.gameData.gameImages?[index].word}'),
+                                          ),
+                                          // height: ,
+                                        ),
+                                      ))),
+                      ),
                     ),
                   )
                 ],

@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             builder: (_, child) {
               return BlocProvider<ContactLessonBloc>(
                   create: (_) => di.sl<ContactLessonBloc>()
-                    ..add(GetContactLessonRequest(lessonId: 4, gameId: 165)),
+                    ..add(GetContactLessonRequest(lessonId: 5, gameId: 168)),
                   child: BlocConsumer<ContactLessonBloc, ContactLessonState>(
                     listener: (context, state) {
                       if (state is GetContactErrorInitial) {
@@ -47,39 +47,6 @@ class MyApp extends StatelessWidget {
                               state.getMainContactData(index: 0);
 
                           print('dataType:$dataType');
-                          // if (dataType != null) {
-                          //   context
-                          //       .read<CurrentGamePhoneticsCubit>()
-                          //       .updateDataOfCurrentGame(
-                          //       basicData: dataType,
-                          //       gameData: state.data,
-                          //       gameIndex: widget.firstTry ||
-                          //           state.data
-                          //               .firstWhere(
-                          //                   (element) =>
-                          //               element
-                          //                   .id ==
-                          //                   widget
-                          //                       .gameId)
-                          //               .nextGameId ==
-                          //               null
-                          //           ? state.data.indexWhere(
-                          //               (element) =>
-                          //           element.id ==
-                          //               widget.gameId)
-                          //           : state.data.indexWhere((element) =>
-                          //       element.id ==
-                          //           state.data
-                          //               .firstWhere((element) =>
-                          //           element.id ==
-                          //               widget.gameId)
-                          //               .nextGameId));
-                          // }
-                          // else {
-                          //   context
-                          //       .read<ContactLessonBloc>()
-                          //       .add(ThisTypeNotSupportedRequest());
-                          // }
                         } catch (e) {
                           context
                               .read<ContactLessonBloc>()

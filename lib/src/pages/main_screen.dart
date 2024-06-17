@@ -54,13 +54,6 @@ class _MainScreenOfGames extends State<MainScreenOfGames> {
                 actionOfCompleteGame: widget.actionOfCompleteGame),
             child: BlocConsumer<CurrentGamePhoneticsCubit,
                 CurrentGamePhoneticsState>(listener: (context, state) {
-              // if (widget.dataOfBasesGame != null) {
-              //   context
-              //       .read<CurrentGamePhoneticsCubit>()
-              //       .updateDataOfCurrentGame(
-              //
-              //           gameIndex: 0);
-              // }
             }, builder: (context, stateOfGame) {
               return Listener(
                 onPointerDown: (opm) {

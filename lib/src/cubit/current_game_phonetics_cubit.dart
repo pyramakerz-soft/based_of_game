@@ -108,7 +108,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         stateOfStringWillSay: stateOfStringWillSay));
   }
 
-  updateIndexOfCurrentGame({required int nextIndex}) {
+  updateIndexOfCurrentGame() async {
     int currentIndex = state.index;
     currentIndex = currentIndex + 1;
     emit(state.copyWith(index: currentIndex));
@@ -142,6 +142,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   bool checkIfIsTheLastQuestionOfGame({required int queations}) {
     int countOfCorrectAnswers = state.countOfCorrectAnswers;
+    print('countOfCorrectAnswers:$countOfCorrectAnswers , $queations');
     if (queations <= countOfCorrectAnswers) {
       return true;
     } else {
@@ -160,6 +161,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int mainCountOfQuestion = stateOfStarsAdd.fold(
         0, (previousValue, element) => previousValue + element);
     emit(state.copyWith(countOfCorrectAnswers: stateOfCountOfCorrectAnswer));
+    print(
+        'stateOfCountOfCorrectAnswer:$stateOfCountOfCorrectAnswer, $stateOfStarsAdd');
     if ((mainCountOfQuestion) > 2) {
       if (stateOfStarsAdd[0] <= stateOfCountOfCorrectAnswer) {
         emit(state.copyWith(countOfStar: 1));
@@ -244,6 +247,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   _updateTheStarState() {
     int countOfWrongAnswers = state.countOfWrongAnswers ?? 0;
     List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
+    print('stateOfStarsAdd:$stateOfStarsAdd');
     int countOfAllStars = stateOfStarsAdd.fold(
         0, (previousValue, element) => previousValue + element);
     countOfWrongAnswers = countOfWrongAnswers + countOfAllStars;
@@ -251,6 +255,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     List<int> listStateOfStarsAdd =
         BaseOfGames.getTheStarsAddState(countOfWrongAnswers);
     emit(state.copyWith(statesOfAddStars: listStateOfStarsAdd));
+    print('stateOfStarsAdd:$listStateOfStarsAdd');
+
     addStarToStudent(stateOfCountOfCorrectAnswer: state.countOfCorrectAnswers);
   }
 

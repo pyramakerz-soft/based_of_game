@@ -10,6 +10,8 @@ import '../core/audio_player_letters.dart';
 import '../core/games_structure/basic_of_game.dart';
 import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
+import '../games/click_the_picture/manager/click_picture_cubit.dart';
+import '../games/click_the_picture/pages/click_picture_game.dart';
 import '../games/click_the_sound/manager/click_the_sound_cubit.dart';
 import '../games/click_the_sound/pages/click_the_sound_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
@@ -44,7 +46,17 @@ class BasedOfGamePhonetics extends StatelessWidget {
                       child: const DragOutGame())
                 } else if ((stateOfGame.basicData?.gameData
                     is ClickPicture)) ...{
-                  const Text('in click picture')
+                  BlocProvider<ClickPictureCubit>(
+                      create: (_) => ClickPictureCubit(
+                          gameData: gamesData[stateOfGame.index],
+                          background:
+                              (stateOfGame.basicData?.gameData as ClickPicture)
+                                  .getBackGround(gamesData[stateOfGame.index]
+                                          .gameImages
+                                          ?.length ??
+                                      0),
+                          isArabic: false),
+                      child: const ClickPictureGame())
                 } else if ((stateOfGame.basicData?.gameData
                     is ClickPictureOfWord)) ...{
                   const Text('in click picture by word')

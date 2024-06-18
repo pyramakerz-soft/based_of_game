@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:games_models/games_models.dart';
-import '../../../../based_of_game.dart';
-import '../../../core/games_structure/basic_of_game.dart';
+import '../../../core/games_structure/basic_of_game_data.dart';
+import '../../../core/phonetics_color.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/click_picture_cubit.dart';
 import '../widgets/single_row.dart';
@@ -99,7 +99,7 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                         //         (50.h + 75 + 20)) /
                         //     2,
                         onTap: isInteracting != null &&
-                                isInteracting != BasicOfGame.stateOIdle
+                                isInteracting != BasicOfGameData.stateOIdle
                             ? null
                             : () async {
                                 // if (clickPictureCubit.checkCurrentClickTime(

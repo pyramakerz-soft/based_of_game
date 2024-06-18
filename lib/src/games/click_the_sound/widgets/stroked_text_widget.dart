@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../based_of_game.dart';
+import '../../../core/phonetics_color.dart';
 import '../../../core/theme_text.dart';
 
 class StrokedText extends StatelessWidget {
@@ -30,12 +29,12 @@ class StrokedText extends StatelessWidget {
                     Shadow(
                       color: AppColorPhonetics.darkBlueColor6.withOpacity(0.5),
                       blurRadius: 0.0,
-                      offset: Offset(2.0, 2.0),
+                      offset: const Offset(2.0, 2.0),
                     ),
                     Shadow(
                       color: AppColorPhonetics.darkBlueColor6.withOpacity(0.5),
                       blurRadius: 0.0,
-                      offset: Offset(-2.0, -3.0),
+                      offset: const Offset(-2.0, -3.0),
                     ),
                   ]
                 : null,

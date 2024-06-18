@@ -73,7 +73,7 @@ class MainApiConnection {
   }
 
   Future<String?> _getUserToken() async =>
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FtYmVybm9hay5jby51ay9GaWxsYW1lbnQvcHVibGljL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzE3OTczNDk0LCJleHAiOjE3MjAxMzM0OTQsIm5iZiI6MTcxNzk3MzQ5NCwianRpIjoiTkh1VDdJdXdjNnZSNjZlMyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.bK4-L4q6r6LNBRVULy-AdYdD6DJBJz-3m4sJC7DI2xM';
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FtYmVybm9hay5jby51ay9GaWxsYW1lbnQvcHVibGljL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzE4NjEwNTQ4LCJleHAiOjE3MjA3NzA1NDgsIm5iZiI6MTcxODYxMDU0OCwianRpIjoibExxQ1RBODlSa0dwUVVKYyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Bd58zqoWC6naVE7HnTMQ_Ar62f9OJSG7Nxb5_yd3Iqk';
 
   Future<di.Response<dynamic>> get({
     required String url,

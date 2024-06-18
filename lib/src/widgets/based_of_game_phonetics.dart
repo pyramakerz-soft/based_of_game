@@ -5,13 +5,15 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:games_models/games_models.dart';
-import '../../based_of_game.dart';
+import '../core/assets_sound_letters.dart';
 import '../core/audio_player_letters.dart';
-import '../core/games_structure/basic_of_game.dart';
+import '../core/games_structure/basic_of_game_data.dart';
 import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
 import '../games/click_the_picture/manager/click_picture_cubit.dart';
 import '../games/click_the_picture/pages/click_picture_game.dart';
+import '../games/click_the_picture_with_word/manager/click_the_picture_with_word_cubit.dart';
+import '../games/click_the_picture_with_word/page/click_the_picture_with_word.dart';
 import '../games/click_the_sound/manager/click_the_sound_cubit.dart';
 import '../games/click_the_sound/pages/click_the_sound_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
@@ -59,7 +61,16 @@ class BasedOfGamePhonetics extends StatelessWidget {
                       child: const ClickPictureGame())
                 } else if ((stateOfGame.basicData?.gameData
                     is ClickPictureOfWord)) ...{
-                  const Text('in click picture by word')
+                  BlocProvider<ClickThePictureWithWordCubit>(
+                      create: (_) => ClickThePictureWithWordCubit(
+                          gameData: gamesData[stateOfGame.index],
+                          backGround: (stateOfGame.basicData?.gameData
+                                  as ClickPictureOfWord)
+                              .getBackGround(gamesData[stateOfGame.index]
+                                      .gameImages
+                                      ?.length ??
+                                  0)),
+                      child: const ClickThePictureWithWord())
                 } else if ((stateOfGame.basicData?.gameData
                     is BasicClickTheSoundGame)) ...{
                   BlocProvider<ClickTheSoundCubit>(

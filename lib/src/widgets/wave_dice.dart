@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../based_of_game.dart';
+import '../core/phonetics_color.dart';
 
 class WaveDice extends StatelessWidget {
   final String? currentAlphabet;

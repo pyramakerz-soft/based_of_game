@@ -2,7 +2,7 @@ import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
 import '../game_types/game_phonatics_types.dart';
 
-abstract class BasicOfGame {
+abstract class BasicOfGameData {
   late bool isRound;
   late String titleImageEn;
   late String? titleImageAr;
@@ -18,9 +18,9 @@ abstract class BasicOfGame {
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
     } else if ((gameType == GameTypes.clickPicture.text()) && audioFlag == 1) {
-      ///audio flag == 0 say the word
       return ClickPicture();
     } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
+      ///audio flag == 0 say the word
       return ClickPictureOfWord();
     } else if (gameType == GameTypes.clickTheSound.text()) {
       return BasicClickTheSoundGame();
@@ -79,7 +79,7 @@ abstract class BasicOfGame {
   ];
 }
 
-class BasicDragOutGame implements BasicOfGame {
+class BasicDragOutGame implements BasicOfGameData {
   @override
   bool isRound = false;
 
@@ -99,7 +99,7 @@ class BasicDragOutGame implements BasicOfGame {
   String? titleImageAr;
 }
 
-class ClickPicture implements BasicOfGame {
+class ClickPicture implements BasicOfGameData {
   @override
   bool isRound = false;
 
@@ -145,7 +145,7 @@ class ClickPicture implements BasicOfGame {
   String? titleImageAr = AppImagesArabic.titleOfClickThePicture;
 }
 
-class Tracking implements BasicOfGame {
+class Tracking implements BasicOfGameData {
   @override
   bool isRound = false;
 
@@ -165,7 +165,7 @@ class Tracking implements BasicOfGame {
   String? titleImageAr;
 }
 
-class Video implements BasicOfGame {
+class Video implements BasicOfGameData {
   @override
   bool isRound = false;
 
@@ -185,7 +185,7 @@ class Video implements BasicOfGame {
   String? titleImageAr;
 }
 
-class BasicClickTheSoundGame implements BasicOfGame {
+class BasicClickTheSoundGame implements BasicOfGameData {
   @override
   bool isRound = false;
 
@@ -202,7 +202,7 @@ class BasicClickTheSoundGame implements BasicOfGame {
   String? titleImageAr;
 }
 
-class ClickPictureOfWord implements BasicOfGame {
+class ClickPictureOfWord implements BasicOfGameData {
   @override
   bool isRound = false;
 
@@ -245,7 +245,7 @@ class ClickPictureOfWord implements BasicOfGame {
   String? titleImageAr;
 }
 
-class BingoGame implements BasicOfGame {
+class BingoGame implements BasicOfGameData {
   @override
   bool isRound = false;
 
@@ -262,7 +262,7 @@ class BingoGame implements BasicOfGame {
   String? titleImageAr;
 }
 
-class SortingCupsGame implements BasicOfGame {
+class SortingCupsGame implements BasicOfGameData {
   @override
   bool isRound = false;
 
@@ -279,7 +279,7 @@ class SortingCupsGame implements BasicOfGame {
   String? titleImageAr;
 }
 
-class SortingPicturesGame implements BasicOfGame {
+class SortingPicturesGame implements BasicOfGameData {
   @override
   bool isRound = true;
 
@@ -297,7 +297,7 @@ class SortingPicturesGame implements BasicOfGame {
   String? titleImageAr;
 }
 
-class SpellingGame implements BasicOfGame {
+class SpellingGame implements BasicOfGameData {
   @override
   bool isRound = true;
 
@@ -316,7 +316,7 @@ class SpellingGame implements BasicOfGame {
   String? titleImageAr;
 }
 
-class XOutGame implements BasicOfGame {
+class XOutGame implements BasicOfGameData {
   @override
   bool isRound = false;
 
@@ -333,7 +333,7 @@ class XOutGame implements BasicOfGame {
   String? titleImageAr;
 }
 
-class DiceGame implements BasicOfGame {
+class DiceGame implements BasicOfGameData {
   @override
   bool isRound = false;
 

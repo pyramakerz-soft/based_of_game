@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:games_models/games_models.dart';
 import '../../../core/assets_images_phonetics.dart';
-import '../../../core/games_structure/basic_of_game.dart';
+import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../core/talk_tts.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
@@ -61,7 +61,7 @@ class _DragOutGame extends State<DragOutGame> {
                       ) {
                         return (stateOfCurrentGamePhoneticsCubit
                                     .stateOfAvatar ==
-                                BasicOfGame.stateOfWin)
+                                BasicOfGameData.stateOfWin)
                             ? Image.asset(
                                 stateOfCurrentGamePhoneticsCubit
                                         .basicData?.gameData?.completeBasket ??
@@ -159,7 +159,7 @@ class _DragOutGame extends State<DragOutGame> {
                                 ),
                                 child: ((stateOfCurrentGamePhoneticsCubit
                                                 .stateOfAvatar ==
-                                            BasicOfGame.stateOfWin) &&
+                                            BasicOfGameData.stateOfWin) &&
                                         (gameState.gameData.gameImages?[index]
                                                 .word
                                                 .toString()

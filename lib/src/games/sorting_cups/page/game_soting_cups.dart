@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:games_models/games_models.dart';
-import '../../../core/games_structure/basic_of_game.dart';
+import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/sorting_cups_cubit.dart';
@@ -169,7 +169,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                               },
                               onAcceptWithDetails: (item) async {
                                 if ((generalStateOfGame.stateOfAvatar ==
-                                        BasicOfGame.stateOIdle ||
+                                        BasicOfGameData.stateOIdle ||
                                     generalStateOfGame.stateOfAvatar == null)) {
                                   print(
                                       "##:${gameState.gameData.mainLetter?.split('')[index].toLowerCase()}");

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
-import 'basic_of_game.dart';
+import 'basic_of_game_data.dart';
 import '../game_types/game_phonatics_types.dart';
 
 enum MainDataOfChaptersTypes {
@@ -88,7 +88,7 @@ abstract class MainDataOfChapters {
   late String idelAvatar;
   late String sadAvatar;
   late String background;
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
   late Color backGroundOfStarBar;
   CustomPainter? Function(List<Color?>? colorsOfPaths)? get tracingOfLetter;
   int? Function(Offset point, Size size)? get checkTheIndexOfPath;
@@ -96,7 +96,7 @@ abstract class MainDataOfChapters {
 }
 
 class SPhonetics implements MainDataOfChapters {
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -110,7 +110,7 @@ class SPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -143,7 +143,7 @@ class APhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -162,7 +162,7 @@ class APhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -183,7 +183,7 @@ class FPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -202,7 +202,7 @@ class FPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -219,7 +219,7 @@ class FPhonetics implements MainDataOfChapters {
 }
 
 class MPhonetics implements MainDataOfChapters {
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -233,7 +233,7 @@ class MPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -267,7 +267,7 @@ class TPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -287,7 +287,7 @@ class TPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -309,7 +309,7 @@ class CPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -329,7 +329,7 @@ class CPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -351,7 +351,7 @@ class RPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -371,7 +371,7 @@ class RPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -393,7 +393,7 @@ class IPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -413,7 +413,7 @@ class IPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -435,7 +435,7 @@ class PPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -455,7 +455,7 @@ class PPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -477,7 +477,7 @@ class HPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -497,7 +497,7 @@ class HPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -519,7 +519,7 @@ class JPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -539,7 +539,7 @@ class JPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -561,7 +561,7 @@ class UPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -581,7 +581,7 @@ class UPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -603,7 +603,7 @@ class LPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -623,7 +623,7 @@ class LPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -645,7 +645,7 @@ class BPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -665,7 +665,7 @@ class BPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -687,7 +687,7 @@ class OPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = Colors.white.withOpacity(.1);
 
@@ -707,7 +707,7 @@ class OPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -729,7 +729,7 @@ class GPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -749,7 +749,7 @@ class GPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -771,7 +771,7 @@ class DPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -791,7 +791,7 @@ class DPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -813,7 +813,7 @@ class WPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -833,7 +833,7 @@ class WPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -855,7 +855,7 @@ class EPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -875,7 +875,7 @@ class EPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -897,7 +897,7 @@ class NPhonetics implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -917,7 +917,7 @@ class NPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -939,7 +939,7 @@ class ConnectionWithoutSortingCups implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -954,7 +954,7 @@ class ConnectionWithoutSortingCups implements MainDataOfChapters {
   @override
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -979,7 +979,7 @@ class ConnectionSortingCups implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -993,7 +993,7 @@ class ConnectionSortingCups implements MainDataOfChapters {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -1021,7 +1021,7 @@ class SpellTheWord implements MainDataOfChapters {
       (Offset point, Size size) {
         return null;
       };
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -1029,7 +1029,7 @@ class SpellTheWord implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfConnect;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
@@ -1057,7 +1057,7 @@ class SpellTheWord implements MainDataOfChapters {
 }
 
 class RedPhonetics implements MainDataOfChapters {
-  final BasicOfGame mineGameData;
+  final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -1071,7 +1071,7 @@ class RedPhonetics implements MainDataOfChapters {
   String sadAvatar = AppImagesArabic.beeFailureRiv;
 
   @override
-  BasicOfGame? gameData;
+  BasicOfGameData? gameData;
 
   @override
   String winAvatar = AppImagesArabic.beeSuccess;

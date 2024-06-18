@@ -2,8 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:games_models/games_models.dart';
-
-import '../../../../based_of_game.dart';
+import '../../../core/assets_sound_letters.dart';
 import '../../../core/audio_player_letters.dart';
 import '../../../core/talk_tts.dart';
 part 'click_picture_state.dart';
@@ -25,7 +24,6 @@ class ClickPictureCubit extends Cubit<ClickPictureInitial> {
   bool addAnswer(int index) {
     List<int> correctIndexes = state.correctIndexes;
     if (state.gameImages?[index].correct == 1) {
-      // emit(state);
       correctIndexes.add(index);
       emit(state.copyWith(correctIndexes: correctIndexes.toSet().toList()));
       return true;

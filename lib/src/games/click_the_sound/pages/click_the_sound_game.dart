@@ -7,7 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:games_models/games_models.dart';
 import '../../../core/assets_images_phonetics.dart';
 import '../../../core/assets_svg_images.dart';
-import '../../../core/games_structure/basic_of_game.dart';
+import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/click_the_sound_cubit.dart';
@@ -77,7 +77,7 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                           viewModel: context.read<ClickTheSoundCubit>(),
                           index: index,
                           onPress: isInteracting != null &&
-                                  isInteracting != BasicOfGame.stateOIdle
+                                  isInteracting != BasicOfGameData.stateOIdle
                               ? null
                               : () async {
                                   if (stateOfGame.letters?[index] ==

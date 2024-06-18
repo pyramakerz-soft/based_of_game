@@ -1,15 +1,17 @@
 import 'dart:developer';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/services.dart';
 import 'package:games_models/games_models.dart';
 import '../../based_of_game.dart';
+import '../core/assets_game_sound.dart';
 import '../core/audio_player_game.dart';
 import '../core/games_structure/base_of_games.dart';
 import '../core/games_structure/basic_of_chapter.dart';
-import '../core/games_structure/basic_of_game.dart';
+import '../core/games_structure/basic_of_game_data.dart';
 
 part 'current_game_phonetics_state.dart';
 
@@ -199,8 +201,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       {required int correctAnswers,
       required int questions,
       void Function()? subAction}) async {
+    AudioPlayer playerCorrect = AudioPlayer();
+
     await _animationOfCorrectAnswer();
     await AudioPlayerGame.startPlaySoundOfCorrect(
+        playerCorrect2: playerCorrect,
         soundPath: AppGameSound.getRandomSoundOfCorrect());
     await addStarToStudent(stateOfCountOfCorrectAnswer: correctAnswers);
     bool isLastLesson = checkIfIsTheLastQuestionOfGame(queations: questions);
@@ -210,7 +215,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         state.actionWhenTriesBeZero!(state.countOfStar ?? 0);
       }
     } else {
-      AudioPlayerGame.playerCorrect.onPlayerComplete.listen((event) {
+      playerCorrect.onPlayerComplete.listen((event) {
+        print('################');
         backToMainAvatar();
         if (subAction != null) {
           subAction();
@@ -220,17 +226,20 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   Future<void> addWrongAnswer({void Function()? actionOfWrongAnswer}) async {
+    AudioPlayer playerWrong = AudioPlayer();
+
     await _animationOfWrongAnswer();
     await _increaseCountOfWrongAnswer();
     await AudioPlayerGame.startPlaySoundOfWrong(
+        playerWrong2: playerWrong,
         soundPath: AppGameSound.getRandomSoundOfWrong());
     if (actionOfWrongAnswer != null) {
-      AudioPlayerGame.playerWrong.onPlayerComplete.listen((event) {
+      playerWrong.onPlayerComplete.listen((event) {
         actionOfWrongAnswer.call();
       });
     }
     // AudioPlayerGame.playerWrong.state.
-    AudioPlayerGame.playerWrong.onPlayerComplete.listen((event) {
+    playerWrong.onPlayerComplete.listen((event) {
       backToMainAvatar();
     });
   }
@@ -245,7 +254,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   _animationOfWrongAnswer() {
     emit(state.copyWith(
         avatarCurrentArtboard: state.avatarArtboardSad,
-        stateOfAvatar: BasicOfGame.stateOfSad));
+        stateOfAvatar: BasicOfGameData.stateOfSad));
     decreaseCountOfTries();
   }
 
@@ -268,14 +277,14 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   Future<void> _animationOfCorrectAnswer() async {
     emit(state.copyWith(
         avatarCurrentArtboard: state.avatarArtboardSuccess,
-        stateOfAvatar: BasicOfGame.stateOfWin));
+        stateOfAvatar: BasicOfGameData.stateOfWin));
   }
 
   backToMainAvatar() async {
     // await Future.delayed(const Duration(seconds: 2));
     emit(state.copyWith(
         avatarCurrentArtboard: state.avatarArtboardIdle,
-        stateOfAvatar: BasicOfGame.stateOIdle));
+        stateOfAvatar: BasicOfGameData.stateOIdle));
   }
 
   Map<int, Offset> touchPositions = <int, Offset>{};

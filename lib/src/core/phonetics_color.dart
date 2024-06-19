@@ -15,6 +15,7 @@ class AppColorPhonetics {
   static const Color skyBlueColor = Color(0xFF9ADFF5);
   static const Color strokeColor = Color(0xff7E3116);
   static const Color dragContainerColor = Color(0xffF0D2AA);
+  static const Color lightGreyColor8 = Color(0xFFBFBFBF);
 
   static const Color lightGreyColor4 = Color(0xFFABABAB);
 }

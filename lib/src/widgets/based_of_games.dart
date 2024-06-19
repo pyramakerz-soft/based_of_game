@@ -1,4 +1,5 @@
 import 'package:based_of_eng_game/src/widgets/empty_space.dart';
+import 'package:based_of_eng_game/src/widgets/widget_of_tries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -68,17 +69,11 @@ class BasedOfGames extends StatelessWidget {
                               30.pw,
                               GestureDetector(
                                 onTap: () {
-                                  // if (context
-                                  //         .read<CurrentGamePhoneticsCubit>()
-                                  //         .state
-                                  //         .actionWhenTriesBeZero !=
-                                  //     null) {
-                                    context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .state
-                                            .actionWhenTriesBeZero(
-                                        stateOfGame.countOfStar ?? 0);
-                                  // }
+                                  context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .state
+                                      .actionWhenTriesBeZero(
+                                          stateOfGame.countOfStar ?? 0);
                                   Navigator.of(context).pop();
                                 },
                                 child: Image.asset(
@@ -130,39 +125,66 @@ class BasedOfGames extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: (stateOfGame.basicData?.gameData is Video)
-                    ? MediaQuery.of(context).size.height
-                    : (MediaQuery.of(context).size.height - (50.h + 5)),
-                child: Column(
-                  children: [
-                    if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
-                      if (stateOfGame.basicData is ConnectionSortingCups) ...{
-                        BasedOfGameConnectSortingCups(
+              if (stateOfGame.countOfTries == 0) ...{
+                widgetOfTries(
+                  context: context,
+                  stateOfGame: stateOfGame,
+                  actionOfDone: () {
+                    context
+                        .read<CurrentGamePhoneticsCubit>()
+                        .state
+                        .actionWhenTriesBeZero(context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .state
+                                .countOfStar ??
+                            0);
+                    Navigator.of(context).pop();
+                  },
+                  backButton: () {
+                    context
+                        .read<CurrentGamePhoneticsCubit>()
+                        .state
+                        .actionWhenTriesBeZero(context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .state
+                                .countOfStar ??
+                            0);
+                    Navigator.of(context).pop();
+                  },
+                )
+              } else ...{
+                SizedBox(
+                  height: (stateOfGame.basicData?.gameData is Video)
+                      ? MediaQuery.of(context).size.height
+                      : (MediaQuery.of(context).size.height - (50.h + 5)),
+                  child: Column(
+                    children: [
+                      if (stateOfGame.basicData?.gameData?.isConnect ==
+                          true) ...{
+                        if (stateOfGame.basicData is ConnectionSortingCups) ...{
+                          BasedOfGameConnectSortingCups(
+                            stateOfGame: stateOfGame,
+                            gamesData: gamesData,
+                          ),
+                        } else ...{
+                          BasedOfGameConnect(
+                            stateOfGame: stateOfGame,
+                            gamesData: gamesData,
+                          ),
+                        }
+                      } else if (BaseOfGames.isPhonetics(
+                          chapter: stateOfGame.basicData.runtimeType)) ...{
+                        BasedOfGamePhonetics(
                           stateOfGame: stateOfGame,
                           gamesData: gamesData,
                         ),
                       } else ...{
-                        BasedOfGameConnect(
-                          stateOfGame: stateOfGame,
-                          gamesData: gamesData,
-                        ),
+                        const SizedBox()
                       }
-                    } else if (BaseOfGames.isPhonetics(
-                        chapter: stateOfGame.basicData.runtimeType)) ...{
-                      BasedOfGamePhonetics(
-                        stateOfGame: stateOfGame,
-                        gamesData: gamesData,
-                      ),
-                    } else ...{
-                      const SizedBox()
-                    }
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-
-              // Text(stateOfGame.basicData.runtimeType.toString()),
-              // Text(stateOfGame.basicData?.gameData.runtimeType.toString() ?? ''),
+              }
             ],
           ),
         ));

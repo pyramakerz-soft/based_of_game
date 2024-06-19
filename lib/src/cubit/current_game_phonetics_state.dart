@@ -119,7 +119,7 @@ class CurrentGamePhoneticsState extends Equatable {
 
   CurrentGamePhoneticsState clearAllData() {
     return CurrentGamePhoneticsState(
-      index: index,
+      index: 0,
       actionWhenTriesBeZero: actionWhenTriesBeZero,
     );
   }

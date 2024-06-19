@@ -119,17 +119,21 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         currentAvatar: basicData.basicAvatar,
         index: gameIndex,
         gameData: gameData));
+    _getTheBackGround();
+    _getTheBackGroundSuccess();
+    _getTheBackGroundSad();
     _saveCountOfTries();
   }
 
   _saveCountOfTries() {
-    int countOfTries = 5; //state.gameData?[state.index].numOfTrials ?? 0;
+    int countOfTries = state.gameData?[state.index].numOfTrials ?? 0;
     emit(state.copyWith(countOfTries: countOfTries, countOfStar: 0));
   }
 
   decreaseCountOfTries() {
     int countOfTries = (state.countOfTries ?? 1) - 1;
     emit(state.copyWith(countOfTries: countOfTries));
+    print('state.countOfTries:${state.countOfTries}');
     if (state.countOfTries == 0) {
       state.actionWhenTriesBeZero(state.countOfStar ?? 0);
     }

@@ -13,6 +13,8 @@ import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
 import '../games/bingo_game/manager/bingo_cubit.dart';
 import '../games/bingo_game/pages/bingo_game.dart';
+import '../games/x_out_game/manager/x_out_cubit.dart';
+import '../games/x_out_game/pages/x_out_game.dart';
 
 class BasedOfGameConnect extends StatelessWidget {
   final CurrentGamePhoneticsState stateOfGame;
@@ -117,9 +119,9 @@ class BasedOfGameConnect extends StatelessWidget {
                             ),
                           )
                         : Container(
-                            width: 0.8.sw,
+                            width: 0.2.sw,
                             height: 0.32.sh,
-                            padding: EdgeInsets.only(left: 10),
+                            padding: const EdgeInsets.only(left: 10),
                             child: Stack(
                               // crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -255,23 +257,24 @@ class BasedOfGameConnect extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                60.ph,
+                // 60.ph,
                 if ((stateOfGame.basicData?.gameData is BingoGame)) ...{
                   BlocProvider<BingoCubit>(
                       create: (_) => BingoCubit(
                             gameData: gamesData[stateOfGame.index],
                           ),
-                      child: BingoGameScreen())
+                      child: const BingoGameScreen())
                 } else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
-                  Text('XOutGame')
-                  // BlocProvider<XOutCubit>(
-                  //     create: (_) => XOutCubit(
-                  //           gameData: stateOfGameData.data,
-                  //         ),
-                  //     child: XOutGameScreen())
+                  // Text('XOutGame')
+                  BlocProvider<XOutCubit>(
+                      create: (_) => XOutCubit(
+                            listGameData: gamesData,
+                            index: stateOfGame.index,
+                          ),
+                      child: const XOutGameScreen())
                 } else if ((stateOfGame.basicData?.gameData
                     is SpellingGame)) ...{
-                  Text('SpellingGame')
+                  const Text('SpellingGame')
                   // BlocProvider<SpellingCubit>(
                   //     create: (_) => SpellingCubit(
                   //         // gameData: stateOfGameData.data[stateOfGame.index],
@@ -283,7 +286,7 @@ class BasedOfGameConnect extends StatelessWidget {
                   //     child: SpellingGameScreen())
                 } else if ((stateOfGame.basicData?.gameData
                     is SortingPicturesGame)) ...{
-                  Text('SortingPicturesGame')
+                  const Text('SortingPicturesGame')
                   // BlocProvider<sortingCubit>(
                   //     create: (_) => sortingCubit(
                   //         gameData: stateOfGameData.data[stateOfGame.index],
@@ -294,7 +297,7 @@ class BasedOfGameConnect extends StatelessWidget {
                   //         allGames: stateOfGameData.data),
                   //     child: SortingGameScreen())
                 } else if ((stateOfGame.basicData?.gameData is DiceGame)) ...{
-                  Text('DiceGame')
+                  const Text('DiceGame')
                   // BlocProvider<DiceCubit>(
                   //     create: (_) => DiceCubit(
                   //           gameData: stateOfGameData.data[stateOfGame.index],

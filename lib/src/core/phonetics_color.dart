@@ -9,6 +9,10 @@ class AppColorPhonetics {
   static const Color selectedColor = Color(0xff5AE2C8);
   static const Color lightBlueColor2 = Color(0xffBEDDEC);
   static const Color lightBlueColor4 = Color(0xff4D7F97);
+  static const Color greenColor3 = Color(0xFFA6F4D6);
+  static const Color correct = Color(0xFFB1E59F);
+  static const Color incorrect = Color(0xFFF9B1B1);
+  static const Color skyBlueColor = Color(0xFF9ADFF5);
 
   static const Color lightGreyColor4 = Color(0xFFABABAB);
 }

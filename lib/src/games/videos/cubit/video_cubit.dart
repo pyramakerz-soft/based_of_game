@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:games_models/games_models.dart';
-import 'package:meta/meta.dart';
 
 part 'video_state.dart';
 

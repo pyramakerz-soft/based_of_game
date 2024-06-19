@@ -1,6 +1,6 @@
 part of 'video_cubit.dart';
 
-final class VideoInitial extends Equatable {
+class VideoInitial extends Equatable {
   final GameModel gameData;
   const VideoInitial({required this.gameData});
   VideoInitial copyWith({GameModel? gameData}) {

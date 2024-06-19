@@ -1,6 +1,8 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
+import '../../games/tracing/widget/letter_m.dart';
+import '../../games/tracing/widget/letter_s.dart';
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
 import 'basic_of_game_data.dart';
@@ -128,12 +130,12 @@ class SPhonetics implements MainDataOfChapters {
   @override
   CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
       (List<Color?>? colorsOfPaths) {
-        return null;
+        return FlipBookPainterLetterS(colorsOfPaths: colorsOfPaths);
       };
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
-        return null;
+        return FlipBookPainterLetterS.indexOfPointInside(point, size);
       };
 }
 
@@ -251,13 +253,13 @@ class MPhonetics implements MainDataOfChapters {
   @override
   CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
       (List<Color?>? colorsOfPaths) {
-        return null;
+        return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
       };
 
   @override
   int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
       (Offset point, Size size) {
-        return null;
+        return FlipBookPainterLetterM.indexOfPointInside(point, size);
       };
 }
 

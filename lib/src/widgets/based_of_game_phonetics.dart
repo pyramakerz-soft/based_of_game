@@ -19,6 +19,8 @@ import '../games/click_the_sound/manager/click_the_sound_cubit.dart';
 import '../games/click_the_sound/pages/click_the_sound_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
+import '../games/tracing/manager/tracing_cubit.dart';
+import '../games/tracing/page/tracing_game.dart';
 import '../games/videos/screen/game_video.dart';
 
 class BasedOfGamePhonetics extends StatelessWidget {
@@ -80,15 +82,20 @@ class BasedOfGamePhonetics extends StatelessWidget {
                             gameData: gamesData[stateOfGame.index],
                           ),
                       child: const ClickTheSoundGame()),
-                } else if (stateOfGame.basicData?.gameData is Tracking) ...{
-                  const Text('tracking'),
                 } else if (stateOfGame.basicData?.gameData is Video) ...{
                   BlocProvider<VideoCubit>(
                     create: (_) => VideoCubit(
                       gameData: gamesData[stateOfGame.index],
                     ),
-                    child: GameVideo(),
+                    child: const GameVideo(),
                   )
+                } else if (stateOfGame.basicData?.gameData is Tracking) ...{
+                  BlocProvider<TracingCubit>(
+                      create: (_) => TracingCubit(
+                            gameData: gamesData[stateOfGame.index],
+                            stateOfGame: stateOfGame,
+                          ),
+                      child: const TracingGame()),
                 }
               ],
             ))),

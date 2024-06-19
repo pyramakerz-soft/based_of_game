@@ -23,12 +23,7 @@ class BasedOfGames extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopScope(
         onPopInvoked: (x) async {
-          if (context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .state
-                      .actionWhenTriesBeZero !=
-                  null &&
-              (stateOfGame.basicData?.gameData is Video)) {
+          if ((stateOfGame.basicData?.gameData is Video)) {
             context
                 .read<CurrentGamePhoneticsCubit>()
                 .state
@@ -43,40 +38,9 @@ class BasedOfGames extends StatelessWidget {
               image: DecorationImage(
                   image: AssetImage(stateOfGame.basicData?.background ?? ''),
                   fit: BoxFit.fill)),
-          child: Stack(
+          child: Column(
             // alignment: Alignment.center,
             children: [
-              SizedBox(
-                height: (stateOfGame.basicData?.gameData is Video)
-                    ? MediaQuery.of(context).size.height
-                    : (MediaQuery.of(context).size.height - (50.h + 5)),
-                child: Column(
-                  children: [
-                    if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
-                      if (stateOfGame.basicData is ConnectionSortingCups) ...{
-                        BasedOfGameConnectSortingCups(
-                          stateOfGame: stateOfGame,
-                          gamesData: gamesData,
-                        ),
-                      } else ...{
-                        BasedOfGameConnect(
-                          stateOfGame: stateOfGame,
-                          gamesData: gamesData,
-                        ),
-                      }
-                    } else if (BaseOfGames.isPhonetics(
-                        chapter: stateOfGame.basicData.runtimeType)) ...{
-                      BasedOfGamePhonetics(
-                        stateOfGame: stateOfGame,
-                        gamesData: gamesData,
-                      ),
-                    } else ...{
-                      const SizedBox()
-                    }
-                  ],
-                ),
-              ),
-
               Container(
                 height: 50.h + 5,
                 clipBehavior: Clip.antiAlias,
@@ -166,6 +130,37 @@ class BasedOfGames extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(
+                height: (stateOfGame.basicData?.gameData is Video)
+                    ? MediaQuery.of(context).size.height
+                    : (MediaQuery.of(context).size.height - (50.h + 5)),
+                child: Column(
+                  children: [
+                    if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
+                      if (stateOfGame.basicData is ConnectionSortingCups) ...{
+                        BasedOfGameConnectSortingCups(
+                          stateOfGame: stateOfGame,
+                          gamesData: gamesData,
+                        ),
+                      } else ...{
+                        BasedOfGameConnect(
+                          stateOfGame: stateOfGame,
+                          gamesData: gamesData,
+                        ),
+                      }
+                    } else if (BaseOfGames.isPhonetics(
+                        chapter: stateOfGame.basicData.runtimeType)) ...{
+                      BasedOfGamePhonetics(
+                        stateOfGame: stateOfGame,
+                        gamesData: gamesData,
+                      ),
+                    } else ...{
+                      const SizedBox()
+                    }
+                  ],
+                ),
+              ),
+
               // Text(stateOfGame.basicData.runtimeType.toString()),
               // Text(stateOfGame.basicData?.gameData.runtimeType.toString() ?? ''),
             ],

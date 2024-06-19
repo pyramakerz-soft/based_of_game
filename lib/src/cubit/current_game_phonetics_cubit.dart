@@ -9,31 +9,23 @@ import 'package:games_models/games_models.dart';
 import '../../based_of_game.dart';
 import '../core/assets_game_sound.dart';
 import '../core/audio_player_game.dart';
-import '../core/games_structure/base_of_games.dart';
-import '../core/games_structure/basic_of_chapter.dart';
 import '../core/games_structure/basic_of_game_data.dart';
 
 part 'current_game_phonetics_state.dart';
 
 class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
-  final MainDataOfChapters _basicData;
-  final List<GameModel> _gameData;
-  final void Function(int countOfStars) _actionOfCompleteGame;
   CurrentGamePhoneticsCubit(
       {required MainDataOfChapters basicData,
       required void Function(int) actionOfCompleteGame,
       required List<GameModel> gameData})
-      : _actionOfCompleteGame = actionOfCompleteGame,
-        _gameData = gameData,
-        _basicData = basicData,
-        super(CurrentGamePhoneticsState(index: 0)) {
+      : super(CurrentGamePhoneticsState(
+            index: 0, actionWhenTriesBeZero: actionOfCompleteGame)) {
     _checkDataOfCubit();
     updateDataOfCurrentGame(
-        basicData: _basicData, gameData: _gameData, gameIndex: 0);
+        basicData: basicData, gameData: gameData, gameIndex: 0);
     _getTheBackGround();
     _getTheBackGroundSuccess();
     _getTheBackGroundSad();
-    emit(state.copyWith(actionWhenTriesBeZero: _actionOfCompleteGame));
   }
   _checkDataOfCubit() {
     if (state.index > (state.gameData?.length ?? 0)) {

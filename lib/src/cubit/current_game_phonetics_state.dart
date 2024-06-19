@@ -13,7 +13,7 @@ class CurrentGamePhoneticsState extends Equatable {
   int countOfWrongAnswers;
   int countOfCorrectAnswers;
 
-  void Function(int x)? actionWhenTriesBeZero;
+  void Function(int x) actionWhenTriesBeZero;
   String? currentAvatar;
   int index;
   int? countOfTries;
@@ -27,7 +27,7 @@ class CurrentGamePhoneticsState extends Equatable {
       this.avatarCurrentArtboard,
       this.stateOfStringIsWord,
       this.stateOfStringWillSay,
-      this.actionWhenTriesBeZero,
+      required this.actionWhenTriesBeZero,
       this.stateOfAvatar,
       this.avatarArtboardIdle,
       this.avatarArtboardSad,
@@ -92,6 +92,7 @@ class CurrentGamePhoneticsState extends Equatable {
   CurrentGamePhoneticsState clearAllData() {
     return CurrentGamePhoneticsState(
       index: index,
+      actionWhenTriesBeZero: actionWhenTriesBeZero,
     );
   }
 

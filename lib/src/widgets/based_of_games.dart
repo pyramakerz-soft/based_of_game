@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:games_models/games_models.dart';
-import '../../based_of_game.dart';
+import '../../based_of_eng_game.dart';
 import '../core/assets_images_phonetics.dart';
 import '../core/games_structure/basic_of_game_data.dart';
 import '../cubit/current_game_phonetics_cubit.dart';

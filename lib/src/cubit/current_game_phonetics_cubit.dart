@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/services.dart';
 import 'package:games_models/games_models.dart';
-import '../../based_of_game.dart';
+import '../../based_of_eng_game.dart';
 import '../core/assets_game_sound.dart';
 import '../core/audio_player_game.dart';
 import '../core/games_structure/basic_of_game_data.dart';

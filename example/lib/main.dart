@@ -1,4 +1,4 @@
-import 'package:based_of_eng_game/based_of_game.dart';
+import 'package:based_of_eng_game/based_of_eng_game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

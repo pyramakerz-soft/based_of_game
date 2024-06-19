@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:based_of_eng_game/based_of_game.dart';
+import 'package:based_of_eng_game/based_of_eng_game.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

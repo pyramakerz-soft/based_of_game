@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:games_models/games_models.dart';
 
-import '../../../../based_of_game.dart';
+import '../../../../based_of_eng_game.dart';
 import '../../../core/assets_sound_letters.dart';
 import '../../../core/audio_player_letters.dart';
 import '../../../core/talk_tts.dart';

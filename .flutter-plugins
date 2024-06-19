@@ -13,3 +13,7 @@ path_provider_linux=/Users/moatazmohamed/.pub-cache/hosted/pub.dev/path_provider
 path_provider_windows=/Users/moatazmohamed/.pub-cache/hosted/pub.dev/path_provider_windows-2.2.1/
 rive_common=/Users/moatazmohamed/.pub-cache/hosted/pub.dev/rive_common-0.2.8/
 sqflite=/Users/moatazmohamed/.pub-cache/hosted/pub.dev/sqflite-2.3.3+1/
+video_player=/Users/moatazmohamed/.pub-cache/hosted/pub.dev/video_player-2.8.7/
+video_player_android=/Users/moatazmohamed/.pub-cache/hosted/pub.dev/video_player_android-2.5.0/
+video_player_avfoundation=/Users/moatazmohamed/.pub-cache/hosted/pub.dev/video_player_avfoundation-2.6.1/
+video_player_web=/Users/moatazmohamed/.pub-cache/hosted/pub.dev/video_player_web-2.3.1/

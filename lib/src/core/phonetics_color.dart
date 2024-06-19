@@ -13,6 +13,7 @@ class AppColorPhonetics {
   static const Color correct = Color(0xFFB1E59F);
   static const Color incorrect = Color(0xFFF9B1B1);
   static const Color skyBlueColor = Color(0xFF9ADFF5);
+  static const Color strokeColor = Color(0xff7E3116);
 
   static const Color lightGreyColor4 = Color(0xFFABABAB);
 }

@@ -13,6 +13,8 @@ import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
 import '../games/bingo_game/manager/bingo_cubit.dart';
 import '../games/bingo_game/pages/bingo_game.dart';
+import '../games/sorting_game/manager/sorting_cubit.dart';
+import '../games/sorting_game/pages/sorting_game.dart';
 import '../games/x_out_game/manager/x_out_cubit.dart';
 import '../games/x_out_game/pages/x_out_game.dart';
 
@@ -34,6 +36,113 @@ class BasedOfGameConnect extends StatelessWidget {
         child: Stack(
           alignment: Alignment.topRight,
           children: [
+            if (stateOfGame.basicData!.gameData!.isRound) ...{
+              PositionedDirectional(
+                top: 0,
+                start: 90.w,
+                child: GestureDetector(
+                  onTap: stateOfGame.beeTalking == true
+                      ? null
+                      : () async {
+                          await context
+                              .read<CurrentGamePhoneticsCubit>()
+                              .beeTalkingTrue();
+                          await TalkTts.startTalk(
+                              text: gamesData[stateOfGame.index].inst ?? '');
+                          TalkTts.flutterTts.setCompletionHandler(() async {
+                            if (stateOfGame.stateOfStringIsWord == true) {
+                              await TalkTts.startTalk(
+                                  text: stateOfGame.stateOfStringWillSay ?? '');
+                            } else {
+                              await AudioPlayerLetters.startPlaySound(
+                                  soundPath:
+                                      AssetsSoundLetters.getSoundOfLetter(
+                                          mainGameLetter: stateOfGame
+                                                  .stateOfStringWillSay ??
+                                              ''));
+                            }
+                          });
+
+                          await context
+                              .read<CurrentGamePhoneticsCubit>()
+                              .beeTalkingFalse();
+                        },
+                  child: Container(
+                      alignment: Alignment.center,
+                      child: stateOfGame.avatarCurrentArtboard == null
+                          ? Image.asset(
+                              stateOfGame.currentAvatar ?? '',
+                              // height:
+                              // MediaQuery.of(context).size.height - (70.h),
+                              height: 85.h,
+                              width: 80.w,
+                            )
+                          : SizedBox(
+                              height: 110.h,
+                              width: 70.w,
+                              child: Rive(
+                                artboard: stateOfGame.avatarCurrentArtboard!,
+                                fit: BoxFit.fill,
+                                useArtboardSize: true,
+                                alignment: Alignment.center,
+                              ))),
+                ),
+              ),
+            },
+            /////////////////////game//////////////////
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // 60.ph,
+                if ((stateOfGame.basicData?.gameData is BingoGame)) ...{
+                  BlocProvider<BingoCubit>(
+                      create: (_) => BingoCubit(
+                            gameData: gamesData[stateOfGame.index],
+                          ),
+                      child: const BingoGameScreen())
+                } else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
+                  // Text('XOutGame')
+                  BlocProvider<XOutCubit>(
+                      create: (_) => XOutCubit(
+                            listGameData: gamesData,
+                            index: stateOfGame.index,
+                          ),
+                      child: const XOutGameScreen())
+                } else if ((stateOfGame.basicData?.gameData
+                    is SpellingGame)) ...{
+                  const Text('SpellingGame')
+                  // BlocProvider<SpellingCubit>(
+                  //     create: (_) => SpellingCubit(
+                  //         // gameData: stateOfGameData.data[stateOfGame.index],
+                  //         index: stateOfGame.index,
+                  //         background:
+                  //             (stateOfGame.basicData?.gameData as SpellingGame)
+                  //                 .woodenBackground,
+                  //         allGames: stateOfGameData.data),
+                  //     child: SpellingGameScreen())
+                } else if ((stateOfGame.basicData?.gameData
+                    is SortingPicturesGame)) ...{
+                  // const Text('SortingPicturesGame')
+                  BlocProvider<SortingCubit>(
+                      create: (_) => SortingCubit(
+                          index: stateOfGame.index,
+                          background: (stateOfGame.basicData?.gameData
+                                  as SortingPicturesGame)
+                              .woodenBackground,
+                          listGameData: gamesData),
+                      child: SortingGameScreen())
+                } else if ((stateOfGame.basicData?.gameData is DiceGame)) ...{
+                  const Text('DiceGame')
+                  // BlocProvider<DiceCubit>(
+                  //     create: (_) => DiceCubit(
+                  //           gameData: stateOfGameData.data[stateOfGame.index],
+                  //         ),
+                  //     child: DiceGamePage())
+                }
+              ],
+            ),
+
             /////////////////////game title//////////////////
             Positioned(
               top: 0,
@@ -44,78 +153,13 @@ class BasedOfGameConnect extends StatelessWidget {
                   children: [
                     stateOfGame.basicData!.gameData!.isRound
                         ? Padding(
-                            padding: EdgeInsets.only(left: 10.w),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  stateOfGame
-                                          .basicData?.gameData?.titleImageEn ??
-                                      '',
-                                  height: 75.h,
-                                  width: 90.w,
-                                  fit: BoxFit.fill,
-                                ),
-                                GestureDetector(
-                                  onTap: stateOfGame.beeTalking == true
-                                      ? null
-                                      : () async {
-                                          await context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .beeTalkingTrue();
-                                          await TalkTts.startTalk(
-                                              text: gamesData[stateOfGame.index]
-                                                      .inst ??
-                                                  '');
-                                          TalkTts.flutterTts
-                                              .setCompletionHandler(() async {
-                                            if (stateOfGame
-                                                    .stateOfStringIsWord ==
-                                                true) {
-                                              await TalkTts.startTalk(
-                                                  text: stateOfGame
-                                                          .stateOfStringWillSay ??
-                                                      '');
-                                            } else {
-                                              await AudioPlayerLetters.startPlaySound(
-                                                  soundPath: AssetsSoundLetters
-                                                      .getSoundOfLetter(
-                                                          mainGameLetter:
-                                                              stateOfGame
-                                                                      .stateOfStringWillSay ??
-                                                                  ''));
-                                            }
-                                          });
-
-                                          await context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .beeTalkingFalse();
-                                        },
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      child: stateOfGame
-                                                  .avatarCurrentArtboard ==
-                                              null
-                                          ? Image.asset(
-                                              stateOfGame.currentAvatar ?? '',
-                                              // height:
-                                              // MediaQuery.of(context).size.height - (70.h),
-                                              height: 85.h,
-                                              width: 80.w,
-                                            )
-                                          : SizedBox(
-                                              height: 110.h,
-                                              width: 70.w,
-                                              child: Rive(
-                                                artboard: stateOfGame
-                                                    .avatarCurrentArtboard!,
-                                                fit: BoxFit.fill,
-                                                useArtboardSize: true,
-                                                alignment: Alignment.center,
-                                              ))),
-                                ),
-                              ],
+                            padding: EdgeInsets.only(left: 10.w, top: 10.h),
+                            child: Image.asset(
+                              stateOfGame.basicData?.gameData?.titleImageEn ??
+                                  '',
+                              height: 75.h,
+                              width: 90.w,
+                              fit: BoxFit.fill,
                             ),
                           )
                         : Container(
@@ -250,61 +294,6 @@ class BasedOfGameConnect extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-
-            /////////////////////game//////////////////
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // 60.ph,
-                if ((stateOfGame.basicData?.gameData is BingoGame)) ...{
-                  BlocProvider<BingoCubit>(
-                      create: (_) => BingoCubit(
-                            gameData: gamesData[stateOfGame.index],
-                          ),
-                      child: const BingoGameScreen())
-                } else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
-                  // Text('XOutGame')
-                  BlocProvider<XOutCubit>(
-                      create: (_) => XOutCubit(
-                            listGameData: gamesData,
-                            index: stateOfGame.index,
-                          ),
-                      child: const XOutGameScreen())
-                } else if ((stateOfGame.basicData?.gameData
-                    is SpellingGame)) ...{
-                  const Text('SpellingGame')
-                  // BlocProvider<SpellingCubit>(
-                  //     create: (_) => SpellingCubit(
-                  //         // gameData: stateOfGameData.data[stateOfGame.index],
-                  //         index: stateOfGame.index,
-                  //         background:
-                  //             (stateOfGame.basicData?.gameData as SpellingGame)
-                  //                 .woodenBackground,
-                  //         allGames: stateOfGameData.data),
-                  //     child: SpellingGameScreen())
-                } else if ((stateOfGame.basicData?.gameData
-                    is SortingPicturesGame)) ...{
-                  const Text('SortingPicturesGame')
-                  // BlocProvider<sortingCubit>(
-                  //     create: (_) => sortingCubit(
-                  //         gameData: stateOfGameData.data[stateOfGame.index],
-                  //         index: stateOfGame.index,
-                  //         background: (stateOfGame.basicData?.gameData
-                  //                 as SortingPicturesGame)
-                  //             .woodenBackground,
-                  //         allGames: stateOfGameData.data),
-                  //     child: SortingGameScreen())
-                } else if ((stateOfGame.basicData?.gameData is DiceGame)) ...{
-                  const Text('DiceGame')
-                  // BlocProvider<DiceCubit>(
-                  //     create: (_) => DiceCubit(
-                  //           gameData: stateOfGameData.data[stateOfGame.index],
-                  //         ),
-                  //     child: DiceGamePage())
-                }
-              ],
             ),
           ],
         ),

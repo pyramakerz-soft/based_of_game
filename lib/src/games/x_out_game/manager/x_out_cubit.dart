@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:games_models/games_models.dart';
-import "package:meta/meta.dart";
 
 import '../../../core/assets_sound_letters.dart';
 import '../../../core/audio_player_letters.dart';
-import '../../../core/game_types/game_phonatics_types.dart';
 import '../../../core/talk_tts.dart';
 part 'x_out_state.dart';
 

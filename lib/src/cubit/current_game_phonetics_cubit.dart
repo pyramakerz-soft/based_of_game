@@ -297,4 +297,12 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   beeTalkingFalse() {
     emit(state.copyWith(beeTalking: false));
   }
+
+  saveCurrentStringOfDice({required String letter}) {
+    emit(state.copyWith(currentStringOfDice: letter));
+  }
+
+  clearCurrentStringOfDice() {
+    emit(state.clearCurrentStringOfDice());
+  }
 }

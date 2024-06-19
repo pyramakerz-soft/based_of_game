@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import '../core/phonetics_color.dart';
+import '../../../core/phonetics_color.dart';
 
 class WaveDice extends StatelessWidget {
   final String? currentAlphabet;
   final Widget? body;
   final double? width;
   final double? height;
-  final double widthAndHeight = 120;
+  double widthAndHeight = 120;
 
-  const WaveDice(
-      {super.key, this.currentAlphabet, this.body, this.width, this.height});
+  WaveDice({Key? key, this.currentAlphabet, this.body, this.width, this.height})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -13,6 +13,9 @@ import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
 import '../games/bingo_game/manager/bingo_cubit.dart';
 import '../games/bingo_game/pages/bingo_game.dart';
+import '../games/dice/manager/dice_cubit.dart';
+import '../games/dice/page/dice_game.dart';
+import '../games/dice/widget/wave_dice.dart';
 import '../games/sorting_game/manager/sorting_cubit.dart';
 import '../games/sorting_game/pages/sorting_game.dart';
 import '../games/x_out_game/manager/x_out_cubit.dart';
@@ -94,7 +97,6 @@ class BasedOfGameConnect extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 60.ph,
                 if ((stateOfGame.basicData?.gameData is BingoGame)) ...{
                   BlocProvider<BingoCubit>(
                       create: (_) => BingoCubit(
@@ -102,7 +104,6 @@ class BasedOfGameConnect extends StatelessWidget {
                           ),
                       child: const BingoGameScreen())
                 } else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
-                  // Text('XOutGame')
                   BlocProvider<XOutCubit>(
                       create: (_) => XOutCubit(
                             listGameData: gamesData,
@@ -131,14 +132,13 @@ class BasedOfGameConnect extends StatelessWidget {
                                   as SortingPicturesGame)
                               .woodenBackground,
                           listGameData: gamesData),
-                      child: SortingGameScreen())
+                      child: const SortingGameScreen())
                 } else if ((stateOfGame.basicData?.gameData is DiceGame)) ...{
-                  const Text('DiceGame')
-                  // BlocProvider<DiceCubit>(
-                  //     create: (_) => DiceCubit(
-                  //           gameData: stateOfGameData.data[stateOfGame.index],
-                  //         ),
-                  //     child: DiceGamePage())
+                  BlocProvider<DiceCubit>(
+                      create: (_) => DiceCubit(
+                            gameData: gamesData[stateOfGame.index],
+                          ),
+                      child: DiceGamePage())
                 }
               ],
             ),
@@ -163,7 +163,7 @@ class BasedOfGameConnect extends StatelessWidget {
                             ),
                           )
                         : Container(
-                            width: 0.2.sw,
+                            width: 0.4.sw,
                             height: 0.32.sh,
                             padding: const EdgeInsets.only(left: 10),
                             child: Stack(
@@ -291,6 +291,16 @@ class BasedOfGameConnect extends StatelessWidget {
                               ],
                             ),
                           ),
+                    if (stateOfGame.currentStringOfDice != null) ...{
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: WaveDice(
+                          currentAlphabet: '${stateOfGame.currentStringOfDice}',
+                          width: 90,
+                          height: 90,
+                        ),
+                      )
+                    }
                   ],
                 ),
               ),

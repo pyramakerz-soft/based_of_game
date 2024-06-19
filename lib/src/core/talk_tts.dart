@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter_tts/flutter_tts.dart';
 
+enum StateOfTalk { talking, stopped }
+
 abstract class TalkTts {
   static FlutterTts flutterTts = FlutterTts();
 
-  static String data = '';
+  static StateOfTalk data = StateOfTalk.stopped;
   static Future startTalk(
       {required String text,
       Function? actionOfStart,
@@ -18,25 +20,30 @@ abstract class TalkTts {
     } else {
       await flutterTts.setLanguage("en-US");
     }
-    data = text;
     flutterTts.setPitch(1.0);
     flutterTts.setSpeechRate(0.3);
     flutterTts.setStartHandler(() {
+      data = StateOfTalk.talking;
       if (actionOfStart != null) {
         actionOfStart();
       }
     });
     flutterTts.setCompletionHandler(() {
+      data = StateOfTalk.stopped;
+
       if (actionComplete != null) {
         actionComplete();
       }
     });
     flutterTts.setCancelHandler(() {
+      data = StateOfTalk.stopped;
       if (actionCancel != null) {
         actionCancel();
       }
     });
     flutterTts.setPauseHandler(() {
+      data = StateOfTalk.stopped;
+
       if (actionPause != null) {
         actionPause();
       }

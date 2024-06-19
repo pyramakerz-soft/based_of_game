@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             builder: (_, child) {
               return BlocProvider<ContactLessonBloc>(
                   create: (_) => di.sl<ContactLessonBloc>()
-                    ..add(GetContactLessonRequest(lessonId: 62, gameId: 146)),
+                    ..add(GetContactLessonRequest(lessonId: 62, gameId: 181)),
                   child: BlocConsumer<ContactLessonBloc, ContactLessonState>(
                     listener: (context, state) {
                       if (state is GetContactErrorInitial) {
@@ -69,6 +69,7 @@ class MyApp extends StatelessWidget {
                             print('the stars send: $listOfIds , $countOfStars');
                             print('#########################################');
                           },
+                          showTheEditedGames: false,
                         );
                       } else {
                         return CircularProgressIndicator();

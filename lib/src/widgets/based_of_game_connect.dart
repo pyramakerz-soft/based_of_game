@@ -18,6 +18,8 @@ import '../games/dice/page/dice_game.dart';
 import '../games/dice/widget/wave_dice.dart';
 import '../games/sorting_game/manager/sorting_cubit.dart';
 import '../games/sorting_game/pages/sorting_game.dart';
+import '../games/spelling_game/manager/spelling_cubit.dart';
+import '../games/spelling_game/pages/spelling_game.dart';
 import '../games/x_out_game/manager/x_out_cubit.dart';
 import '../games/x_out_game/pages/x_out_game.dart';
 
@@ -112,16 +114,16 @@ class BasedOfGameConnect extends StatelessWidget {
                       child: const XOutGameScreen())
                 } else if ((stateOfGame.basicData?.gameData
                     is SpellingGame)) ...{
-                  const Text('SpellingGame')
-                  // BlocProvider<SpellingCubit>(
-                  //     create: (_) => SpellingCubit(
-                  //         // gameData: stateOfGameData.data[stateOfGame.index],
-                  //         index: stateOfGame.index,
-                  //         background:
-                  //             (stateOfGame.basicData?.gameData as SpellingGame)
-                  //                 .woodenBackground,
-                  //         allGames: stateOfGameData.data),
-                  //     child: SpellingGameScreen())
+                  // const Text('SpellingGame')
+                  BlocProvider<SpellingCubit>(
+                      create: (_) => SpellingCubit(
+                          // gameData: stateOfGameData.data[stateOfGame.index],
+                          index: stateOfGame.index,
+                          background:
+                              (stateOfGame.basicData?.gameData as SpellingGame)
+                                  .woodenBackground,
+                          allGames: gamesData),
+                      child: SpellingGameScreen())
                 } else if ((stateOfGame.basicData?.gameData
                     is SortingPicturesGame)) ...{
                   // const Text('SortingPicturesGame')
@@ -154,12 +156,46 @@ class BasedOfGameConnect extends StatelessWidget {
                     stateOfGame.basicData!.gameData!.isRound
                         ? Padding(
                             padding: EdgeInsets.only(left: 10.w, top: 10.h),
-                            child: Image.asset(
-                              stateOfGame.basicData?.gameData?.titleImageEn ??
-                                  '',
-                              height: 75.h,
-                              width: 90.w,
-                              fit: BoxFit.fill,
+                            child: GestureDetector(
+                              onTap: stateOfGame.beeTalking == true
+                                  ? null
+                                  : () async {
+                                      await context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .beeTalkingTrue();
+                                      await TalkTts.startTalk(
+                                          text: gamesData[stateOfGame.index]
+                                                  .inst ??
+                                              '');
+                                      TalkTts.flutterTts
+                                          .setCompletionHandler(() async {
+                                        if (stateOfGame.stateOfStringIsWord ==
+                                            true) {
+                                          await TalkTts.startTalk(
+                                              text: stateOfGame
+                                                      .stateOfStringWillSay ??
+                                                  '');
+                                        } else {
+                                          await AudioPlayerLetters.startPlaySound(
+                                              soundPath: AssetsSoundLetters
+                                                  .getSoundOfLetter(
+                                                      mainGameLetter: stateOfGame
+                                                              .stateOfStringWillSay ??
+                                                          ''));
+                                        }
+                                      });
+
+                                      await context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .beeTalkingFalse();
+                                    },
+                              child: Image.asset(
+                                stateOfGame.basicData?.gameData?.titleImageEn ??
+                                    '',
+                                height: 75.h,
+                                width: 90.w,
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           )
                         : Container(

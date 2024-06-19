@@ -49,7 +49,7 @@ abstract class BaseOfGames {
     WPhonetics,
     EPhonetics,
     NPhonetics,
-    SpellTheWord,
+    // SpellTheWord,
     ConnectionSortingCups,
     ConnectionWithoutSortingCups
   ];
@@ -71,8 +71,6 @@ abstract class BaseOfGames {
     if (BasicOfGameData.isConnectGame(game: subGame.toLowerCase()) == true) {
       if (subGame.toLowerCase() == GameTypes.sortingCups.text()) {
         return ConnectionSortingCups(mineGameData: SortingCupsGame());
-      } else if (subGame.toLowerCase() == GameTypes.spelling.text()) {
-        return SpellTheWord(mineGameData: SpellingGame());
       } else {
         return ConnectionWithoutSortingCups(
             mineGameData: BasicOfGameData.getTheGameType(

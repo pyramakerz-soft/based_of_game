@@ -1015,47 +1015,6 @@ class ConnectionSortingCups implements MainDataOfChapters {
   int? countOfPartsOfLettersForTracing;
 }
 
-class SpellTheWord implements MainDataOfChapters {
-  @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
-  final BasicOfGameData mineGameData;
-  @override
-  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
-
-  @override
-  String background = AppImagesPhonetics.backGroundOfConnect;
-
-  @override
-  BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
-
-  SpellTheWord({required this.mineGameData}) {
-    gameData = mineGameData;
-  }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
-  @override
-  String basicAvatar = AppImagesPhonetics.basicBess;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
-
-  @override
-  int? countOfPartsOfLettersForTracing;
-}
-
 class RedPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override

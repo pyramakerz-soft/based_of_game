@@ -141,28 +141,6 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                                         });
                                       }
                                     });
-                                    // context
-                                    //     .read<CurrentGamePhoneticsCubit>()
-                                    //     .animationOfCorrectAnswer();
-                                    // print(stateOfGameData.correctIndexes.length);
-                                    // context
-                                    //     .read<CurrentGamePhoneticsCubit>()
-                                    //     .addStarToStudent(
-                                    //         stateOfCountOfCorrectAnswer:
-                                    //             stateOfGameData
-                                    //                     .correctIndexes.length +
-                                    //                 1,
-                                    //         mainCountOfQuestion: stateOfGameData
-                                    //             .gameData.gameImages!
-                                    //             .where(
-                                    //                 (element) => element.correct == 1)
-                                    //             .length);
-                                    // context
-                                    //     .read<CurrentGamePhoneticsCubit>()
-                                    //     .animationOfCorrectAnswer();
-                                    // context
-                                    //     .read<CurrentGamePhoneticsCubit>()
-                                    //     .backToMainAvatar();
                                   } else {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()

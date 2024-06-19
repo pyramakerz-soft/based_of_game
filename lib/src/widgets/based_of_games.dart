@@ -7,6 +7,7 @@ import 'package:games_models/games_models.dart';
 import '../../based_of_game.dart';
 import '../core/assets_images_phonetics.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
+import 'based_of_game_connect.dart';
 import 'based_of_game_connect_sorting_cups.dart';
 import 'based_of_game_phonetics.dart';
 
@@ -112,6 +113,11 @@ class BasedOfGames extends StatelessWidget {
                 if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
                   if (stateOfGame.basicData is ConnectionSortingCups) ...{
                     BasedOfGameConnectSortingCups(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
+                  } else ...{
+                    BasedOfGameConnect(
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
                     ),

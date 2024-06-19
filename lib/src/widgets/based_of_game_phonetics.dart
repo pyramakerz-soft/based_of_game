@@ -39,7 +39,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 if ((stateOfGame.basicData?.gameData is BasicDragOutGame)) ...{
-                  ///todo need to know why when the index of CurrentGamePhoneticsCubit change
+                  ///todo need to know why when the index of CurrentGamePhoneticsCubit change not the gameData change
                   BlocProvider<DragOutCubit>(
                       create: (_) => DragOutCubit(
                           index: stateOfGame.index,

@@ -116,8 +116,7 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addSuccessAnswer(
                                                 questions:
-                                                    state.listGameData.length ??
-                                                        0,
+                                                    state.listGameData.length,
                                                 correctAnswers:
                                                     (state.currentGameIndex) +
                                                         1)

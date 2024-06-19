@@ -10,6 +10,8 @@ import '../manager/dice_cubit.dart';
 import '../widget/item_card_of_image_widget.dart';
 
 class DiceGamePage extends StatefulWidget {
+  const DiceGamePage({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _DiceGamePage();
@@ -46,7 +48,7 @@ class _DiceGamePage extends State<DiceGamePage> {
         margin: EdgeInsets.only(right: 15.w, bottom: 9),
         width: MediaQuery.of(context).size.width - (100.w),
         height: MediaQuery.of(context).size.height - 69.h,
-        padding: EdgeInsets.all(1),
+        padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),

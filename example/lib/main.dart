@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
                           MainDataOfChapters? dataType =
                               state.getMainContactData(index: 0);
 
-                          print('dataType:$dataType');
+                          debugPrint('dataType:$dataType');
                         } catch (e) {
                           context
                               .read<ContactLessonBloc>()
@@ -65,14 +65,17 @@ class MyApp extends StatelessWidget {
                             List<int> listOfIds = stateOfGameData.data
                                 .map((game) => game.id ?? 0)
                                 .toList();
-                            print('#########################################');
-                            print('the stars send: $listOfIds , $countOfStars');
-                            print('#########################################');
+                            debugPrint(
+                                '#########################################');
+                            debugPrint(
+                                'the stars send: $listOfIds , $countOfStars');
+                            debugPrint(
+                                '#########################################');
                           },
                           showTheEditedGames: false,
                         );
                       } else {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
                     },
                   ));

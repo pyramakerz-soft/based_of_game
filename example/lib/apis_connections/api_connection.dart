@@ -125,7 +125,6 @@ class MainApiConnection {
     Map<String, String>? data,
     Map<String, String?>? headers,
   }) async {
-    String language = await _getAppLanguage();
     String? token = await _getUserToken();
     var multipartFile;
     var stream;
@@ -140,17 +139,17 @@ class MainApiConnection {
       request.fields[key] = value;
     });
     if (filePath != null) {
-      stream = new http.ByteStream(DelegatingStream.typed(filePath.openRead()));
+      stream = http.ByteStream(DelegatingStream.typed(filePath.openRead()));
       length = await filePath.length();
-      multipartFile = new http.MultipartFile('photo', stream, length,
+      multipartFile = http.MultipartFile('photo', stream, length,
           filename: basename(filePath.path));
       request.files.add(multipartFile);
     }
     StreamedResponse response = await request.send();
     http.Response res = await http.Response.fromStream(response);
     var bodyData = json.decode(res.body);
-    print('result11' + bodyData['result'].toString());
-    print('result11' + bodyData.toString());
+    debugPrint('result11${bodyData['result']}');
+    debugPrint('result11$bodyData');
     if (bodyData['result'] != null && res.statusCode == 200) {
       return res;
     } else {

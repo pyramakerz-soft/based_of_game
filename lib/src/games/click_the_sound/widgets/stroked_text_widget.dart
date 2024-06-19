@@ -5,11 +5,12 @@ import '../../../core/theme_text.dart';
 class StrokedText extends StatelessWidget {
   final String text;
   final bool isDisabled;
-  double? fontSize;
-  double? strokeWidth;
-  bool? hasShadows;
+  final double? fontSize;
+  final double? strokeWidth;
+  final bool? hasShadows;
 
-  StrokedText({
+  const StrokedText({
+    super.key,
     required this.text,
     required this.isDisabled,
     this.fontSize,

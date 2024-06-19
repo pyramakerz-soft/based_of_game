@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class StarWidget extends StatelessWidget {
   final String image;
 
-  const StarWidget({Key? key, required this.image}) : super(key: key);
+  const StarWidget({super.key, required this.image});
   @override
   Widget build(BuildContext context) {
     return Image.asset(

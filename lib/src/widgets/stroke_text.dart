@@ -4,13 +4,14 @@ import '../core/theme_text.dart';
 
 class StrokeText extends StatelessWidget {
   final String text;
-  final isDisabled;
+  final bool isDisabled;
   final double? fontSize;
   final double? strokeWidth;
   final Color? color;
   final Color? strokeColor;
   const StrokeText(
-      {required this.text,
+      {super.key,
+      required this.text,
       required this.isDisabled,
       this.strokeWidth,
       this.fontSize,

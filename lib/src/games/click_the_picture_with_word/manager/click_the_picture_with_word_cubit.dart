@@ -1,10 +1,9 @@
 import 'dart:math';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:games_models/games_models.dart';
 
-import '../../../core/assets_sound_letters.dart';
-import '../../../core/audio_player_letters.dart';
 import '../../../core/talk_tts.dart';
 part 'click_the_picture_with_word_state.dart';
 
@@ -36,12 +35,12 @@ class ClickThePictureWithWordCubit
     //   }
     // });
     int countOfTheImage = checkImages.length;
-    print('countOfTheImage:$countOfTheImage, ${state.chooseWord}');
+    debugPrint('countOfTheImage:$countOfTheImage, ${state.chooseWord}');
     if (countOfTheImage != 0 && state.chooseWord == null) {
       Random random = Random();
       int randomNumber = random.nextInt(countOfTheImage);
       GameImagesModel chooseWord = checkImages[randomNumber];
-      print('chooseWord.word ?? ' ':${chooseWord.word ?? ''}');
+      debugPrint('chooseWord.word ?? ' ':${chooseWord.word ?? ''}');
       await TalkTts.startTalk(text: chooseWord.word ?? '');
       emit(state.copyWith(chooseWord: chooseWord));
     }
@@ -49,13 +48,13 @@ class ClickThePictureWithWordCubit
   }
 
   addTheCorrectAnswer({required int idOfUserAnswer}) async {
-    print('addTheCorrectAnswer');
+    debugPrint('addTheCorrectAnswer');
     emit(state.clearChooseWord());
 
     List<int> correctAnswer = state.correctIndexes;
     correctAnswer.add(idOfUserAnswer);
     emit(state.copyWith(correctIndexes: correctAnswer));
-    print(state.chooseWord);
+    debugPrint("${state.chooseWord}");
     // getTheRandomWord();
   }
 

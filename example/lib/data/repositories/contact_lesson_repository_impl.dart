@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:games_models/games_models.dart';
 import '../../domain/repositories/repositories_contact_lesson.dart';
@@ -23,7 +22,7 @@ class ContactLessonRepositoryImpl implements ProgramContactLessonRepository {
             lessonId: lessonId, gameId: gameId);
         // final res = await localRemoteDataSource.getContactLessonDataRemotely(programId: programId);
         return Right(res);
-      } catch (e, s) {
+      } catch (e) {
         return Left(LoginFailure());
       }
     } else {
@@ -39,7 +38,7 @@ class ContactLessonRepositoryImpl implements ProgramContactLessonRepository {
         final res = await remoteDataSource.getGameById(gameId: gameId);
         // final res = await localRemoteDataSource.getContactLessonDataRemotely(programId: programId);
         return Right(res);
-      } catch (e, s) {
+      } catch (e) {
         return Left(LoginFailure());
       }
     } else {

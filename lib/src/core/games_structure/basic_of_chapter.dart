@@ -1,4 +1,3 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 import '../../games/tracing/widget/letter_m.dart';
@@ -6,7 +5,6 @@ import '../../games/tracing/widget/letter_s.dart';
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
 import 'basic_of_game_data.dart';
-import '../game_types/game_phonatics_types.dart';
 
 enum MainDataOfChaptersTypes {
   s,

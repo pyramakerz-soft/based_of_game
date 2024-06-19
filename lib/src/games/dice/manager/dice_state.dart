@@ -30,14 +30,14 @@ class DiceInitial extends Equatable {
 
   clearCurrentAnswer() {
     return DiceInitial(
-        gameData: gameData ?? gameData,
+        gameData: gameData,
         chooseWord: null,
         letterDices: letterDices ?? letterDices,
         gameImages: gameImages ?? gameImages,
-        correctIndexes: correctIndexes ?? correctIndexes);
+        correctIndexes: correctIndexes);
   }
 
   @override
   List<Object?> get props =>
-      [gameData, chooseWord,gameImages, correctIndexes, letterDices];
+      [gameData, chooseWord, gameImages, correctIndexes, letterDices];
 }

@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,13 +6,13 @@ import '../../../core/phonetics_color.dart';
 
 class XOutItemWidget extends StatelessWidget {
   const XOutItemWidget({
-    Key? key,
+    super.key,
     required this.imageName,
     required this.isSelected,
     required this.isCorrect,
     required this.word,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   final String imageName;
   final String word;

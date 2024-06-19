@@ -12,13 +12,12 @@ class ItemCardWidgetOFSortingCups extends StatelessWidget {
   final String body;
 
   const ItemCardWidgetOFSortingCups(
-      {Key? key,
+      {super.key,
       this.width,
       this.height,
       required this.body,
       this.onTap,
-      required this.hide})
-      : super(key: key);
+      required this.hide});
   @override
   Widget build(BuildContext context) {
     // final countOfFingers = context

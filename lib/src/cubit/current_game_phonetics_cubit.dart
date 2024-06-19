@@ -4,6 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flame_rive/flame_rive.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:games_models/games_models.dart';
 import '../../based_of_eng_game.dart';
@@ -130,13 +131,13 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int countOfTries = (state.countOfTries ?? 1) - 1;
     emit(state.copyWith(countOfTries: countOfTries));
     if (state.countOfTries == 0) {
-      state.actionWhenTriesBeZero!(state.countOfStar ?? 0);
+      state.actionWhenTriesBeZero(state.countOfStar ?? 0);
     }
   }
 
   bool checkIfIsTheLastQuestionOfGame({required int queations}) {
     int countOfCorrectAnswers = state.countOfCorrectAnswers;
-    print('countOfCorrectAnswers:$countOfCorrectAnswers , $queations');
+    debugPrint('countOfCorrectAnswers:$countOfCorrectAnswers , $queations');
     if (queations <= countOfCorrectAnswers) {
       return true;
     } else {
@@ -155,7 +156,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int mainCountOfQuestion = stateOfStarsAdd.fold(
         0, (previousValue, element) => previousValue + element);
     emit(state.copyWith(countOfCorrectAnswers: stateOfCountOfCorrectAnswer));
-    print(
+    debugPrint(
         'stateOfCountOfCorrectAnswer:$stateOfCountOfCorrectAnswer, $stateOfStarsAdd');
     if ((mainCountOfQuestion) > 2) {
       if (stateOfStarsAdd[0] <= stateOfCountOfCorrectAnswer) {
@@ -203,12 +204,10 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     bool isLastLesson = checkIfIsTheLastQuestionOfGame(queations: questions);
     if (isLastLesson == true) {
       await Future.delayed(const Duration(seconds: 2));
-      if (state.actionWhenTriesBeZero != null) {
-        state.actionWhenTriesBeZero!(state.countOfStar ?? 0);
-      }
+      state.actionWhenTriesBeZero(state.countOfStar ?? 0);
     } else {
       playerCorrect.onPlayerComplete.listen((event) {
-        print('################');
+        debugPrint('################');
         backToMainAvatar();
         if (subAction != null) {
           subAction();
@@ -237,7 +236,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   _increaseCountOfWrongAnswer() {
-    int countOfWrongAnswers = state.countOfWrongAnswers ?? 0;
+    int countOfWrongAnswers = state.countOfWrongAnswers;
     countOfWrongAnswers++;
     emit(state.copyWith(countOfWrongAnswers: countOfWrongAnswers));
     _updateTheStarState();
@@ -251,9 +250,9 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   _updateTheStarState() {
-    int countOfWrongAnswers = state.countOfWrongAnswers ?? 0;
+    int countOfWrongAnswers = state.countOfWrongAnswers;
     List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
-    print('stateOfStarsAdd:$stateOfStarsAdd');
+    debugPrint('stateOfStarsAdd:$stateOfStarsAdd');
     int countOfAllStars = stateOfStarsAdd.fold(
         0, (previousValue, element) => previousValue + element);
     countOfWrongAnswers = countOfWrongAnswers + countOfAllStars;
@@ -261,7 +260,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     List<int> listStateOfStarsAdd =
         BaseOfGames.getTheStarsAddState(countOfWrongAnswers);
     emit(state.copyWith(statesOfAddStars: listStateOfStarsAdd));
-    print('stateOfStarsAdd:$listStateOfStarsAdd');
+    debugPrint('stateOfStarsAdd:$listStateOfStarsAdd');
 
     addStarToStudent(stateOfCountOfCorrectAnswer: state.countOfCorrectAnswers);
   }

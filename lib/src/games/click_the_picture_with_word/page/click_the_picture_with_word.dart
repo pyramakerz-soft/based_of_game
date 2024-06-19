@@ -86,7 +86,7 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
                                       .read<CurrentGamePhoneticsCubit>()
                                       .addSuccessAnswer(
                                           subAction: () async {
-                                            print(
+                                            debugPrint(
                                                 'subAction:${gameState.chooseWord?.word}');
                                             await context
                                                 .read<

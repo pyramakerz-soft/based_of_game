@@ -3,14 +3,13 @@ import 'dart:developer';
 import 'package:based_of_eng_game/based_of_eng_game.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:games_models/games_models.dart';
-import 'package:meta/meta.dart';
 
 import '../domain/use_cases/contact_lesson_use_cases.dart';
 import '../domain/use_cases/game_use_cases.dart';
 import '../error/failures.dart';
-import '../error/failures_messages.dart';
 
 part 'contact_lesson_event.dart';
 part 'contact_lesson_state.dart';
@@ -48,14 +47,5 @@ Future<ContactLessonState> _eitherLoadedOrErrorState(
 }
 
 String _mapFailureToMessage(Failure failure) {
-  switch (failure.runtimeType) {
-    case ServerFailure:
-      return SERVER_FAILURE_MESSAGE;
-    case LoginFailure:
-      return Login_FAILURE_MESSAGE;
-    case CacheFailure:
-      return CACHE_FAILURE_MESSAGE;
-    default:
-      return 'Unexpected error';
-  }
+  return 'Unexpected error';
 }

@@ -6,10 +6,10 @@ class WaveDice extends StatelessWidget {
   final Widget? body;
   final double? width;
   final double? height;
-  double widthAndHeight = 120;
+  final double widthAndHeight = 120;
 
-  WaveDice({Key? key, this.currentAlphabet, this.body, this.width, this.height})
-      : super(key: key);
+  const WaveDice(
+      {super.key, this.currentAlphabet, this.body, this.width, this.height});
   @override
   Widget build(BuildContext context) {
     return Container(

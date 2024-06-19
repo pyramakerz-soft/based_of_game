@@ -6,7 +6,7 @@ import '../../../core/assets_images_phonetics.dart';
 class CupWidget extends StatelessWidget {
   final String image;
 
-  const CupWidget({Key? key, required this.image}) : super(key: key);
+  const CupWidget({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {

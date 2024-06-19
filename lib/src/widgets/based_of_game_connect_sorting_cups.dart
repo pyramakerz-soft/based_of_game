@@ -20,8 +20,7 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
   final List<GameModel> gamesData;
 
   const BasedOfGameConnectSortingCups(
-      {Key? key, required this.stateOfGame, required this.gamesData})
-      : super(key: key);
+      {super.key, required this.stateOfGame, required this.gamesData});
   @override
   Widget build(BuildContext context) {
     return Expanded(

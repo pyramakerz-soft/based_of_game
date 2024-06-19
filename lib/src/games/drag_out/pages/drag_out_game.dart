@@ -89,7 +89,7 @@ class _DragOutGame extends State<DragOutGame> {
                           await context
                               .read<CurrentGamePhoneticsCubit>()
                               .addSuccessAnswer(
-                                  questions: gameState.allGameData.length ?? 0,
+                                  questions: gameState.allGameData.length,
                                   correctAnswers: (gameState.index) + 1)
                               .whenComplete(() async {
                             bool isLastQuestion = context

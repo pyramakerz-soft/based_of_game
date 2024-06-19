@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,8 +10,6 @@ import '../widget/dice_pop_up.dart';
 part 'dice_state.dart';
 
 class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
-  // final GameModel gameData;
-
   DiceCubit({required GameModel gameData})
       : super(DiceInitial(gameData: gameData, correctIndexes: [])) {
     TalkTts.startTalk(text: gameData.inst ?? '');
@@ -26,27 +23,27 @@ class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
     // for (int i = (gameData.gameLetters?.length ?? 0); i < 6; i++) {
     //   letterDices.add('');
     // }
-    print('letterDices:$letterDices');
+    debugPrint('letterDices:$letterDices');
     emit(state.copyWith(
         gameData: gameData, letterDices: letterDices, gameImages: gameImages));
     // playTheDice(context: context);
   }
 
   addTheCorrectAnswer({required int idOfUserAnswer}) async {
-    List<int> correctAnswer = state.correctIndexes ?? [];
-    print('correctAnswer:${correctAnswer.length}');
+    List<int> correctAnswer = state.correctIndexes;
+    debugPrint('correctAnswer:${correctAnswer.length}');
     correctAnswer.add(idOfUserAnswer);
     emit(state.clearCurrentAnswer());
     emit(state.copyWith(correctIndexes: correctAnswer));
 
-    print('correctAnswer:${correctAnswer.length}');
+    debugPrint('correctAnswer:${correctAnswer.length}');
   }
 
   playTheDice(
       {required BuildContext context,
       required void Function(String currentAlphabet)
           functionOfSaveWords}) async {
-    print('playTheDice');
+    debugPrint('playTheDice');
     checkTheDiceLetters();
     final p = context.read<DiceCubit>();
     showDialog(
@@ -61,8 +58,8 @@ class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
   }
 
   bool checkIfIsTheLastGameOfLesson() {
-    int currentIndexOfAnswers = state.correctIndexes?.length ?? 0;
-    int currentIndexOfLetters = state.gameData?.gameImages?.length ?? 0;
+    int currentIndexOfAnswers = state.correctIndexes.length;
+    int currentIndexOfLetters = state.gameData.gameImages?.length ?? 0;
     if (currentIndexOfAnswers != (currentIndexOfLetters)) {
       return false;
     } else {
@@ -71,17 +68,16 @@ class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
   }
 
   checkTheDiceLetters() {
-    print('checkTheDiceLetters:${state.gameData}');
-    Set<String?> collectedFirstChars = state.gameData?.gameImages
+    debugPrint('checkTheDiceLetters:${state.gameData}');
+    Set<String?> collectedFirstChars = state.gameData.gameImages
             ?.where((model) =>
                 (model.word?.isNotEmpty ?? false) &&
-                ((state.correctIndexes?.contains(model.id) == false) ||
-                    state.correctIndexes?.contains(model.id) == null))
+                ((state.correctIndexes.contains(model.id) == false)))
             .map((model) => model.word?[0])
             .toList()
             .toSet() ??
         {};
-    print('collectedFirstChars:$collectedFirstChars');
+    debugPrint('collectedFirstChars:$collectedFirstChars');
     List<String?> tempList = collectedFirstChars.toList();
     List<String> tempLetterDices = [];
     for (int i = 0; i < 6; i++) {
@@ -91,7 +87,7 @@ class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
         tempLetterDices.add('');
       }
     }
-    print('tempLetterDices:${tempLetterDices}');
+    debugPrint('tempLetterDices:${tempLetterDices}');
     emit(state.copyWith(letterDices: tempLetterDices));
   }
 

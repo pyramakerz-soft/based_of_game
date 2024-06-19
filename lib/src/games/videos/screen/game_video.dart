@@ -21,7 +21,6 @@ class GameVideo extends StatefulWidget {
 class _GameVideo extends State<GameVideo> {
   late VideoPlayerController _controller;
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-  Duration _currentTime = Duration.zero;
   int currentStateOfGame = 0;
   double currentStateOfGameSec = 0;
   double currentStateOfGameSec1 = 0;
@@ -47,7 +46,6 @@ class _GameVideo extends State<GameVideo> {
                 if ((_controller.value.position.inSeconds) >=
                     (currentStateOfGameSec * (currentStateOfGame + 1))) {
                   setState(() {
-                    _currentTime = _controller.value.position;
                     currentStateOfGame = currentStateOfGame + 1;
                   });
                 }
@@ -63,16 +61,16 @@ class _GameVideo extends State<GameVideo> {
                       );
                 }
                 if (currentStateOfGame == 3) {
-                  if (context
-                          .read<CurrentGamePhoneticsCubit>()
-                          .state
-                          .actionWhenTriesBeZero !=
-                      null) {
-                    context
-                        .read<CurrentGamePhoneticsCubit>()
-                        .state
-                        .actionWhenTriesBeZero!(currentStateOfGame);
-                  }
+                  // if (context
+                  //         .read<CurrentGamePhoneticsCubit>()
+                  //         .state
+                  //         .actionWhenTriesBeZero !=
+                  //     null) {
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .state
+                      .actionWhenTriesBeZero(currentStateOfGame);
+                  // }
                   //   context.read<JourneyBarCubit>().sendStars(
                   //       gamesId: [widget.currentDataGame.id ?? 0],
                   //       countOfStar: currentStateOfGame);

@@ -13,7 +13,7 @@ class DicePopUp extends StatelessWidget {
   Widget build(BuildContext context) {
     final diceLetters = context.watch<DiceCubit>().state.letterDices;
     int countOfPlayed = context
-        .select((DiceCubit value) => value.state.correctIndexes?.length ?? 0);
+        .select((DiceCubit value) => value.state.correctIndexes.length);
 
     return AlertDialog(
       backgroundColor: Colors.transparent,

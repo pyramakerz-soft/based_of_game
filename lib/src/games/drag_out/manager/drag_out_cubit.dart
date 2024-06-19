@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:games_models/games_models.dart';
 
 import '../../../core/assets_sound_letters.dart';
@@ -16,7 +17,7 @@ class DragOutCubit extends Cubit<DragOutInitial> {
       : super(DragOutInitial(
             gameData: gameData, allGameData: allGameData, index: index)) {
     // emit(state.copyWith(gameData: gameData));
-    print('DragOutCubit');
+    debugPrint('DragOutCubit');
     emit(state.copyWith(gameData: allGameData[index]));
     sayLetter();
   }
@@ -46,9 +47,9 @@ class DragOutCubit extends Cubit<DragOutInitial> {
   // }
 
   updateTheCurrentGame({required int index}) {
-    print('updateTheCurrentGame:${state.gameData.id}, $index');
+    debugPrint('updateTheCurrentGame:${state.gameData.id}, $index');
     emit(state.copyWith(gameData: state.allGameData[index], index: index));
-    print('updateTheCurrentGame:${state.gameData.id}');
+    debugPrint('updateTheCurrentGame:${state.gameData.id}');
   }
 
   sayLetter() async {

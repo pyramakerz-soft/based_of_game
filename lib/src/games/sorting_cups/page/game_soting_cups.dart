@@ -11,9 +11,10 @@ import '../widget/cup_widget.dart';
 import '../widget/item_card_widget_sorting_cups.dart';
 
 class GamesSortingCups extends StatefulWidget {
+  const GamesSortingCups({super.key});
+
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _GamesSortingCups();
   }
 }
@@ -171,12 +172,12 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                 if ((generalStateOfGame.stateOfAvatar ==
                                         BasicOfGameData.stateOIdle ||
                                     generalStateOfGame.stateOfAvatar == null)) {
-                                  print(
+                                  debugPrint(
                                       "##:${gameState.gameData.mainLetter?.split('')[index].toLowerCase()}");
 
-                                  print(
+                                  debugPrint(
                                       "##:${gameState.chooseWord?.letter?.toLowerCase().toLowerCase()}");
-                                  print(
+                                  debugPrint(
                                       "##:${(item.data.letter?.toLowerCase() ?? '')}");
                                   if (gameState.chooseWord?.letter
                                               ?.toLowerCase() ==

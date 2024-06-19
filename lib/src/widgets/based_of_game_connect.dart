@@ -1,4 +1,3 @@
-import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -123,7 +122,7 @@ class BasedOfGameConnect extends StatelessWidget {
                               (stateOfGame.basicData?.gameData as SpellingGame)
                                   .woodenBackground,
                           allGames: gamesData),
-                      child: SpellingGameScreen())
+                      child: const SpellingGameScreen())
                 } else if ((stateOfGame.basicData?.gameData
                     is SortingPicturesGame)) ...{
                   // const Text('SortingPicturesGame')

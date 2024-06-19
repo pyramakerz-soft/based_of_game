@@ -27,7 +27,7 @@ class BasedOfGames extends StatelessWidget {
             context
                 .read<CurrentGamePhoneticsCubit>()
                 .state
-                .actionWhenTriesBeZero!(stateOfGame.countOfStar ?? 0);
+                .actionWhenTriesBeZero(stateOfGame.countOfStar ?? 0);
           }
         },
         canPop: true,
@@ -68,17 +68,17 @@ class BasedOfGames extends StatelessWidget {
                               30.pw,
                               GestureDetector(
                                 onTap: () {
-                                  if (context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .state
-                                          .actionWhenTriesBeZero !=
-                                      null) {
+                                  // if (context
+                                  //         .read<CurrentGamePhoneticsCubit>()
+                                  //         .state
+                                  //         .actionWhenTriesBeZero !=
+                                  //     null) {
                                     context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .state
-                                            .actionWhenTriesBeZero!(
+                                            .actionWhenTriesBeZero(
                                         stateOfGame.countOfStar ?? 0);
-                                  }
+                                  // }
                                   Navigator.of(context).pop();
                                 },
                                 child: Image.asset(

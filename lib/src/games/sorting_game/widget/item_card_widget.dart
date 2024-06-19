@@ -23,30 +23,30 @@ class ItemCardWidget extends StatelessWidget {
       data: data,
 
       feedback: Transform.translate(
-          offset: Offset(30, 0), // Adjust the offset to center the feedback
-          child:Material(
-        color: Colors.transparent,
-        child: Container(
-          height: 70.0,
-          width: 60.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          child:  CachedNetworkImage(
-            imageUrl:body.image!,
-            placeholder: (context, url) => const Center(
-              child: CupertinoActivityIndicator(),
+          offset:
+              const Offset(30, 0), // Adjust the offset to center the feedback
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              height: 70.0,
+              width: 60.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: CachedNetworkImage(
+                imageUrl: body.image!,
+                placeholder: (context, url) => const Center(
+                  child: CupertinoActivityIndicator(),
+                ),
+                errorWidget: (context, url, error) => const Icon(
+                  Icons.error,
+                  color: Colors.red,
+                ),
+                // height: ,
+              ),
             ),
-            errorWidget: (context, url, error) =>
-            const Icon(
-              Icons.error,
-              color: Colors.red,
-            ),
-            // height: ,
-          ),
-        ),
-      )),
-        childWhenDragging: const SizedBox(),
+          )),
+      childWhenDragging: const SizedBox(),
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: Container(
@@ -55,12 +55,13 @@ class ItemCardWidget extends StatelessWidget {
           ),
           child: Center(
             child: CachedNetworkImage(
-              imageUrl:body.image!,
+              imageUrl: body.image!,
               placeholder: (context, url) => const Center(
                 child: CupertinoActivityIndicator(),
               ),
-              errorWidget: (context, url, error) =>
-              Center(child:  Text('${body.word}'),),
+              errorWidget: (context, url, error) => Center(
+                child: Text('${body.word}'),
+              ),
               // height: ,
             ),
           ),

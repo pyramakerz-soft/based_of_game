@@ -14,7 +14,9 @@ dependencies:
   dartz: ^0.10.1
   flame_rive: ^1.10.2
   equatable: ^2.0.5
-  games_models: ^0.0.4
+  games_models:
+    git:
+      url: https://github.com/moataz-mohamed194/games_models.git
   audioplayers: ^6.0.0
   flutter_bloc: ^8.1.5
   flutter_svg: ^2.0.10+1

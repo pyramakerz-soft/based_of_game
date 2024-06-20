@@ -73,7 +73,6 @@ class MyApp extends StatelessWidget {
                                 '#########################################');
                           },
                           showTheEditedGames: false,
-                          stateLoading: false,
                         );
                       } else {
                         return const CircularProgressIndicator();

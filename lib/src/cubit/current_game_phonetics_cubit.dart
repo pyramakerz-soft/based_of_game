@@ -22,7 +22,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       required List<GameModel> gameData})
       : super(CurrentGamePhoneticsState(
             index: 0, actionWhenTriesBeZero: actionOfCompleteGame)) {
-    _getTheBackGroundLoading();
     _checkDataOfCubit();
     updateDataOfCurrentGame(
         basicData: basicData, gameData: gameData, gameIndex: 0);

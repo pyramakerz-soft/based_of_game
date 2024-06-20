@@ -46,9 +46,6 @@ abstract class AppImagesPhonetics {
   static const String tracingWithFinger =
       "${mainPathOfImages}tracing_with_finger.png";
   static const String clickTheSound = "${mainPathOfImages}click_the_sound.png";
-  static const String imageCompleteStar =
-      "${mainPathOfImages}complete_star.png";
-  static const String imageEmptyStar = "${mainPathOfImages}empty_star.png";
   static const String imageBasket = "${mainPathOfImages}basket.png";
   static const String imageBasketComplete =
       "${mainPathOfImages}basket_complete.png";
@@ -66,14 +63,6 @@ abstract class AppImagesPhonetics {
   static const String diamondShape = "${mainPathOfImages}diamond_shape.png";
   static const String hexagonShape = "${mainPathOfImages}hexagon_shape.png";
 
-  static const String settingButtonIcon =
-      "${mainPathOfImages}settingButtonIcon.png";
-  static const String backButtonIcon = "${mainPathOfImages}backButtonIcon.png";
-  static const String stayOfStarBar = "${mainPathOfImages}stayOfStarBar.png";
-  static const String barOneStar = "${mainPathOfImages}barOneStar.png";
-  static const String barTwoStar = "${mainPathOfImages}barTwoStar.png";
-  static const String barZeroStar = "${mainPathOfImages}barZeroStar.png";
-  static const String barThreeStar = "${mainPathOfImages}barThreeStar.png";
   static const String woodBackground = "${mainPathOfImages}wood.png";
   static const String bubbleSelected = '${mainPathOfImages}bubbleSelected.png';
   static const String sortingGame = "${mainPathOfImages}sorting_game.png";

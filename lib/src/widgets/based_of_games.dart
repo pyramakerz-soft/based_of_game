@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:games_models/games_models.dart';
 import '../../based_of_eng_game.dart';
+import '../core/assets_images_main.dart';
 import '../core/assets_images_phonetics.dart';
 import '../core/games_structure/basic_of_game_data.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
@@ -77,7 +78,7 @@ class BasedOfGames extends StatelessWidget {
                                   Navigator.of(context).pop();
                                 },
                                 child: Image.asset(
-                                  AppImagesPhonetics.backButtonIcon,
+                                  AppImagesMain.backButtonIcon,
                                   height: 40.h,
                                   // width: 40.w,
                                 ),
@@ -85,7 +86,7 @@ class BasedOfGames extends StatelessWidget {
                               10.pw,
                               GestureDetector(
                                 child: Image.asset(
-                                  AppImagesPhonetics.settingButtonIcon,
+                                  AppImagesMain.settingButtonIcon,
                                   height: 45.h,
                                   // width: 40.w,
                                 ),
@@ -98,7 +99,7 @@ class BasedOfGames extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         Image.asset(
-                          AppImagesPhonetics.stayOfStarBar,
+                          AppImagesMain.stayOfStarBar,
                           width: 65.w,
                           fit: BoxFit.contain,
                         ),
@@ -106,19 +107,19 @@ class BasedOfGames extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: ((stateOfGame.countOfStar ?? 0) == 0)
                                 ? Image.asset(
-                                    AppImagesPhonetics.barZeroStar,
+                              AppImagesMain.barZeroStar,
                                     width: 40.w,
                                     fit: BoxFit.contain,
                                   )
                                 : ((stateOfGame.countOfStar ?? 0) == 1)
-                                    ? Image.asset(AppImagesPhonetics.barOneStar,
+                                    ? Image.asset(AppImagesMain.barOneStar,
                                         width: 40.w)
                                     : ((stateOfGame.countOfStar ?? 0) == 2)
                                         ? Image.asset(
-                                            AppImagesPhonetics.barTwoStar,
+                                AppImagesMain.barTwoStar,
                                             width: 40.w)
                                         : Image.asset(
-                                            AppImagesPhonetics.barThreeStar,
+                                AppImagesMain.barThreeStar,
                                             width: 40.w))
                       ],
                     )),

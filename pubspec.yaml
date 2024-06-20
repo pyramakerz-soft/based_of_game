@@ -1,6 +1,6 @@
 name: based_of_eng_game
 description: "based of eng game"
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/moataz-mohamed194/based_of_eng_game.git
 
 environment:
@@ -14,9 +14,7 @@ dependencies:
   dartz: ^0.10.1
   flame_rive: ^1.10.2
   equatable: ^2.0.5
-  games_models:
-    git:
-      url: https://github.com/moataz-mohamed194/games_models.git
+  games_models: ^0.0.6
   audioplayers: ^6.0.0
   flutter_bloc: ^8.1.5
   flutter_svg: ^2.0.10+1

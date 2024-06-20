@@ -1,7 +1,7 @@
 import 'dart:math' hide log;
 
 class AppGameSound {
-  static const String mainPathOfSoundBase = 'sound/';
+  static const String mainPathOfSoundBase = 'sound/base/';
 
   static const String notThatOneSound =
       "${mainPathOfSoundBase}notThatOneSound.mp3";

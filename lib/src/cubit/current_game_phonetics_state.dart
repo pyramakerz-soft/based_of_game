@@ -5,7 +5,6 @@ class CurrentGamePhoneticsState extends Equatable {
   Artboard? avatarArtboardSuccess;
   Artboard? avatarArtboardSad;
   Artboard? avatarCurrentArtboard;
-  Artboard? avatarArtboardLoading;
   bool? touchPositions = false;
   String? stateOfAvatar;
   String? stateOfStringWillSay;
@@ -27,7 +26,6 @@ class CurrentGamePhoneticsState extends Equatable {
       {this.basicData,
       this.gameData,
       this.avatarCurrentArtboard,
-      this.avatarArtboardLoading,
       this.stateOfStringIsWord,
       this.stateOfStringWillSay,
       required this.actionWhenTriesBeZero,
@@ -50,7 +48,6 @@ class CurrentGamePhoneticsState extends Equatable {
       {MainDataOfChapters? basicData,
       Artboard? avatarArtboardSuccess,
       Artboard? avatarArtboardIdle,
-      Artboard? avatarArtboardLoading,
       Artboard? avatarArtboardSad,
       bool? touchPositions,
       bool? stateOfStringIsWord,
@@ -73,8 +70,6 @@ class CurrentGamePhoneticsState extends Equatable {
         basicData: basicData ?? this.basicData,
         index: index ?? this.index,
         currentStringOfDice: currentStringOfDice ?? this.currentStringOfDice,
-        avatarArtboardLoading:
-            avatarArtboardLoading ?? this.avatarArtboardLoading,
         touchPositions: touchPositions ?? this.touchPositions,
         actionWhenTriesBeZero:
             actionWhenTriesBeZero ?? this.actionWhenTriesBeZero,
@@ -104,7 +99,6 @@ class CurrentGamePhoneticsState extends Equatable {
         index: index,
         currentStringOfDice: null,
         touchPositions: touchPositions ?? touchPositions,
-        avatarArtboardLoading: avatarArtboardLoading ?? avatarArtboardLoading,
         actionWhenTriesBeZero: actionWhenTriesBeZero,
         stateOfStringWillSay: stateOfStringWillSay ?? stateOfStringWillSay,
         avatarCurrentArtboard: avatarCurrentArtboard ?? avatarCurrentArtboard,
@@ -135,7 +129,6 @@ class CurrentGamePhoneticsState extends Equatable {
         basicData,
         currentAvatar,
         avatarArtboardIdle,
-        avatarArtboardLoading,
         stateOfStringIsWord,
         stateOfStringWillSay,
         avatarArtboardSad,

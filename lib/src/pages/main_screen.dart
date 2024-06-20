@@ -1,3 +1,4 @@
+import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ class MainScreenOfGames extends StatefulWidget {
   final List<GameModel> stateOfGameData;
   final MainDataOfChapters? dataOfBasesGame;
   final bool showTheEditedGames;
+  final bool stateLoading;
   final void Function(int countOfStars) actionOfCompleteGame;
 
   const MainScreenOfGames(
@@ -18,7 +20,8 @@ class MainScreenOfGames extends StatefulWidget {
       required this.stateOfGameData,
       required this.dataOfBasesGame,
       required this.actionOfCompleteGame,
-      required this.showTheEditedGames});
+      required this.showTheEditedGames,
+      required this.stateLoading});
   @override
   State<StatefulWidget> createState() {
     return _MainScreenOfGames();
@@ -78,14 +81,21 @@ class _MainScreenOfGames extends State<MainScreenOfGames> {
                           .read<CurrentGamePhoneticsCubit>()
                           .clearPointerPosition(opm.pointer);
                     },
-                    child: BasedOfGames(
-                      stateOfGame: stateOfGame,
-                      gamesData: widget.showTheEditedGames
-                          ? widget.stateOfGameData
-                          : widget.stateOfGameData
-                              .where((element) => element.isEdited == 0)
-                              .toList(),
-                    ),
+                    child: widget.stateLoading
+                        ? stateOfGame.avatarArtboardLoading != null
+                            ? Rive(
+                                artboard: stateOfGame.avatarArtboardLoading!,
+                                fit: BoxFit.fill,
+                              )
+                            : const SizedBox()
+                        : BasedOfGames(
+                            stateOfGame: stateOfGame,
+                            gamesData: widget.showTheEditedGames
+                                ? widget.stateOfGameData
+                                : widget.stateOfGameData
+                                    .where((element) => element.isEdited == 0)
+                                    .toList(),
+                          ),
                   );
                 })));
   }

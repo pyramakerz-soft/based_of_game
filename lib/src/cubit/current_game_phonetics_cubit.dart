@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:games_models/games_models.dart';
 import '../../based_of_eng_game.dart';
 import '../core/assets_game_sound.dart';
+import '../core/assets_images_phonetics.dart';
 import '../core/audio_player_game.dart';
 import '../core/games_structure/basic_of_game_data.dart';
 
@@ -21,6 +22,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       required List<GameModel> gameData})
       : super(CurrentGamePhoneticsState(
             index: 0, actionWhenTriesBeZero: actionOfCompleteGame)) {
+    _getTheBackGroundLoading();
     _checkDataOfCubit();
     updateDataOfCurrentGame(
         basicData: basicData, gameData: gameData, gameIndex: 0);
@@ -32,6 +34,31 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     if (state.index > (state.gameData?.length ?? 0)) {
       return Exception("check the game data");
     }
+  }
+
+  _getTheBackGroundLoading() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      rootBundle.load(AppImagesPhonetics.loadingRiv).then(
+        (data) async {
+          try {
+            final file = RiveFile.import(data);
+            final artboard = file.mainArtboard;
+
+            var controller = StateMachineController.fromArtboard(
+                artboard, 'State Machine 1');
+            controller?.inputs.forEach((element) {
+              log('element:${element.name}');
+            });
+            if (controller != null) {
+              artboard.addController(controller);
+            }
+            emit(state.copyWith(avatarArtboardLoading: artboard));
+          } catch (e) {
+            log(e.toString());
+          }
+        },
+      );
+    });
   }
 
   _getTheBackGround() {

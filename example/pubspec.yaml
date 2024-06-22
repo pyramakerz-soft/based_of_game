@@ -74,6 +74,7 @@ flutter:
     - assets/fonts/
     - assets/sound/
     - assets/phonetics/
+    - assets/main_games/
     - assets/svg/
   #   - images/a_dot_ham.jpeg
 

@@ -90,8 +90,10 @@ abstract class MainDataOfChapters {
   late String background;
   BasicOfGameData? gameData;
   late Color backGroundOfStarBar;
-  CustomPainter? Function(List<Color?>? colorsOfPaths)? get tracingOfLetter;
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath;
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)?
+      get tracingOfLetter;
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath;
   late int? countOfPartsOfLettersForTracing = 0;
 }
 
@@ -126,23 +128,28 @@ class SPhonetics implements MainDataOfChapters {
   int? countOfPartsOfLettersForTracing = 14;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return FlipBookPainterLetterS(colorsOfPaths: colorsOfPaths);
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return FlipBookPainterLetterS(
+                colorsOfPaths: colorsOfPaths, points: points);
+          };
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return FlipBookPainterLetterS.indexOfPointInside(point, size);
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return FlipBookPainterLetterS.indexOfPointInside(
+                point, size, isFingerPosition);
+          };
 }
 
 class APhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -151,10 +158,11 @@ class APhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfA;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
   @override
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
@@ -179,19 +187,21 @@ class APhonetics implements MainDataOfChapters {
 
 class FPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
   @override
   String background = AppImagesPhonetics.backGroundOfA;
 
@@ -249,33 +259,37 @@ class MPhonetics implements MainDataOfChapters {
   int? countOfPartsOfLettersForTracing = 16;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+          };
 
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return FlipBookPainterLetterM.indexOfPointInside(point, size);
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
 }
 
 class TPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfT;
@@ -305,19 +319,21 @@ class TPhonetics implements MainDataOfChapters {
 
 class CPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfC;
@@ -347,19 +363,21 @@ class CPhonetics implements MainDataOfChapters {
 
 class RPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfR;
@@ -389,19 +407,21 @@ class RPhonetics implements MainDataOfChapters {
 
 class IPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfI;
@@ -431,10 +451,11 @@ class IPhonetics implements MainDataOfChapters {
 
 class PPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -443,10 +464,11 @@ class PPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfP;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
@@ -473,10 +495,11 @@ class PPhonetics implements MainDataOfChapters {
 
 class HPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -488,10 +511,11 @@ class HPhonetics implements MainDataOfChapters {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
@@ -515,19 +539,21 @@ class HPhonetics implements MainDataOfChapters {
 
 class JPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfJ;
@@ -557,19 +583,21 @@ class JPhonetics implements MainDataOfChapters {
 
 class UPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfJ;
@@ -599,19 +627,21 @@ class UPhonetics implements MainDataOfChapters {
 
 class LPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfL;
@@ -641,10 +671,11 @@ class LPhonetics implements MainDataOfChapters {
 
 class BPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -656,10 +687,11 @@ class BPhonetics implements MainDataOfChapters {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
@@ -683,19 +715,21 @@ class BPhonetics implements MainDataOfChapters {
 
 class OPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = Colors.white.withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfO;
@@ -725,19 +759,21 @@ class OPhonetics implements MainDataOfChapters {
 
 class GPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfG;
@@ -767,19 +803,21 @@ class GPhonetics implements MainDataOfChapters {
 
 class DPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfD;
@@ -809,19 +847,21 @@ class DPhonetics implements MainDataOfChapters {
 
 class WPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfW;
@@ -851,19 +891,21 @@ class WPhonetics implements MainDataOfChapters {
 
 class EPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfE;
@@ -893,10 +935,11 @@ class EPhonetics implements MainDataOfChapters {
 
 class NPhonetics implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -908,10 +951,11 @@ class NPhonetics implements MainDataOfChapters {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
@@ -935,10 +979,11 @@ class NPhonetics implements MainDataOfChapters {
 
 class ConnectionWithoutSortingCups implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -964,10 +1009,11 @@ class ConnectionWithoutSortingCups implements MainDataOfChapters {
   }
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -975,10 +1021,11 @@ class ConnectionWithoutSortingCups implements MainDataOfChapters {
 
 class ConnectionSortingCups implements MainDataOfChapters {
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1006,10 +1053,11 @@ class ConnectionSortingCups implements MainDataOfChapters {
   String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -1046,13 +1094,15 @@ class RedPhonetics implements MainDataOfChapters {
   int? countOfPartsOfLettersForTracing = 14;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
   @override
-  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
-      (Offset point, Size size) {
-        return null;
-      };
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
 }

@@ -4,11 +4,13 @@ class TracingInitial extends Equatable {
   final GameModel gameData;
   final CurrentGamePhoneticsState stateOfGame;
   final List<Color?> colorsOfPaths;
+  final List<Offset> paths;
   final Offset? currentPosition;
   final int? countOfPaths;
 
   const TracingInitial(
       {required this.gameData,
+      required this.paths,
       required this.colorsOfPaths,
       this.countOfPaths,
       this.currentPosition,
@@ -17,12 +19,14 @@ class TracingInitial extends Equatable {
   TracingInitial copyWith(
       {GameModel? gameData,
       List<Color?>? colorsOfPaths,
+      List<Offset>? paths,
       CurrentGamePhoneticsState? stateOfGame,
       Offset? currentPosition,
       int? countOfPaths}) {
     return TracingInitial(
       gameData: gameData ?? this.gameData,
       stateOfGame: stateOfGame ?? this.stateOfGame,
+      paths: paths ?? this.paths,
       colorsOfPaths: colorsOfPaths ?? this.colorsOfPaths,
       currentPosition: currentPosition ?? this.currentPosition,
       countOfPaths: countOfPaths ?? this.countOfPaths,
@@ -35,6 +39,7 @@ class TracingInitial extends Equatable {
       stateOfGame: stateOfGame,
       colorsOfPaths: colorsOfPaths,
       currentPosition: null,
+      paths: paths,
       countOfPaths: countOfPaths,
     );
   }
@@ -43,6 +48,7 @@ class TracingInitial extends Equatable {
     return TracingInitial(
       gameData: gameData,
       countOfPaths: null,
+      paths: paths,
       currentPosition: null,
       stateOfGame: stateOfGame,
       colorsOfPaths: [],
@@ -50,6 +56,12 @@ class TracingInitial extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [gameData, colorsOfPaths, currentPosition, countOfPaths, stateOfGame];
+  List<Object?> get props => [
+        gameData,
+        colorsOfPaths,
+        paths,
+        currentPosition,
+        countOfPaths,
+        stateOfGame
+      ];
 }

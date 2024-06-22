@@ -95,33 +95,14 @@ class _TracingGame extends State<TracingGame> {
                               });
                             } else {}
                           });
-
-                          // await context
-                          //     .read<CurrentGamePhoneticsCubit>()
-                          //     .animationOfCorrectAnswer();
-                          // await context
-                          //     .read<CurrentGamePhoneticsCubit>()
-                          //     .addStarToStudent(
-                          //       stateOfCountOfCorrectAnswer: 1,
-                          //       mainCountOfQuestion: 1,
-                          //     );
-                          //   await Future.delayed(const Duration(seconds: 3));
-                          //   Navigator.pop(context);
-                          //   context.read<CurrentGamePhoneticsCubit>().sendStars(
-                          //       gamesId: [stateOfGame.gameData?.id ?? 0],
-                          //       actionOfStars:
-                          //           (int countOfStars, List<int> listOfIds) {
-                          //         context.read<JourneyBarCubit>().sendStars(
-                          //             gamesId: listOfIds,
-                          //             countOfStar: countOfStars);
-                          //       });
                         }
                       },
                       child: CustomPaint(
                           size: Size(MediaQuery.of(context).size.width / 3,
                               MediaQuery.of(context).size.height - (70.h)),
-                          painter: stateOfGame.stateOfGame.basicData!
-                              .tracingOfLetter!(stateOfGame.colorsOfPaths))),
+                          painter: stateOfGame
+                                  .stateOfGame.basicData!.tracingOfLetter!(
+                              stateOfGame.colorsOfPaths, stateOfGame.paths))),
                 },
                 if (stateOfGame.currentPosition != null) ...{
                   Positioned(

@@ -54,70 +54,35 @@ class _DragOutGame extends State<DragOutGame> {
                 children: [
                   Container(
                       margin: const EdgeInsets.only(bottom: 15, left: 10),
-                      child: DragTarget<GameImagesModel>(builder: (
-                        BuildContext context,
-                        List<dynamic> accepted,
-                        List<dynamic> rejected,
-                      ) {
-                        return (stateOfCurrentGamePhoneticsCubit
+                      child: Draggable<String>(
+                        data: gameState.gameData.mainLetter ?? '',
+                        childWhenDragging: SizedBox(
+                          height: (MediaQuery.of(context).size.height / 2.8).h,
+                          width: 130,
+                        ),
+                        feedback: Image.asset(
+                          AppImagesPhonetics.outX,
+                          height: (MediaQuery.of(context).size.height / 2.8).h,
+                          width: 130,
+                        ),
+                        child: ((stateOfCurrentGamePhoneticsCubit
                                     .stateOfAvatar ==
-                                BasicOfGameData.stateOfWin)
-                            ? Image.asset(
-                                stateOfCurrentGamePhoneticsCubit
-                                        .basicData?.gameData?.completeBasket ??
-                                    '',
-                                height:
-                                    (MediaQuery.of(context).size.height / 2.8)
-                                        .h,
-                                width: 130,
+                                BasicOfGameData.stateOfWin))
+                            ? SizedBox(
+                                width: (MediaQuery.of(context).size.width -
+                                        (130 + 50 + 130)) /
+                                    3,
+                                height: 130.h,
+                                // height: ,
                               )
                             : Image.asset(
-                                AppImagesPhonetics.imageBasket,
+                                AppImagesPhonetics.X,
                                 height:
                                     (MediaQuery.of(context).size.height / 2.8)
                                         .h,
                                 width: 130,
-                              );
-                      }, onAcceptWithDetails: (item) async {
-                        if (item.data.word
-                                .toString()
-                                .split('')
-                                .first
-                                .toLowerCase() !=
-                            (gameState.gameData.mainLetter?.toLowerCase() ??
-                                '')) {
-                          await context
-                              .read<CurrentGamePhoneticsCubit>()
-                              .addSuccessAnswer(
-                                  questions: gameState.allGameData.length,
-                                  correctAnswers: (gameState.index) + 1)
-                              .whenComplete(() async {
-                            bool isLastQuestion = context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .checkIfIsTheLastQuestionOfGame(
-                                    queations: gameState.allGameData.length);
-                            if (isLastQuestion) {
-                              Future.delayed(const Duration(seconds: 2),
-                                  () async {
-                                Navigator.of(context).pop();
-                              });
-                            } else {
-                              await context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .updateIndexOfCurrentGame();
-                              context.read<DragOutCubit>().updateTheCurrentGame(
-                                  index: context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .state
-                                      .index);
-                            }
-                          });
-                        } else {
-                          await context
-                              .read<CurrentGamePhoneticsCubit>()
-                              .addWrongAnswer(actionOfWrongAnswer: () async {});
-                        }
-                      })),
+                              ),
+                      )),
                   Container(
                     margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
                     padding: const EdgeInsets.symmetric(
@@ -131,83 +96,103 @@ class _DragOutGame extends State<DragOutGame> {
                             color: AppColorPhonetics.boarderColor, width: 5)),
                     child: FittedBox(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: List.generate(
                             gameState.gameData.gameImages?.length ?? 0,
-                            (index) => Draggable<GameImagesModel>(
-                                data: gameState.gameData.gameImages?[index],
-                                childWhenDragging: SizedBox(
-                                  width: (MediaQuery.of(context).size.width -
-                                          (130 + 50 + 130)) /
-                                      4,
-                                  height: 130.h,
-                                ),
-                                feedback: CachedNetworkImage(
-                                  imageUrl: gameState
-                                          .gameData.gameImages?[index].image ??
-                                      '',
-                                  width: (MediaQuery.of(context).size.width -
-                                          (130 + 50 + 130)) /
-                                      4,
-                                  height: 130.h,
-                                  placeholder: (context, url) => const Center(
-                                    child: CupertinoActivityIndicator(),
-                                  ),
-                                  errorWidget: (context, url, error) => Text(
-                                      '${gameState.gameData.gameImages?[index].word}'),
-                                  // height: ,
-                                ),
-                                child: ((stateOfCurrentGamePhoneticsCubit
-                                                .stateOfAvatar ==
-                                            BasicOfGameData.stateOfWin) &&
-                                        (gameState.gameData.gameImages?[index]
-                                                .word
-                                                .toString()
-                                                .split('')
-                                                .first
-                                                .toLowerCase() !=
-                                            (gameState.gameData.mainLetter
-                                                    ?.toLowerCase() ??
-                                                '')))
-                                    ? SizedBox(
-                                        width:
-                                            (MediaQuery.of(context).size.width -
-                                                    (130 + 50 + 130)) /
-                                                4,
-                                        height: 130.h,
-                                        // height: ,
-                                      )
-                                    : GestureDetector(
-                                        onTap: () {
-                                          TalkTts.startTalk(
-                                              text: gameState
-                                                      .gameData
-                                                      .gameImages?[index]
-                                                      .word ??
-                                                  '');
-                                        },
-                                        child: CachedNetworkImage(
-                                          imageUrl: gameState.gameData
-                                                  .gameImages?[index].image ??
-                                              '',
+                            (index) => DragTarget<String>(builder: (
+                                  BuildContext context,
+                                  List<dynamic> accepted,
+                                  List<dynamic> rejected,
+                                ) {
+                                  return (stateOfCurrentGamePhoneticsCubit
+                                              .stateOfAvatar ==
+                                          BasicOfGameData.stateOfWin)
+                                      ? SizedBox(
                                           width: (MediaQuery.of(context)
                                                       .size
                                                       .width -
                                                   (130 + 50 + 130)) /
-                                              4,
+                                              3,
                                           height: 130.h,
-                                          placeholder: (context, url) =>
-                                              const Center(
-                                            child: CupertinoActivityIndicator(),
+                                        )
+                                      : GestureDetector(
+                                    onTap: (){
+                                      print(
+                                          '####:${gameState.gameData.gameImages?[index].word}');
+                                    },
+                                        child: CachedNetworkImage(
+                                            imageUrl: gameState.gameData
+                                                    .gameImages?[index].image ??
+                                                '',
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    (130 + 50 + 130)) /
+                                                3,
+                                            height: 130.h,
+                                            placeholder: (context, url) =>
+                                                const Center(
+                                              child: CupertinoActivityIndicator(),
+                                            ),
+                                            errorWidget: (context, url, error) =>
+                                                Center(
+                                              child: Text(
+                                                  '${gameState.gameData.gameImages?[index].word}'),
+                                            ),
+                                            // height: ,
                                           ),
-                                          errorWidget: (context, url, error) =>
-                                              Center(
-                                            child: Text(
-                                                '${gameState.gameData.gameImages?[index].word}'),
-                                          ),
-                                          // height: ,
-                                        ),
-                                      ))),
+                                      );
+                                }, onAcceptWithDetails: (item) async {
+                                  print(
+                                      '####:${gameState.gameData.gameImages?[index].word}');
+                                  print('####:${(item.data.toLowerCase())}');
+                                  if (gameState.gameData.gameImages?[index].word
+                                          .toString()
+                                          .split('')
+                                          .first
+                                          .toLowerCase() !=
+                                      (item.data.toLowerCase())) {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addSuccessAnswer(
+                                            questions:
+                                                gameState.allGameData.length,
+                                            correctAnswers:
+                                                (gameState.index) + 1)
+                                        .whenComplete(() async {
+                                      bool isLastQuestion = context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .checkIfIsTheLastQuestionOfGame(
+                                              queations:
+                                                  gameState.allGameData.length);
+                                      if (isLastQuestion) {
+                                        Future.delayed(
+                                            const Duration(seconds: 2),
+                                            () async {
+                                          Navigator.of(context).pop();
+                                        });
+                                      } else {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .updateIndexOfCurrentGame();
+                                        context
+                                            .read<DragOutCubit>()
+                                            .updateTheCurrentGame(
+                                                index: context
+                                                    .read<
+                                                        CurrentGamePhoneticsCubit>()
+                                                    .state
+                                                    .index);
+                                      }
+                                    });
+                                  } else {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addWrongAnswer(
+                                            actionOfWrongAnswer: () async {});
+                                  }
+                                })),
                       ),
                     ),
                   )

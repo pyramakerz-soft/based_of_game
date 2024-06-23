@@ -1,5 +1,7 @@
 abstract class AppImagesPhonetics {
   static const String mainPathOfImages = 'assets/phonetics/';
+  static const String outX = "${mainPathOfImages}out_X.png";
+  static const String X = "${mainPathOfImages}x.png";
   static const String backGroundOfS = "${mainPathOfImages}backGroundOfS.png";
   static const String backGroundOfA = "${mainPathOfImages}backGroundOfA.png";
   static const String backGroundOfC = "${mainPathOfImages}backGroundOfC.png";

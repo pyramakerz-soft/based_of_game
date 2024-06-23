@@ -176,7 +176,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
           stateOfCountOfCorrectAnswer) {
         emit(state.copyWith(countOfStar: 3));
       }
-    } else {
+    }
+    else {
       if (mainCountOfQuestion == 1) {
         emit(state.copyWith(countOfStar: 3));
       } else if (mainCountOfQuestion == 2) {
@@ -187,6 +188,39 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         }
       }
     }
+    checkTheStateOfStar();
+  }
+
+  checkTheStateOfStar(){
+    int stateOfGameStar = state.basicData?.gameData?.countOfMinimizeStar??0;
+    int countOfStar = state.countOfStar??0;
+    int countOfWrongAnswers = state.countOfWrongAnswers??0;
+    if(stateOfGameStar == 1){
+      print('stateOfGameStar:$stateOfGameStar');
+      print('countOfStar:$countOfStar');
+      print('countOfWrongAnswers:$countOfWrongAnswers');
+      print('countOfWrongAnswers:${countOfWrongAnswers%2}');
+      if(countOfStar>0 ){
+        countOfStar= countOfStar-countOfWrongAnswers;
+        if(countOfStar<0){
+          emit(state.copyWith(countOfStar: 0));
+        }else {
+          emit(state.copyWith(countOfStar: countOfStar));
+        }
+      }
+    }else if( stateOfGameStar ==2){
+      if(countOfStar>0 ){
+        if(countOfWrongAnswers%2==0) {
+          countOfStar = countOfStar - (countOfWrongAnswers/2).round();
+          if (countOfStar < 0) {
+            emit(state.copyWith(countOfStar: 0));
+          } else {
+            emit(state.copyWith(countOfStar: countOfStar));
+          }
+        }
+      }
+    }
+
   }
 
   increaseDirectlyCountOfStar() {
@@ -233,7 +267,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         actionOfWrongAnswer.call();
       });
     }
-    // AudioPlayerGame.playerWrong.state.
     playerWrong.onPlayerComplete.listen((event) {
       backToMainAvatar();
     });
@@ -243,7 +276,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int countOfWrongAnswers = state.countOfWrongAnswers;
     countOfWrongAnswers++;
     emit(state.copyWith(countOfWrongAnswers: countOfWrongAnswers));
-    _updateTheStarState();
+    addStarToStudent(stateOfCountOfCorrectAnswer: state.countOfCorrectAnswers);
   }
 
   _animationOfWrongAnswer() {
@@ -253,21 +286,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     decreaseCountOfTries();
   }
 
-  _updateTheStarState() {
-    int countOfWrongAnswers = state.countOfWrongAnswers;
-    List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
-    debugPrint('stateOfStarsAdd:$stateOfStarsAdd');
-    int countOfAllStars = stateOfStarsAdd.fold(
-        0, (previousValue, element) => previousValue + element);
-    countOfWrongAnswers = countOfWrongAnswers + countOfAllStars;
-
-    List<int> listStateOfStarsAdd =
-        BaseOfGames.getTheStarsAddState(countOfWrongAnswers);
-    emit(state.copyWith(statesOfAddStars: listStateOfStarsAdd));
-    debugPrint('stateOfStarsAdd:$listStateOfStarsAdd');
-
-    addStarToStudent(stateOfCountOfCorrectAnswer: state.countOfCorrectAnswers);
-  }
 
   Future<void> _animationOfCorrectAnswer() async {
     emit(state.copyWith(

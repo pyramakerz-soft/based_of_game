@@ -13,7 +13,6 @@ class CurrentGamePhoneticsState extends Equatable {
   int countOfWrongAnswers;
   int countOfCorrectAnswers;
   String? currentStringOfDice;
-
   void Function(int x) actionWhenTriesBeZero;
   String? currentAvatar;
   int index;

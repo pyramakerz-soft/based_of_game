@@ -7,6 +7,7 @@ abstract class BasicOfGameData {
   late String titleImageEn;
   late String? titleImageAr;
   late String? completeBasket;
+  late int countOfMinimizeStar;
   static String connect = 'Connect';
   static String stateOIdle = 'idle';
   static String stateOfWin = 'win';
@@ -86,9 +87,6 @@ class BasicDragOutGame implements BasicOfGameData {
   @override
   String titleImageEn = AppImagesPhonetics.dragOut;
 
-  // @override
-  // String keyGame = BasicOfEveryGame.;
-
   @override
   String? completeBasket = AppImagesPhonetics.imageBasketComplete;
 
@@ -97,6 +95,9 @@ class BasicDragOutGame implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 2;
 }
 
 class ClickPicture implements BasicOfGameData {
@@ -105,9 +106,6 @@ class ClickPicture implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesPhonetics.clickPicture;
-
-  // @override
-  // String keyGame = 'Click the picture';
 
   @override
   String? completeBasket;
@@ -143,6 +141,9 @@ class ClickPicture implements BasicOfGameData {
 
   @override
   String? titleImageAr = AppImagesArabic.titleOfClickThePicture;
+
+  @override
+  int countOfMinimizeStar = 1;
 }
 
 class Tracking implements BasicOfGameData {
@@ -163,6 +164,9 @@ class Tracking implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
 }
 
 class Video implements BasicOfGameData {
@@ -183,6 +187,9 @@ class Video implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
 }
 
 class BasicClickTheSoundGame implements BasicOfGameData {
@@ -200,6 +207,9 @@ class BasicClickTheSoundGame implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
 }
 
 class ClickPictureOfWord implements BasicOfGameData {
@@ -243,6 +253,9 @@ class ClickPictureOfWord implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
 }
 
 class BingoGame implements BasicOfGameData {
@@ -260,6 +273,9 @@ class BingoGame implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
 }
 
 class SortingCupsGame implements BasicOfGameData {
@@ -277,6 +293,9 @@ class SortingCupsGame implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 2;
 }
 
 class SortingPicturesGame implements BasicOfGameData {
@@ -295,6 +314,9 @@ class SortingPicturesGame implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 2;
 }
 
 class SpellingGame implements BasicOfGameData {
@@ -314,6 +336,9 @@ class SpellingGame implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 2;
 }
 
 class XOutGame implements BasicOfGameData {
@@ -331,6 +356,9 @@ class XOutGame implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 2;
 }
 
 class DiceGame implements BasicOfGameData {
@@ -348,4 +376,7 @@ class DiceGame implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 2;
 }

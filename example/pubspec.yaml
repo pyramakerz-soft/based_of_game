@@ -72,7 +72,7 @@ flutter:
   assets:
     - assets/letters/
     - assets/fonts/
-    - assets/sound/
+    - assets/sound/base/
     - assets/phonetics/
     - assets/main_games/
     - assets/svg/

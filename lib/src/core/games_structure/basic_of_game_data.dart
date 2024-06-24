@@ -19,10 +19,10 @@ abstract class BasicOfGameData {
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
     } else if ((gameType == GameTypes.clickPicture.text()) && audioFlag == 1) {
-      return ClickPicture();
-    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
-      ///audio flag == 0 say the word
       return ClickPictureOfWord();
+      ///audio flag == 1 say the word
+    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
+      return ClickPicture();
     } else if (gameType == GameTypes.clickTheSound.text()) {
       return BasicClickTheSoundGame();
     } else if (gameType == GameTypes.bingo.text()) {
@@ -217,7 +217,7 @@ class ClickPictureOfWord implements BasicOfGameData {
   bool isRound = false;
 
   @override
-  String titleImageEn = AppImagesPhonetics.clickPicture;
+  String titleImageEn = AppImagesPhonetics.clickPictureWithWord;
 
   @override
   String? completeBasket;

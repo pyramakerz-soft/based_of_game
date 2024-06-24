@@ -49,6 +49,12 @@ abstract class BaseOfGames {
     WPhonetics,
     EPhonetics,
     NPhonetics,
+    KPhonetics,
+    QPhonetics,
+    VPhonetics,
+    XPhonetics,
+    YPhonetics,
+    ZPhonetics,
     // SpellTheWord,
     ConnectionSortingCups,
     ConnectionWithoutSortingCups
@@ -80,7 +86,37 @@ abstract class BaseOfGames {
       return SPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.a.text()) {
+    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.k.text()) {
+      return KPhonetics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.q.text()) {
+      return QPhonetics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.v.text()) {
+      return VPhonetics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.x.text()) {
+      return XPhonetics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.y.text()) {
+      return YPhonetics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.z.text()) {
+      return ZPhonetics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.a.text()) {
       return APhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));

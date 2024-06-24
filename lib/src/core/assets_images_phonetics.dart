@@ -40,6 +40,12 @@ abstract class AppImagesPhonetics {
       "${mainPathOfImages}letter_of_click_pic.png";
   static const String backGroundOfF = "${mainPathOfImages}backGroundOfF.png";
   static const String backGroundOfM = "${mainPathOfImages}backGroundOfM.png";
+  static const String backGroundOfK = "${mainPathOfImages}backGroundOfK.png";
+  static const String backGroundOfQ = "${mainPathOfImages}backGroundOfQ.png";
+  static const String backGroundOfV = "${mainPathOfImages}backGroundOfV.png";
+  static const String backGroundOfX = "${mainPathOfImages}backGroundOfX.png";
+  static const String backGroundOfY = "${mainPathOfImages}backGroundOfY.png";
+  static const String backGroundOfZ = "${mainPathOfImages}backGroundOfZ.png";
   static const String backGroundOfT = "${mainPathOfImages}backGroundOfT.png";
   static const String basicAvatarNormal =
       "${mainPathOfImages}basicAvatarNormal.png";
@@ -47,6 +53,7 @@ abstract class AppImagesPhonetics {
   static const String winAvatar = "${mainPathOfImages}winAvatar.png";
   static const String dragOut = "${mainPathOfImages}dragOut.png";
   static const String clickPicture = "${mainPathOfImages}click_picture.png";
+  static const String clickPictureWithWord = "${mainPathOfImages}listen_and_click.png";
   static const String tracingWithFinger =
       "${mainPathOfImages}tracing_with_finger.png";
   static const String clickTheSound = "${mainPathOfImages}click_the_sound.png";

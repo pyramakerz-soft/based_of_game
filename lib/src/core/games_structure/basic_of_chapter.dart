@@ -28,6 +28,7 @@ enum MainDataOfChaptersTypes {
   w,
   e,
   n,
+  k,q,v,x,y,z,
   redUnit
 }
 
@@ -74,6 +75,18 @@ extension TypeExtension on MainDataOfChaptersTypes {
         return 'e'.toLowerCase();
       case MainDataOfChaptersTypes.n:
         return 'n'.toLowerCase();
+      case MainDataOfChaptersTypes.k:
+        return 'k'.toLowerCase();
+      case MainDataOfChaptersTypes.q:
+        return 'q'.toLowerCase();
+      case MainDataOfChaptersTypes.v:
+        return 'v'.toLowerCase();
+      case MainDataOfChaptersTypes.x:
+        return 'x'.toLowerCase();
+      case MainDataOfChaptersTypes.y:
+        return 'y'.toLowerCase();
+      case MainDataOfChaptersTypes.z:
+        return 'z'.toLowerCase();
       case MainDataOfChaptersTypes.video:
         return 'video'.toLowerCase();
       case MainDataOfChaptersTypes.redUnit:
@@ -249,6 +262,270 @@ class MPhonetics implements MainDataOfChapters {
   String winAvatar = AppImagesPhonetics.beeSuccess;
 
   MPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+
+  @override
+  int? countOfPartsOfLettersForTracing = 16;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+          };
+
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+}
+class KPhonetics implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfK;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfGameData? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  KPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+
+  @override
+  int? countOfPartsOfLettersForTracing = 16;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+          };
+
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+}
+class QPhonetics implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfQ;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfGameData? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  QPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+
+  @override
+  int? countOfPartsOfLettersForTracing = 16;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+          };
+
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+}
+class VPhonetics implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfV;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfGameData? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  VPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+
+  @override
+  int? countOfPartsOfLettersForTracing = 16;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+          };
+
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+}
+class XPhonetics implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfX;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfGameData? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  XPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+
+  @override
+  int? countOfPartsOfLettersForTracing = 16;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+          };
+
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+}
+class YPhonetics implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfY;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfGameData? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  YPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+
+  @override
+  int? countOfPartsOfLettersForTracing = 16;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+          };
+
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+}
+class ZPhonetics implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfZ;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfGameData? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  ZPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 

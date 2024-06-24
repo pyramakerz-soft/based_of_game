@@ -133,7 +133,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                   as SortingPicturesGame)
                               .woodenBackground,
                           listGameData: gamesData),
-                      child: const SortingGameScreen())
+                      child:  SortingGameScreen())
                 } else if ((stateOfGame.basicData?.gameData is DiceGame)) ...{
                   BlocProvider<DiceCubit>(
                       create: (_) => DiceCubit(

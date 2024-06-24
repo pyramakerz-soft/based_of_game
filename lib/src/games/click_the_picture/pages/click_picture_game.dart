@@ -1,5 +1,7 @@
+import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:games_models/games_models.dart';
 import '../../../core/assets_images_phonetics.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
@@ -69,6 +71,7 @@ class _ClickPictureGame extends State<ClickPictureGame> {
         child: Container(
           margin: EdgeInsets.only(
               bottom: (30),
+              top: 10,
               left: stateOfGameData.isArabic == true ? 0 : 20,
               right: stateOfGameData.isArabic == true ? 20 : 0),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
@@ -100,9 +103,9 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                                 .state
                                 .correctIndexes
                                 .contains(index),
-                            // height: (MediaQuery.of(context).size.height -
-                            //         (50.h + 75 + 20)) /
-                            //     2,
+                            height: (MediaQuery.of(context).size.height -
+                                    (50.h + 75 + 20)) /
+                                2,
                             onTap: isInteracting != null &&
                                     isInteracting != BasicOfGameData.stateOIdle
                                 ? null

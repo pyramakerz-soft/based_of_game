@@ -93,111 +93,110 @@ class _DragOutGame extends State<DragOutGame> {
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(
                             color: AppColorPhonetics.boarderColor, width: 5)),
-                    child: FittedBox(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: List.generate(
-                            gameState.gameData.gameImages?.length ?? 0,
-                            (index) => DragTarget<String>(builder: (
-                                  BuildContext context,
-                                  List<dynamic> accepted,
-                                  List<dynamic> rejected,
-                                ) {
-                                  return (stateOfCurrentGamePhoneticsCubit
-                                              .stateOfAvatar ==
-                                          BasicOfGameData.stateOfWin)
-                                      ? SizedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: List.generate(
+                          gameState.gameData.gameImages?.length ?? 0,
+                          (index) => DragTarget<String>(builder: (
+                                BuildContext context,
+                                List<dynamic> accepted,
+                                List<dynamic> rejected,
+                              ) {
+                                return (stateOfCurrentGamePhoneticsCubit
+                                            .stateOfAvatar ==
+                                        BasicOfGameData.stateOfWin)
+                                    ? SizedBox(
+                                        width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                (130 + 50 + 130)) /
+                                            4,
+                                        height: 110.h,
+                                      )
+                                    : GestureDetector(
+                                        onTap: () {
+                                          TalkTts.startTalk(
+                                              text: gameState
+                                                      .gameData
+                                                      .gameImages?[index]
+                                                      .word ??
+                                                  '');
+                                        },
+                                        child: CachedNetworkImage(
+                                          imageUrl: gameState.gameData
+                                                  .gameImages?[index].image ??
+                                              '',
                                           width: (MediaQuery.of(context)
                                                       .size
                                                       .width -
                                                   (130 + 50 + 130)) /
-                                              3,
-                                          height: 130.h,
-                                        )
-                                      : GestureDetector(
-                                          onTap: () {
-                                            TalkTts.startTalk(
-                                                text: gameState
-                                                        .gameData
-                                                        .gameImages?[index]
-                                                        .word ??
-                                                    '');
-                                          },
-                                          child: CachedNetworkImage(
-                                            imageUrl: gameState.gameData
-                                                    .gameImages?[index].image ??
-                                                '',
-                                            width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width -
-                                                    (130 + 50 + 130)) /
-                                                3,
-                                            height: 130.h,
-                                            placeholder: (context, url) =>
-                                                const Center(
-                                              child:
-                                                  CupertinoActivityIndicator(),
-                                            ),
-                                            errorWidget:
-                                                (context, url, error) => Center(
-                                              child: Text(
-                                                  '${gameState.gameData.gameImages?[index].word}'),
-                                            ),
-                                            // height: ,
+                                              4,
+                                          height: 110.h,
+                                          placeholder: (context, url) =>
+                                              const Center(
+                                            child:
+                                                CupertinoActivityIndicator(),
                                           ),
-                                        );
-                                }, onAcceptWithDetails: (item) async {
-                                  print(
-                                      '####:${gameState.gameData.gameImages?[index].word}');
-                                  print('####:${(item.data.toLowerCase())}');
-                                  if (gameState.gameData.gameImages?[index].word
-                                          .toString()
-                                          .split('')
-                                          .first
-                                          .toLowerCase() !=
-                                      (item.data.toLowerCase())) {
-                                    await context
+                                          errorWidget:
+                                              (context, url, error) => Center(
+                                            child: Text(
+                                                '${gameState.gameData.gameImages?[index].word}'),
+                                          ),
+                                          fit: BoxFit.contain,
+                                          // height: ,
+                                        ),
+                                      );
+                              }, onAcceptWithDetails: (item) async {
+                                print(
+                                    '####:${gameState.gameData.gameImages?[index].word}');
+                                print('####:${(item.data.toLowerCase())}');
+                                if (gameState.gameData.gameImages?[index].word
+                                        .toString()
+                                        .split('')
+                                        .first
+                                        .toLowerCase() !=
+                                    (item.data.toLowerCase())) {
+                                  await context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .addSuccessAnswer(
+                                          questions:
+                                              gameState.allGameData.length,
+                                          correctAnswers:
+                                              (gameState.index) + 1)
+                                      .whenComplete(() async {
+                                    bool isLastQuestion = context
                                         .read<CurrentGamePhoneticsCubit>()
-                                        .addSuccessAnswer(
-                                            questions:
-                                                gameState.allGameData.length,
-                                            correctAnswers:
-                                                (gameState.index) + 1)
-                                        .whenComplete(() async {
-                                      bool isLastQuestion = context
+                                        .checkIfIsTheLastQuestionOfGame(
+                                            queations:
+                                                gameState.allGameData.length);
+                                    if (isLastQuestion) {
+                                      Future.delayed(
+                                          const Duration(seconds: 2),
+                                          () async {
+                                        Navigator.of(context).pop();
+                                      });
+                                    } else {
+                                      await context
                                           .read<CurrentGamePhoneticsCubit>()
-                                          .checkIfIsTheLastQuestionOfGame(
-                                              queations:
-                                                  gameState.allGameData.length);
-                                      if (isLastQuestion) {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                            () async {
-                                          Navigator.of(context).pop();
-                                        });
-                                      } else {
-                                        await context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .updateIndexOfCurrentGame();
-                                        context
-                                            .read<DragOutCubit>()
-                                            .updateTheCurrentGame(
-                                                index: context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .state
-                                                    .index);
-                                      }
-                                    });
-                                  } else {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addWrongAnswer(
-                                            actionOfWrongAnswer: () async {});
-                                  }
-                                })),
-                      ),
+                                          .updateIndexOfCurrentGame();
+                                      context
+                                          .read<DragOutCubit>()
+                                          .updateTheCurrentGame(
+                                              index: context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .state
+                                                  .index);
+                                    }
+                                  });
+                                } else {
+                                  await context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .addWrongAnswer(
+                                          actionOfWrongAnswer: () async {});
+                                }
+                              })),
                     ),
                   )
                 ],

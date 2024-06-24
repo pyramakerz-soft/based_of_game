@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/assets_images_phonetics.dart';
+import '../../../core/phonetics_color.dart';
+import '../../../core/theme_text.dart';
 
 class CupWidget extends StatelessWidget {
   final String image;
@@ -23,10 +25,11 @@ class CupWidget extends StatelessWidget {
           ),
           Text(
             image,
-            style: Theme.of(context)
-                .textTheme
-                .displayLarge
-                ?.copyWith(fontSize: 50, fontWeight: FontWeight.w700),
+            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                fontSize: 50,
+                fontWeight: FontWeight.w700,
+                color: AppColorPhonetics.darkBorderColor,
+                fontFamily: AppTheme.getFontFamily5()),
           ),
         ],
       ),

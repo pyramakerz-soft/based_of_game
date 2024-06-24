@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/assets_images_phonetics.dart';
+import '../../../core/theme_text.dart';
 
 class ItemCardWidgetOFSortingCups extends StatelessWidget {
   final double? width;
@@ -36,10 +37,10 @@ class ItemCardWidgetOFSortingCups extends StatelessWidget {
                 fit: BoxFit.fitWidth, width: width, height: height),
             Text(
               body,
-              style: Theme.of(context)
-                  .textTheme
-                  .displayLarge
-                  ?.copyWith(fontSize: 18.sp, fontWeight: FontWeight.w700),
+              style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: AppTheme.getFontFamily5()),
             )
           ],
         ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:games_models/games_models.dart';
+import '../../../core/assets_images_phonetics.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
+import '../../../core/theme_text.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/click_picture_cubit.dart';
 import '../widgets/single_row.dart';
@@ -78,84 +80,113 @@ class _ClickPictureGame extends State<ClickPictureGame> {
               borderRadius: BorderRadius.circular(15),
               border:
                   Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
-          child: Wrap(
-            spacing: 15,
-            alignment: WrapAlignment.center,
-            children: List.generate(
-                stateOfGameData.gameData.gameImages?.length ?? 0,
-                (index) => FittedBox(
-                      child: SingleElement(
-                        index: index,
-                        background: stateOfGameData.backGround[index],
-                        image:
-                            stateOfGameData.gameData.gameImages?[index].image ??
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Wrap(
+                spacing: 15,
+                alignment: WrapAlignment.center,
+                children: List.generate(
+                    stateOfGameData.gameData.gameImages?.length ?? 0,
+                    (index) => FittedBox(
+                          child: SingleElement(
+                            index: index,
+                            background: stateOfGameData.backGround[index],
+                            image: stateOfGameData
+                                    .gameData.gameImages?[index].image ??
                                 '',
-                        selected: context
-                            .read<ClickPictureCubit>()
-                            .state
-                            .correctIndexes
-                            .contains(index),
-                        // height: (MediaQuery.of(context).size.height -
-                        //         (50.h + 75 + 20)) /
-                        //     2,
-                        onTap: isInteracting != null &&
-                                isInteracting != BasicOfGameData.stateOIdle
-                            ? null
-                            : () async {
-                                // if (clickPictureCubit.checkCurrentClickTime(
-                                //     current: DateTime.now())) {
-                                if (!stateOfGameData.correctIndexes
-                                    .contains(index)) {
-                                  if (stateOfGameData.gameData
-                                          .gameImages?[index].correct ==
-                                      1) {
-                                    context
-                                        .read<ClickPictureCubit>()
-                                        .addAnswer(index);
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addSuccessAnswer(
-                                            questions: stateOfGameData
-                                                    .gameImages
-                                                    ?.where((element) =>
-                                                        element.correct == 1)
-                                                    .length ??
-                                                0,
-                                            correctAnswers: stateOfGameData
-                                                .correctIndexes.length)
-                                        .whenComplete(() {
-                                      bool isLastQuestion = context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .checkIfIsTheLastQuestionOfGame(
-                                              queations: stateOfGameData
-                                                      .gameImages
-                                                      ?.where((element) =>
-                                                          element.correct == 1)
-                                                      .length ??
-                                                  0);
-                                      if (isLastQuestion) {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                            () async {
-                                          Navigator.of(context).pop();
+                            selected: context
+                                .read<ClickPictureCubit>()
+                                .state
+                                .correctIndexes
+                                .contains(index),
+                            // height: (MediaQuery.of(context).size.height -
+                            //         (50.h + 75 + 20)) /
+                            //     2,
+                            onTap: isInteracting != null &&
+                                    isInteracting != BasicOfGameData.stateOIdle
+                                ? null
+                                : () async {
+                                    // if (clickPictureCubit.checkCurrentClickTime(
+                                    //     current: DateTime.now())) {
+                                    if (!stateOfGameData.correctIndexes
+                                        .contains(index)) {
+                                      if (stateOfGameData.gameData
+                                              .gameImages?[index].correct ==
+                                          1) {
+                                        context
+                                            .read<ClickPictureCubit>()
+                                            .addAnswer(index);
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addSuccessAnswer(
+                                                questions: stateOfGameData
+                                                        .gameImages
+                                                        ?.where((element) =>
+                                                            element.correct ==
+                                                            1)
+                                                        .length ??
+                                                    0,
+                                                correctAnswers: stateOfGameData
+                                                    .correctIndexes.length)
+                                            .whenComplete(() {
+                                          bool isLastQuestion = context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .checkIfIsTheLastQuestionOfGame(
+                                                  queations: stateOfGameData
+                                                          .gameImages
+                                                          ?.where((element) =>
+                                                              element.correct ==
+                                                              1)
+                                                          .length ??
+                                                      0);
+                                          if (isLastQuestion) {
+                                            Future.delayed(
+                                                const Duration(seconds: 2),
+                                                () async {
+                                              Navigator.of(context).pop();
+                                            });
+                                          }
+                                        });
+                                      } else {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addWrongAnswer(
+                                                actionOfWrongAnswer: () async {
+                                          await context
+                                              .read<ClickPictureCubit>()
+                                              .sayTheLetter();
                                         });
                                       }
-                                    });
-                                  } else {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addWrongAnswer(
-                                            actionOfWrongAnswer: () async {
-                                      await context
-                                          .read<ClickPictureCubit>()
-                                          .sayTheLetter();
-                                    });
-                                  }
-                                }
-                                // }
-                              },
-                      ),
-                    )),
+                                    }
+                                    // }
+                                  },
+                          ),
+                        )),
+              ),
+              Positioned(
+                  top: -60,
+                  right: -60,
+                  child: Container(
+                      alignment: Alignment.center,
+                      height: 100,
+                      width: 100,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(
+                                  AppImagesPhonetics.letterOfClickPic))),
+                      child: Text(
+                        stateOfGameData.gameData.mainLetter ?? '',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(
+                                fontSize: 70,
+                                fontWeight: FontWeight.w700,
+                                color: AppColorPhonetics.darkBorderColor,
+                                fontFamily: AppTheme.getFontFamily5()),
+                      )))
+            ],
           ),
         ),
       );

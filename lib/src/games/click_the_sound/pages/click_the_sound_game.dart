@@ -71,8 +71,8 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                           letter: stateOfGame.letters?[index] ?? '',
                           viewModel: context.read<ClickTheSoundCubit>(),
                           index: index,
-                          onPress: isInteracting != null &&
-                                  isInteracting != BasicOfGameData.stateOIdle
+                          onPress: (isInteracting != null &&
+                                  isInteracting != BasicOfGameData.stateOIdle)||( context.read<ClickTheSoundCubit>().state.correctIndexes?.contains(index) ?? false)
                               ? null
                               : () async {
                                   if (stateOfGame.letters?[index] ==

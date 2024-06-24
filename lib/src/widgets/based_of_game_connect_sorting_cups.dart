@@ -117,8 +117,8 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
               child: Container(
                   alignment: Alignment.center,
                   child: stateOfGame.avatarCurrentArtboard == null
-                      ? Image.asset(
-                          stateOfGame.currentAvatar ?? '',
+                      ? SizedBox(
+                          // stateOfGame.currentAvatar ?? '',
                           // height:
                           // MediaQuery.of(context).size.height - (70.h),
                           height: 85.h,

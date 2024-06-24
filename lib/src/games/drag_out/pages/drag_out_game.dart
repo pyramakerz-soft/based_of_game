@@ -69,11 +69,10 @@ class _DragOutGame extends State<DragOutGame> {
                                     .stateOfAvatar ==
                                 BasicOfGameData.stateOfWin))
                             ? SizedBox(
-                                width: (MediaQuery.of(context).size.width -
-                                        (130 + 50 + 130)) /
-                                    3,
-                                height: 130.h,
-                                // height: ,
+                                height:
+                                    (MediaQuery.of(context).size.height / 2.8)
+                                        .h,
+                                width: 130,
                               )
                             : Image.asset(
                                 AppImagesPhonetics.X,
@@ -117,11 +116,15 @@ class _DragOutGame extends State<DragOutGame> {
                                           height: 130.h,
                                         )
                                       : GestureDetector(
-                                    onTap: (){
-                                      print(
-                                          '####:${gameState.gameData.gameImages?[index].word}');
-                                    },
-                                        child: CachedNetworkImage(
+                                          onTap: () {
+                                            TalkTts.startTalk(
+                                                text: gameState
+                                                        .gameData
+                                                        .gameImages?[index]
+                                                        .word ??
+                                                    '');
+                                          },
+                                          child: CachedNetworkImage(
                                             imageUrl: gameState.gameData
                                                     .gameImages?[index].image ??
                                                 '',
@@ -133,16 +136,17 @@ class _DragOutGame extends State<DragOutGame> {
                                             height: 130.h,
                                             placeholder: (context, url) =>
                                                 const Center(
-                                              child: CupertinoActivityIndicator(),
+                                              child:
+                                                  CupertinoActivityIndicator(),
                                             ),
-                                            errorWidget: (context, url, error) =>
-                                                Center(
+                                            errorWidget:
+                                                (context, url, error) => Center(
                                               child: Text(
                                                   '${gameState.gameData.gameImages?[index].word}'),
                                             ),
                                             // height: ,
                                           ),
-                                      );
+                                        );
                                 }, onAcceptWithDetails: (item) async {
                                   print(
                                       '####:${gameState.gameData.gameImages?[index].word}');

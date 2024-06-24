@@ -195,11 +195,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int stateOfGameStar = state.basicData?.gameData?.countOfMinimizeStar??0;
     int countOfStar = state.countOfStar??0;
     int countOfWrongAnswers = state.countOfWrongAnswers??0;
+    print('stateOfGameStar:$stateOfGameStar');
+    print('countOfStar:$countOfStar');
+    print('countOfWrongAnswers:$countOfWrongAnswers');
+    print('countOfWrongAnswers:${countOfWrongAnswers%2}');
     if(stateOfGameStar == 1){
-      print('stateOfGameStar:$stateOfGameStar');
-      print('countOfStar:$countOfStar');
-      print('countOfWrongAnswers:$countOfWrongAnswers');
-      print('countOfWrongAnswers:${countOfWrongAnswers%2}');
       if(countOfStar>0 ){
         countOfStar= countOfStar-countOfWrongAnswers;
         if(countOfStar<0){
@@ -210,8 +210,15 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       }
     }else if( stateOfGameStar ==2){
       if(countOfStar>0 ){
-        if(countOfWrongAnswers%2==0) {
-          countOfStar = countOfStar - (countOfWrongAnswers/2).round();
+        if(countOfWrongAnswers==1||countOfWrongAnswers==2) {
+          countOfStar = countOfStar - 1;
+          if (countOfStar < 0) {
+            emit(state.copyWith(countOfStar: 0));
+          } else {
+            emit(state.copyWith(countOfStar: countOfStar));
+          }
+        }else if(countOfWrongAnswers==3||countOfWrongAnswers==4) {
+          countOfStar = countOfStar - 2;
           if (countOfStar < 0) {
             emit(state.copyWith(countOfStar: 0));
           } else {

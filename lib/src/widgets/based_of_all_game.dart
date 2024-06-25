@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 
 import '../../based_of_eng_game.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
@@ -13,7 +13,7 @@ import 'widget_of_tries.dart';
 
 class BasedOfAllGame extends StatelessWidget {
   final CurrentGamePhoneticsState stateOfGame;
-  final List<GameModel> gamesData;
+  final List<GameFinalModel> gamesData;
 
   const BasedOfAllGame(
       {super.key, required this.stateOfGame, required this.gamesData});

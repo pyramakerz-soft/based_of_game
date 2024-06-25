@@ -2,20 +2,19 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:games_models/games_models.dart';
-
+import '../../../../src_model/export_models.dart';
 import '../../../core/assets_sound_letters.dart';
 import '../../../core/audio_player_letters.dart';
 import '../../../core/talk_tts.dart';
 part 'bingo_state.dart';
 
 class BingoCubit extends Cubit<BingoInitial> {
-  BingoCubit({required GameModel gameData})
+  BingoCubit({required GameFinalModel gameData})
       : super(BingoInitial(gameData: gameData, correctIndexes: [])) {
-    List<GameLettersModel> supList = (state.gameData.gameLetters ?? [])
+    List<GameLettersGameFinalModel> supList = (state.gameData.gameLetters ?? [])
         .where((element) => element.id != null)
         .toList();
-    supList.insert(4, const GameLettersModel());
+    supList.insert(4, const GameLettersGameFinalModel());
     emit(state.copyWith(cardsLetters: supList.toList()));
     startSayDataOfGame();
   }
@@ -26,7 +25,7 @@ class BingoCubit extends Cubit<BingoInitial> {
   }
 
   getTheRandomWord() async {
-    List<GameLettersModel> checkLetters = [];
+    List<GameLettersGameFinalModel> checkLetters = [];
 
     state.cardsLetters?.forEach((element) {
       debugPrint('${state.correctIndexes}');
@@ -41,7 +40,7 @@ class BingoCubit extends Cubit<BingoInitial> {
     if (countOfTheImage != 0) {
       Random random = Random();
       int randomNumber = random.nextInt(countOfTheImage);
-      GameLettersModel chooseWord = checkLetters[randomNumber];
+      GameLettersGameFinalModel chooseWord = checkLetters[randomNumber];
       debugPrint('chooseWord:${chooseWord.letter}');
       if (chooseWord.id == null) {
         getTheRandomWord();

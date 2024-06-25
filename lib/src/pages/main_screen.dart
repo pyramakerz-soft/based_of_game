@@ -2,14 +2,14 @@ import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 
 import '../core/games_structure/basic_of_chapter.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
 import '../widgets/based_of_games.dart';
 
 class MainScreenOfGames extends StatefulWidget {
-  final List<GameModel> stateOfGameData;
+  final List<GameFinalModel> stateOfGameData;
   final MainDataOfChapters? dataOfBasesGame;
   final bool showTheEditedGames;
   final void Function(int countOfStars) actionOfCompleteGame;

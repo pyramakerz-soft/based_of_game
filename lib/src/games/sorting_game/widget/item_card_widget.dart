@@ -2,13 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 
 class ItemCardWidget extends StatelessWidget {
   final void Function()? onTap;
-  final GameImagesModel body;
+  final GameImagesGameFinalModel body;
   final int index;
-  final GameImagesModel data;
+  final GameImagesGameFinalModel data;
 
   const ItemCardWidget(
       {super.key,
@@ -18,7 +18,7 @@ class ItemCardWidget extends StatelessWidget {
       required this.data});
   @override
   Widget build(BuildContext context) {
-    return Draggable<GameImagesModel>(
+    return Draggable<GameImagesGameFinalModel>(
       // Data is the value this Draggable stores.
       data: data,
 

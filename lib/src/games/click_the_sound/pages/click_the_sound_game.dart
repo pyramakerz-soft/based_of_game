@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../../core/assets_images_phonetics.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
@@ -21,7 +21,7 @@ class ClickTheSoundGame extends StatefulWidget {
 class _ClickTheSoundGame extends State<ClickTheSoundGame> {
   @override
   void initState() {
-    final GameModel gameData =
+    final GameFinalModel gameData =
         context.read<ClickTheSoundCubit>().state.gameData;
     context.read<CurrentGamePhoneticsCubit>().getStateOfStars(
         mainCountOfQuestion: gameData.gameLetters
@@ -72,7 +72,14 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                           viewModel: context.read<ClickTheSoundCubit>(),
                           index: index,
                           onPress: (isInteracting != null &&
-                                  isInteracting != BasicOfGameData.stateOIdle)||( context.read<ClickTheSoundCubit>().state.correctIndexes?.contains(index) ?? false)
+                                      isInteracting !=
+                                          BasicOfGameData.stateOIdle) ||
+                                  (context
+                                          .read<ClickTheSoundCubit>()
+                                          .state
+                                          .correctIndexes
+                                          ?.contains(index) ??
+                                      false)
                               ? null
                               : () async {
                                   if (stateOfGame.letters?[index] ==

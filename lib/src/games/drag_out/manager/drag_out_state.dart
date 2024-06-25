@@ -1,8 +1,8 @@
 part of 'drag_out_cubit.dart';
 
 class DragOutInitial extends Equatable {
-  final GameModel gameData;
-  final List<GameModel> allGameData;
+  final GameFinalModel gameData;
+  final List<GameFinalModel> allGameData;
   final int? correctAnswer;
   final int index;
 
@@ -13,8 +13,8 @@ class DragOutInitial extends Equatable {
     required this.allGameData,
   });
   DragOutInitial copyWith({
-    GameModel? gameData,
-    List<GameModel>? allGameData,
+    GameFinalModel? gameData,
+    List<GameFinalModel>? allGameData,
     int? correctAnswer,
     int? index,
   }) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
@@ -20,7 +20,7 @@ class ClickThePictureWithWord extends StatefulWidget {
 class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
   @override
   void initState() {
-    final GameModel gameData =
+    final GameFinalModel gameData =
         context.read<ClickThePictureWithWordCubit>().state.gameData;
     context.read<CurrentGamePhoneticsCubit>().getStateOfStars(
         mainCountOfQuestion: (gameData.gameImages?.length ?? 0));

@@ -5,7 +5,6 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:games_models/games_models.dart';
 
 import '../domain/use_cases/contact_lesson_use_cases.dart';
 import '../domain/use_cases/game_use_cases.dart';
@@ -38,7 +37,7 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
 }
 
 Future<ContactLessonState> _eitherLoadedOrErrorState(
-    Either<Failure, List<GameModel>> failureOrTrivia, int gameId) async {
+    Either<Failure, List<GameFinalModel>> failureOrTrivia, int gameId) async {
   ContactLessonState tempState = failureOrTrivia.fold(
     (failure) => GetContactErrorInitial(message: _mapFailureToMessage(failure)),
     (data) => GetContactInitial(data: data),

@@ -1,9 +1,9 @@
 part of 'dice_cubit.dart';
 
 class DiceInitial extends Equatable {
-  final GameModel gameData;
+  final GameFinalModel gameData;
   final String? chooseWord;
-  final List<GameImagesModel>? gameImages;
+  final List<GameImagesGameFinalModel>? gameImages;
 
   final List<int> correctIndexes;
   final List<String>? letterDices;
@@ -14,9 +14,9 @@ class DiceInitial extends Equatable {
       required this.correctIndexes,
       this.letterDices});
   DiceInitial copyWith({
-    GameModel? gameData,
+    GameFinalModel? gameData,
     String? chooseWord,
-    List<GameImagesModel>? gameImages,
+    List<GameImagesGameFinalModel>? gameImages,
     List<String>? letterDices,
     List<int>? correctIndexes,
   }) {

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../core/assets_images_phonetics.dart';
@@ -27,7 +27,7 @@ class _GameVideo extends State<GameVideo> {
   @override
   void initState() {
     super.initState();
-    final GameModel gameData = context.read<VideoCubit>().state.gameData;
+    final GameFinalModel gameData = context.read<VideoCubit>().state.gameData;
 
     try {
       _controller =

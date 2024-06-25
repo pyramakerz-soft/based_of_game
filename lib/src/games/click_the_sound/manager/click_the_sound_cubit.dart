@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../../core/assets_sound_letters.dart';
 import '../../../core/audio_player_letters.dart';
 import '../../../core/talk_tts.dart';
@@ -8,10 +8,10 @@ import '../../../core/talk_tts.dart';
 part 'click_the_sound_state.dart';
 
 class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
-  final GameModel _gameData;
+  final GameFinalModel _gameData;
 
   ClickTheSoundCubit({
-    required GameModel gameData,
+    required GameFinalModel gameData,
   })  : _gameData = gameData,
         super(ClickTheSoundInitial(gameData: gameData, correctIndexes: [])) {
     generateRandomLetters();

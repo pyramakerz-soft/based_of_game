@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../core/talk_tts.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
@@ -12,7 +12,7 @@ part 'tracing_state.dart';
 
 class TracingCubit extends Cubit<TracingInitial> {
   TracingCubit(
-      {required GameModel gameData,
+      {required GameFinalModel gameData,
       required CurrentGamePhoneticsState stateOfGame})
       : super(TracingInitial(
           colorsOfPaths: [],

@@ -1,20 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 
 import '../../../core/talk_tts.dart';
 part 'spelling_state.dart';
 
 class SpellingCubit extends Cubit<SpellingInitial> {
-  // final GameModel gameData;
-  // final List<GameModel> allGames;
+  // final GameFinalModel gameData;
+  // final List<GameFinalModel> allGames;
   // final String background;
   // final int index;
   SpellingCubit(
       {required String background,
       required int index,
-      required List<GameModel> allGames})
+      required List<GameFinalModel> allGames})
       : super(SpellingInitial(
             woodenBackground: background,
             correctAnswers: List.generate(

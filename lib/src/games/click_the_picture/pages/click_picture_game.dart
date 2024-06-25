@@ -2,7 +2,7 @@ import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../../core/assets_images_phonetics.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
@@ -22,7 +22,8 @@ class ClickPictureGame extends StatefulWidget {
 class _ClickPictureGame extends State<ClickPictureGame> {
   @override
   void initState() {
-    final GameModel gameData = context.read<ClickPictureCubit>().state.gameData;
+    final GameFinalModel gameData =
+        context.read<ClickPictureCubit>().state.gameData;
     context.read<CurrentGamePhoneticsCubit>().getStateOfStars(
         mainCountOfQuestion: gameData.gameImages
                 ?.where((element) => element.correct == 1)

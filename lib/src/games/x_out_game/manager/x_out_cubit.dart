@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 
 import '../../../core/assets_sound_letters.dart';
 import '../../../core/audio_player_letters.dart';
@@ -10,7 +10,7 @@ import '../../../core/talk_tts.dart';
 part 'x_out_state.dart';
 
 class XOutCubit extends Cubit<XOutInitial> {
-  XOutCubit({required List<GameModel> listGameData, required int index})
+  XOutCubit({required List<GameFinalModel> listGameData, required int index})
       : super(XOutInitial(
             listGameData:
                 listGameData.where((element) => element.isEdited == 0).toList(),

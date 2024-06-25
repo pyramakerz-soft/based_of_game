@@ -2,10 +2,10 @@ part of 'bingo_cubit.dart';
 
 @immutable
 class BingoInitial extends Equatable {
-  final List<GameLettersModel>? cardsLetters;
-  final GameModel gameData;
+  final List<GameLettersGameFinalModel>? cardsLetters;
+  final GameFinalModel gameData;
   final List<int> correctIndexes;
-  final GameLettersModel? chooseWord;
+  final GameLettersGameFinalModel? chooseWord;
 
   const BingoInitial(
       {required this.gameData,
@@ -14,9 +14,9 @@ class BingoInitial extends Equatable {
       this.chooseWord});
 
   BingoInitial copyWith(
-      {GameModel? gameData,
-      List<GameLettersModel>? cardsLetters,
-      GameLettersModel? chooseWord,
+      {GameFinalModel? gameData,
+      List<GameLettersGameFinalModel>? cardsLetters,
+      GameLettersGameFinalModel? chooseWord,
       List<String>? indexOfCorrectAnswers,
       List<int>? correctIndexes}) {
     return BingoInitial(

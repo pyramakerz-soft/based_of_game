@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../../core/talk_tts.dart';
 
 part 'sorting_state.dart';
 
 class SortingCubit extends Cubit<SortingInitial> {
   SortingCubit({
-    required List<GameModel> listGameData,
+    required List<GameFinalModel> listGameData,
     required String background,
     required int index,
   }) : super(SortingInitial(
@@ -31,7 +31,7 @@ class SortingCubit extends Cubit<SortingInitial> {
   }
 
   changeImages() {
-    List<GameImagesModel> newList =
+    List<GameImagesGameFinalModel> newList =
         (state.listGameData[state.index].gameImages ?? [])
             .where((element) =>
                 state.correctAnswersIds.contains(element.id) == false)
@@ -40,11 +40,12 @@ class SortingCubit extends Cubit<SortingInitial> {
     emit(state.copyWith(currentImages: newList));
   }
 
-  addTheCorrectAnswer({required GameImagesModel answer}) async {
-    List<GameImagesModel> correctAnswersData = state.correctAnswersData;
+  addTheCorrectAnswer({required GameImagesGameFinalModel answer}) async {
+    List<GameImagesGameFinalModel> correctAnswersData =
+        state.correctAnswersData;
     List<int> correctAnswersIds = state.correctAnswersIds;
     correctAnswersData.add(answer);
-    List<GameImagesModel> newImagesList = state.currentImages;
+    List<GameImagesGameFinalModel> newImagesList = state.currentImages;
     newImagesList.removeWhere((element) => element.id == answer.id);
     correctAnswersIds.add(answer.id ?? 0);
     emit(state.copyWith(

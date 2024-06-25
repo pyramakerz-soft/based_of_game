@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
@@ -22,7 +22,7 @@ class XOutGameScreen extends StatefulWidget {
 class _XOutGameScreen extends State<XOutGameScreen> {
   @override
   void initState() {
-    final List<GameModel> gameData =
+    final List<GameFinalModel> gameData =
         context.read<XOutCubit>().state.listGameData;
     context
         .read<CurrentGamePhoneticsCubit>()

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
 import '../../../widgets/stroke_text.dart';
@@ -23,7 +23,7 @@ class SortingGameScreen extends StatefulWidget {
 class _SortingGameScreen extends State<SortingGameScreen> {
   @override
   void initState() {
-    final List<GameModel> gameData =
+    final List<GameFinalModel> gameData =
         context.read<SortingCubit>().state.listGameData;
     context.read<CurrentGamePhoneticsCubit>().getStateOfStars(
         mainCountOfQuestion:
@@ -103,7 +103,7 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                               height: 0.8.sw,
                               width: 0.12.sw,
                               padding: const EdgeInsets.only(top: 30),
-                              child: DragTarget<GameImagesModel>(
+                              child: DragTarget<GameImagesGameFinalModel>(
                                 builder: (
                                   BuildContext context,
                                   List<dynamic> accepted,
@@ -171,9 +171,9 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                                   );
                                 },
                                 onAcceptWithDetails:
-                                    (DragTargetDetails<GameImagesModel>
+                                    (DragTargetDetails<GameImagesGameFinalModel>
                                         details) async {
-                                  GameImagesModel image = details.data;
+                                  GameImagesGameFinalModel image = details.data;
                                   if ((gameState.gameData.gameLetters![index]
                                               .letter)
                                           ?.toLowerCase() ==

@@ -1,7 +1,7 @@
 part of 'click_the_sound_cubit.dart';
 
 class ClickTheSoundInitial extends Equatable {
-  final GameModel gameData;
+  final GameFinalModel gameData;
   List<String>? letters;
   List<int>? correctIndexes = [];
 
@@ -12,7 +12,7 @@ class ClickTheSoundInitial extends Equatable {
   });
 
   ClickTheSoundInitial copyWith({
-    GameModel? gameData,
+    GameFinalModel? gameData,
     List<String>? letters,
     int? correctAnswers,
     List<int>? correctIndexes,

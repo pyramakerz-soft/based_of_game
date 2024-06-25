@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 
 import '../../../core/talk_tts.dart';
 part 'click_the_picture_with_word_state.dart';
@@ -10,7 +10,7 @@ part 'click_the_picture_with_word_state.dart';
 class ClickThePictureWithWordCubit
     extends Cubit<ClickThePictureWithWordInitial> {
   ClickThePictureWithWordCubit(
-      {required GameModel gameData, required List<String> backGround})
+      {required GameFinalModel gameData, required List<String> backGround})
       : super(ClickThePictureWithWordInitial(
             gameData: gameData, backGround: backGround, correctIndexes: [])) {
     startGame();
@@ -24,7 +24,7 @@ class ClickThePictureWithWordCubit
 
   getTheRandomWord() async {
     // if () {
-    List<GameImagesModel> checkImages = state.gameImages
+    List<GameImagesGameFinalModel> checkImages = state.gameImages
             ?.where(
                 (element) => state.correctIndexes.contains(element.id) == false)
             .toList() ??
@@ -39,7 +39,7 @@ class ClickThePictureWithWordCubit
     if (countOfTheImage != 0 && state.chooseWord == null) {
       Random random = Random();
       int randomNumber = random.nextInt(countOfTheImage);
-      GameImagesModel chooseWord = checkImages[randomNumber];
+      GameImagesGameFinalModel chooseWord = checkImages[randomNumber];
       debugPrint('chooseWord.word ?? ' ':${chooseWord.word ?? ''}');
       await TalkTts.startTalk(text: chooseWord.word ?? '');
       emit(state.copyWith(chooseWord: chooseWord));

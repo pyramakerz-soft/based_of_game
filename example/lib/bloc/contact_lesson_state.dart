@@ -9,7 +9,7 @@ abstract class ContactLessonState extends Equatable {
 class ContactLessonInitial extends ContactLessonState {}
 
 class GetContactInitial extends ContactLessonState {
-  final List<GameModel> data;
+  final List<GameFinalModel> data;
 
   GetContactInitial({required this.data});
 

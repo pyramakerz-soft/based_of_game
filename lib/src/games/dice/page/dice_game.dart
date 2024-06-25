@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
@@ -32,7 +32,7 @@ class _DiceGamePage extends State<DiceGamePage> {
                 .read<CurrentGamePhoneticsCubit>()
                 .saveCurrentStringOfDice(letter: currentAlphabet);
           });
-      final GameModel gameData = context.read<DiceCubit>().state.gameData;
+      final GameFinalModel gameData = context.read<DiceCubit>().state.gameData;
       context.read<CurrentGamePhoneticsCubit>().getStateOfStars(
           mainCountOfQuestion: gameData.gameImages?.length ?? 0);
     });

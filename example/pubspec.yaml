@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_bloc: ^8.1.5
 
-  games_models: ^0.0.6
+#  games_models: ^0.0.6
   based_of_eng_game:
     path: ../
   internet_connection_checker: ^1.0.0+1

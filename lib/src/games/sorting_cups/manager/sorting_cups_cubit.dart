@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 
 import '../../../core/assets_sound_letters.dart';
 import '../../../core/audio_player_letters.dart';
@@ -11,11 +11,11 @@ import '../../../core/talk_tts.dart';
 part 'sorting_cups_state.dart';
 
 class SortingCupsCubit extends Cubit<SortingCupsInitial> {
-  final GameModel gameData;
+  final GameFinalModel gameData;
 
   SortingCupsCubit({required this.gameData})
       : super(SortingCupsInitial(gameData: gameData)) {
-    List<GameLettersModel> cardsLetters = gameData.gameLetters ?? [];
+    List<GameLettersGameFinalModel> cardsLetters = gameData.gameLetters ?? [];
     cardsLetters.shuffle();
     emit(state.copyWith(gameData: gameData, cardsLetters: cardsLetters));
     initStart();
@@ -44,7 +44,7 @@ class SortingCupsCubit extends Cubit<SortingCupsInitial> {
   }
 
   getTheRandomWord() async {
-    List<GameLettersModel> checkImages = [];
+    List<GameLettersGameFinalModel> checkImages = [];
 
     state.gameData.gameLetters?.forEach((element) {
       if (state.correctIndexes == null ||
@@ -56,7 +56,7 @@ class SortingCupsCubit extends Cubit<SortingCupsInitial> {
     if (countOfTheImage != 0) {
       Random random = Random();
       int randomNumber = random.nextInt(countOfTheImage);
-      GameLettersModel chooseWord = checkImages[randomNumber];
+      GameLettersGameFinalModel chooseWord = checkImages[randomNumber];
       await AudioPlayerLetters.startPlaySound(
           soundPath: AssetsSoundLetters.getSoundOfLetter(
               mainGameLetter: chooseWord.letter?.toLowerCase() ?? ''));

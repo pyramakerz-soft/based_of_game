@@ -2,14 +2,14 @@ part of 'sorting_cubit.dart';
 
 @immutable
 class SortingInitial extends Equatable {
-  final List<GameModel> listGameData;
-  final GameModel gameData;
+  final List<GameFinalModel> listGameData;
+  final GameFinalModel gameData;
   final List<int> correctAnswersIds;
   final String? woodenBackground;
   final int index;
   final int countOfQuestion;
-  final List<GameImagesModel> currentImages;
-  final List<GameImagesModel> correctAnswersData;
+  final List<GameImagesGameFinalModel> currentImages;
+  final List<GameImagesGameFinalModel> correctAnswersData;
 
   const SortingInitial({
     required this.listGameData,
@@ -23,14 +23,14 @@ class SortingInitial extends Equatable {
   });
 
   SortingInitial copyWith(
-      {List<GameModel>? listGameData,
-      GameModel? gameData,
-      List<GameLettersModel>? cardsLetters,
-      GameLettersModel? chooseWord,
+      {List<GameFinalModel>? listGameData,
+      GameFinalModel? gameData,
+      List<GameLettersGameFinalModel>? cardsLetters,
+      GameLettersGameFinalModel? chooseWord,
       List<String>? indexOfCorrectAnswers,
       List<int>? correctAnswersIds,
-      List<GameImagesModel>? currentImages,
-      List<GameImagesModel>? correctAnswersData,
+      List<GameImagesGameFinalModel>? currentImages,
+      List<GameImagesGameFinalModel>? correctAnswersData,
       int? index,
       int? countOfQuestion,
       String? woodenBackground}) {

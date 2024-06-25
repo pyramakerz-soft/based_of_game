@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../core/talk_tts.dart';
@@ -25,7 +25,7 @@ class SpellingGameScreen extends StatefulWidget {
 class _SpellingGameScreen extends State<SpellingGameScreen> {
   @override
   void initState() {
-    final List<GameModel> gameData =
+    final List<GameFinalModel> gameData =
         context.read<SpellingCubit>().state.allGames;
     context
         .read<CurrentGamePhoneticsCubit>()

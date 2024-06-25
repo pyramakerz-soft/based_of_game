@@ -17,7 +17,7 @@ class CurrentGamePhoneticsState extends Equatable {
   String? currentAvatar;
   int index;
   int? countOfTries;
-  List<GameModel>? gameData;
+  List<GameFinalModel>? gameData;
   List<int>? statesOfAddStars;
   int? countOfStar = 0;
   MainDataOfChapters? basicData;
@@ -57,7 +57,7 @@ class CurrentGamePhoneticsState extends Equatable {
       void Function(int x)? actionWhenTriesBeZero,
       String? currentAvatar,
       String? stateOfAvatar,
-      List<GameModel>? gameData,
+      List<GameFinalModel>? gameData,
       List<int>? statesOfAddStars,
       int? index,
       int? countOfTries,

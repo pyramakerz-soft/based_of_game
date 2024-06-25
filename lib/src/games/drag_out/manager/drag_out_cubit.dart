@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 
 import '../../../core/assets_sound_letters.dart';
 import '../../../core/audio_player_letters.dart';
@@ -9,10 +9,10 @@ import '../../../core/talk_tts.dart';
 part 'drag_out_state.dart';
 
 class DragOutCubit extends Cubit<DragOutInitial> {
-  // final GameModel _gameData;
+  // final GameFinalModel _gameData;
   DragOutCubit(
-      {required GameModel gameData,
-      required List<GameModel> allGameData,
+      {required GameFinalModel gameData,
+      required List<GameFinalModel> allGameData,
       required int index})
       : super(DragOutInitial(
             gameData: gameData, allGameData: allGameData, index: index)) {

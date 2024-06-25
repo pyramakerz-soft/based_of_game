@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../../core/assets_images_phonetics.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
@@ -22,7 +22,7 @@ class DragOutGame extends StatefulWidget {
 class _DragOutGame extends State<DragOutGame> {
   @override
   void initState() {
-    final List<GameModel> gameData =
+    final List<GameFinalModel> gameData =
         context.read<DragOutCubit>().state.allGameData;
     context
         .read<CurrentGamePhoneticsCubit>()
@@ -107,11 +107,10 @@ class _DragOutGame extends State<DragOutGame> {
                                             .stateOfAvatar ==
                                         BasicOfGameData.stateOfWin)
                                     ? SizedBox(
-                                        width: (MediaQuery.of(context)
-                                                    .size
-                                                    .width -
-                                                (130 + 50 + 130)) /
-                                            4,
+                                        width:
+                                            (MediaQuery.of(context).size.width -
+                                                    (130 + 50 + 130)) /
+                                                4,
                                         height: 110.h,
                                       )
                                     : GestureDetector(
@@ -135,11 +134,10 @@ class _DragOutGame extends State<DragOutGame> {
                                           height: 110.h,
                                           placeholder: (context, url) =>
                                               const Center(
-                                            child:
-                                                CupertinoActivityIndicator(),
+                                            child: CupertinoActivityIndicator(),
                                           ),
-                                          errorWidget:
-                                              (context, url, error) => Center(
+                                          errorWidget: (context, url, error) =>
+                                              Center(
                                             child: Text(
                                                 '${gameState.gameData.gameImages?[index].word}'),
                                           ),
@@ -162,8 +160,7 @@ class _DragOutGame extends State<DragOutGame> {
                                       .addSuccessAnswer(
                                           questions:
                                               gameState.allGameData.length,
-                                          correctAnswers:
-                                              (gameState.index) + 1)
+                                          correctAnswers: (gameState.index) + 1)
                                       .whenComplete(() async {
                                     bool isLastQuestion = context
                                         .read<CurrentGamePhoneticsCubit>()
@@ -171,8 +168,7 @@ class _DragOutGame extends State<DragOutGame> {
                                             queations:
                                                 gameState.allGameData.length);
                                     if (isLastQuestion) {
-                                      Future.delayed(
-                                          const Duration(seconds: 2),
+                                      Future.delayed(const Duration(seconds: 2),
                                           () async {
                                         Navigator.of(context).pop();
                                       });

@@ -4,11 +4,11 @@ part of 'click_picture_cubit.dart';
 // abstract class DragOutState {}
 
 class ClickPictureInitial extends Equatable {
-  final GameModel gameData;
+  final GameFinalModel gameData;
   final List<String> backGround;
   final List<int> correctIndexes;
   final bool isArabic;
-  final List<GameImagesModel>? gameImages;
+  final List<GameImagesGameFinalModel>? gameImages;
   const ClickPictureInitial(
       {required this.gameData,
       required this.backGround,
@@ -17,10 +17,10 @@ class ClickPictureInitial extends Equatable {
       required this.isArabic});
 
   ClickPictureInitial copyWith(
-      {GameModel? gameData,
+      {GameFinalModel? gameData,
       List<String>? backGround,
       List<int>? correctIndexes,
-      List<GameImagesModel>? gameImages,
+      List<GameImagesGameFinalModel>? gameImages,
       DateTime? currentPressTime,
       bool? isArabic}) {
     return ClickPictureInitial(

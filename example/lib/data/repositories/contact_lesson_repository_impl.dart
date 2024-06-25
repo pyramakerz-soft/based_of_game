@@ -1,5 +1,5 @@
+import 'package:based_of_eng_game/based_of_eng_game.dart';
 import 'package:dartz/dartz.dart';
-import 'package:games_models/games_models.dart';
 import '../../domain/repositories/repositories_contact_lesson.dart';
 import '../../error/failures.dart';
 import '../../network/network_info.dart';
@@ -14,7 +14,7 @@ class ContactLessonRepositoryImpl implements ProgramContactLessonRepository {
       {required this.remoteDataSource, required this.networkInfo});
 
   @override
-  Future<Either<Failure, List<GameModel>>> lessonContactDataRepository(
+  Future<Either<Failure, List<GameFinalModel>>> lessonContactDataRepository(
       {required int lessonId, required int gameId}) async {
     if (await networkInfo.isConnected) {
       try {
@@ -31,7 +31,7 @@ class ContactLessonRepositoryImpl implements ProgramContactLessonRepository {
   }
 
   @override
-  Future<Either<Failure, List<GameModel>>> gameById(
+  Future<Either<Failure, List<GameFinalModel>>> gameById(
       {required int gameId}) async {
     if (await networkInfo.isConnected) {
       try {

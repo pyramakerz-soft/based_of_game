@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 
 part 'video_state.dart';
 
 class VideoCubit extends Cubit<VideoInitial> {
-  VideoCubit({required GameModel gameData})
+  VideoCubit({required GameFinalModel gameData})
       : super(VideoInitial(gameData: gameData));
 }

@@ -1,7 +1,7 @@
 part of 'tracing_cubit.dart';
 
 class TracingInitial extends Equatable {
-  final GameModel gameData;
+  final GameFinalModel gameData;
   final CurrentGamePhoneticsState stateOfGame;
   final List<Color?> colorsOfPaths;
   final List<Offset> paths;
@@ -17,7 +17,7 @@ class TracingInitial extends Equatable {
       required this.stateOfGame});
 
   TracingInitial copyWith(
-      {GameModel? gameData,
+      {GameFinalModel? gameData,
       List<Color?>? colorsOfPaths,
       List<Offset>? paths,
       CurrentGamePhoneticsState? stateOfGame,

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../../core/assets_sound_letters.dart';
 import '../../../core/audio_player_letters.dart';
 import '../../../core/talk_tts.dart';
@@ -10,10 +10,10 @@ import '../widget/dice_pop_up.dart';
 part 'dice_state.dart';
 
 class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
-  DiceCubit({required GameModel gameData})
+  DiceCubit({required GameFinalModel gameData})
       : super(DiceInitial(gameData: gameData, correctIndexes: [])) {
     TalkTts.startTalk(text: gameData.inst ?? '');
-    List<GameImagesModel> gameImages = gameData.gameImages ?? [];
+    List<GameImagesGameFinalModel> gameImages = gameData.gameImages ?? [];
     gameImages.shuffle();
     List<String> letterDices = [];
 

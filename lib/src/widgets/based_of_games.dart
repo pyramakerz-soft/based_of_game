@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../based_of_eng_game.dart';
 import '../core/assets_images_main.dart';
 import '../core/assets_images_phonetics.dart';
@@ -20,7 +20,7 @@ import 'game_bar.dart';
 
 class BasedOfGames extends StatelessWidget {
   final CurrentGamePhoneticsState stateOfGame;
-  final List<GameModel> gamesData;
+  final List<GameFinalModel> gamesData;
 
   const BasedOfGames(
       {super.key, required this.stateOfGame, required this.gamesData});

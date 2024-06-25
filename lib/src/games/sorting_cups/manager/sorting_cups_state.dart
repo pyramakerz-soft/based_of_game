@@ -1,10 +1,10 @@
 part of 'sorting_cups_cubit.dart';
 
 class SortingCupsInitial extends Equatable {
-  final GameModel gameData;
-  final List<GameLettersModel>? cardsLetters;
+  final GameFinalModel gameData;
+  final List<GameLettersGameFinalModel>? cardsLetters;
   final List<int>? correctIndexes;
-  final GameLettersModel? chooseWord;
+  final GameLettersGameFinalModel? chooseWord;
 
   const SortingCupsInitial(
       {required this.gameData,
@@ -12,9 +12,9 @@ class SortingCupsInitial extends Equatable {
       this.correctIndexes,
       this.chooseWord});
   SortingCupsInitial copyWith(
-      {GameModel? gameData,
-      List<GameLettersModel>? cardsLetters,
-      GameLettersModel? chooseWord,
+      {GameFinalModel? gameData,
+      List<GameLettersGameFinalModel>? cardsLetters,
+      GameLettersGameFinalModel? chooseWord,
       List<String>? indexOfCorrectAnswers,
       List<int>? correctIndexes}) {
     return SortingCupsInitial(

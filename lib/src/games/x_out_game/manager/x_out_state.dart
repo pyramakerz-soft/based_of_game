@@ -2,8 +2,8 @@ part of 'x_out_cubit.dart';
 
 @immutable
 class XOutInitial extends Equatable {
-  final List<GameModel> listGameData;
-  final GameModel? gameData;
+  final List<GameFinalModel> listGameData;
+  final GameFinalModel? gameData;
   final int? correctAnswers;
   final int currentGameIndex;
   final List<int>? selectedItems;
@@ -17,9 +17,9 @@ class XOutInitial extends Equatable {
   });
 
   XOutInitial copyWith({
-    List<GameModel>? listGameData,
+    List<GameFinalModel>? listGameData,
     int? correctAnswers,
-    GameModel? gameData,
+    GameFinalModel? gameData,
     int? currentGameIndex,
     List<int>? selectedItems,
     // bool? isInteracting,

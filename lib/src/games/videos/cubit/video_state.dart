@@ -1,9 +1,9 @@
 part of 'video_cubit.dart';
 
 class VideoInitial extends Equatable {
-  final GameModel gameData;
+  final GameFinalModel gameData;
   const VideoInitial({required this.gameData});
-  VideoInitial copyWith({GameModel? gameData}) {
+  VideoInitial copyWith({GameFinalModel? gameData}) {
     return VideoInitial(gameData: gameData ?? this.gameData);
   }
 

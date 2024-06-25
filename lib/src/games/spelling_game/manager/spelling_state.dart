@@ -2,9 +2,9 @@ part of 'spelling_cubit.dart';
 
 @immutable
 class SpellingInitial extends Equatable {
-  final List<GameLettersModel>? cardsLetters;
-  final List<GameModel> allGames;
-  final GameModel? gameData;
+  final List<GameLettersGameFinalModel>? cardsLetters;
+  final List<GameFinalModel> allGames;
+  final GameFinalModel? gameData;
   final List<String> correctAnswers;
   // final int? correctAnswer;
   final String? woodenBackground;
@@ -19,10 +19,10 @@ class SpellingInitial extends Equatable {
       this.woodenBackground});
 
   SpellingInitial copyWith(
-      {List<GameModel>? allGames,
-      GameModel? gameData,
-      List<GameLettersModel>? cardsLetters,
-      GameLettersModel? chooseWord,
+      {List<GameFinalModel>? allGames,
+      GameFinalModel? gameData,
+      List<GameLettersGameFinalModel>? cardsLetters,
+      GameLettersGameFinalModel? chooseWord,
       int? correctAnswer,
       int? countOfWrong,
       int? index,

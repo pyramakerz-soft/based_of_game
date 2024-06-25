@@ -1,12 +1,12 @@
 part of 'click_the_picture_with_word_cubit.dart';
 
 class ClickThePictureWithWordInitial extends Equatable {
-  final GameModel gameData;
-  // final List<GameImagesModel>? gameDataPartOne;
-  final List<GameImagesModel>? gameImages;
+  final GameFinalModel gameData;
+  // final List<GameImagesGameFinalModel>? gameDataPartOne;
+  final List<GameImagesGameFinalModel>? gameImages;
   final List<String> backGround;
   final List<int> correctIndexes;
-  final GameImagesModel? chooseWord;
+  final GameImagesGameFinalModel? chooseWord;
   // final int? correctAnswer;
   const ClickThePictureWithWordInitial(
       {required this.gameData,
@@ -16,11 +16,11 @@ class ClickThePictureWithWordInitial extends Equatable {
       this.chooseWord});
 
   ClickThePictureWithWordInitial copyWith(
-      {GameModel? gameData,
+      {GameFinalModel? gameData,
       List<String>? backGround,
-      List<GameImagesModel>? gameImages,
+      List<GameImagesGameFinalModel>? gameImages,
       List<int>? correctIndexes,
-      GameImagesModel? chooseWord}) {
+      GameImagesGameFinalModel? chooseWord}) {
     return ClickThePictureWithWordInitial(
         gameData: gameData ?? this.gameData,
         backGround: backGround ?? this.backGround,

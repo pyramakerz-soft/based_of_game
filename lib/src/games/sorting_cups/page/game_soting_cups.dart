@@ -2,7 +2,7 @@ import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:games_models/games_models.dart';
+import '../../../../src_model/export_models.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
@@ -22,7 +22,8 @@ class GamesSortingCups extends StatefulWidget {
 class _GamesSortingCups extends State<GamesSortingCups> {
   @override
   void initState() {
-    final GameModel gameData = context.read<SortingCupsCubit>().state.gameData;
+    final GameFinalModel gameData =
+        context.read<SortingCupsCubit>().state.gameData;
     context.read<CurrentGamePhoneticsCubit>().getStateOfStars(
         mainCountOfQuestion: gameData.gameLetters?.length ?? 0);
 
@@ -63,7 +64,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                       ? (gameState.cardsLetters?.length ?? 0)
                       : endIndex;
 
-                  List<GameLettersModel> rowItems =
+                  List<GameLettersGameFinalModel> rowItems =
                       (gameState.cardsLetters)?.sublist(startIndex, endIndex) ??
                           [];
 
@@ -77,7 +78,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                         return Row(
                           key: key,
                           children: [
-                            Draggable<GameLettersModel>(
+                            Draggable<GameLettersGameFinalModel>(
                                 // onDraggableCanceled:
                                 //     (Velocity velocity, Offset offset) {},
                                 // onDragStarted: () {},
@@ -158,7 +159,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                               CurrentGamePhoneticsState>(
                           listener: (context, state) {},
                           builder: (context, generalStateOfGame) {
-                            return DragTarget<GameLettersModel>(
+                            return DragTarget<GameLettersGameFinalModel>(
                               builder:
                                   (context, candidateItems, rejectedItems) {
                                 // log('candidateItems:${candidateItems}');

@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../core/assets_images_main.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
 
-class GameBar extends StatelessWidget{
+class GameBar extends StatelessWidget {
   final CurrentGamePhoneticsState stateOfGame;
 
   const GameBar({super.key, required this.stateOfGame});
@@ -40,11 +40,11 @@ class GameBar extends StatelessWidget{
                     30.pw,
                     GestureDetector(
                       onTap: () {
-                        context
-                            .read<CurrentGamePhoneticsCubit>()
-                            .state
-                            .actionWhenTriesBeZero(
-                            stateOfGame.countOfStar ?? 0);
+                        // context
+                        //     .read<CurrentGamePhoneticsCubit>()
+                        //     .state
+                        //     .actionWhenTriesBeZero(
+                        //     stateOfGame.countOfStar ?? 0);
                         Navigator.of(context).pop();
                       },
                       child: Image.asset(
@@ -66,35 +66,32 @@ class GameBar extends StatelessWidget{
               )),
           Expanded(
               child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    AppImagesMain.stayOfStarBar,
-                    width: 65.w,
-                    fit: BoxFit.contain,
-                  ),
-                  Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: ((stateOfGame.countOfStar ?? 0) == 0)
-                          ? Image.asset(
-                        AppImagesMain.barZeroStar,
-                        width: 40.w,
-                        fit: BoxFit.contain,
-                      )
-                          : ((stateOfGame.countOfStar ?? 0) == 1)
-                          ? Image.asset(AppImagesMain.barOneStar,
-                          width: 40.w)
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                AppImagesMain.stayOfStarBar,
+                width: 65.w,
+                fit: BoxFit.contain,
+              ),
+              Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ((stateOfGame.countOfStar ?? 0) == 0)
+                      ? Image.asset(
+                          AppImagesMain.barZeroStar,
+                          width: 40.w,
+                          fit: BoxFit.contain,
+                        )
+                      : ((stateOfGame.countOfStar ?? 0) == 1)
+                          ? Image.asset(AppImagesMain.barOneStar, width: 40.w)
                           : ((stateOfGame.countOfStar ?? 0) == 2)
-                          ? Image.asset(AppImagesMain.barTwoStar,
-                          width: 40.w)
-                          : Image.asset(
-                          AppImagesMain.barThreeStar,
-                          width: 40.w))
-                ],
-              )),
+                              ? Image.asset(AppImagesMain.barTwoStar,
+                                  width: 40.w)
+                              : Image.asset(AppImagesMain.barThreeStar,
+                                  width: 40.w))
+            ],
+          )),
         ],
       ),
     );
   }
-
 }

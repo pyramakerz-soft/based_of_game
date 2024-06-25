@@ -8,6 +8,7 @@ import '../cubit/current_game_phonetics_cubit.dart';
 import 'based_of_game_connect.dart';
 import 'based_of_game_connect_sorting_cups.dart';
 import 'based_of_game_phonetics.dart';
+import 'based_of_game_short_vowels.dart';
 import 'game_bar.dart';
 import 'widget_of_tries.dart';
 
@@ -56,7 +57,13 @@ class BasedOfAllGame extends StatelessWidget {
             height: (MediaQuery.of(context).size.height - (50.h + 5)),
             child: Column(
               children: [
-                if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
+                if (stateOfGame.basicData is ShortVowels) ...{
+                  BasedOfGameShortVowels(
+                    stateOfGame: stateOfGame,
+                    gamesData: gamesData,
+                  ),
+                }
+                else if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
                   if (stateOfGame.basicData is ConnectionSortingCups) ...{
                     BasedOfGameConnectSortingCups(
                       stateOfGame: stateOfGame,
@@ -69,13 +76,15 @@ class BasedOfAllGame extends StatelessWidget {
                       gamesData: gamesData,
                     ),
                   }
-                } else if (BaseOfGames.isPhonetics(
+                }
+                else if (BaseOfGames.isPhonetics(
                     chapter: stateOfGame.basicData.runtimeType)) ...{
                   BasedOfGamePhonetics(
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,
                   ),
-                } else ...{
+                }
+                else ...{
                   const SizedBox()
                 }
               ],

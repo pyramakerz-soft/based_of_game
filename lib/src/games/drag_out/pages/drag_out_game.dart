@@ -145,7 +145,8 @@ class _DragOutGame extends State<DragOutGame> {
                                           // height: ,
                                         ),
                                       );
-                              }, onAcceptWithDetails: (item) async {
+                              },
+                              onAcceptWithDetails: (item) async {
                                 print(
                                     '####:${gameState.gameData.gameImages?[index].word}');
                                 print('####:${(item.data.toLowerCase())}');

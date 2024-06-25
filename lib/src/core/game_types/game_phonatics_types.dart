@@ -21,6 +21,8 @@ enum GameTypes {
   chooseTheCorrectCharArabic,
   createWordArabic,
   video,
+  dragPicToWord,
+  dragWordToPic,
   spellingWord
 }
 
@@ -49,6 +51,10 @@ extension TypeExtension on GameTypes {
         return 'trace'.toLowerCase();
       case GameTypes.video:
         return 'Video'.toLowerCase();
+      case GameTypes.dragPicToWord:
+        return 'Drag Pic to Word'.toLowerCase();;
+      case GameTypes.dragWordToPic:
+        return 'Drag Word to Pic'.toLowerCase();
       case GameTypes.spellingWord:
         return 'Spelling Word'.toLowerCase();
       case GameTypes.tracingArabic:

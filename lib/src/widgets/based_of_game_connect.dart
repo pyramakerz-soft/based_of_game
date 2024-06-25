@@ -140,16 +140,6 @@ class BasedOfGameConnect extends StatelessWidget {
                         gameData: gamesData[stateOfGame.index],
                       ),
                       child: DiceGamePage())
-                } else if ((stateOfGame.basicData?.gameData is SpellingWordGame)) ...{
-                  BlocProvider<SpellingCubit>(
-                      create: (_) => SpellingCubit(
-                        // gameData: stateOfGameData.data[stateOfGame.index],
-                          index: stateOfGame.index,
-                          background:
-                          (stateOfGame.basicData?.gameData as SpellingWordGame)
-                              .woodenBackground,
-                          allGames: gamesData),
-                      child: const SpellingGameScreen())
                 }
               ],
             ),

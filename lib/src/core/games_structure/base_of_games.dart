@@ -74,6 +74,13 @@ abstract class BaseOfGames {
       required String subGame,
       required String unitName,
       required int audioFlag}) {
+    if (unitName
+        .toLowerCase()
+        .contains(MainDataOfChaptersTypes.shortVowels.text())) {
+      return ShortVowels(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
     if (BasicOfGameData.isConnectGame(game: subGame.toLowerCase()) == true) {
       if (subGame.toLowerCase() == GameTypes.sortingCups.text()) {
         return ConnectionSortingCups(mineGameData: SortingCupsGame());
@@ -86,10 +93,6 @@ abstract class BaseOfGames {
       return SPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (unitName.toLowerCase().contains(MainDataOfChaptersTypes.shortVowels.text())) {
-      return ShortVowels(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
       return SPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
@@ -98,33 +101,27 @@ abstract class BaseOfGames {
       return KPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    }
-    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.q.text()) {
+    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.q.text()) {
       return QPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    }
-    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.v.text()) {
+    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.v.text()) {
       return VPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    }
-    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.x.text()) {
+    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.x.text()) {
       return XPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    }
-    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.y.text()) {
+    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.y.text()) {
       return YPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    }
-    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.z.text()) {
+    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.z.text()) {
       return ZPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    }
-    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.a.text()) {
+    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.a.text()) {
       return APhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));

@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
               return BlocProvider<ContactLessonBloc>(
                   create: (_) => di.sl<ContactLessonBloc>()
                     // ..add(GetContactLessonRequest(lessonId: 62, gameId: 183)),
-                    ..add(GetContactLessonRequest(lessonId: 102, gameId: 1246)),
+                    ..add(GetContactLessonRequest(lessonId: 104, gameId: 1255)),
                   child: BlocConsumer<ContactLessonBloc, ContactLessonState>(
                     listener: (context, state) {
                       if (state is GetContactErrorInitial) {

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../src_model/export_models.dart';
 
@@ -13,15 +13,14 @@ class DragWordToPicCubit extends Cubit<DragWordToPicInitial> {
           gameData: gameData,
           correctedAnswers: [],
         )) {
-    List<GameImagesGameFinalModel>? gameImages = (gameData.gameImages??[]);
+    List<GameImagesGameFinalModel>? gameImages = (gameData.gameImages ?? []);
     gameImages.shuffle();
     emit(state.copyWith(
-      gameImages: _splitListIntoTwo(gameData.gameImages ?? []).first
-          as List<GameImagesGameFinalModel>,
-      gameImages2: _splitListIntoTwo(gameData.gameImages ?? []).last
-          as List<GameImagesGameFinalModel>,
-        mainGameImages:gameImages
-    ));
+        gameImages: _splitListIntoTwo(gameData.gameImages ?? []).first
+            as List<GameImagesGameFinalModel>,
+        gameImages2: _splitListIntoTwo(gameData.gameImages ?? []).last
+            as List<GameImagesGameFinalModel>,
+        mainGameImages: gameImages));
   }
   List<List<GameImagesGameFinalModel>>
       _splitListIntoTwo<GameImagesGameFinalModel>(

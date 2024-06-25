@@ -62,7 +62,8 @@ class BasedOfAllGame extends StatelessWidget {
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
                     ),
-                  } else ...{
+                  }
+                  else ...{
                     BasedOfGameConnect(
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,

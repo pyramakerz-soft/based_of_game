@@ -18,29 +18,43 @@ abstract class BasicOfGameData {
     gameType.toLowerCase();
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
-    } else if ((gameType == GameTypes.clickPicture.text()) && audioFlag == 1) {
+    }
+    else if ((gameType == GameTypes.clickPicture.text()) && audioFlag == 1) {
       return ClickPictureOfWord();
       ///audio flag == 1 say the word
-    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
+    }
+    else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
       return ClickPicture();
-    } else if (gameType == GameTypes.clickTheSound.text()) {
+    }
+    else if (gameType == GameTypes.clickTheSound.text()) {
       return BasicClickTheSoundGame();
-    } else if (gameType == GameTypes.bingo.text()) {
+    }
+    else if (gameType == GameTypes.bingo.text()) {
       return BingoGame();
-    } else if (gameType == GameTypes.sortingCups.text()) {
+    }
+    else if (gameType == GameTypes.sortingCups.text()) {
       return SortingCupsGame();
-    } else if (gameType == GameTypes.sortingPictures.text()) {
+    }
+    else if (gameType == GameTypes.sortingPictures.text()) {
       return SortingPicturesGame();
-    } else if (gameType == GameTypes.spelling.text()) {
+    }
+    else if (gameType == GameTypes.spelling.text()) {
       return SpellingGame();
-    } else if (gameType == GameTypes.xOut.text()) {
+    }
+    else if (gameType == GameTypes.xOut.text()) {
       return XOutGame();
-    } else if (gameType == GameTypes.dice.text()) {
+    }
+    else if (gameType == GameTypes.dice.text()) {
       return DiceGame();
-    } else if (gameType == GameTypes.tracing.text()) {
+    }
+    else if (gameType == GameTypes.tracing.text()) {
       return Tracking();
-    } else if (gameType == GameTypes.video.text()) {
+    }
+    else if (gameType == GameTypes.video.text()) {
       return Video();
+    }
+    else if (gameType == GameTypes.spellingWord.text()) {
+      return SpellingWordGame();
     }
   }
 
@@ -50,7 +64,8 @@ abstract class BasicOfGameData {
     GameTypes.sortingCups.text(),
     GameTypes.dice.text(),
     GameTypes.xOut.text(),
-    GameTypes.spelling.text()
+    GameTypes.spelling.text(),
+    GameTypes.spellingWord.text()
   ];
 
   static bool isConnectGame({required String game}) {
@@ -376,6 +391,27 @@ class DiceGame implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 2;
+}
+
+class SpellingWordGame implements BasicOfGameData {
+  @override
+  bool isRound = true;
+
+  @override
+  String titleImageEn = AppImagesPhonetics.spellingWordGame;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
+
+  @override
+  String? titleImageAr;
+  String woodenBackground = AppImagesPhonetics.woodBackground;
 
   @override
   int countOfMinimizeStar = 2;

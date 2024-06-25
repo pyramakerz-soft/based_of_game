@@ -10,8 +10,8 @@ class DragTargetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 0.17.sh,
-      width: 75.0,
+      height: 50.h,
+      width: 30.w,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
           color: AppColorPhonetics.dragContainerColor,

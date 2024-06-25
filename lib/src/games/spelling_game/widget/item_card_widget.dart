@@ -27,8 +27,8 @@ class ItemCardWidget extends StatelessWidget {
       feedback: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          height: 70.0,
-          width: 60.0,
+          height: maxHeight,
+          width: maxWidth,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
             color: AppColorPhonetics.darkBlueColor,
@@ -48,7 +48,7 @@ class ItemCardWidget extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         child: Container(
           height: maxHeight,
-          width: maxHeight,
+          width: maxWidth,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
             color: AppColorPhonetics.darkBlueColor,

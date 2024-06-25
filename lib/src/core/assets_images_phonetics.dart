@@ -19,6 +19,7 @@ abstract class AppImagesPhonetics {
   static const String backGroundOfW = "${mainPathOfImages}backGroundOfw.png";
   static const String backGroundOfE = "${mainPathOfImages}backGroundOfE.png";
   static const String backGroundOfN = "${mainPathOfImages}backGroundOfN.png";
+  static const String backGroundOfShortVowels = "${mainPathOfImages}backGroundOfShortVowels.png";
   static const String loadingVideo = "${mainPathOfImages}loading_video.png";
   static const String iconEmptyStar = "${mainPathOfImages}empty_star.png";
 
@@ -33,6 +34,7 @@ abstract class AppImagesPhonetics {
   static const String iconBoarderOfChar =
       "${mainPathOfImages}iconBoarderOfChar.svg";
   static const String diceNameGame = "${mainPathOfImages}diceNameGame.png";
+  static const String spellingWordGame = "${mainPathOfImages}spellingWordGame.png";
   static const String spellingNameGame =
       "${mainPathOfImages}spellingNameGame.png";
   static const String xOutGameName = "${mainPathOfImages}xOutGameName.png";
@@ -75,6 +77,7 @@ abstract class AppImagesPhonetics {
   static const String hexagonShape = "${mainPathOfImages}hexagon_shape.png";
 
   static const String woodBackground = "${mainPathOfImages}wood.png";
+  static const String boarderBackground = "${mainPathOfImages}boarderBackground.png";
   static const String bubbleSelected = '${mainPathOfImages}bubbleSelected.png';
   static const String sortingGame = "${mainPathOfImages}sorting_game.png";
 

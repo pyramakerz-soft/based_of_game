@@ -86,6 +86,14 @@ abstract class BaseOfGames {
       return SPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    } else if (unitName.toLowerCase().contains(MainDataOfChaptersTypes.shortVowels.text())) {
+      return ShortVowels(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
+      return SPhonetics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.k.text()) {
       return KPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(

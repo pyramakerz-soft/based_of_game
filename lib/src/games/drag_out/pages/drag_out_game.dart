@@ -145,11 +145,10 @@ class _DragOutGame extends State<DragOutGame> {
                                           // height: ,
                                         ),
                                       );
-                              },
-                              onAcceptWithDetails: (item) async {
-                                print(
+                              }, onAcceptWithDetails: (item) async {
+                                debugPrint(
                                     '####:${gameState.gameData.gameImages?[index].word}');
-                                print('####:${(item.data.toLowerCase())}');
+                                debugPrint('####:${(item.data.toLowerCase())}');
                                 if (gameState.gameData.gameImages?[index].word
                                         .toString()
                                         .split('')

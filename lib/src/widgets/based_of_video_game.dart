@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../src_model/export_models.dart';
 
 import '../../based_of_eng_game.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
 import '../games/videos/cubit/video_cubit.dart';
 import '../games/videos/screen/game_video.dart';
-import 'based_of_game_phonetics.dart';
 import 'game_bar.dart';
 
 class BasedOfVideoGame extends StatelessWidget {

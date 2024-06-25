@@ -6,11 +6,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../src_model/export_models.dart';
 import '../../based_of_eng_game.dart';
 import '../core/assets_game_sound.dart';
 import '../core/audio_player_game.dart';
-import '../core/games_structure/basic_of_game_data.dart';
 
 part 'current_game_phonetics_state.dart';
 
@@ -133,7 +131,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   decreaseCountOfTries() {
     int countOfTries = (state.countOfTries ?? 1) - 1;
     emit(state.copyWith(countOfTries: countOfTries));
-    print('state.countOfTries:${state.countOfTries}');
+    debugPrint('state.countOfTries:${state.countOfTries}');
     if (state.countOfTries == 0) {
       state.actionWhenTriesBeZero(state.countOfStar ?? 0);
     }
@@ -194,10 +192,10 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int stateOfGameStar = state.basicData?.gameData?.countOfMinimizeStar ?? 0;
     int countOfStar = state.countOfStar ?? 0;
     int countOfWrongAnswers = state.countOfWrongAnswers ?? 0;
-    print('stateOfGameStar:$stateOfGameStar');
-    print('countOfStar:$countOfStar');
-    print('countOfWrongAnswers:$countOfWrongAnswers');
-    print('countOfWrongAnswers:${countOfWrongAnswers % 2}');
+    debugPrint('stateOfGameStar:$stateOfGameStar');
+    debugPrint('countOfStar:$countOfStar');
+    debugPrint('countOfWrongAnswers:$countOfWrongAnswers');
+    debugPrint('countOfWrongAnswers:${countOfWrongAnswers % 2}');
     if (stateOfGameStar == 1) {
       if (countOfStar > 0) {
         countOfStar = countOfStar - countOfWrongAnswers;

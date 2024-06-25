@@ -52,7 +52,7 @@ extension TypeExtension on GameTypes {
       case GameTypes.video:
         return 'Video'.toLowerCase();
       case GameTypes.dragPicToWord:
-        return 'Drag Pic to Word'.toLowerCase();;
+        return 'Drag Pic to Word'.toLowerCase();
       case GameTypes.dragWordToPic:
         return 'Drag Word to Pic'.toLowerCase();
       case GameTypes.spellingWord:

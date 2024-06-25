@@ -59,14 +59,16 @@ class RowImage extends StatelessWidget {
                                   ?.copyWith(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700,
-                                      color: stateOfGameData.correctedAnswers.contains(gameImages[index].id)
+                                      color: stateOfGameData.correctedAnswers
+                                              .contains(gameImages[index].id)
                                           ? AppColorPhonetics.darkBorderColor
                                           : AppColorPhonetics.lightBlueColor,
                                       fontFamily: AppTheme.getFontFamily5()),
                             ),
                           );
                         }, onAcceptWithDetails: (item) async {
-                          print("+++++++++++:${item.data.word?.toLowerCase()}, ${gameImages[index].word?.toLowerCase()}");
+                          debugPrint(
+                              "+++++++++++:${item.data.word?.toLowerCase()}, ${gameImages[index].word?.toLowerCase()}");
                           if (item.data.word?.toLowerCase() ==
                               (gameImages[index].word?.toLowerCase())) {
                             context.read<DragWordToPicCubit>().addCorrectAnswer(

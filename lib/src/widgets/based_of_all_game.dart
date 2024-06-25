@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../src_model/export_models.dart';
 
 import '../../based_of_eng_game.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
@@ -62,29 +61,26 @@ class BasedOfAllGame extends StatelessWidget {
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,
                   ),
-                }
-                else if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
+                } else if (stateOfGame.basicData?.gameData?.isConnect ==
+                    true) ...{
                   if (stateOfGame.basicData is ConnectionSortingCups) ...{
                     BasedOfGameConnectSortingCups(
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
                     ),
-                  }
-                  else ...{
+                  } else ...{
                     BasedOfGameConnect(
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
                     ),
                   }
-                }
-                else if (BaseOfGames.isPhonetics(
+                } else if (BaseOfGames.isPhonetics(
                     chapter: stateOfGame.basicData.runtimeType)) ...{
                   BasedOfGamePhonetics(
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,
                   ),
-                }
-                else ...{
+                } else ...{
                   const SizedBox()
                 }
               ],

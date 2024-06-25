@@ -87,7 +87,7 @@ class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
         tempLetterDices.add('');
       }
     }
-    debugPrint('tempLetterDices:${tempLetterDices}');
+    debugPrint('tempLetterDices:$tempLetterDices');
     emit(state.copyWith(letterDices: tempLetterDices));
   }
 

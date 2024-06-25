@@ -1,13 +1,8 @@
-import 'package:based_of_eng_game/src/core/phonetics_color.dart';
 import 'package:based_of_eng_game/src/widgets/empty_space.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:dotted_border/dotted_border.dart';
 import '../../../../src_model/export_models.dart';
-import '../../../core/theme_text.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/drag_word_to_pic_cubit.dart';
 import '../widget/text_in_drag.dart';
@@ -103,9 +98,10 @@ class _DragWordToPicGameScreen extends State<DragWordToPicGameScreen> {
                       spacing: 8,
                       runSpacing: 7,
                       children: List.generate(
-                        stateOfGameData.mainGameImages?.length??0,
+                        stateOfGameData.mainGameImages?.length ?? 0,
                         (index) => stateOfGameData.correctedAnswers.contains(
-                                    stateOfGameData.mainGameImages?[index].id) ==
+                                    stateOfGameData
+                                        .mainGameImages?[index].id) ==
                                 false
                             ? Draggable<GameImagesGameFinalModel>(
                                 data: stateOfGameData.mainGameImages?[index],
@@ -135,11 +131,11 @@ class _DragWordToPicGameScreen extends State<DragWordToPicGameScreen> {
                     children: [
                       RowImage(
                         gameImages: stateOfGameData.gameImages ?? [],
-                        mainGameImages: stateOfGameData.mainGameImages??[],
+                        mainGameImages: stateOfGameData.mainGameImages ?? [],
                       ),
                       RowImage(
                         gameImages: stateOfGameData.gameImages2 ?? [],
-                        mainGameImages: stateOfGameData.mainGameImages??[],
+                        mainGameImages: stateOfGameData.mainGameImages ?? [],
                       )
                     ],
                   ),

@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,10 +17,7 @@ class TextInDrag extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Text(
         image.word ?? '',
-        style: Theme.of(context)
-            .textTheme
-            .displayLarge
-            ?.copyWith(
+        style: Theme.of(context).textTheme.displayLarge?.copyWith(
             fontSize: 18,
             fontWeight: FontWeight.w700,
             color: AppColorPhonetics.darkBorderColor,

@@ -191,7 +191,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   checkTheStateOfStar() {
     int stateOfGameStar = state.basicData?.gameData?.countOfMinimizeStar ?? 0;
     int countOfStar = state.countOfStar ?? 0;
-    int countOfWrongAnswers = state.countOfWrongAnswers ?? 0;
+    int countOfWrongAnswers = state.countOfWrongAnswers;
     debugPrint('stateOfGameStar:$stateOfGameStar');
     debugPrint('countOfStar:$countOfStar');
     debugPrint('countOfWrongAnswers:$countOfWrongAnswers');

@@ -142,7 +142,7 @@ widgetOfTries(
                                   .state
                                   .gameData;
                               gameData?.first.gameLetters?.forEach((element) {
-                                print('%%:${element.id}');
+                                debugPrint('%%:${element.id}');
                               });
                               context
                                   .read<CurrentGamePhoneticsCubit>()
@@ -200,7 +200,7 @@ widgetOfTries(
                                     .state
                                     .gameData;
                                 gameData?.first.gameLetters?.forEach((element) {
-                                  print('%%:${element.id}');
+                                  debugPrint('%%:${element.id}');
                                 });
                                 context
                                     .read<CurrentGamePhoneticsCubit>()

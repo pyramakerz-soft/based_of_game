@@ -149,8 +149,8 @@ class BasedOfGamePhonetics extends StatelessWidget {
                             },
                       child: Container(
                           child: stateOfGame.avatarCurrentArtboard == null
-                              ? Image.asset(
-                                  stateOfGame.currentAvatar ?? '',
+                              ? SizedBox(
+                                  // stateOfGame.currentAvatar ?? '',
                                   height:
                                       MediaQuery.of(context).size.height > 450
                                           ? 250.h

@@ -64,7 +64,7 @@ extension TypeExtension on GameTypes {
       case GameTypes.wordFamily:
         return 'word family'.toLowerCase();
       case GameTypes.match:
-        return 'match'.toLowerCase();
+        return 'Match'.toLowerCase();
       case GameTypes.listenAndChoose:
         return 'listen And Choose'.toLowerCase();
       case GameTypes.rearrange:

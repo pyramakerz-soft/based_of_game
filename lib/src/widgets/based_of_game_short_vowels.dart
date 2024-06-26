@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/games/match/manager/match_cubit.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import '../games/drag_pic_to_word/page/drag_pic_to_word.dart';
 import '../games/drag_word_to_pic/manager/drag_word_to_pic_cubit.dart';
 import '../games/drag_word_to_pic/page/drag_pic_to_word.dart';
 import '../games/family_word/pages/family_word_game.dart';
+import '../games/match/page/match_screen.dart';
 import '../games/rearrange/manager/rearrange_cubit.dart';
 import '../games/rearrange/page/rearrange_screen.dart';
 import '../games/sorting_game/manager/sorting_cubit.dart';
@@ -51,13 +53,22 @@ class BasedOfGameShortVowels extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if ((stateOfGame.basicData?.gameData
-                      is RearrangeGame)) ...{
+                  is RearrangeGame)) ...{
                     BlocProvider<RearrangeCubit>(
                         create: (_) => RearrangeCubit(
-                            // gameData: stateOfGameData.data[stateOfGame.index],
-                            index: stateOfGame.index,
-                            listGameData: gamesData, ),
+                          // gameData: stateOfGameData.data[stateOfGame.index],
+                          index: stateOfGame.index,
+                          listGameData: gamesData, ),
                         child: RearrangeScreen())
+                  }else
+                  if ((stateOfGame.basicData?.gameData
+                  is MatchGame)) ...{
+                    BlocProvider<MatchCubit>(
+                        create: (_) => MatchCubit(
+                          // gameData: stateOfGameData.data[stateOfGame.index],
+                          index: stateOfGame.index,
+                          listGameData: gamesData, ),
+                        child: MatchScreen())
                   }
                 ],
               ),

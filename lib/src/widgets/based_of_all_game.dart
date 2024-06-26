@@ -8,6 +8,7 @@ import 'based_of_game_connect.dart';
 import 'based_of_game_connect_sorting_cups.dart';
 import 'based_of_game_phonetics.dart';
 import 'based_of_game_short_vowels.dart';
+import 'based_of_game_short_vowels_text_rive.dart';
 import 'game_bar.dart';
 import 'widget_of_tries.dart';
 
@@ -57,10 +58,17 @@ class BasedOfAllGame extends StatelessWidget {
             child: Column(
               children: [
                 if (stateOfGame.basicData is ShortVowels) ...{
-                  BasedOfGameShortVowels(
-                    stateOfGame: stateOfGame,
-                    gamesData: gamesData,
-                  ),
+                  if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
+                    BasedOfGameShortVowelsTextNextRive(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
+                  }else...{
+                    BasedOfGameShortVowels(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
+                  }
                 } else if (stateOfGame.basicData?.gameData?.isConnect ==
                     true) ...{
                   if (stateOfGame.basicData is ConnectionSortingCups) ...{

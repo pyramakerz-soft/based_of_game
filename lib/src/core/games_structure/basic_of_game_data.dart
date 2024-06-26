@@ -68,6 +68,10 @@ abstract class BasicOfGameData {
       print('WordFamilyGame');
       return WordFamilyGame();
     }
+    else if (gameType == GameTypes.rearrange.text()) {
+      print('WordFamilyGame');
+      return RearrangeGame();
+    }
   }
 
   static List listOfConnectGames = [
@@ -489,4 +493,24 @@ class WordFamilyGame implements BasicOfGameData {
 
   @override
   int countOfMinimizeStar = 2;
+}
+class RearrangeGame implements BasicOfGameData {
+  @override
+  bool isRound = true;
+
+
+  @override
+  String titleImageEn = AppImagesPhonetics.rearrangeGame;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
 }

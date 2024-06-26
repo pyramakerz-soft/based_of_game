@@ -68,7 +68,7 @@ extension TypeExtension on GameTypes {
       case GameTypes.listenAndChoose:
         return 'listen And Choose'.toLowerCase();
       case GameTypes.rearrange:
-        return 'rearrange'.toLowerCase();
+        return 'Rearrange'.toLowerCase();
       case GameTypes.tracingArabic:
         return 'تتبع بإصبعين'.toLowerCase();
       case GameTypes.clickPictureArabic:

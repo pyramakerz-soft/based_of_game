@@ -138,8 +138,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   bool checkIfIsTheLastQuestionOfGame({required int queations}) {
-    int countOfCorrectAnswers = state.countOfCorrectAnswers;
-    debugPrint('countOfCorrectAnswers:$countOfCorrectAnswers , $queations');
+    int countOfCorrectAnswers = state.index+1;
+    print('countOfCorrectAnswers:$countOfCorrectAnswers , $queations');
     if (queations <= countOfCorrectAnswers) {
       return true;
     } else {

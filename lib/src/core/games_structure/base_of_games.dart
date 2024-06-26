@@ -74,6 +74,9 @@ abstract class BaseOfGames {
       required String subGame,
       required String unitName,
       required int audioFlag}) {
+    print(':${(unitName
+        .toLowerCase()
+        .contains(MainDataOfChaptersTypes.shortVowels.text()))}');
     if (unitName
         .toLowerCase()
         .contains(MainDataOfChaptersTypes.shortVowels.text())) {

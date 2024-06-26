@@ -36,6 +36,7 @@ abstract class AppImagesPhonetics {
   static const String diceNameGame = "${mainPathOfImages}diceNameGame.png";
   static const String spellingWordGame = "${mainPathOfImages}spellingWordGame.png";
   static const String dragPicToWordGame = "${mainPathOfImages}dragPicToWordGame.png";
+  static const String wordFamilyGame = "${mainPathOfImages}wordFamilyGame.png";
   static const String spellingNameGame =
       "${mainPathOfImages}spellingNameGame.png";
   static const String xOutGameName = "${mainPathOfImages}xOutGameName.png";

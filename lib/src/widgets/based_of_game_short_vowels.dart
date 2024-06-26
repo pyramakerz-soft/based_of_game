@@ -14,6 +14,9 @@ import '../games/drag_pic_to_word/manager/drag_pic_to_word_cubit.dart';
 import '../games/drag_pic_to_word/page/drag_pic_to_word.dart';
 import '../games/drag_word_to_pic/manager/drag_word_to_pic_cubit.dart';
 import '../games/drag_word_to_pic/page/drag_pic_to_word.dart';
+import '../games/family_word/pages/family_word_game.dart';
+import '../games/sorting_game/manager/sorting_cubit.dart';
+import '../games/sorting_game/pages/sorting_game.dart';
 import '../games/spelling_game/manager/spelling_cubit.dart';
 import '../games/spelling_game/pages/spelling_game.dart';
 
@@ -126,11 +129,21 @@ class BasedOfGameShortVowels extends StatelessWidget {
                             gameData: gamesData[stateOfGame.index]),
                         child: DragPicToWordGameScreen())
                   } else if ((stateOfGame.basicData?.gameData
-                      is DragWordToPicGame)) ...{
+                  is DragWordToPicGame)) ...{
                     BlocProvider<DragWordToPicCubit>(
                         create: (_) => DragWordToPicCubit(
                             gameData: gamesData[stateOfGame.index]),
                         child: DragWordToPicGameScreen())
+                  } else if ((stateOfGame.basicData?.gameData
+                  is WordFamilyGame)) ...{
+                    BlocProvider<SortingCubit>(
+                        create: (_) => SortingCubit(
+                            index: stateOfGame.index,
+                            background: (stateOfGame.basicData?.gameData
+                            as WordFamilyGame)
+                                .woodenBackground,
+                            listGameData: gamesData),
+                        child: FamilyWordGameScreen())
                   }
                 ],
               ),

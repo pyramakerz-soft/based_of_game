@@ -23,6 +23,7 @@ class SortingCubit extends Cubit<SortingInitial> {
                 0,
                 (previousValue, element) =>
                     previousValue + (element.gameImages?.length ?? 0)))) {
+    print('###index:${index}');
     emit(state.copyWith(
         cardsLetters: state.listGameData.first.gameLetters,
         correctAnswersIds: []));
@@ -60,13 +61,30 @@ class SortingCubit extends Cubit<SortingInitial> {
 
   updateTheCurrentGame({required int index}) {
     debugPrint('updateTheCurrentGame:${state.gameData.id}, $index');
-    emit(state.copyWith(gameData: state.listGameData[index], index: index));
+    emit(state.copyWith(
+      gameData: state.listGameData[index],
+      index: index,
+      cardsLetters: state.listGameData[index].gameLetters,
+    ));
+    changeImages();
     debugPrint('updateTheCurrentGame:${state.gameData.id}');
   }
-
+  bool _checkIds(List<int> ids, List<GameImagesGameFinalModel> objs) {
+    for (var obj in objs) {
+      if (ids.contains(obj.id)) {
+        // print('Object with ID ${obj.id} is in the list.');
+      } else {
+        return false;
+      }
+    }
+    return true;
+  }
   bool checkIfIsTheLastQuestionOfGame() {
-    if ((state.correctAnswersIds.length) ==
-        (state.listGameData[state.index].gameImages?.length ?? 0)) {
+    // int x= state.correctAnswersIds.where(test)
+    // state.listGameData[state.index].gameImages.where((test)=> test.id == )
+    // state.listGameData[state.index].gameLetters.
+    // _checkIds(state.correctAnswersIds,state.listGameData[state.index].gameImages??[]);
+    if (_checkIds(state.correctAnswersIds,state.listGameData[state.index].gameImages??[])) {
       return true;
     } else {
       return false;

@@ -15,39 +15,58 @@ abstract class BasicOfGameData {
   bool isConnect = false;
 
   static getTheGameType({required String gameType, required int audioFlag}) {
+    print('${gameType} == ${GameTypes.wordFamily.text()}');
     gameType.toLowerCase();
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
-    } else if ((gameType == GameTypes.clickPicture.text()) && audioFlag == 1) {
+    }
+    else if ((gameType == GameTypes.clickPicture.text()) && audioFlag == 1) {
       return ClickPictureOfWord();
 
       ///audio flag == 1 say the word
-    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
+    }
+    else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
       return ClickPicture();
-    } else if (gameType == GameTypes.clickTheSound.text()) {
+    }
+    else if (gameType == GameTypes.clickTheSound.text()) {
       return BasicClickTheSoundGame();
-    } else if (gameType == GameTypes.bingo.text()) {
+    }
+    else if (gameType == GameTypes.bingo.text()) {
       return BingoGame();
-    } else if (gameType == GameTypes.sortingCups.text()) {
+    }
+    else if (gameType == GameTypes.sortingCups.text()) {
       return SortingCupsGame();
-    } else if (gameType == GameTypes.sortingPictures.text()) {
+    }
+    else if (gameType == GameTypes.sortingPictures.text()) {
       return SortingPicturesGame();
-    } else if (gameType == GameTypes.spelling.text()) {
+    }
+    else if (gameType == GameTypes.spelling.text()) {
       return SpellingGame();
-    } else if (gameType == GameTypes.xOut.text()) {
+    }
+    else if (gameType == GameTypes.xOut.text()) {
       return XOutGame();
-    } else if (gameType == GameTypes.dice.text()) {
+    }
+    else if (gameType == GameTypes.dice.text()) {
       return DiceGame();
-    } else if (gameType == GameTypes.tracing.text()) {
+    }
+    else if (gameType == GameTypes.tracing.text()) {
       return Tracking();
-    } else if (gameType == GameTypes.video.text()) {
+    }
+    else if (gameType == GameTypes.video.text()) {
       return Video();
-    } else if (gameType == GameTypes.spellingWord.text()) {
+    }
+    else if (gameType == GameTypes.spellingWord.text()) {
       return SpellingWordGame();
-    } else if (gameType == GameTypes.dragPicToWord.text()) {
+    }
+    else if (gameType == GameTypes.dragPicToWord.text()) {
       return DragPicToWordGame();
-    } else if (gameType == GameTypes.dragWordToPic.text()) {
+    }
+    else if (gameType == GameTypes.dragWordToPic.text()) {
       return DragWordToPicGame();
+    }
+    else if (gameType == GameTypes.wordFamily.text()) {
+      print('WordFamilyGame');
+      return WordFamilyGame();
     }
   }
 
@@ -429,6 +448,7 @@ class DragPicToWordGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 1;
 }
+
 class DragWordToPicGame implements BasicOfGameData {
   @override
   bool isRound = true;
@@ -447,4 +467,26 @@ class DragWordToPicGame implements BasicOfGameData {
 
   @override
   int countOfMinimizeStar = 1;
+}
+
+class WordFamilyGame implements BasicOfGameData {
+  @override
+  bool isRound = true;
+
+  String woodenBackground = AppImagesPhonetics.woodBackground;
+
+  @override
+  String titleImageEn = AppImagesPhonetics.wordFamilyGame;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
+
+  @override
+  String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 2;
 }

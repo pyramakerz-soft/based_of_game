@@ -23,7 +23,11 @@ enum GameTypes {
   video,
   dragPicToWord,
   dragWordToPic,
-  spellingWord
+  spellingWord,
+  wordFamily,
+  listenAndChoose,
+  match,
+  rearrange,
 }
 
 extension TypeExtension on GameTypes {
@@ -57,6 +61,14 @@ extension TypeExtension on GameTypes {
         return 'Drag Word to Pic'.toLowerCase();
       case GameTypes.spellingWord:
         return 'Spelling Word'.toLowerCase();
+      case GameTypes.wordFamily:
+        return 'word family'.toLowerCase();
+      case GameTypes.match:
+        return 'match'.toLowerCase();
+      case GameTypes.listenAndChoose:
+        return 'listen And Choose'.toLowerCase();
+      case GameTypes.rearrange:
+        return 'rearrange'.toLowerCase();
       case GameTypes.tracingArabic:
         return 'تتبع بإصبعين'.toLowerCase();
       case GameTypes.clickPictureArabic:

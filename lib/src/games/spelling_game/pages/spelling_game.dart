@@ -49,7 +49,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: Container(
                       padding: const EdgeInsets.only(top: 10),
                       // height: 0.6.sh,
@@ -60,6 +60,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                           )),
                       child: Column(
                         children: [
+                          10.ph,
                           GestureDetector(
                             onTap: TalkTts.data == StateOfTalk.talking
                                 ? null
@@ -72,7 +73,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                               imageUrl:
                               gameState.gameData?.gameImages?.first.image ??
                                   '',
-                              height: 0.35.sh,
+                              height: 0.33.sh,
                               placeholder: (context, url) => const Center(
                                 child: CupertinoActivityIndicator(),
                               ),
@@ -178,7 +179,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                     )),
                 20.pw,
                 Expanded(
-                  flex: 3,
+                  flex: 4,
                   child: Container(
                       alignment: Alignment.center,
                       // height: MediaQuery.of(context).size.height - (70.h),
@@ -213,11 +214,11 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                                 maxHeight: (((gameState.gameData)
                                     ?.gameLetters
                                     ?.length ??
-                                    1)==26?35.h:60.h),
+                                    1)==26?30.h:60.h),
                                 maxWidth: (((gameState.gameData)
                                     ?.gameLetters
                                     ?.length ??
-                                    1)==26?26.w:30.w),
+                                    1)==26?23.w:30.w),
                                 index: index,
                               );
                             }),

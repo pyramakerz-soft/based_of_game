@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/phonetics_color.dart';
+import '../../../core/theme_text.dart';
 
 class DragTargetWidget extends StatelessWidget {
   final String title;
@@ -22,6 +23,7 @@ class DragTargetWidget extends StatelessWidget {
           style: TextStyle(
               color: AppColorPhonetics.darkBlueColor,
               fontSize: 0.04.sw,
+              fontFamily: AppTheme.getFontFamily5(),
               fontWeight: FontWeight.w900),
         ),
       ),

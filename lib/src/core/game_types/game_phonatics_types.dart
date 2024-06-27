@@ -28,7 +28,8 @@ enum GameTypes {
   listenAndChoose,
   match,
   rearrange,
-  clickTheWord
+  clickTheWord,
+  chooseTheSentence
 }
 
 extension TypeExtension on GameTypes {
@@ -72,6 +73,8 @@ extension TypeExtension on GameTypes {
         return 'Listen and Choose'.toLowerCase();
       case GameTypes.rearrange:
         return 'Rearrange'.toLowerCase();
+      case GameTypes.chooseTheSentence:
+        return 'Choose the Sentence'.toLowerCase();
       case GameTypes.tracingArabic:
         return 'تتبع بإصبعين'.toLowerCase();
       case GameTypes.clickPictureArabic:

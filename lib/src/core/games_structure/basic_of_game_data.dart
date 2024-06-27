@@ -82,6 +82,9 @@ abstract class BasicOfGameData {
     else if (gameType == GameTypes.clickTheWord.text()) {
       return ClickTheWordGame();
     }
+    else if (gameType == GameTypes.chooseTheSentence.text()) {
+      return ChooseTheSentenceGame();
+    }
   }
 
   static List listOfConnectGames = [
@@ -568,6 +571,26 @@ class ClickTheWordGame implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesPhonetics.clickTheWordGame;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
+}
+class ChooseTheSentenceGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+
+  @override
+  String titleImageEn = AppImagesPhonetics.chooseTheSentenceGame;
 
   @override
   String? completeBasket;

@@ -53,19 +53,24 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                     color: AppColorPhonetics.boarderColor, width: 5)),
             child: Row(
               children: [
-                Expanded(
-                  child: CachedNetworkImage(
-                    imageUrl: gameState.gameData.gameImages?.first.image ?? '',
-                    height: 0.33.sh,
-                    placeholder: (context, url) => const Center(
-                      child: CupertinoActivityIndicator(),
-                    ),
-                    errorWidget: (context, url, error) => const Icon(
-                      Icons.error,
-                      color: Colors.red,
+                if(gameState.gameData.gameImages?.first.image!=null && gameState.gameData.gameImages?.first.image!='')...{
+                  Expanded(
+                    child: CachedNetworkImage(
+                      imageUrl: gameState.gameData.gameImages?.first.image ??
+                          '',
+                      height: 0.33.sh,
+                      placeholder: (context, url) =>
+                      const Center(
+                        child: CupertinoActivityIndicator(),
+                      ),
+                      errorWidget: (context, url, error) =>
+                      const Icon(
+                        Icons.error,
+                        color: Colors.red,
+                      ),
                     ),
                   ),
-                ),
+                },
                 Expanded(
                     flex: 2,
                     child: Column(

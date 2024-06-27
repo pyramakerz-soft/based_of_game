@@ -63,6 +63,14 @@ class BasedOfGameUpVowels extends StatelessWidget {
                           index: stateOfGame.index,
                           listGameData: gamesData, ),
                         child: ClickTheWordScreen())
+                  }else if ((stateOfGame.basicData?.gameData
+                  is RearrangeGame)) ...{
+                    BlocProvider<RearrangeCubit>(
+                        create: (_) => RearrangeCubit(
+                          // gameData: stateOfGameData.data[stateOfGame.index],
+                          index: stateOfGame.index,
+                          listGameData: gamesData, ),
+                        child: RearrangeScreen())
                   }
                 ],
               ),

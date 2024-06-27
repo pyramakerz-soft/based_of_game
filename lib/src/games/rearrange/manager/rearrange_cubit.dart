@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../src_model/export_models.dart';
 import '../../../core/talk_tts.dart';
@@ -35,7 +34,7 @@ class RearrangeCubit extends Cubit<RearrangeInitial> {
         userAnswers: List.generate(showAnswers.length, (x) => '')));
   }
 
-   bool? addUserAnswer({required int index, required String answer}) {
+  bool? addUserAnswer({required int index, required String answer}) {
     List<String> showAnswers = state.userAnswers;
     print('addUserAnswer:$showAnswers , $index , $answer');
 
@@ -44,9 +43,9 @@ class RearrangeCubit extends Cubit<RearrangeInitial> {
     bool userAnswer = _checkIfAnswerCompleted();
     print('addUserAnswer:$showAnswers');
 
-    if(userAnswer==true){
+    if (userAnswer == true) {
       return _checkCorrectAnswer();
-    }else{
+    } else {
       return null;
     }
   }
@@ -62,15 +61,14 @@ class RearrangeCubit extends Cubit<RearrangeInitial> {
     }
   }
 
-  _checkCorrectAnswer(){
+  _checkCorrectAnswer() {
     String correctAnswer = state.finalAnswer;
     String userAnswer = state.userAnswers.join(' ');
-    if(correctAnswer == userAnswer){
+    if (correctAnswer == userAnswer) {
       return true;
-    }else{
+    } else {
       return false;
     }
-
   }
 
   updateTheCurrentGame({required int index}) {
@@ -79,11 +77,12 @@ class RearrangeCubit extends Cubit<RearrangeInitial> {
     debugPrint('updateTheCurrentGame:${state.gameData.id}');
     reFormatAnswers();
   }
-  clearUserAnswer(){
 
+  clearUserAnswer() {
     GameFinalModel data = state.gameData;
     String word = data.gameImages?.first.word ?? '';
     List<String> wordAnswers = word.split(' ').toList() ?? [];
-    emit(state.copyWith(userAnswers: List.generate(wordAnswers.length, (x) => '')));
+    emit(state.copyWith(
+        userAnswers: List.generate(wordAnswers.length, (x) => '')));
   }
 }

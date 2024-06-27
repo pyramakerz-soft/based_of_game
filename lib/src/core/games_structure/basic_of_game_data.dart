@@ -76,6 +76,9 @@ abstract class BasicOfGameData {
       print('WordFamilyGame');
       return MatchGame();
     }
+    else if (gameType == GameTypes.listenAndChoose.text()) {
+      return ListenAndChooseGame();
+    }
   }
 
   static List listOfConnectGames = [
@@ -436,7 +439,6 @@ class SpellingWordGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 2;
 }
-
 class DragPicToWordGame implements BasicOfGameData {
   @override
   bool isRound = true;
@@ -456,7 +458,6 @@ class DragPicToWordGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 1;
 }
-
 class DragWordToPicGame implements BasicOfGameData {
   @override
   bool isRound = true;
@@ -476,10 +477,9 @@ class DragWordToPicGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 1;
 }
-
 class WordFamilyGame implements BasicOfGameData {
   @override
-  bool isRound = true;
+  bool isRound = false;
 
   String woodenBackground = AppImagesPhonetics.woodBackground;
 
@@ -531,6 +531,26 @@ class MatchGame implements BasicOfGameData {
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
+}
+class ListenAndChooseGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+
+  @override
+  String titleImageEn = AppImagesPhonetics.listenAndChooseGame;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
 
   @override
   String? titleImageAr;

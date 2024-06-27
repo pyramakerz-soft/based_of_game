@@ -236,7 +236,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       required int questions,
       void Function()? subAction}) async {
     AudioPlayer playerCorrect = AudioPlayer();
-
+    print('correctAnswers:$correctAnswers');
     await _animationOfCorrectAnswer();
     await AudioPlayerGame.startPlaySoundOfCorrect(
         playerCorrect2: playerCorrect,

@@ -15,6 +15,8 @@ import '../games/drag_pic_to_word/page/drag_pic_to_word.dart';
 import '../games/drag_word_to_pic/manager/drag_word_to_pic_cubit.dart';
 import '../games/drag_word_to_pic/page/drag_pic_to_word.dart';
 import '../games/family_word/pages/family_word_game.dart';
+import '../games/listen_and_choose/manager/listen_choose_cubit.dart';
+import '../games/listen_and_choose/page/listen_and_choose_screen.dart';
 import '../games/sorting_game/manager/sorting_cubit.dart';
 import '../games/sorting_game/pages/sorting_game.dart';
 import '../games/spelling_game/manager/spelling_cubit.dart';
@@ -144,6 +146,13 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                                 .woodenBackground,
                             listGameData: gamesData),
                         child: FamilyWordGameScreen())
+                  } else if ((stateOfGame.basicData?.gameData
+                  is ListenAndChooseGame)) ...{
+                    BlocProvider<ListenChooseCubit>(
+                        create: (_) => ListenChooseCubit(
+                            index: stateOfGame.index,
+                            listGameData: gamesData),
+                        child: ListenAndChooseScreen())
                   }
                 ],
               ),
@@ -151,9 +160,7 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
             PositionedDirectional(
               top: 0,
               start: 45.w,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+              child:
                   Padding(
                     padding: EdgeInsets.only(left: 10.w, top: 10.h),
                     child: GestureDetector(
@@ -189,12 +196,11 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                         stateOfGame.basicData?.gameData?.titleImageEn ?? '',
                         height: 75.h,
                         width: 120.w,
-                        fit: BoxFit.fill,
+                        // fit: BoxFit.fill,
                       ),
                     ),
                   ),
-                ],
-              ),
+
             ),
           ],
         ),

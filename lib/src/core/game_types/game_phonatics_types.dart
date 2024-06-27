@@ -28,6 +28,7 @@ enum GameTypes {
   listenAndChoose,
   match,
   rearrange,
+  clickTheWord
 }
 
 extension TypeExtension on GameTypes {
@@ -65,6 +66,8 @@ extension TypeExtension on GameTypes {
         return 'word family'.toLowerCase();
       case GameTypes.match:
         return 'Match'.toLowerCase();
+      case GameTypes.clickTheWord:
+        return 'Click the Word'.toLowerCase();
       case GameTypes.listenAndChoose:
         return 'Listen and Choose'.toLowerCase();
       case GameTypes.rearrange:

@@ -20,6 +20,8 @@ class AppColorPhonetics {
   static const Color whiteColor = Color(0xffF7F7F7);
   static const Color lightBlueColor = Color(0xffC0EDE8);
   static const Color lightYellowColor = Color(0xffEFD8BA);
+  static const Color greenColor = Color(0xff438B38);
+  static const Color redColor = Color(0xffF04E4E);
 
   static const Color lightGreyColor4 = Color(0xFFABABAB);
 }

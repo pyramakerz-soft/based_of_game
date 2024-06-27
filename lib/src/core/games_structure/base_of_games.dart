@@ -83,8 +83,14 @@ abstract class BaseOfGames {
       return ShortVowels(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }else
+    if (unitName
+        .contains(MainDataOfChaptersTypes.up.text())) {
+      return UpVowels(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     }
-    if (BasicOfGameData.isConnectGame(game: subGame.toLowerCase()) == true) {
+    else if (BasicOfGameData.isConnectGame(game: subGame.toLowerCase()) == true) {
       if (subGame.toLowerCase() == GameTypes.sortingCups.text()) {
         return ConnectionSortingCups(mineGameData: SortingCupsGame());
       } else {

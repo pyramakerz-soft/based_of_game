@@ -49,7 +49,8 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
                     color: AppColorPhonetics.boarderColor, width: 5)),
-            child: Column(
+            child:
+            Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

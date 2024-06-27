@@ -30,7 +30,7 @@ enum MainDataOfChaptersTypes {
   n,
   k,q,v,x,y,z,
   redUnit,
-  shortVowels,
+  shortVowels,up
 }
 
 extension TypeExtension on MainDataOfChaptersTypes {
@@ -90,6 +90,8 @@ extension TypeExtension on MainDataOfChaptersTypes {
         return 'z'.toLowerCase();
       case MainDataOfChaptersTypes.shortVowels:
         return 'Short Vowels'.toLowerCase();
+      case MainDataOfChaptersTypes.up:
+        return 'UP';
       case MainDataOfChaptersTypes.video:
         return 'video'.toLowerCase();
       case MainDataOfChaptersTypes.redUnit:
@@ -1291,6 +1293,51 @@ class ShortVowels implements MainDataOfChapters {
   String winAvatar = AppImagesPhonetics.beeSuccess;
 
   ShortVowels
+      ({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+
+  @override
+  int? countOfPartsOfLettersForTracing;
+}
+
+class UpVowels implements MainDataOfChapters {
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfShortVowels;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfGameData? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  UpVowels
       ({required this.mineGameData}) {
     gameData = mineGameData;
   }

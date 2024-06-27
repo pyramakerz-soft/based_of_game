@@ -148,6 +148,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   getStateOfStars({required int mainCountOfQuestion}) {
+    print('getStateOfStars:$mainCountOfQuestion');
     List<int> stateOfStarsAdd =
         BaseOfGames.getTheStarsAddState(mainCountOfQuestion);
     emit(state.copyWith(statesOfAddStars: stateOfStarsAdd));

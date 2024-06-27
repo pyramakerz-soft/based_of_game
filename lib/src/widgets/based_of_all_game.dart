@@ -9,6 +9,7 @@ import 'based_of_game_connect_sorting_cups.dart';
 import 'based_of_game_phonetics.dart';
 import 'based_of_game_short_vowels.dart';
 import 'based_of_game_short_vowels_text_rive.dart';
+import 'based_of_game_up_vowels.dart';
 import 'game_bar.dart';
 import 'widget_of_tries.dart';
 
@@ -52,7 +53,8 @@ class BasedOfAllGame extends StatelessWidget {
               Navigator.of(context).pop();
             },
           )
-        } else ...{
+        }
+        else ...{
           SizedBox(
             height: (MediaQuery.of(context).size.height - (50.h + 5)),
             child: Column(
@@ -69,7 +71,20 @@ class BasedOfAllGame extends StatelessWidget {
                       gamesData: gamesData,
                     ),
                   }
-                } else if (stateOfGame.basicData?.gameData?.isConnect ==
+                }else if (stateOfGame.basicData is UpVowels) ...{
+                  if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
+                    BasedOfGameShortVowelsTextNextRive(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
+                  }else...{
+                    BasedOfGameUpVowels(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
+                  }
+                }
+                else if (stateOfGame.basicData?.gameData?.isConnect ==
                     true) ...{
                   if (stateOfGame.basicData is ConnectionSortingCups) ...{
                     BasedOfGameConnectSortingCups(

@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
-class MatchingPainter extends CustomPainter {
-  final Offset? firstPosition;
-  final Offset? secondPosition;
-
-  MatchingPainter(this.firstPosition, this.secondPosition);
-
+class LinePainter extends CustomPainter {
+  Offset? start;
+  Offset? end;
+  LinePainter(this.start, this.end);
   @override
   void paint(Canvas canvas, Size size) {
-    if (firstPosition != null && secondPosition != null) {
-      final paint = Paint()
-        ..color = Colors.red
-        ..strokeWidth = 2.0
-        ..strokeCap = StrokeCap.round;
-
-      canvas.drawLine(firstPosition!, secondPosition!, paint);
+    if (start == null || end == null) {
+      return;
+    }
+    if (start != null && end != null) {
+      canvas.drawLine(
+          start!,
+          end!,
+          Paint()
+            ..strokeWidth = 4
+            ..color = Colors.red);
     }
   }
 

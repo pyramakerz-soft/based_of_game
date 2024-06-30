@@ -37,138 +37,160 @@ class _MatchScreen extends State<MatchScreen2> {
 
   @override
   Widget build(BuildContext context) {
-    final stateOfCurrentGamePhoneticsCubit =
-        context.watch<CurrentGamePhoneticsCubit>().state;
     return BlocConsumer<MatchCubit2, MatchInitial2>(
         listener: (context, state) {},
         builder: (context, gameState) {
-          return Container(
-            margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            width: MediaQuery.of(context).size.width - (130 + 50 + 130),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(
-                    color: AppColorPhonetics.boarderColor, width: 5)),
-            child: CustomPaint(
-                painter: MatchingPainter2(gameState.positions),
-                child: Column(
-                  children: List.generate(gameState.finalDataWillShow.length,
-                      (index) {
-                    final GlobalKey _widgetKey1 = GlobalKey();
-                    final GlobalKey _widgetKey2 = GlobalKey();
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                            onTapUp: (TapUpDetails details) {
-                              context.read<MatchCubit2>().addCorrectAnswer(
-                                  index: index,
-                                  // position: Offset(
-                                  //     (MediaQuery.of(context).size.width / 6) +
-                                  //         20,
-                                  //     (((MediaQuery.of(context).size.height) /
-                                  //                     15) +
-                                  //                 40) *
-                                  //             (index + 1) +
-                                  //         (100 * (index))),
+          return
+              // Container(
+              // margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
+              // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              // width: MediaQuery.of(context).size.width - (130 + 50 + 130),
+              // alignment: Alignment.center,
+              // decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     borderRadius: BorderRadius.circular(15),
+              //     border: Border.all(
+              //         color: AppColorPhonetics.boarderColor, width: 5)),
+              // child:
+              CustomPaint(
+                  painter: MatchingPainter2(gameState.positions),
+                  child: Column(
+                    children: List.generate(gameState.finalDataWillShow.length,
+                        (index) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                              onTapUp: (TapUpDetails details) {
+                                // if (gameState.widgetKey[index].currentContext
+                                //         ?.findRenderObject() !=
+                                //     null) {
+                                //   RenderBox? render = gameState
+                                //       .widgetKey[index].currentContext
+                                //       ?.findRenderObject() as RenderBox?;
+                                //   Offset centerWidget = Offset(
+                                //       (render?.size.width ?? 0),
+                                //       (render?.size.height ?? 0) -
+                                //           (appBarSize ?? 0));
+                                //   // print('centerWidget:$centerWidget');
+                                //   if (render?.localToGlobal(
+                                //         centerWidget,
+                                //       ) !=
+                                //       null) {
+                                //     print(
+                                //         'centerWidget:${render!.localToGlobal(
+                                //       centerWidget,
+                                //     )}');
+                                print('localPosition:${details.localPosition}');
+                                print(
+                                    'localPosition:${Offset(details.localPosition.dx, index == 0 ? details.localPosition.dy * (index + 2) : details.localPosition.dy * (index + 3))}');
+                                print(
+                                    'globalPosition:${details.globalPosition}');
 
-                                  // position: Offset(
-                                  //     (MediaQuery.of(context).size.width / 6) +
-                                  //         20,
-                                  //     (((MediaQuery.of(context).size.width /
-                                  //                 6) /
-                                  //             4) *
-                                  //         (index == 0 ? 1 : (index + 3)))),
-                                  position: Offset(
-                                      (MediaQuery.of(context).size.width / 6) +
-                                          20,
-                                      details.globalPosition.dy / 2),
-                                  isFirst: true);
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 6,
-                                  child: Text(
-                                    gameState.finalDataWillShow[index].word ??
-                                        '',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontFamily: AppTheme.getFontFamily5(),
+                                context.read<MatchCubit2>().addCorrectAnswer(
+                                    index: index,
+                                    position: Offset(
+                                        details.localPosition.dx,
+                                        index == 0
+                                            ? details.localPosition.dy *
+                                                (index + 2)
+                                            : details.localPosition.dy *
+                                                (index + 3)),
+                                    isFirst: true);
+                                // }
+                                // gestureDetector.onPanStart(
+                                //   DragStartDetails(
+                                //     localPosition: render?.localToGlobal(
+                                //       centerWidget,
+                                //     ),
+                                //   ),
+                                // );
+                                // }
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 6,
+                                    child: Text(
+                                      gameState.finalDataWillShow[index].word ??
+                                          '',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontFamily: AppTheme.getFontFamily5(),
+                                          color: AppColorPhonetics
+                                              .darkBorderColor),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
+                                  20.pw,
+                                  Container(
+                                    height: 17,
+                                    key: gameState.widgetKey[index],
+                                    width: 17,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(17),
                                         color:
-                                            AppColorPhonetics.darkBorderColor),
-                                    textAlign: TextAlign.start,
+                                            AppColorPhonetics.lightYellowColor),
+                                  )
+                                ],
+                              )),
+                          GestureDetector(
+                              onTapUp: (TapUpDetails details) {
+                                context.read<MatchCubit2>().addCorrectAnswer(
+                                    index: index,
+                                    position: Offset(
+                                        MediaQuery.of(context).size.width -
+                                            (MediaQuery.of(context).size.width /
+                                                3),
+                                        (((MediaQuery.of(context).size.height) /
+                                                        15) +
+                                                    40) *
+                                                (index + 1) +
+                                            (100 * (index))),
+                                    isFirst: false);
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    height: 17,
+                                    width: 17,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(17),
+                                        color:
+                                            AppColorPhonetics.lightYellowColor),
                                   ),
-                                ),
-                                20.pw,
-                                Container(
-                                  key: _widgetKey1,
-                                  height: 17,
-                                  width: 17,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(17),
-                                      color:
-                                          AppColorPhonetics.lightYellowColor),
-                                )
-                              ],
-                            )),
-                        GestureDetector(
-                            onTapUp: (TapUpDetails details) {
-                              context.read<MatchCubit2>().addCorrectAnswer(
-                                  index: index,
-                                  position: Offset(
-                                      MediaQuery.of(context).size.width -
-                                          (MediaQuery.of(context).size.width /
-                                              3),
-                                      (((MediaQuery.of(context).size.height) /
-                                                      15) +
-                                                  40) *
-                                              (index + 1) +
-                                          (100 * (index))),
-                                  isFirst: false);
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  key: _widgetKey2,
-                                  height: 17,
-                                  width: 17,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(17),
-                                      color:
-                                          AppColorPhonetics.lightYellowColor),
-                                ),
-                                20.pw,
-                                CachedNetworkImage(
-                                  imageUrl: gameState
-                                          .finalDataWillShow[index].image ??
-                                      '',
-                                  height:
-                                      (MediaQuery.of(context).size.height) / 5,
-                                  width: MediaQuery.of(context).size.width / 15,
+                                  20.pw,
+                                  CachedNetworkImage(
+                                    imageUrl: gameState
+                                            .finalDataWillShow[index].image ??
+                                        '',
+                                    height:
+                                        (MediaQuery.of(context).size.height) /
+                                            5,
+                                    width:
+                                        MediaQuery.of(context).size.width / 15,
 
-                                  // height: 0.33.sh,
-                                  placeholder: (context, url) => const Center(
-                                    child: CupertinoActivityIndicator(),
+                                    // height: 0.33.sh,
+                                    placeholder: (context, url) => const Center(
+                                      child: CupertinoActivityIndicator(),
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(
+                                      Icons.error,
+                                      color: Colors.red,
+                                    ),
                                   ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(
-                                    Icons.error,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ],
-                            )),
-                      ],
-                    );
-                  }),
-                )),
-          );
+                                ],
+                              )),
+                        ],
+                      );
+                    }),
+                  ));
+          //   ,
+          // );
         });
   }
 }

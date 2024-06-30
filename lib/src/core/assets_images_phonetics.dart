@@ -19,9 +19,14 @@ abstract class AppImagesPhonetics {
   static const String backGroundOfW = "${mainPathOfImages}backGroundOfw.png";
   static const String backGroundOfE = "${mainPathOfImages}backGroundOfE.png";
   static const String backGroundOfN = "${mainPathOfImages}backGroundOfN.png";
-  static const String backGroundOfShortVowels = "${mainPathOfImages}backGroundOfShortVowels.png";
+  static const String backGroundOfShortVowels =
+      "${mainPathOfImages}backGroundOfShortVowels.png";
   static const String loadingVideo = "${mainPathOfImages}loading_video.png";
   static const String iconEmptyStar = "${mainPathOfImages}empty_star.png";
+  static const String iconUnselectedCheckBox =
+      "${mainPathOfImages}unselected_check_box.png";
+  static const String iconSelectedCheckBox =
+      "${mainPathOfImages}selected_check_box.png";
 
   static const String position2Finger =
       "${mainPathOfImages}position_2_finger.png";
@@ -34,14 +39,19 @@ abstract class AppImagesPhonetics {
   static const String iconBoarderOfChar =
       "${mainPathOfImages}iconBoarderOfChar.svg";
   static const String diceNameGame = "${mainPathOfImages}diceNameGame.png";
-  static const String spellingWordGame = "${mainPathOfImages}spellingWordGame.png";
-  static const String dragPicToWordGame = "${mainPathOfImages}dragPicToWordGame.png";
+  static const String spellingWordGame =
+      "${mainPathOfImages}spellingWordGame.png";
+  static const String dragPicToWordGame =
+      "${mainPathOfImages}dragPicToWordGame.png";
   static const String wordFamilyGame = "${mainPathOfImages}wordFamilyGame.png";
   static const String rearrangeGame = "${mainPathOfImages}rearrangeGame.png";
   static const String matchGame = "${mainPathOfImages}matchGame.png";
-  static const String listenAndChooseGame = "${mainPathOfImages}listenAndChooseGame.png";
-  static const String clickTheWordGame = "${mainPathOfImages}clickTheWordGame.png";
-  static const String chooseTheSentenceGame = "${mainPathOfImages}chooseTheSentenceGame.png";
+  static const String listenAndChooseGame =
+      "${mainPathOfImages}listenAndChooseGame.png";
+  static const String clickTheWordGame =
+      "${mainPathOfImages}clickTheWordGame.png";
+  static const String chooseTheSentenceGame =
+      "${mainPathOfImages}chooseTheSentenceGame.png";
   static const String spellingNameGame =
       "${mainPathOfImages}spellingNameGame.png";
   static const String xOutGameName = "${mainPathOfImages}xOutGameName.png";
@@ -62,7 +72,8 @@ abstract class AppImagesPhonetics {
   static const String winAvatar = "${mainPathOfImages}winAvatar.png";
   static const String dragOut = "${mainPathOfImages}dragOut.png";
   static const String clickPicture = "${mainPathOfImages}click_picture.png";
-  static const String clickPictureWithWord = "${mainPathOfImages}listen_and_click.png";
+  static const String clickPictureWithWord =
+      "${mainPathOfImages}listen_and_click.png";
   static const String tracingWithFinger =
       "${mainPathOfImages}tracing_with_finger.png";
   static const String clickTheSound = "${mainPathOfImages}click_the_sound.png";
@@ -84,7 +95,8 @@ abstract class AppImagesPhonetics {
   static const String hexagonShape = "${mainPathOfImages}hexagon_shape.png";
 
   static const String woodBackground = "${mainPathOfImages}wood.png";
-  static const String boarderBackground = "${mainPathOfImages}boarderBackground.png";
+  static const String boarderBackground =
+      "${mainPathOfImages}boarderBackground.png";
   static const String bubbleSelected = '${mainPathOfImages}bubbleSelected.png';
   static const String sortingGame = "${mainPathOfImages}sorting_game.png";
 

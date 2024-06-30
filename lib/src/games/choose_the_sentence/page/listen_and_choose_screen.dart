@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../src_model/model/game_model.dart';
+import '../../../core/assets_images_phonetics.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../core/theme_text.dart';
@@ -33,6 +35,7 @@ class _ChooseTheSentenceScreen extends State<ChooseTheSentenceScreen> {
         stateOfStringWillSay: gameData.first.inst ?? '');
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final isInteracting =
@@ -51,89 +54,108 @@ class _ChooseTheSentenceScreen extends State<ChooseTheSentenceScreen> {
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
                     color: AppColorPhonetics.boarderColor, width: 5)),
-            child:
-            Column(
+            child: Column(
               children: [
-
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(gameState.choose.length, (index) {
-                        return
-                          GestureDetector(
-                            onTap: isInteracting != null &&
-                                isInteracting != BasicOfGameData.stateOIdle
-                                ? null
-                                : () async {
-                              bool stateOfAnswer = context
-                                  .read<ChooseTheSentenceCubit>()
-                                  .addAnswer(
-                                  userChoose:
-                                  gameState.choose[index].letter ??
-                                      '');
-                              if (stateOfAnswer == true) {
-                                await context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .addSuccessAnswer(
-                                    questions:
-                                    gameState.listGameData.length,
-                                    correctAnswers:
-                                    gameState.countCorrectAnswers+1)
-                                    .whenComplete(() {
-                                  print('listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
-                                  bool isLastQuestion = context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .checkIfIsTheLastQuestionOfGame(
-                                      queations: gameState
-                                          .listGameData.length);
-                                  if (isLastQuestion) {
-                                    Future.delayed(
-                                        const Duration(seconds: 2),
-                                            () async {
-                                          Navigator.of(context).pop();
-                                        });
-                                  } else {
-                                    Future.delayed(
-                                        const Duration(seconds: 2),
-                                            () async {
-                                          await context
+                        return Column(
+                          children: [
+                            GestureDetector(
+                              onTap: isInteracting != null &&
+                                      isInteracting !=
+                                          BasicOfGameData.stateOIdle
+                                  ? null
+                                  : () async {
+                                      bool stateOfAnswer = context
+                                          .read<ChooseTheSentenceCubit>()
+                                          .addAnswer(
+                                              userChoose: gameState
+                                                      .choose[index].letter ??
+                                                  '');
+                                      if (stateOfAnswer == true) {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addSuccessAnswer(
+                                                questions: gameState
+                                                    .listGameData.length,
+                                                correctAnswers: gameState
+                                                        .countCorrectAnswers +
+                                                    1)
+                                            .whenComplete(() {
+                                          print(
+                                              'listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
+                                          bool isLastQuestion = context
                                               .read<CurrentGamePhoneticsCubit>()
-                                              .updateIndexOfCurrentGame();
-                                          context
-                                              .read<ChooseTheSentenceCubit>()
-                                              .updateTheCurrentGame(
-                                              index: context
+                                              .checkIfIsTheLastQuestionOfGame(
+                                                  queations: gameState
+                                                      .listGameData.length);
+                                          if (isLastQuestion) {
+                                            Future.delayed(
+                                                const Duration(seconds: 2),
+                                                () async {
+                                              Navigator.of(context).pop();
+                                            });
+                                          } else {
+                                            Future.delayed(
+                                                const Duration(seconds: 2),
+                                                () async {
+                                              await context
                                                   .read<
-                                                  CurrentGamePhoneticsCubit>()
-                                                  .state
-                                                  .index);
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .updateIndexOfCurrentGame();
+                                              context
+                                                  .read<
+                                                      ChooseTheSentenceCubit>()
+                                                  .updateTheCurrentGame(
+                                                      index: context
+                                                          .read<
+                                                              CurrentGamePhoneticsCubit>()
+                                                          .state
+                                                          .index);
+                                            });
+                                          }
                                         });
-                                  }
-                                });
-                              } else {
-                                await context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .addWrongAnswer(
-                                    actionOfWrongAnswer: () async {});
-                              }
-                            },
-                            child: Row(
-                              children: [
-
-                                Text(
-                                  gameState.choose[index].letter ?? '',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: AppTheme.getFontFamily5(),
-                                      color: AppColorPhonetics.darkBorderColor),
-                                ),
-                              ],
+                                      } else {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addWrongAnswer(
+                                                actionOfWrongAnswer:
+                                                    () async {});
+                                      }
+                                    },
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    gameState.isCorrect == true &&
+                                            gameState.gameData.gameImages?.first
+                                                    .word ==
+                                                gameState.choose[index].letter
+                                        ? AppImagesPhonetics
+                                            .iconSelectedCheckBox
+                                        : AppImagesPhonetics
+                                            .iconUnselectedCheckBox,
+                                    height: 30.h,
+                                  ),
+                                  10.pw,
+                                  Text(
+                                    gameState.choose[index].letter ?? '',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontFamily: AppTheme.getFontFamily5(),
+                                        color:
+                                            AppColorPhonetics.darkBorderColor),
+                                  ),
+                                ],
+                              ),
                             ),
-                          );
+                            10.ph,
+                          ],
+                        );
                       }),
                     ),
                     CachedNetworkImage(

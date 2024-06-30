@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../src_model/export_models.dart';
 import '../../../core/talk_tts.dart';
@@ -45,20 +44,26 @@ class ClickTheWordCubit extends Cubit<ClickTheWordInitial> {
     emit(state.copyWith(listCorrectAnswers: listCorrectAnswers));
     return _isLastQuestionInGame();
   }
-  bool _isLastQuestionInGame(){
+
+  bool _isLastQuestionInGame() {
     List<int> listCorrectAnswers = state.listCorrectAnswers;
     int countOfQuestion = 0;
-    List<GameFinalModel> listGameData2 = state.listGameData.sublist(0, (state.index+1));
-    listGameData2.forEach((element){
-      int countOfQuestionSubGame = element.gameLetters?.where((element2)=>element2.letter == element.correctAns ).length??0;
-      countOfQuestion = countOfQuestion+countOfQuestionSubGame;
+    List<GameFinalModel> listGameData2 =
+        state.listGameData.sublist(0, (state.index + 1));
+    listGameData2.forEach((element) {
+      int countOfQuestionSubGame = element.gameLetters
+              ?.where((element2) => element2.letter == element.correctAns)
+              .length ??
+          0;
+      countOfQuestion = countOfQuestion + countOfQuestionSubGame;
     });
 
-    if(countOfQuestion==listCorrectAnswers.length){
-      print('countOfQuestionSubGame:$countOfQuestion, ${listCorrectAnswers.length}');
+    if (countOfQuestion == listCorrectAnswers.length) {
+      print(
+          'countOfQuestionSubGame:$countOfQuestion, ${listCorrectAnswers.length}');
 
       return true;
-    }else {
+    } else {
       return false;
     }
   }
@@ -71,13 +76,13 @@ class ClickTheWordCubit extends Cubit<ClickTheWordInitial> {
   }
 
   _sayLetter() async {
-    await TalkTts.startTalk(text: "${state.gameData.inst} ${state.gameData.correctAns}");
+    await TalkTts.startTalk(
+        text: "${state.gameData.inst} ${state.gameData.correctAns}");
   }
 
   addWrongAnswer({required int answerId}) async {
-    emit(state.copyWith(wrongAnswer:answerId));
+    emit(state.copyWith(wrongAnswer: answerId));
     await Future.delayed(Duration(seconds: 1));
     emit(state.clearWrongAnswer());
-
   }
 }

@@ -1,9 +1,6 @@
-import 'dart:ui';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../src_model/export_models.dart';
 import '../../../core/talk_tts.dart';

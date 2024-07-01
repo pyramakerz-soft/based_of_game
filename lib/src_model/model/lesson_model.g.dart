@@ -17,14 +17,7 @@ LessonGameFinalModel _$LessonGameFinalModelFromJson(
       warmupId: (json['warmup_id'] as num?)?.toInt(),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
-      chapter: json['chapter'] == null
-          ? null
-          : SubChapterGameFinalModel.fromJson(
-              json['chapter'] as Map<String, dynamic>),
       type: json['type'] as String?,
-      games: (json['games'] as List<dynamic>?)
-          ?.map((e) => GameFinalModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
       unit: json['unit'] == null
           ? null
           : UserCourseGameFinalModel.fromJson(
@@ -43,7 +36,5 @@ Map<String, dynamic> _$LessonGameFinalModelToJson(
       'name': instance.name,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
-      'chapter': instance.chapter?.toJson(),
-      'games': instance.games?.map((e) => e.toJson()).toList(),
       'unit': instance.unit?.toJson(),
     };

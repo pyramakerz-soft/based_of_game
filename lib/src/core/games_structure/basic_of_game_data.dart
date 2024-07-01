@@ -85,6 +85,9 @@ abstract class BasicOfGameData {
     else if (gameType == GameTypes.chooseTheSentence.text()) {
       return ChooseTheSentenceGame();
     }
+    else if (gameType == GameTypes.chooseTheCorrect.text()) {
+      return ChooseTheCorrectGame();
+    }
   }
 
   static List listOfConnectGames = [
@@ -591,6 +594,26 @@ class ChooseTheSentenceGame implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesPhonetics.chooseTheSentenceGame;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
+}
+class ChooseTheCorrectGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+
+  @override
+  String titleImageEn = AppImagesPhonetics.chooseTheCorrectGame;
 
   @override
   String? completeBasket;

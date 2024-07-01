@@ -11,6 +11,8 @@ import '../core/audio_player_letters.dart';
 import '../core/games_structure/basic_of_game_data.dart';
 import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
+import '../games/choose_the_correct/manager/choose_the_correct_cubit.dart';
+import '../games/choose_the_correct/page/choose_the_correct_screen.dart';
 import '../games/choose_the_sentence/manager/listen_choose_cubit.dart';
 import '../games/choose_the_sentence/page/listen_and_choose_screen.dart';
 import '../games/click_the_word/manager/click_the_word_cubit.dart';
@@ -81,6 +83,13 @@ class BasedOfGameUpVowels extends StatelessWidget {
                           index: stateOfGame.index,
                           listGameData: gamesData, ),
                         child: ChooseTheSentenceScreen())
+                  } else if ((stateOfGame.basicData?.gameData
+                  is ChooseTheCorrectGame)) ...{
+                    BlocProvider<ChooseTheCorrectCubit>(
+                        create: (_) => ChooseTheCorrectCubit(
+                            index: stateOfGame.index,
+                            listGameData: gamesData),
+                        child: ChooseTheCorrectScreen())
                   }
                 ],
               ),

@@ -29,7 +29,8 @@ enum GameTypes {
   match,
   rearrange,
   clickTheWord,
-  chooseTheSentence
+  chooseTheSentence,
+  chooseTheCorrect
 }
 
 extension TypeExtension on GameTypes {
@@ -55,6 +56,8 @@ extension TypeExtension on GameTypes {
         return 'Spelling'.toLowerCase();
       case GameTypes.tracing:
         return 'trace'.toLowerCase();
+      case GameTypes.chooseTheCorrect:
+        return 'Choose the Correct'.toLowerCase();
       case GameTypes.video:
         return 'Video'.toLowerCase();
       case GameTypes.dragPicToWord:

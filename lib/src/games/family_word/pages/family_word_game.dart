@@ -59,34 +59,29 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                               color: AppColorPhonetics.darkBorderColor,
                               width: 5)),
                       child: Center(
-                        child: Column(
-                          children: [
-                            Text('##:${gameState.gameData.id}'),
-                            GridView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: 4,
-                                padding: EdgeInsets.all(10),
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisSpacing: 20,
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 2,
-                                  crossAxisSpacing: 35,
-                                ),
-                                itemBuilder: (context, index) {
-                                  try {
-                                    return ItemCardWordWidget(
-                                      data: gameState.currentImages[index],
-                                      body: gameState.currentImages[index],
-                                      index: gameState.currentImages[index].id ?? 0,
-                                    );
-                                  } catch (e) {
-                                    return const SizedBox();
-                                  }
-                                }),
-                          ],
-                        ),
+                        child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: 4,
+                            padding: EdgeInsets.all(10),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              mainAxisSpacing: 20,
+                              crossAxisCount: 2,
+                              childAspectRatio: 2,
+                              crossAxisSpacing: 35,
+                            ),
+                            itemBuilder: (context, index) {
+                              try {
+                                return ItemCardWordWidget(
+                                  data: gameState.currentImages[index],
+                                  body: gameState.currentImages[index],
+                                  index: gameState.currentImages[index].id ?? 0,
+                                );
+                              } catch (e) {
+                                return const SizedBox();
+                              }
+                            }),
                       )),
                   Expanded(
                       child: Container(

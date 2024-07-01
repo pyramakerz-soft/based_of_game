@@ -36,7 +36,9 @@ class ItemCardWordWidget extends StatelessWidget {
               strokeWidth: 1,
               dashPattern: [8, 4],
               color: AppColorPhonetics.darkBorderColor,
-              radius: Radius.circular(12),
+
+              borderType : BorderType.RRect,
+              radius: const Radius.circular(7),
               // padding: const EdgeInsets.all(6),
               child: Center(
                 child: Text(
@@ -56,7 +58,9 @@ class ItemCardWordWidget extends StatelessWidget {
         strokeWidth: 1,
         dashPattern: [8, 4],
         color: AppColorPhonetics.darkBorderColor,
-        radius: Radius.circular(12),
+
+        borderType : BorderType.RRect,
+        radius: const Radius.circular(7),
         // padding: const EdgeInsets.all(6),
         child: Center(
           child: Text(

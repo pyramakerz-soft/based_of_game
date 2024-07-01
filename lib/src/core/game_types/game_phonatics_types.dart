@@ -30,7 +30,7 @@ enum GameTypes {
   rearrange,
   clickTheWord,
   chooseTheSentence,
-  chooseTheCorrect
+  chooseTheCorrect,sortingCupsUP
 }
 
 extension TypeExtension on GameTypes {
@@ -74,6 +74,8 @@ extension TypeExtension on GameTypes {
         return 'Click the Word'.toLowerCase();
       case GameTypes.listenAndChoose:
         return 'Listen and Choose'.toLowerCase();
+      case GameTypes.sortingCupsUP:
+        return 'Sorting cups UP'.toLowerCase();
       case GameTypes.rearrange:
         return 'Rearrange'.toLowerCase();
       case GameTypes.chooseTheSentence:

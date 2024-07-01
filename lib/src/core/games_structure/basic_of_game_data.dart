@@ -37,6 +37,9 @@ abstract class BasicOfGameData {
     else if (gameType == GameTypes.sortingCups.text()) {
       return SortingCupsGame();
     }
+    else if (gameType == GameTypes.sortingCupsUP.text()) {
+      return SortingCupsGame();
+    }
     else if (gameType == GameTypes.sortingPictures.text()) {
       return SortingPicturesGame();
     }

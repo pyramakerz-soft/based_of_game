@@ -9,14 +9,13 @@ part 'match_state.dart';
 
 class MatchCubit extends Cubit<MatchInitial> {
   MatchCubit({
-    required List<GameFinalModel> listGameData,
-    required int index,
+    required GameFinalModel gameData,
   }) : super(MatchInitial(
-          gameData: listGameData[index],
-          index: index,
-          listGameData: listGameData,
+          gameData: gameData,
+          // listGameData: listGameData,
           answers: [],
           positions: [],
+          countQuestions: gameData.gameImages?.length ?? 0,
           widgetKey: [],
           imageAnswers: [],
         )) {
@@ -37,43 +36,36 @@ class MatchCubit extends Cubit<MatchInitial> {
     ));
   }
 
-  addCorrectAnswer(
-      {required Offset endPosition, required Offset startPosition}) {
+  int addCorrectAnswer(
+      {required Offset endPosition, required Offset startPosition, required int answerId, required int imageAnswerId}) {
     int countOfCorrect = state.countCorrectAnswers;
-    List<List<Offset?>> positions = state.positions;
-    // if (isFirst == true) {
-    //   // try {
-    //   //   List<List<Offset?>> subPositions = positions
-    //   //       .where((test) => test.last != null && test.first == null)
-    //   //       .toList();
-    //   //   int x = positions.indexOf(subPositions.first);
-    //   //   positions[x].first = position;
-    //   // } catch (e) {
-    //   positions[index].first = position;
-    //   // }
-    //   print('positions:$positions');
-    // } else {
-    //   // List<List<Offset?>> subPositions = positions
-    //   //     .where((test) => test.first != null && test.last == null)
-    //   //     .toList();
-    //   // if (subPositions.isNotEmpty) {
-    //   //   int x = positions.indexOf(subPositions.first);
-    //   //
-    //   //   positions[x].last = position;
-    //   // } else {
-    //   positions[index].last = position;
-    //   // }
-    //   print('1positions:$positions');
-    // }
     countOfCorrect++;
+    List<List<Offset?>> positions = state.positions;
+    positions.insert((countOfCorrect - 1), [startPosition, endPosition]);
     emit(state.copyWith(
         countCorrectAnswers: countOfCorrect, positions: positions));
+    List<GameLettersGameFinalModel> answers = state.answers;
+    List<GameImagesGameFinalModel> imageAnswers = state.imageAnswers;
+    GameLettersGameFinalModel  answer2 = answers.where((test)=> test.id == answerId).first;
+    int indexAnswer = answers.indexOf(answer2);
+    answers[indexAnswer] =GameLettersGameFinalModel(
+      letter: answers[indexAnswer].letter
+    );
+    GameImagesGameFinalModel  answerImageAnswers2 = imageAnswers.where((test)=> test.id == imageAnswerId).first;
+    int indexImageAnswers = imageAnswers.indexOf(answerImageAnswers2);
+    imageAnswers[indexImageAnswers] =GameImagesGameFinalModel(
+      word: imageAnswers[indexImageAnswers].word,
+      image: imageAnswers[indexImageAnswers].image
+    );
+    emit(state.copyWith(imageAnswers:imageAnswers, answers:answers));
+      return countOfCorrect;
+
   }
 
-  updateTheCurrentGame({required int index}) {
-    debugPrint('updateTheCurrentGame:${state.gameData.id}, $index');
-    emit(state.copyWith(gameData: state.listGameData[index], index: index));
-    debugPrint('updateTheCurrentGame:${state.gameData.id}');
-    reFormatAnswers();
-  }
+  // updateTheCurrentGame({required int index}) {
+  //   debugPrint('updateTheCurrentGame:${state.gameData.id}, $index');
+  //   emit(state.copyWith(gameData: state.listGameData[index], index: index));
+  //   debugPrint('updateTheCurrentGame:${state.gameData.id}');
+  //   reFormatAnswers();
+  // }
 }

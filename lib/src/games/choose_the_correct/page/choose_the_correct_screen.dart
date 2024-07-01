@@ -22,14 +22,14 @@ class ChooseTheCorrectScreen extends StatefulWidget {
 class _ChooseTheCorrectScreen extends State<ChooseTheCorrectScreen> {
   @override
   void initState() {
-    final List<GameFinalModel> gameData =
+    final List<GameFinalModel> gamesData =
         context.read<ChooseTheCorrectCubit>().state.listGameData;
     context
         .read<CurrentGamePhoneticsCubit>()
-        .getStateOfStars(mainCountOfQuestion: gameData.length);
+        .getStateOfStars(mainCountOfQuestion: gamesData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
         stateOfStringIsWord: true,
-        stateOfStringWillSay: gameData.first.inst ?? '');
+        stateOfStringWillSay: gamesData.first.inst ?? '');
     super.initState();
   }
 

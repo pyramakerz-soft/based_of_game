@@ -156,6 +156,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   addStarToStudent({required int stateOfCountOfCorrectAnswer}) {
     List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
+    print('stateOfStarsAdd:$stateOfStarsAdd');
     int mainCountOfQuestion = stateOfStarsAdd.fold(
         0, (previousValue, element) => previousValue + element);
     emit(state.copyWith(countOfCorrectAnswers: stateOfCountOfCorrectAnswer));

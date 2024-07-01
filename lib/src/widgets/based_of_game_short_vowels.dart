@@ -65,9 +65,7 @@ class BasedOfGameShortVowels extends StatelessWidget {
                       is MatchGame)) ...{
                     BlocProvider<MatchCubit>(
                         create: (_) => MatchCubit(
-                              // gameData: stateOfGameData.data[stateOfGame.index],
-                              index: stateOfGame.index,
-                              listGameData: gamesData,
+                              gameData: gamesData[stateOfGame.index],
                             ),
                         child: MatchScreen())
                   }

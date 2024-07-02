@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'game_model.dart';
-import 'sub_chapter_model.dart';
 import 'user_courses.dart';
 part 'lesson_model.g.dart';
 
@@ -17,8 +15,6 @@ class LessonGameFinalModel extends Equatable {
   final String? name;
   final String? createdAt;
   final String? updatedAt;
-  final SubChapterGameFinalModel? chapter;
-  final List<GameFinalModel>? games;
   final UserCourseGameFinalModel? unit;
   const LessonGameFinalModel(
       {this.id,
@@ -29,9 +25,7 @@ class LessonGameFinalModel extends Equatable {
       this.warmupId,
       this.createdAt,
       this.updatedAt,
-      this.chapter,
       this.type,
-      this.games,
       this.unit});
 
   factory LessonGameFinalModel.fromJson(Map<String, dynamic> json) {
@@ -51,9 +45,7 @@ class LessonGameFinalModel extends Equatable {
         unitId,
         createdAt,
         updatedAt,
-        chapter,
         stars,
         type,
-        games
       ];
 }

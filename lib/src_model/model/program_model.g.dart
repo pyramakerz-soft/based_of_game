@@ -17,9 +17,6 @@ ProgramGameFinalModel _$ProgramGameFinalModelFromJson(
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       image: json['image'] as String?,
-      studentTests: (json['student_tests'] as List<dynamic>?)
-          ?.map((e) => TestGameFinalModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
       course: json['course'] == null
           ? null
           : CourseGameFinalModel.fromJson(
@@ -38,5 +35,4 @@ Map<String, dynamic> _$ProgramGameFinalModelToJson(
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'course': instance.course?.toJson(),
-      'student_tests': instance.studentTests?.map((e) => e.toJson()).toList(),
     };

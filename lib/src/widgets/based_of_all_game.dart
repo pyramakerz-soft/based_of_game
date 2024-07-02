@@ -53,8 +53,7 @@ class BasedOfAllGame extends StatelessWidget {
               Navigator.of(context).pop();
             },
           )
-        }
-        else ...{
+        } else ...{
           SizedBox(
             height: (MediaQuery.of(context).size.height - (50.h + 5)),
             child: Column(
@@ -65,26 +64,32 @@ class BasedOfAllGame extends StatelessWidget {
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
                     ),
-                  }else...{
+                  } else ...{
                     BasedOfGameShortVowels(
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
                     ),
                   }
-                }else if (stateOfGame.basicData is UpVowels) ...{
+                } else if (stateOfGame.basicData is UpVowels) ...{
                   if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
-                    BasedOfGameShortVowelsTextNextRive(
-                      stateOfGame: stateOfGame,
-                      gamesData: gamesData,
-                    ),
-                  }else...{
+                    if (stateOfGame.basicData?.gameData is SortingCupsGame) ...{
+                      BasedOfGameConnectSortingCups(
+                        stateOfGame: stateOfGame,
+                        gamesData: gamesData,
+                      ),
+                    } else ...{
+                      BasedOfGameShortVowelsTextNextRive(
+                        stateOfGame: stateOfGame,
+                        gamesData: gamesData,
+                      ),
+                    }
+                  } else ...{
                     BasedOfGameUpVowels(
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
                     ),
                   }
-                }
-                else if (stateOfGame.basicData?.gameData?.isConnect ==
+                } else if (stateOfGame.basicData?.gameData?.isConnect ==
                     true) ...{
                   if (stateOfGame.basicData is ConnectionSortingCups) ...{
                     BasedOfGameConnectSortingCups(

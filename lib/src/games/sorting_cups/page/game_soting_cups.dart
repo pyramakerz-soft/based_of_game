@@ -281,7 +281,9 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addWrongAnswer(
-                                            actionOfWrongAnswer: () async {});
+                                            actionOfWrongAnswer: () async {
+                                              context.read<SortingCupsCubit>().sayTheLetter();
+                                            });
                                   }
                                 }
                               },

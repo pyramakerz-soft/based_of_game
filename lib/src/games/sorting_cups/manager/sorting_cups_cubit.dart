@@ -63,4 +63,12 @@ class SortingCupsCubit extends Cubit<SortingCupsInitial> {
       emit(state.copyWith(chooseWord: chooseWord));
     }
   }
+  sayTheLetter() async {
+    GameLettersGameFinalModel? chooseWord = state.chooseWord;
+    if(chooseWord!=null) {
+      await AudioPlayerLetters.startPlaySound(
+          soundPath: AssetsSoundLetters.getSoundOfLetter(
+              mainGameLetter: chooseWord.letter?.toLowerCase() ?? ''));
+    }
+  }
 }

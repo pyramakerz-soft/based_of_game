@@ -6,12 +6,14 @@ class XOutInitial extends Equatable {
   final GameFinalModel? gameData;
   final int? correctAnswers;
   final int currentGameIndex;
+  final int? isWrong;
   final List<int>? selectedItems;
 
   const XOutInitial({
     required this.listGameData,
     this.gameData,
     this.correctAnswers = 0,
+    this.isWrong ,
     required this.currentGameIndex,
     this.selectedItems = const [],
   });
@@ -21,6 +23,7 @@ class XOutInitial extends Equatable {
     int? correctAnswers,
     GameFinalModel? gameData,
     int? currentGameIndex,
+    int? isWrong,
     List<int>? selectedItems,
     // bool? isInteracting,
   }) {
@@ -28,6 +31,7 @@ class XOutInitial extends Equatable {
       listGameData: listGameData ?? this.listGameData,
       correctAnswers: correctAnswers ?? this.correctAnswers,
       currentGameIndex: currentGameIndex ?? this.currentGameIndex,
+      isWrong: isWrong ?? this.isWrong,
       selectedItems: selectedItems ?? this.selectedItems,
       gameData: gameData ?? this.gameData,
     );
@@ -37,13 +41,25 @@ class XOutInitial extends Equatable {
     return XOutInitial(
       listGameData: listGameData,
       correctAnswers: null,
+      isWrong:null,
       currentGameIndex: currentGameIndex,
       selectedItems: null,
       gameData: gameData ?? gameData,
     );
   }
 
+  XOutInitial clearWrongStateAnswer() {
+    return XOutInitial(
+      listGameData: listGameData,
+      correctAnswers: correctAnswers,
+      isWrong:null,
+      currentGameIndex: currentGameIndex,
+      selectedItems: selectedItems,
+      gameData: gameData ?? gameData,
+    );
+  }
+
   @override
   List<Object?> get props =>
-      [listGameData, correctAnswers, selectedItems, currentGameIndex, gameData];
+      [listGameData, correctAnswers, selectedItems, currentGameIndex, gameData, isWrong];
 }

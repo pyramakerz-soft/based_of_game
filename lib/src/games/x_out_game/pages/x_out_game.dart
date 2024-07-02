@@ -96,11 +96,13 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                       return gameHasData
                           ? const SizedBox()
                           : XOutItemWidget(
+                        imageId:state.gameData?.gameImages?[index].id??0,
                               imageName:
                                   state.gameData?.gameImages?[index].image ??
                                       "",
                               isSelected: isSelected,
                               isCorrect: isCorrect,
+                              isWrong:state.isWrong,
                               onTap: isInteracting != null &&
                                       isInteracting !=
                                           BasicOfGameData.stateOIdle
@@ -149,10 +151,15 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                                         });
                                       } else {
                                         await context
+                                            .read<XOutCubit>().addWrongAnswer(isWrong: state.gameData?.gameImages?[index].id??0);
+                                        await context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addWrongAnswer(
                                                 actionOfWrongAnswer:
-                                                    () async {});
+                                                    () async {
+                                                      await context
+                                                          .read<XOutCubit>().clearWrongAnswer();
+                                                    });
                                       }
                                     },
                               word:

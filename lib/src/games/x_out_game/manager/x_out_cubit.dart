@@ -52,4 +52,11 @@ class XOutCubit extends Cubit<XOutInitial> {
         soundPath: AssetsSoundLetters.getSoundOfLetter(
             mainGameLetter: (state.gameData?.mainLetter ?? '')));
   }
+  addWrongAnswer({required int isWrong})  {
+    emit(state.copyWith(isWrong:isWrong));
+  }
+
+  clearWrongAnswer()  {
+    emit(state.clearWrongStateAnswer());
+  }
 }

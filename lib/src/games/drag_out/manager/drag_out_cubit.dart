@@ -19,37 +19,20 @@ class DragOutCubit extends Cubit<DragOutInitial> {
     // emit(state.copyWith(gameData: gameData));
     debugPrint('DragOutCubit');
     emit(state.copyWith(gameData: allGameData[index]));
+    reFormatData();
     sayLetter();
   }
-
-  // Future<int> increaseCountOfCorrectAnswers() async {
-  //   int sub = state.correctAnswer ?? 0;
-  //   sub = sub + 1;
-  //   emit(state.copyWith(correctAnswer: sub));
-  //   return Future.value(state.correctAnswer);
-  // }
-
-  // bool checkIfIsTheLastGameOfLesson() {
-  //   int currentIndex = state.index ?? 0;
-  //   currentIndex = currentIndex + 1;
-  //
-  //   if ((state.gameData.length) > currentIndex) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-
-  // updateIndexOfCurrentGame() {
-  //   int currentIndex = state.index ?? 0;
-  //   currentIndex = currentIndex + 1;
-  //   emit(state.copyWith(index: currentIndex));
-  // }
+reFormatData(){
+  List<GameImagesGameFinalModel> gameImages = state.gameData.gameImages??[];
+  gameImages.shuffle();
+  emit(state.copyWith(gameImages:gameImages));
+}
 
   updateTheCurrentGame({required int index}) {
     debugPrint('updateTheCurrentGame:${state.gameData.id}, $index');
     emit(state.copyWith(gameData: state.allGameData[index], index: index));
     debugPrint('updateTheCurrentGame:${state.gameData.id}');
+    reFormatData();
   }
 
   sayLetter() async {

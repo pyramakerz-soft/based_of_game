@@ -28,7 +28,7 @@ class _DragOutGame extends State<DragOutGame> {
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: true,
+        stateOfStringIsWord: false,
         stateOfStringWillSay: gameData.first.mainLetter ?? '');
     super.initState();
   }
@@ -55,6 +55,7 @@ class _DragOutGame extends State<DragOutGame> {
                   Container(
                       margin: const EdgeInsets.only(bottom: 15, left: 10),
                       child: Draggable<String>(
+                        maxSimultaneousDrags:1,
                         data: gameState.gameData.mainLetter ?? '',
                         childWhenDragging: SizedBox(
                           height: (MediaQuery.of(context).size.height / 2.8).h,
@@ -83,7 +84,7 @@ class _DragOutGame extends State<DragOutGame> {
                               ),
                       )),
                   Container(
-                    margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
+                    margin:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height>500?250.h:(15 + 50), top: 50),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 20),
                     width: MediaQuery.of(context).size.width - (130 + 50 + 130),
@@ -97,7 +98,7 @@ class _DragOutGame extends State<DragOutGame> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: List.generate(
-                          gameState.gameData.gameImages?.length ?? 0,
+                          gameState.gameImages?.length ?? 0,
                           (index) => DragTarget<String>(builder: (
                                 BuildContext context,
                                 List<dynamic> accepted,
@@ -117,14 +118,12 @@ class _DragOutGame extends State<DragOutGame> {
                                         onTap: () {
                                           TalkTts.startTalk(
                                               text: gameState
-                                                      .gameData
                                                       .gameImages?[index]
                                                       .word ??
                                                   '');
                                         },
                                         child: CachedNetworkImage(
-                                          imageUrl: gameState.gameData
-                                                  .gameImages?[index].image ??
+                                          imageUrl: gameState.gameImages?[index].image ??
                                               '',
                                           width: (MediaQuery.of(context)
                                                       .size
@@ -139,7 +138,7 @@ class _DragOutGame extends State<DragOutGame> {
                                           errorWidget: (context, url, error) =>
                                               Center(
                                             child: Text(
-                                                '${gameState.gameData.gameImages?[index].word}'),
+                                                '${gameState.gameImages?[index].word}'),
                                           ),
                                           fit: BoxFit.contain,
                                           // height: ,
@@ -148,14 +147,9 @@ class _DragOutGame extends State<DragOutGame> {
                               },
                               onAcceptWithDetails: (item) async {
                                 debugPrint(
-                                    '####:${gameState.gameData.gameImages?[index].word}');
+                                    '####:${gameState.gameImages?[index].word}');
                                 debugPrint('####:${(item.data.toLowerCase())}');
-                                if (gameState.gameData.gameImages?[index].word
-                                        .toString()
-                                        .split('')
-                                        .first
-                                        .toLowerCase() !=
-                                    (item.data.toLowerCase())) {
+                                if (gameState.gameImages?[index].correct ==1) {
                                   await context
                                       .read<CurrentGamePhoneticsCubit>()
                                       .addSuccessAnswer(

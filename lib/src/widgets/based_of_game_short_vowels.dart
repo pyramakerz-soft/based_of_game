@@ -17,8 +17,6 @@ import '../games/drag_word_to_pic/manager/drag_word_to_pic_cubit.dart';
 import '../games/drag_word_to_pic/page/drag_pic_to_word.dart';
 import '../games/family_word/pages/family_word_game.dart';
 import '../games/match/page/match_screen.dart';
-import '../games/match3/manager/match_cubit.dart';
-import '../games/match3/page/match_screen2.dart';
 import '../games/rearrange/manager/rearrange_cubit.dart';
 import '../games/rearrange/page/rearrange_screen.dart';
 import '../games/sorting_game/manager/sorting_cubit.dart';

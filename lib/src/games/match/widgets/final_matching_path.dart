@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../core/phonetics_color.dart';
+import '../../../core/phonetics_color.dart';
 
-class MatchingPainter2 extends CustomPainter {
+class FinalMatchingPainter extends CustomPainter {
   final List<List<Offset?>> firstPosition;
 
-  MatchingPainter2(this.firstPosition);
+  FinalMatchingPainter(this.firstPosition);
 
   @override
   void paint(Canvas canvas, Size size) {

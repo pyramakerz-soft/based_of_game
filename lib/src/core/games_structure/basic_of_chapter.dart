@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../games/tracing/widget/letter_m.dart';
-import '../../games/tracing/widget/letter_s.dart';
+import '../../games/tracing/widget/letter_s3.dart';
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
 import 'basic_of_game_data.dart';
@@ -28,9 +28,15 @@ enum MainDataOfChaptersTypes {
   w,
   e,
   n,
-  k,q,v,x,y,z,
+  k,
+  q,
+  v,
+  x,
+  y,
+  z,
   redUnit,
-  shortVowels,up
+  shortVowels,
+  up
 }
 
 extension TypeExtension on MainDataOfChaptersTypes {
@@ -290,6 +296,7 @@ class MPhonetics implements MainDataOfChapters {
             return null;
           };
 }
+
 class KPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
@@ -334,6 +341,7 @@ class KPhonetics implements MainDataOfChapters {
             return null;
           };
 }
+
 class QPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
@@ -378,6 +386,7 @@ class QPhonetics implements MainDataOfChapters {
             return null;
           };
 }
+
 class VPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
@@ -422,6 +431,7 @@ class VPhonetics implements MainDataOfChapters {
             return null;
           };
 }
+
 class XPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
@@ -466,6 +476,7 @@ class XPhonetics implements MainDataOfChapters {
             return null;
           };
 }
+
 class YPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
@@ -510,6 +521,7 @@ class YPhonetics implements MainDataOfChapters {
             return null;
           };
 }
+
 class ZPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
@@ -1292,8 +1304,7 @@ class ShortVowels implements MainDataOfChapters {
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
 
-  ShortVowels
-      ({required this.mineGameData}) {
+  ShortVowels({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
@@ -1337,8 +1348,7 @@ class UpVowels implements MainDataOfChapters {
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
 
-  UpVowels
-      ({required this.mineGameData}) {
+  UpVowels({required this.mineGameData}) {
     gameData = mineGameData;
   }
 

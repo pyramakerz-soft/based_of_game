@@ -10,9 +10,9 @@ import '../../../../src_model/export_models.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../core/theme_text.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
-import '../../match3/matching_path.dart';
+import '../widgets/final_matching_path.dart';
 import '../manager/match_cubit.dart';
-import '../matching_path.dart';
+import '../widgets/matching_path.dart';
 
 class MatchScreen extends StatefulWidget {
   const MatchScreen({super.key});
@@ -26,10 +26,10 @@ class MatchScreen extends StatefulWidget {
 class _MatchScreen extends State<MatchScreen> {
   @override
   void initState() {
-    final GameFinalModel gameData =
-        context.read<MatchCubit>().state.gameData;
-    context.read<CurrentGamePhoneticsCubit>().getStateOfStars(
-        mainCountOfQuestion: gameData.gameImages?.length??0);
+    final GameFinalModel gameData = context.read<MatchCubit>().state.gameData;
+    context
+        .read<CurrentGamePhoneticsCubit>()
+        .getStateOfStars(mainCountOfQuestion: gameData.gameImages?.length ?? 0);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
         stateOfStringIsWord: false,
         stateOfStringWillSay: gameData.mainLetter ?? '');
@@ -91,7 +91,7 @@ class _MatchScreen extends State<MatchScreen> {
                           (50.h + 5 + 120.h),
                       child: CustomPaint(
                         size: Size.infinite,
-                        painter: MatchingPainter2(gameState.positions),
+                        painter: FinalMatchingPainter(gameState.positions),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -269,35 +269,40 @@ class _MatchScreen extends State<MatchScreen> {
                                                     ?.toLowerCase() ==
                                                 item.data.letter
                                                     ?.toLowerCase()) {
-
-                                              int countCorrectAnswers = await context
-                                                  .read<MatchCubit>()
-                                                  .addCorrectAnswer(
-                                                      endPosition: end!,
-                                                      startPosition: start!,
-                                                      answerId:
-                                                          item.data.id ?? 0,
-                                                      imageAnswerId: gameState
-                                                              .imageAnswers[
-                                                                  index]
-                                                              .id ??
-                                                          0);
-                                              print('gameState.countQuestions:${gameState.countQuestions}, ${gameState.countCorrectAnswers}');
+                                              int countCorrectAnswers =
+                                                  await context
+                                                      .read<MatchCubit>()
+                                                      .addCorrectAnswer(
+                                                          endPosition: end!,
+                                                          startPosition: start!,
+                                                          answerId:
+                                                              item.data.id ?? 0,
+                                                          imageAnswerId: gameState
+                                                                  .imageAnswers[
+                                                                      index]
+                                                                  .id ??
+                                                              0);
+                                              print(
+                                                  'gameState.countQuestions:${gameState.countQuestions}, ${gameState.countCorrectAnswers}');
                                               await context
-                                                  .read<CurrentGamePhoneticsCubit>()
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
                                                   .addSuccessAnswer(
-                                                  questions:
-                                                  gameState.countQuestions,
-                                                  correctAnswers:countCorrectAnswers)
+                                                      questions: gameState
+                                                          .countQuestions,
+                                                      correctAnswers:
+                                                          countCorrectAnswers)
                                                   .whenComplete(() {
                                                 // print('listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
 
-                                                if (gameState.countQuestions==countCorrectAnswers) {
+                                                if (gameState.countQuestions ==
+                                                    countCorrectAnswers) {
                                                   Future.delayed(
-                                                      const Duration(seconds: 2),
-                                                          () async {
-                                                        Navigator.of(context).pop();
-                                                      });
+                                                      const Duration(
+                                                          seconds: 2),
+                                                      () async {
+                                                    Navigator.of(context).pop();
+                                                  });
                                                 }
                                                 // else {
                                                 //   Future.delayed(

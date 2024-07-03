@@ -71,9 +71,7 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                           letter: stateOfGame.letters?[index] ?? '',
                           viewModel: context.read<ClickTheSoundCubit>(),
                           index: index,
-                          onPress: (isInteracting != null &&
-                                      isInteracting !=
-                                          BasicOfGameData.stateOIdle) ||
+                          onPress:
                                   (context
                                           .read<ClickTheSoundCubit>()
                                           .state
@@ -82,6 +80,12 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                                       false)
                               ? null
                               : () async {
+                            if(context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .ableButton()){
+                              print('###:${(context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .ableButton())}');
                                   if (stateOfGame.letters?[index] ==
                                       stateOfGame.gameData.mainLetter) {
                                     await context
@@ -103,7 +107,7 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                                         .whenComplete(() {
                                       bool isLastQuestion = context
                                           .read<CurrentGamePhoneticsCubit>()
-                                          .checkIfIsTheLastQuestionOfGame(
+                                          .secondWayToCheckIfIsTheLastQuestionOfGame(
                                               queations: stateOfGame.letters
                                                       ?.where((element) =>
                                                           element ==
@@ -129,6 +133,7 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                                           .sayTheLetter();
                                     });
                                   }
+                                  }
                                 },
                         ),
                       ),
@@ -145,13 +150,14 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
     required int index,
     required ClickTheSoundCubit viewModel,
   }) {
-    return SizedBox(
-      width: 104.w,
+    return Container(
+      // width: 104.w,
       height: 104.h,
+      margin: EdgeInsets.symmetric(horizontal: 20.w),
       child: InkWell(
         onTap: onPress,
         child: Container(
-          width: 104.w,
+          // width: 104.w,
           height: 104.h,
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -167,6 +173,7 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
             text: letter,
             isDisabled:
                 viewModel.state.correctIndexes?.contains(index) ?? false,
+
           ),
         ),
       ),

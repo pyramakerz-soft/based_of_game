@@ -9,6 +9,8 @@ import 'package:flutter/services.dart';
 import '../../based_of_eng_game.dart';
 import '../core/assets_game_sound.dart';
 import '../core/audio_player_game.dart';
+import '../core/audio_player_letters.dart';
+import '../core/talk_tts.dart';
 
 part 'current_game_phonetics_state.dart';
 
@@ -30,6 +32,14 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     if (state.index > (state.gameData?.length ?? 0)) {
       return Exception("check the game data");
     }
+  }
+
+  bool ableButton() {
+    print('state.stateOfAvatar:${((state.stateOfAvatar == BasicOfGameData.stateOIdle) || (state.stateOfAvatar == null))}');
+    print('state.stateOfAvatar:${(AudioPlayerLetters.player.state)}');
+    print('state.stateOfAvatar:${(TalkTts.data )}');
+    return ((state.stateOfAvatar == BasicOfGameData.stateOIdle) ||
+        (state.stateOfAvatar == null))&&(AudioPlayerLetters.player.state !=PlayerState.playing) && (TalkTts.data == StateOfTalk.stopped);
   }
 
   _getTheBackGround() {
@@ -138,8 +148,17 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   bool checkIfIsTheLastQuestionOfGame({required int queations}) {
-    int countOfCorrectAnswers = state.index+1;
+    int countOfCorrectAnswers = state.index + 1;
     print('countOfCorrectAnswers:$countOfCorrectAnswers , $queations');
+    if (queations <= countOfCorrectAnswers) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool secondWayToCheckIfIsTheLastQuestionOfGame({required int queations}) {
+    int countOfCorrectAnswers = state.countOfCorrectAnswers;
     if (queations <= countOfCorrectAnswers) {
       return true;
     } else {

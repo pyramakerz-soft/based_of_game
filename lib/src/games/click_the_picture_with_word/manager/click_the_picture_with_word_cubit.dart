@@ -47,7 +47,7 @@ class ClickThePictureWithWordCubit
     // }
   }
 
-  addTheCorrectAnswer({required int idOfUserAnswer}) async {
+  Future addTheCorrectAnswer({required int idOfUserAnswer}) async {
     debugPrint('addTheCorrectAnswer');
     emit(state.clearChooseWord());
 

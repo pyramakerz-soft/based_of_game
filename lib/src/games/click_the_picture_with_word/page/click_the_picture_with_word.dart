@@ -68,61 +68,68 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
                       image: gameState.gameImages?[index].image ?? '',
                       selected: gameState.correctIndexes
                           .contains(gameState.gameImages?[index].id),
-                      onTap: isInteracting != null &&
-                              isInteracting != BasicOfGameData.stateOIdle
-                          ? null
-                          : () async {
-                              if (!gameState.correctIndexes
-                                  .contains(gameState.gameImages?[index].id)) {
-                                if ((gameState.chooseWord?.word ?? '') ==
-                                    (gameState.gameImages?[index].word)) {
-                                  await context
-                                      .read<ClickThePictureWithWordCubit>()
-                                      .addTheCorrectAnswer(
-                                          idOfUserAnswer: (gameState
-                                                  .gameImages?[index].id ??
+                      onTap: () async {
+                        if (context
+                            .read<CurrentGamePhoneticsCubit>()
+                            .ableButton()) {
+                          print('ableButton:${context
+                              .read<CurrentGamePhoneticsCubit>()
+                              .ableButton()}');
+                          if (!gameState.correctIndexes
+                              .contains(gameState.gameImages?[index].id)) {
+                            if ((gameState.chooseWord?.word ?? '') ==
+                                (gameState.gameImages?[index].word)) {
+                              await context
+                                  .read<ClickThePictureWithWordCubit>()
+                                  .addTheCorrectAnswer(
+                                      idOfUserAnswer:
+                                          (gameState.gameImages?[index].id ??
                                               0));
-                                  await context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .addSuccessAnswer(
-                                          subAction: () async {
-                                            debugPrint(
-                                                'subAction:${gameState.chooseWord?.word}');
-                                            await context
-                                                .read<
-                                                    ClickThePictureWithWordCubit>()
-                                                .getTheRandomWord();
-                                          },
-                                          questions:
-                                              gameState.gameImages?.length ?? 0,
-                                          correctAnswers:
-                                              gameState.correctIndexes.length)
-                                      .whenComplete(() async {
-                                    bool isLastQuestion = context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .checkIfIsTheLastQuestionOfGame(
-                                            queations:
-                                                gameState.gameImages?.length ??
-                                                    0);
-                                    if (isLastQuestion) {
-                                      Future.delayed(const Duration(seconds: 2),
-                                          () async {
-                                        Navigator.of(context).pop();
-                                      });
-                                    } else {}
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .addSuccessAnswer(
+                                      subAction: () async {
+                                        debugPrint(
+                                            'subAction:${gameState.chooseWord?.word}');
+                                        await context
+                                            .read<
+                                                ClickThePictureWithWordCubit>()
+                                            .getTheRandomWord();
+                                      },
+                                      questions:
+                                          gameState.gameImages?.length ?? 0,
+                                      correctAnswers:
+                                          gameState.correctIndexes.length)
+                                  .whenComplete(() async {
+                                bool isLastQuestion = context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .secondWayToCheckIfIsTheLastQuestionOfGame(
+                                        queations:
+                                            gameState.gameImages?.length ?? 0);
+                                if (isLastQuestion) {
+                                  Future.delayed(const Duration(seconds: 2),
+                                      () async {
+                                    Navigator.of(context).pop();
                                   });
-                                } else {
-                                  await context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .addWrongAnswer(
-                                          actionOfWrongAnswer: () async {
-                                    await context
-                                        .read<ClickThePictureWithWordCubit>()
-                                        .sayTheLetter();
-                                  });
-                                }
-                              }
-                            })));
+                                } else {}
+                              });
+                            }
+                            else {
+
+                              print('wrong:${gameState.chooseWord}');
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .addWrongAnswer(
+                                      actionOfWrongAnswer: () async {
+                                await context
+                                    .read<ClickThePictureWithWordCubit>()
+                                    .sayTheLetter();
+                              });
+                            }
+                          }
+                        }
+                      }))
+          );
         }));
   }
 }

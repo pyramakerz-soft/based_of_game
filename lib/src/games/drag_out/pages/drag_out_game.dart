@@ -149,7 +149,7 @@ class _DragOutGame extends State<DragOutGame> {
                                 debugPrint(
                                     '####:${gameState.gameImages?[index].word}');
                                 debugPrint('####:${(item.data.toLowerCase())}');
-                                if (gameState.gameImages?[index].correct ==1) {
+                                if (gameState.gameImages?[index].correct ==0) {
                                   await context
                                       .read<CurrentGamePhoneticsCubit>()
                                       .addSuccessAnswer(

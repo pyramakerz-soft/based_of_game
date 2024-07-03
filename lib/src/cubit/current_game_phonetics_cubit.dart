@@ -263,7 +263,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         playerCorrect2: playerCorrect,
         soundPath: AppGameSound.getRandomSoundOfCorrect());
     await addStarToStudent(stateOfCountOfCorrectAnswer: correctAnswers);
-    bool isLastLesson = checkIfIsTheLastQuestionOfGame(queations: questions);
+    bool isLastLesson = secondWayToCheckIfIsTheLastQuestionOfGame(queations: questions);
     if (isLastLesson == true) {
       await Future.delayed(const Duration(seconds: 2));
       state.actionWhenTriesBeZero(state.countOfStar ?? 0);

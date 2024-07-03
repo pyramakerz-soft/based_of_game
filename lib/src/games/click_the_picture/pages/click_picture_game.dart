@@ -43,29 +43,7 @@ class _ClickPictureGame extends State<ClickPictureGame> {
 
     return BlocConsumer<ClickPictureCubit, ClickPictureInitial>(
         listener: (context, state) {
-      // int success = state.correctIndexes.length;
-      // if (success ==
-      //     (gameData.gameImages?.where((e) => e.correct == 1).toList().length ??
-      //         1)) {
-      //   Future.delayed(Duration(seconds: 2), () {
-      //     // context.read<CurrentGamePhoneticsCubit>().sendStars(
-      //     //     gamesId: [state.gameData.id ?? 0],
-      //     //     actionOfStars: (int countOfStars, List<int> listOfIds) {
-      //     //       context
-      //     //           .read<JourneyBarCubit>()
-      //     //           .sendStars(gamesId: listOfIds, countOfStar: countOfStars);
-      //     //     });
-      //
-      //     Navigator.pop(context);
-      //   });
-      // }
-      // if (success == 2 || success == 4 || success ==5) {
-      //   context.read<CurrentGamePhoneticsCubit>().increaseDirectlyCountOfStar();
-      // }
     }, builder: (context, stateOfGameData) {
-      // context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-      //     stateOfStringIsWord: false,
-      //     stateOfStringWillSay: stateOfGameData.gameData.mainLetter ?? '');
       return Container(
         alignment: Alignment.center,
         child: Container(
@@ -106,12 +84,10 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                             height: (MediaQuery.of(context).size.height -
                                     (50.h + 75 + 20)) /
                                 2,
-                            onTap: isInteracting != null &&
-                                    isInteracting != BasicOfGameData.stateOIdle
-                                ? null
-                                : () async {
-                                    // if (clickPictureCubit.checkCurrentClickTime(
-                                    //     current: DateTime.now())) {
+                            onTap: () async {
+                              if (context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .ableButton()) {
                                     if (!stateOfGameData.correctIndexes
                                         .contains(index)) {
                                       if (stateOfGameData.gameData
@@ -123,7 +99,9 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                                         await context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addSuccessAnswer(
-                                                questions: stateOfGameData
+                                            // supportTheFirstWayOfCheckComplete:true,
+
+                                            questions: stateOfGameData
                                                         .gameImages
                                                         ?.where((element) =>
                                                             element.correct ==
@@ -135,7 +113,7 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                                             .whenComplete(() {
                                           bool isLastQuestion = context
                                               .read<CurrentGamePhoneticsCubit>()
-                                              .checkIfIsTheLastQuestionOfGame(
+                                              .secondWayToCheckIfIsTheLastQuestionOfGame(
                                                   queations: stateOfGameData
                                                           .gameImages
                                                           ?.where((element) =>
@@ -143,6 +121,7 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                                                               1)
                                                           .length ??
                                                       0);
+                                          print('isLastQuestion:$isLastQuestion');
                                           if (isLastQuestion) {
                                             Future.delayed(
                                                 const Duration(seconds: 2),
@@ -162,7 +141,7 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                                         });
                                       }
                                     }
-                                    // }
+                                    }
                                   },
                           ),
                         )),

@@ -159,6 +159,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   bool secondWayToCheckIfIsTheLastQuestionOfGame({required int queations}) {
     int countOfCorrectAnswers = state.countOfCorrectAnswers;
+    print('secondWayToCheckIfIsTheLastQuestionOfGame:$countOfCorrectAnswers , $queations');
+
     if (queations <= countOfCorrectAnswers) {
       return true;
     } else {
@@ -255,6 +257,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   Future addSuccessAnswer(
       {required int correctAnswers,
       required int questions,
+        bool? supportTheFirstWayOfCheckComplete,
       void Function()? subAction}) async {
     AudioPlayer playerCorrect = AudioPlayer();
     print('correctAnswers:$correctAnswers');
@@ -263,7 +266,12 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         playerCorrect2: playerCorrect,
         soundPath: AppGameSound.getRandomSoundOfCorrect());
     await addStarToStudent(stateOfCountOfCorrectAnswer: correctAnswers);
-    bool isLastLesson = secondWayToCheckIfIsTheLastQuestionOfGame(queations: questions);
+    bool isLastLesson = supportTheFirstWayOfCheckComplete??false;
+    if(supportTheFirstWayOfCheckComplete==true) {
+       isLastLesson = checkIfIsTheLastQuestionOfGame(queations: questions);
+    }else {
+      isLastLesson = secondWayToCheckIfIsTheLastQuestionOfGame(queations: questions);
+    }
     if (isLastLesson == true) {
       await Future.delayed(const Duration(seconds: 2));
       state.actionWhenTriesBeZero(state.countOfStar ?? 0);

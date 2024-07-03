@@ -149,44 +149,48 @@ class _DragOutGame extends State<DragOutGame> {
                                 debugPrint(
                                     '####:${gameState.gameImages?[index].word}');
                                 debugPrint('####:${(item.data.toLowerCase())}');
-                                if (gameState.gameImages?[index].correct ==0) {
-                                  await context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .addSuccessAnswer(
-                                          questions:
-                                              gameState.allGameData.length,
-                                          correctAnswers: (gameState.index) + 1)
-                                      .whenComplete(() async {
-                                    bool isLastQuestion = context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .checkIfIsTheLastQuestionOfGame(
-                                            queations:
-                                                gameState.allGameData.length);
-                                    if (isLastQuestion) {
-                                      Future.delayed(const Duration(seconds: 2),
-                                          () async {
-                                        Navigator.of(context).pop();
-                                      });
-                                    } else {
-                                      await context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .updateIndexOfCurrentGame();
-                                      context
-                                          .read<DragOutCubit>()
-                                          .updateTheCurrentGame(
-                                              index: context
-                                                  .read<
-                                                      CurrentGamePhoneticsCubit>()
-                                                  .state
-                                                  .index);
-                                    }
-                                  });
-                                } else {
-                                  await context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .addWrongAnswer(
-                                          actionOfWrongAnswer: () async {});
-                                }
+    if (context
+        .read<CurrentGamePhoneticsCubit>()
+        .ableButton()) {
+      if (gameState.gameImages?[index].correct == 0) {
+        await context
+            .read<CurrentGamePhoneticsCubit>()
+            .addSuccessAnswer(
+            questions:
+            gameState.allGameData.length,
+            correctAnswers: (gameState.index) + 1)
+            .whenComplete(() async {
+          bool isLastQuestion = context
+              .read<CurrentGamePhoneticsCubit>()
+              .checkIfIsTheLastQuestionOfGame(
+              queations:
+              gameState.allGameData.length);
+          if (isLastQuestion) {
+            Future.delayed(const Duration(seconds: 2),
+                    () async {
+                  Navigator.of(context).pop();
+                });
+          } else {
+            await context
+                .read<CurrentGamePhoneticsCubit>()
+                .updateIndexOfCurrentGame();
+            context
+                .read<DragOutCubit>()
+                .updateTheCurrentGame(
+                index: context
+                    .read<
+                    CurrentGamePhoneticsCubit>()
+                    .state
+                    .index);
+          }
+        });
+      } else {
+        await context
+            .read<CurrentGamePhoneticsCubit>()
+            .addWrongAnswer(
+            actionOfWrongAnswer: () async {});
+      }
+    }
                               })),
                     ),
                   )

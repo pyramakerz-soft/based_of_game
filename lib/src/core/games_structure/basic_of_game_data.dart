@@ -528,7 +528,7 @@ class RearrangeGame implements BasicOfGameData {
   String? titleImageAr;
 
   @override
-  int countOfMinimizeStar = 1;
+  int countOfMinimizeStar = 2;
 }
 class MatchGame implements BasicOfGameData {
   @override
@@ -588,7 +588,7 @@ class ClickTheWordGame implements BasicOfGameData {
   String? titleImageAr;
 
   @override
-  int countOfMinimizeStar = 1;
+  int countOfMinimizeStar = 2;
 }
 class ChooseTheSentenceGame implements BasicOfGameData {
   @override

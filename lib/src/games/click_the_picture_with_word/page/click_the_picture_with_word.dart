@@ -30,8 +30,6 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
 
   @override
   Widget build(BuildContext context) {
-    final isInteracting =
-        context.watch<CurrentGamePhoneticsCubit>().state.stateOfAvatar;
 
     return Container(
         margin: const EdgeInsets.only(bottom: (30), left: 20),
@@ -56,6 +54,7 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
               children: List.generate(
                   (gameState.gameImages?.length ?? 0),
                   (index) => SingleElement(
+                      word: gameState.gameData.gameImages?[index].word ?? '',
                       width: (MediaQuery.of(context).size.width - (130 + 40)) /
                           (((gameState.gameImages?.length ?? 0) / 2) + 1)
                               .round(),
@@ -72,9 +71,8 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
                         if (context
                             .read<CurrentGamePhoneticsCubit>()
                             .ableButton()) {
-                          print('ableButton:${context
-                              .read<CurrentGamePhoneticsCubit>()
-                              .ableButton()}');
+                          print(
+                              'ableButton:${context.read<CurrentGamePhoneticsCubit>().ableButton()}');
                           if (!gameState.correctIndexes
                               .contains(gameState.gameImages?[index].id)) {
                             if ((gameState.chooseWord?.word ?? '') ==
@@ -113,9 +111,7 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
                                   });
                                 } else {}
                               });
-                            }
-                            else {
-
+                            } else {
                               print('wrong:${gameState.chooseWord}');
                               await context
                                   .read<CurrentGamePhoneticsCubit>()
@@ -128,8 +124,7 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
                             }
                           }
                         }
-                      }))
-          );
+                      })));
         }));
   }
 }

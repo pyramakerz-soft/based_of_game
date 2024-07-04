@@ -49,6 +49,8 @@ abstract class TalkTts {
     });
     flutterTts.awaitSpeakCompletion(true);
     await flutterTts.speak(text);
+    data = StateOfTalk.stopped;
+
   }
 
   static stopTalk() async {

@@ -170,9 +170,9 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                         '');
                               },
                               onAcceptWithDetails: (item) async {
-                                if ((generalStateOfGame.stateOfAvatar ==
-                                        BasicOfGameData.stateOIdle ||
-                                    generalStateOfGame.stateOfAvatar == null)) {
+                                if(context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .ableButton()){
                                   debugPrint(
                                       "##:${gameState.gameData.mainLetter?.split('')[index].toLowerCase()}");
 

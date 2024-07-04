@@ -20,7 +20,7 @@ abstract class TalkTts {
       await flutterTts.setLanguage("en-US");
     }
     flutterTts.setPitch(1.0);
-    flutterTts.setSpeechRate(0.3);
+    flutterTts.setSpeechRate(0.4);
     flutterTts.setStartHandler(() {
       data = StateOfTalk.talking;
       if (actionOfStart != null) {

@@ -9,6 +9,7 @@ class SingleElement extends StatelessWidget {
   final String background;
   final bool selected;
   final String image;
+  final String word;
   final int index;
   final double? width;
   final double? height;
@@ -17,6 +18,7 @@ class SingleElement extends StatelessWidget {
       required this.onTap,
       required this.background,
       required this.selected,
+      required this.word,
       required this.image,
       this.height,
       this.width,
@@ -50,6 +52,11 @@ class SingleElement extends StatelessWidget {
                     (MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
                 height: height != null ? ((height ?? 0) - 10) : 100.h,
                 // height: ,
+                errorWidget: (context, url, error) =>
+                    Center(
+                      child: Text(
+                          word),
+                    ),
               ),
             ),
           ],

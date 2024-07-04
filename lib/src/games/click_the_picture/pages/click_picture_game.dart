@@ -143,6 +143,8 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                                     }
                                     }
                                   },
+                            word: stateOfGameData
+                                .gameData.gameImages?[index].word??'',
                           ),
                         )),
               ),

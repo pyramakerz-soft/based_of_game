@@ -96,72 +96,75 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                       return gameHasData
                           ? const SizedBox()
                           : XOutItemWidget(
-                        imageId:state.gameData?.gameImages?[index].id??0,
+                              imageId:
+                                  state.gameData?.gameImages?[index].id ?? 0,
                               imageName:
                                   state.gameData?.gameImages?[index].image ??
                                       "",
                               isSelected: isSelected,
                               isCorrect: isCorrect,
-                              isWrong:state.isWrong,
-                              onTap: isInteracting != null &&
-                                      isInteracting !=
-                                          BasicOfGameData.stateOIdle
-                                  ? null
-                                  : () async {
-                                      if (state.gameData?.gameImages?[index]
-                                              .correct ==
-                                          0) {
-                                        await context
-                                            .read<XOutCubit>()
-                                            .selectItem(index);
-                                        await context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .addSuccessAnswer(
-                                                questions:
-                                                    state.listGameData.length,
-                                                correctAnswers:
-                                                    (state.currentGameIndex) +
-                                                        1)
-                                            .whenComplete(() async {
-                                          bool isLastQuestion = context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .checkIfIsTheLastQuestionOfGame(
-                                                  queations: state
-                                                      .listGameData.length);
-                                          if (isLastQuestion) {
-                                            Future.delayed(
-                                                const Duration(seconds: 2),
-                                                () async {
-                                              Navigator.of(context).pop();
-                                            });
-                                          } else {
-                                            await context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .updateIndexOfCurrentGame();
-                                            await context
-                                                .read<XOutCubit>()
-                                                .updateTheCurrentGame(
-                                                    index: context
-                                                        .read<
-                                                            CurrentGamePhoneticsCubit>()
-                                                        .state
-                                                        .index);
-                                          }
+                              isWrong: state.isWrong,
+                              onTap: () async {
+                                if (context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .ableButton()) {
+                                  if (state.gameData?.gameImages?[index]
+                                          .correct ==
+                                      0) {
+                                    await context
+                                        .read<XOutCubit>()
+                                        .selectItem(index);
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addSuccessAnswer(
+                                            questions:
+                                                state.listGameData.length,
+                                            correctAnswers:
+                                                (state.currentGameIndex) + 1)
+                                        .whenComplete(() async {
+                                      bool isLastQuestion = context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .checkIfIsTheLastQuestionOfGame(
+                                              queations:
+                                                  state.listGameData.length);
+                                      if (isLastQuestion) {
+                                        Future.delayed(
+                                            const Duration(seconds: 2),
+                                            () async {
+                                          Navigator.of(context).pop();
                                         });
                                       } else {
                                         await context
-                                            .read<XOutCubit>().addWrongAnswer(isWrong: state.gameData?.gameImages?[index].id??0);
-                                        await context
                                             .read<CurrentGamePhoneticsCubit>()
-                                            .addWrongAnswer(
-                                                actionOfWrongAnswer:
-                                                    () async {
-                                                      await context
-                                                          .read<XOutCubit>().clearWrongAnswer();
-                                                    });
+                                            .updateIndexOfCurrentGame();
+                                        await context
+                                            .read<XOutCubit>()
+                                            .updateTheCurrentGame(
+                                                index: context
+                                                    .read<
+                                                        CurrentGamePhoneticsCubit>()
+                                                    .state
+                                                    .index);
                                       }
-                                    },
+                                    });
+                                  } else {
+                                    await context
+                                        .read<XOutCubit>()
+                                        .addWrongAnswer(
+                                            isWrong: state.gameData
+                                                    ?.gameImages?[index].id ??
+                                                0);
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addWrongAnswer(
+                                            actionOfWrongAnswer: () async {
+                                      await context
+                                          .read<XOutCubit>()
+                                          .clearWrongAnswer();
+                                    });
+                                  }
+                                }
+                              },
                               word:
                                   state.gameData?.gameImages?[index].word ?? '',
                             );

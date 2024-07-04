@@ -24,7 +24,7 @@ class ItemCardWidget extends StatelessWidget {
     return Draggable<String>(
       // Data is the value this Draggable stores.
       data: body,
-
+      maxSimultaneousDrags: 1,
       feedback: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(

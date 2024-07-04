@@ -46,13 +46,15 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
           return Padding(
             padding: const EdgeInsets.only(top: 40, left: 30),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
                     flex: 3,
                     child: Container(
                       padding: const EdgeInsets.only(top: 10),
                       // height: 0.6.sh,
+                      height: MediaQuery.of(context).size.height * 0.64,
+
                       decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(gameState.woodenBackground ?? ''),
@@ -60,30 +62,32 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                           )),
                       child: Column(
                         children: [
-                          10.ph,
-                          GestureDetector(
-                            onTap: TalkTts.data == StateOfTalk.talking
-                                ? null
-                                : () {
-                              TalkTts.startTalk(
-                                  text: gameState.gameData?.correctAns ??
-                                      '');
-                            },
-                            child: CachedNetworkImage(
-                              imageUrl:
-                              gameState.gameData?.gameImages?.first.image ??
-                                  '',
-                              height: 0.33.sh,
-                              placeholder: (context, url) => const Center(
-                                child: CupertinoActivityIndicator(),
-                              ),
-                              errorWidget: (context, url, error) => const Icon(
-                                Icons.error,
-                                color: Colors.red,
+                          25.ph,
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: TalkTts.data == StateOfTalk.talking
+                                  ? null
+                                  : () {
+                                TalkTts.startTalk(
+                                    text: gameState.gameData?.correctAns ??
+                                        '');
+                              },
+                              child: CachedNetworkImage(
+                                imageUrl:
+                                gameState.gameData?.gameImages?.first.image ??
+                                    '',
+                                // height: 110.h,
+                                placeholder: (context, url) => const Center(
+                                  child: CupertinoActivityIndicator(),
+                                ),
+                                errorWidget: (context, url, error) => Center(
+                                  child: Text(
+                                      '${gameState.gameData?.gameImages?.first.word}'),
+                                ),
                               ),
                             ),
                           ),
-                          7.ph,
+                          10.ph,
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 25),
                             child: Row(
@@ -91,6 +95,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                               children: List.generate(
                                   gameState.correctAnswers.length,
                                       (index) => DragTarget<String>(
+
                                     builder: (
                                         BuildContext context,
                                         List<dynamic> accepted,
@@ -103,9 +108,9 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                                     onAcceptWithDetails:
                                         (DragTargetDetails<String>
                                     details) async {
-                                      if (isInteracting == null ||
-                                          isInteracting ==
-                                              BasicOfGameData.stateOIdle) {
+                                          if (context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .ableButton()) {
                                         context
                                             .read<SpellingCubit>()
                                             .addTheCorrectAnswer(
@@ -173,7 +178,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                                   )),
                             ),
                           ),
-                          20.ph,
+                          45.ph,
                         ],
                       ),
                     )),
@@ -184,8 +189,11 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                       alignment: Alignment.center,
                       // height: MediaQuery.of(context).size.height - (70.h),
                       margin: EdgeInsets.only(right: 15.w),
+                      padding: EdgeInsets.symmetric(vertical: ((gameState.gameData)
+                          ?.gameLetters
+                          ?.length ??
+                          1)==26?0:20),
                       // width: MediaQuery.of(context).size.width * 0.37,
-                      height: MediaQuery.of(context).size.height * 0.64,
                       // padding: EdgeInsets.all(1),
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -214,7 +222,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                                 maxHeight: (((gameState.gameData)
                                     ?.gameLetters
                                     ?.length ??
-                                    1)==26?30.h:60.h),
+                                    1)==26?40.h:60.h),
                                 maxWidth: (((gameState.gameData)
                                     ?.gameLetters
                                     ?.length ??

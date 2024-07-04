@@ -105,166 +105,42 @@ widgetOfTries(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                             3,
-                            (index) =>
-                                (double.parse("${stateOfGame.countOfStar}") >
-                                        (index))
-                                    ? Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: index == 1 ? 10.0 : 0),
-                                        child: SvgPicture.asset(
-                                          AppSvgImages.iconCompleteStar,
-                                          height: 30,
-                                        ),
-                                      )
-                                    : Image.asset(
+                            (index) =>Image.asset(
                                         AppImagesPhonetics.iconEmptyStar,
                                         height: 30,
                                       )),
                       ),
-                      if (stateOfGame.countOfStar == 0) ...{
-                        Text(
-                          '"Try again?"',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            color: AppColorPhonetics.darkBlueColor,
-                            fontFamily: AppTheme.getFontFamily5(),
-                          ),
+                      Text(
+                        '"Try again?"',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          color: AppColorPhonetics.darkBlueColor,
+                          fontFamily: AppTheme.getFontFamily5(),
                         ),
-                        const SizedBox(height: 10),
-                        ReTryButtton(
-                            dataFunction: () {
-                              final basicData = context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .state
-                                  .basicData;
-                              final gameData = context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .state
-                                  .gameData;
-                              gameData?.first.gameLetters?.forEach((element) {
-                                debugPrint('%%:${element.id}');
-                              });
-                              context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .updateDataOfCurrentGame(
-                                      basicData: basicData!,
-                                      gameData: (gameData ?? []),
-                                      gameIndex: 0);
-                            },
-                            title: 'Retry',
-                            width: 150)
-                      } else ...{
-                        if (stateOfGame.countOfStar == 1) ...{
-                          Text(
-                            '"Excellent! Keep going?"',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: AppColorPhonetics.darkBlueColor,
-                              fontFamily: AppTheme.getFontFamily5(),
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        } else if (stateOfGame.countOfStar == 2) ...{
-                          Text(
-                            '"Very Good! Keep going?"',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: AppColorPhonetics.darkBlueColor,
-                              fontFamily: AppTheme.getFontFamily5(),
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        } else if (stateOfGame.countOfStar == 3) ...{
-                          Text(
-                            '"Good! Keep going?"',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: AppColorPhonetics.darkBlueColor,
-                              fontFamily: AppTheme.getFontFamily5(),
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        },
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                final basicData = context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .state
-                                    .basicData;
-                                final gameData = context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .state
-                                    .gameData;
-                                gameData?.first.gameLetters?.forEach((element) {
-                                  debugPrint('%%:${element.id}');
-                                });
-                                context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .updateDataOfCurrentGame(
-                                        basicData: basicData!,
-                                        gameData: (gameData ?? []),
-                                        gameIndex: 0);
-                              },
-                              child: SizedBox(
-                                // height: 20,
-                                width: 50,
-                                child: Container(
-                                    height: 40,
-                                    width: 50,
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 10,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: AppColorPhonetics.darkBlueColor,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: SvgPicture.asset(
-                                      AppSvgImages.reloading,
-                                      height: 20,
-                                    )),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            GestureDetector(
-                              onTap: actionOfDone,
-                              child: SizedBox(
-                                height: 40,
-                                width: 50,
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    height: 50,
-                                    width: 50,
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 10,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: AppColorPhonetics.darkBlueColor,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Text(
-                                      'Done',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                            fontSize: 12,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily:
-                                                AppTheme.getFontFamily5(),
-                                            height: 0,
-                                            letterSpacing: 0.50,
-                                          ),
-                                    )),
-                              ),
-                            ),
-                          ],
-                        )
-                      }
+                      ),
+                      const SizedBox(height: 10),
+                      ReTryButtton(
+                          dataFunction: () {
+                            final basicData = context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .state
+                                .basicData;
+                            final gameData = context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .state
+                                .gameData;
+                            gameData?.first.gameLetters?.forEach((element) {
+                              debugPrint('%%:${element.id}');
+                            });
+                            context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .updateDataOfCurrentGame(
+                                    basicData: basicData!,
+                                    gameData: (gameData ?? []),
+                                    gameIndex: 0);
+                          },
+                          title: 'Retry',
+                          width: 150)
                     ],
                   ),
                 ),

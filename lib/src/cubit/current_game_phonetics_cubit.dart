@@ -141,8 +141,10 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   decreaseCountOfTries() {
     int countOfTries = (state.countOfTries ?? 1) - 1;
     emit(state.copyWith(countOfTries: countOfTries));
-    debugPrint('state.countOfTries:${state.countOfTries}');
+    debugPrint('state.countOfTries:${state.countOfTries}, stars:${state.countOfStar}');
     if (state.countOfTries == 0) {
+      emit(state.copyWith(countOfStar: 0));
+
       state.actionWhenTriesBeZero(state.countOfStar ?? 0);
     }
   }
@@ -306,8 +308,10 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   _increaseCountOfWrongAnswer() {
     int countOfWrongAnswers = state.countOfWrongAnswers;
+    int countOfCorrectAnswers = state.countOfCorrectAnswers;
     countOfWrongAnswers++;
-    emit(state.copyWith(countOfWrongAnswers: countOfWrongAnswers));
+    countOfCorrectAnswers = countOfCorrectAnswers-countOfWrongAnswers;
+    emit(state.copyWith(countOfWrongAnswers: countOfWrongAnswers, countOfCorrectAnswers:countOfCorrectAnswers<0?0:countOfCorrectAnswers));
     addStarToStudent(stateOfCountOfCorrectAnswer: state.countOfCorrectAnswers);
   }
 

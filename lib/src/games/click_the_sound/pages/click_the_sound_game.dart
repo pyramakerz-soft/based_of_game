@@ -42,7 +42,7 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
         context.watch<CurrentGamePhoneticsCubit>().state.stateOfAvatar;
     return Container(
       margin: const EdgeInsets.only(bottom: 30, top: 50, left: 70),
-      width: MediaQuery.of(context).size.width - 265,
+      width: MediaQuery.of(context).size.width - 100.w,
       height: MediaQuery.of(context).size.width < 760
           ? MediaQuery.of(context).size.height * 0.7
           : MediaQuery.of(context).size.height * 0.65,
@@ -71,68 +71,66 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                           letter: stateOfGame.letters?[index] ?? '',
                           viewModel: context.read<ClickTheSoundCubit>(),
                           index: index,
-                          onPress:
-                                  (context
-                                          .read<ClickTheSoundCubit>()
-                                          .state
-                                          .correctIndexes
-                                          ?.contains(index) ??
-                                      false)
+                          onPress: (context
+                                      .read<ClickTheSoundCubit>()
+                                      .state
+                                      .correctIndexes
+                                      ?.contains(index) ??
+                                  false)
                               ? null
                               : () async {
-                            if(context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .ableButton()){
-                              print('###:${(context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .ableButton())}');
-                                  if (stateOfGame.letters?[index] ==
-                                      stateOfGame.gameData.mainLetter) {
-                                    await context
-                                        .read<ClickTheSoundCubit>()
-                                        .incrementCorrectAnswerCount(index);
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addSuccessAnswer(
-                                            questions: stateOfGame.letters
-                                                    ?.where((element) =>
-                                                        element ==
-                                                        stateOfGame.gameData
-                                                            .mainLetter)
-                                                    .length ??
-                                                0,
-                                            correctAnswers: ((stateOfGame
-                                                    .correctIndexes?.length ??
-                                                0)))
-                                        .whenComplete(() {
-                                      bool isLastQuestion = context
+                                  if (context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .ableButton()) {
+                                    print(
+                                        '###:${(context.read<CurrentGamePhoneticsCubit>().ableButton())}');
+                                    if (stateOfGame.letters?[index] ==
+                                        stateOfGame.gameData.mainLetter) {
+                                      await context
+                                          .read<ClickTheSoundCubit>()
+                                          .incrementCorrectAnswerCount(index);
+                                      await context
                                           .read<CurrentGamePhoneticsCubit>()
-                                          .secondWayToCheckIfIsTheLastQuestionOfGame(
-                                              queations: stateOfGame.letters
+                                          .addSuccessAnswer(
+                                              questions: stateOfGame.letters
                                                       ?.where((element) =>
                                                           element ==
                                                           stateOfGame.gameData
                                                               .mainLetter)
                                                       .length ??
-                                                  0);
-                                      if (isLastQuestion) {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                            () async {
-                                          Navigator.of(context).pop();
-                                        });
-                                      }
-                                    });
-                                  } else {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addWrongAnswer(
-                                            actionOfWrongAnswer: () async {
+                                                  0,
+                                              correctAnswers: ((stateOfGame
+                                                      .correctIndexes?.length ??
+                                                  0)))
+                                          .whenComplete(() {
+                                        bool isLastQuestion = context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .secondWayToCheckIfIsTheLastQuestionOfGame(
+                                                queations: stateOfGame.letters
+                                                        ?.where((element) =>
+                                                            element ==
+                                                            stateOfGame.gameData
+                                                                .mainLetter)
+                                                        .length ??
+                                                    0);
+                                        if (isLastQuestion) {
+                                          Future.delayed(
+                                              const Duration(seconds: 2),
+                                              () async {
+                                            Navigator.of(context).pop();
+                                          });
+                                        }
+                                      });
+                                    } else {
                                       await context
-                                          .read<ClickTheSoundCubit>()
-                                          .sayTheLetter();
-                                    });
-                                  }
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .addWrongAnswer(
+                                              actionOfWrongAnswer: () async {
+                                        await context
+                                            .read<ClickTheSoundCubit>()
+                                            .sayTheLetter();
+                                      });
+                                    }
                                   }
                                 },
                         ),
@@ -173,7 +171,6 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
             text: letter,
             isDisabled:
                 viewModel.state.correctIndexes?.contains(index) ?? false,
-
           ),
         ),
       ),

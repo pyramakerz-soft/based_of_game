@@ -12,7 +12,7 @@ class XOutItemWidget extends StatelessWidget {
     required this.isSelected,
     required this.isCorrect,
     required this.imageId,
-     this.isWrong,
+    this.isWrong,
     required this.word,
     required this.onTap,
   });
@@ -30,6 +30,7 @@ class XOutItemWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         decoration: BoxDecoration(
           color: isSelected
               ? (isCorrect
@@ -46,7 +47,7 @@ class XOutItemWidget extends StatelessWidget {
             CachedNetworkImage(
               imageUrl: imageName,
               fit: BoxFit.fill,
-              height: 70.h,
+              // height: 70.h,
               // width: 50.w,
               errorWidget: (context, url, error) {
                 return Center(
@@ -54,11 +55,11 @@ class XOutItemWidget extends StatelessWidget {
                 );
               },
             ),
-            if(isWrong== imageId)...{
+            if (isWrong == imageId) ...{
               Image.asset(
                 AppImagesPhonetics.X,
-                height: 70.h,
-
+                // height: 70.h,
+                fit: BoxFit.fill,
               )
             }
           ],

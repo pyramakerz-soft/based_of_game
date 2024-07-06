@@ -8,12 +8,13 @@ class XOutInitial extends Equatable {
   final int currentGameIndex;
   final int? isWrong;
   final List<int>? selectedItems;
-
+  final List<GameImagesGameFinalModel>? gameImages;
   const XOutInitial({
     required this.listGameData,
     this.gameData,
+    this.gameImages,
     this.correctAnswers = 0,
-    this.isWrong ,
+    this.isWrong,
     required this.currentGameIndex,
     this.selectedItems = const [],
   });
@@ -24,6 +25,7 @@ class XOutInitial extends Equatable {
     GameFinalModel? gameData,
     int? currentGameIndex,
     int? isWrong,
+    List<GameImagesGameFinalModel>? gameImages,
     List<int>? selectedItems,
     // bool? isInteracting,
   }) {
@@ -32,6 +34,7 @@ class XOutInitial extends Equatable {
       correctAnswers: correctAnswers ?? this.correctAnswers,
       currentGameIndex: currentGameIndex ?? this.currentGameIndex,
       isWrong: isWrong ?? this.isWrong,
+      gameImages: gameImages ?? this.gameImages,
       selectedItems: selectedItems ?? this.selectedItems,
       gameData: gameData ?? this.gameData,
     );
@@ -41,7 +44,8 @@ class XOutInitial extends Equatable {
     return XOutInitial(
       listGameData: listGameData,
       correctAnswers: null,
-      isWrong:null,
+      isWrong: null,
+      gameImages: gameImages,
       currentGameIndex: currentGameIndex,
       selectedItems: null,
       gameData: gameData ?? gameData,
@@ -52,7 +56,8 @@ class XOutInitial extends Equatable {
     return XOutInitial(
       listGameData: listGameData,
       correctAnswers: correctAnswers,
-      isWrong:null,
+      isWrong: null,
+      gameImages: gameImages,
       currentGameIndex: currentGameIndex,
       selectedItems: selectedItems,
       gameData: gameData ?? gameData,
@@ -60,6 +65,13 @@ class XOutInitial extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [listGameData, correctAnswers, selectedItems, currentGameIndex, gameData, isWrong];
+  List<Object?> get props => [
+        listGameData,
+        gameImages,
+        correctAnswers,
+        selectedItems,
+        currentGameIndex,
+        gameData,
+        isWrong
+      ];
 }

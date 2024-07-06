@@ -137,8 +137,8 @@ class BasedOfGameConnect extends StatelessWidget {
                 } else if ((stateOfGame.basicData?.gameData is DiceGame)) ...{
                   BlocProvider<DiceCubit>(
                       create: (_) => DiceCubit(
-                        gameData: gamesData[stateOfGame.index],
-                      ),
+                            gameData: gamesData[stateOfGame.index],
+                          ),
                       child: DiceGamePage())
                 }
               ],
@@ -199,7 +199,7 @@ class BasedOfGameConnect extends StatelessWidget {
                           )
                         : Container(
                             width: 0.4.sw,
-                            height: 0.32.sh,
+                            height: 0.4.sh,
                             padding: const EdgeInsets.only(left: 10),
                             child: Stack(
                               // crossAxisAlignment: CrossAxisAlignment.start,
@@ -273,8 +273,8 @@ class BasedOfGameConnect extends StatelessWidget {
                                               )),
                                   ),
                                 ),
-                                Positioned(
-                                  bottom: 0,
+                                PositionedDirectional(
+                                  top: 60.h,
                                   child: GestureDetector(
                                     onTap: stateOfGame.beeTalking == true
                                         ? null

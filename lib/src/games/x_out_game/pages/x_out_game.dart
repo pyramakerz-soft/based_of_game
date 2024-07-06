@@ -28,7 +28,7 @@ class _XOutGameScreen extends State<XOutGameScreen> {
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: true,
+        stateOfStringIsWord: false,
         stateOfStringWillSay: gameData.first.mainLetter ?? '');
     super.initState();
   }
@@ -76,7 +76,7 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                       letterSpacing: 0.50,
                     ),
               ),
-              if (state.gameData?.gameImages?.isNotEmpty ?? false) ...{
+              if (state.gameImages?.isNotEmpty ?? false) ...{
                 Expanded(
                   child: GridView.builder(
                     physics: const NeverScrollableScrollPhysics(),
@@ -89,28 +89,27 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                     itemBuilder: (context, index) {
                       final isSelected =
                           state.selectedItems?.contains(index) == true;
-                      final isCorrect =
-                          state.gameData?.gameImages?[index].correct == 0;
+                      final isCorrect = state.gameImages?[index].correct == 0;
                       final bool gameHasData =
-                          state.gameData?.gameImages?.isEmpty ?? false;
+                          state.gameImages?.isEmpty ?? false;
                       return gameHasData
                           ? const SizedBox()
                           : XOutItemWidget(
-                              imageId:
-                                  state.gameData?.gameImages?[index].id ?? 0,
-                              imageName:
-                                  state.gameData?.gameImages?[index].image ??
-                                      "",
+                              imageId: state.gameImages?[index].id ?? 0,
+                              imageName: state.gameImages?[index].image ?? "",
                               isSelected: isSelected,
                               isCorrect: isCorrect,
                               isWrong: state.isWrong,
                               onTap: () async {
                                 if (context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .ableButton()) {
-                                  if (state.gameData?.gameImages?[index]
-                                          .correct ==
-                                      0) {
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .ableButton() &&
+                                    state.currentGameIndex ==
+                                        context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .state
+                                            .index) {
+                                  if (state.gameImages?[index].correct == 0) {
                                     await context
                                         .read<XOutCubit>()
                                         .selectItem(index);
@@ -165,8 +164,7 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                                   }
                                 }
                               },
-                              word:
-                                  state.gameData?.gameImages?[index].word ?? '',
+                              word: state.gameImages?[index].word ?? '',
                             );
                     },
                   ),

@@ -16,7 +16,14 @@ class XOutCubit extends Cubit<XOutInitial> {
                 listGameData.where((element) => element.isEdited == 0).toList(),
             currentGameIndex: index)) {
     emit(state.copyWith(gameData: state.listGameData[index]));
-    startSayGame();
+    _reFormatData();
+    _startSayGame();
+  }
+  _reFormatData() {
+    List<GameImagesGameFinalModel> gameImages =
+        state.gameData?.gameImages ?? [];
+    gameImages.shuffle();
+    emit(state.copyWith(gameImages: gameImages));
   }
 
   Future<void> selectItem(int index) async {
@@ -37,10 +44,11 @@ class XOutCubit extends Cubit<XOutInitial> {
     emit(state.clearCurrentCorrectAnswers());
     emit(state.copyWith(
         gameData: state.listGameData[index], currentGameIndex: index));
+    _reFormatData();
     sayTheLetter();
   }
 
-  startSayGame() async {
+  _startSayGame() async {
     await TalkTts.startTalk(text: state.gameData?.inst ?? '');
     await AudioPlayerLetters.startPlaySound(
         soundPath: AssetsSoundLetters.getSoundOfLetter(
@@ -48,15 +56,17 @@ class XOutCubit extends Cubit<XOutInitial> {
   }
 
   sayTheLetter() async {
+    await Future.delayed(const Duration(seconds: 1));
     await AudioPlayerLetters.startPlaySound(
         soundPath: AssetsSoundLetters.getSoundOfLetter(
             mainGameLetter: (state.gameData?.mainLetter ?? '')));
   }
-  addWrongAnswer({required int isWrong})  {
-    emit(state.copyWith(isWrong:isWrong));
+
+  addWrongAnswer({required int isWrong}) {
+    emit(state.copyWith(isWrong: isWrong));
   }
 
-  clearWrongAnswer()  {
+  clearWrongAnswer() {
     emit(state.clearWrongStateAnswer());
   }
 }

@@ -6,6 +6,7 @@ class ItemCardOfImageWidget extends StatelessWidget {
   final double maxHeight;
   final void Function()? onTap;
   final String body;
+  final String word;
   final bool? hide;
   final int index;
   final int countOfImages;
@@ -15,6 +16,7 @@ class ItemCardOfImageWidget extends StatelessWidget {
       required this.maxWidth,
       this.hide,
       required this.maxHeight,
+      required this.word,
       required this.body,
       required this.countOfImages,
       this.onTap,
@@ -111,9 +113,14 @@ class ItemCardOfImageWidget extends StatelessWidget {
                     )
                   : CachedNetworkImage(
                       imageUrl: body,
+                      errorWidget: (context, url, error) {
+                        return Center(
+                          child: Text(word),
+                        );
+                      }
 
                       // isDisabled: false,
-                    ),
+                      ),
             ),
           ),
         ],

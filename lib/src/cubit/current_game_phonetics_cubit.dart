@@ -35,11 +35,14 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   bool ableButton() {
-    print('state.stateOfAvatar:${((state.stateOfAvatar == BasicOfGameData.stateOIdle) || (state.stateOfAvatar == null))}');
+    print(
+        'state.stateOfAvatar:${((state.stateOfAvatar == BasicOfGameData.stateOIdle) || (state.stateOfAvatar == null))}');
     print('state.stateOfAvatar:${(AudioPlayerLetters.player.state)}');
-    print('state.stateOfAvatar:${(TalkTts.data )}');
+    print('state.stateOfAvatar:${(TalkTts.data)}');
     return ((state.stateOfAvatar == BasicOfGameData.stateOIdle) ||
-        (state.stateOfAvatar == null))&&(AudioPlayerLetters.player.state !=PlayerState.playing) && (TalkTts.data == StateOfTalk.stopped);
+            (state.stateOfAvatar == null)) &&
+        (AudioPlayerLetters.player.state != PlayerState.playing) &&
+        (TalkTts.data == StateOfTalk.stopped);
   }
 
   _getTheBackGround() {
@@ -141,7 +144,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   decreaseCountOfTries() {
     int countOfTries = (state.countOfTries ?? 1) - 1;
     emit(state.copyWith(countOfTries: countOfTries));
-    debugPrint('state.countOfTries:${state.countOfTries}, stars:${state.countOfStar}');
+    debugPrint(
+        'state.countOfTries:${state.countOfTries}, stars:${state.countOfStar}');
     if (state.countOfTries == 0) {
       emit(state.copyWith(countOfStar: 0));
 
@@ -161,7 +165,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   bool secondWayToCheckIfIsTheLastQuestionOfGame({required int queations}) {
     int countOfCorrectAnswers = state.countOfCorrectAnswers;
-    print('secondWayToCheckIfIsTheLastQuestionOfGame:$countOfCorrectAnswers , $queations');
+    print(
+        'secondWayToCheckIfIsTheLastQuestionOfGame:$countOfCorrectAnswers , $queations');
 
     if (queations <= countOfCorrectAnswers) {
       return true;
@@ -259,7 +264,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   Future addSuccessAnswer(
       {required int correctAnswers,
       required int questions,
-        bool? supportTheFirstWayOfCheckComplete,
+      bool? supportTheFirstWayOfCheckComplete,
       void Function()? subAction}) async {
     AudioPlayer playerCorrect = AudioPlayer();
     print('correctAnswers:$correctAnswers');
@@ -268,11 +273,12 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         playerCorrect2: playerCorrect,
         soundPath: AppGameSound.getRandomSoundOfCorrect());
     await addStarToStudent(stateOfCountOfCorrectAnswer: correctAnswers);
-    bool isLastLesson = supportTheFirstWayOfCheckComplete??false;
-    if(supportTheFirstWayOfCheckComplete==true) {
-       isLastLesson = checkIfIsTheLastQuestionOfGame(queations: questions);
-    }else {
-      isLastLesson = secondWayToCheckIfIsTheLastQuestionOfGame(queations: questions);
+    bool isLastLesson = supportTheFirstWayOfCheckComplete ?? false;
+    if (supportTheFirstWayOfCheckComplete == true) {
+      isLastLesson = checkIfIsTheLastQuestionOfGame(queations: questions);
+    } else {
+      isLastLesson =
+          secondWayToCheckIfIsTheLastQuestionOfGame(queations: questions);
     }
     if (isLastLesson == true) {
       await Future.delayed(const Duration(seconds: 2));
@@ -308,11 +314,14 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   _increaseCountOfWrongAnswer() {
     int countOfWrongAnswers = state.countOfWrongAnswers;
-    int countOfCorrectAnswers = state.countOfCorrectAnswers;
+    int countOfStar = state.countOfStar ?? 0;
     countOfWrongAnswers++;
-    countOfCorrectAnswers = countOfCorrectAnswers-countOfWrongAnswers;
-    emit(state.copyWith(countOfWrongAnswers: countOfWrongAnswers, countOfCorrectAnswers:countOfCorrectAnswers<0?0:countOfCorrectAnswers));
-    addStarToStudent(stateOfCountOfCorrectAnswer: state.countOfCorrectAnswers);
+    countOfStar--;
+    // countOfCorrectAnswers = countOfCorrectAnswers-countOfWrongAnswers;
+
+    emit(state.copyWith(
+        countOfWrongAnswers: countOfWrongAnswers,
+        countOfStar: countOfStar < 0 ? 0 : countOfStar));
   }
 
   _animationOfWrongAnswer() {

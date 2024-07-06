@@ -69,157 +69,77 @@ class _DiceGamePage extends State<DiceGamePage> {
                       listener: (context, state) {},
                       builder: (context0, generalStateOfGame) {
                         return ItemCardOfImageWidget(
-                          onTap: isInteracting != null &&
-                                  isInteracting != BasicOfGameData.stateOIdle
-                              ? null
-                              : () async {
-                                  // if ((context
-                                  //     .read<CurrentGamePhoneticsCubit>()
-                                  //     .state
-                                  //     .stateOfAvatar ==
-                                  //     BasicOfGame.stateOIdle ||
-                                  //     context
-                                  //         .read<CurrentGamePhoneticsCubit>()
-                                  //         .state
-                                  //         .stateOfAvatar ==
-                                  //         null) &&
-                                  if (gameState.correctIndexes.contains(
-                                          gameState.gameImages?[index].id) ==
-                                      false) {
-                                    //   // print(
-                                    //   //     '###:${gameState.gameData?.gameImages?[index].word?.split('').first}');
-                                    //   // print("###:${gameState.chooseWord}");
-                                    if (gameState.gameImages?[index].word
-                                            ?.split('')
-                                            .first ==
-                                        gameState.chooseWord) {
-                                      //     await context
-                                      //         .read<CurrentGamePhoneticsCubit>()
-                                      //         .animationOfCorrectAnswer();
-                                      await context
-                                          .read<DiceCubit>()
-                                          .addTheCorrectAnswer(
-                                              idOfUserAnswer:
-                                                  (gameState.gameImages)?[index]
-                                                          .id ??
-                                                      0);
-                                      await context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .addSuccessAnswer(
-                                              questions: gameState
-                                                      .gameImages?.length ??
-                                                  0,
-                                              correctAnswers: gameState
-                                                  .correctIndexes.length)
-                                          .whenComplete(() async {
-                                        bool isLastQuestion = context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .checkIfIsTheLastQuestionOfGame(
-                                                queations: gameState
-                                                        .gameImages?.length ??
+                          word: (gameState.gameImages)?[index].word ?? '',
+                          onTap: () async {
+                            if (context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .ableButton()) {
+                              if (gameState.correctIndexes.contains(
+                                      gameState.gameImages?[index].id) ==
+                                  false) {
+                                if (gameState.gameImages?[index].word
+                                        ?.split('')
+                                        .first ==
+                                    gameState.chooseWord) {
+                                  await context
+                                      .read<DiceCubit>()
+                                      .addTheCorrectAnswer(
+                                          idOfUserAnswer:
+                                              (gameState.gameImages)?[index]
+                                                      .id ??
+                                                  0);
+                                  await context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .addSuccessAnswer(
+                                          questions:
+                                              gameState.gameImages?.length ?? 0,
+                                          correctAnswers:
+                                              gameState.correctIndexes.length)
+                                      .whenComplete(() async {
+                                    bool isLastQuestion = context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .checkIfIsTheLastQuestionOfGame(
+                                            queations:
+                                                gameState.gameImages?.length ??
                                                     0);
-                                        context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .clearCurrentStringOfDice();
-                                        if (isLastQuestion) {
-                                          Future.delayed(
-                                              const Duration(seconds: 2),
-                                              () async {
-                                            Navigator.of(context).pop();
-                                          });
-                                        } else {
-                                          context.read<DiceCubit>().playTheDice(
-                                              context: context,
-                                              functionOfSaveWords:
-                                                  (String currentAlphabet) {
-                                                context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .saveTheStringWillSay(
-                                                        stateOfStringIsWord:
-                                                            false,
-                                                        stateOfStringWillSay:
-                                                            currentAlphabet);
-
-                                                context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .saveCurrentStringOfDice(
-                                                        letter:
-                                                            currentAlphabet);
-                                              });
-                                        }
+                                    context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .clearCurrentStringOfDice();
+                                    if (isLastQuestion) {
+                                      Future.delayed(const Duration(seconds: 2),
+                                          () async {
+                                        Navigator.of(context).pop();
                                       });
-                                      //     context
-                                      //         .read<CurrentGamePhoneticsCubit>()
-                                      //         .addStarToStudent(
-                                      //       stateOfCountOfCorrectAnswer:
-                                      //       gameState.correctIndexes?.length ?? 0,
-                                      //       mainCountOfQuestion: gameState
-                                      //           .gameData?.gameImages?.length ??
-                                      //           0,
-                                      //     );
-                                      //
-                                      //     bool isLastLesson = context
-                                      //         .read<DiceCubit>()
-                                      //         .checkIfIsTheLastGameOfLesson();
-                                      //     if (isLastLesson == true) {
-                                      //       await Future.delayed(
-                                      //           const Duration(seconds: 2));
-                                      //       context
-                                      //           .read<CurrentGamePhoneticsCubit>()
-                                      //           .clearCurrentStringOfDice();
-                                      //       context
-                                      //           .read<CurrentGamePhoneticsCubit>()
-                                      //           .sendStars(
-                                      //           gamesId: [
-                                      //             gameState.gameData?.id ?? 0
-                                      //           ],
-                                      //           actionOfStars: (int countOfStars,
-                                      //               List<int> listOfIds) {
-                                      //             context
-                                      //                 .read<JourneyBarCubit>()
-                                      //                 .sendStars(
-                                      //                 gamesId: listOfIds,
-                                      //                 countOfStar: countOfStars);
-                                      //           });
-                                      //
-                                      //       Navigator.of(context).pop();
-                                      //     } else {
-                                      //       await context
-                                      //           .read<CurrentGamePhoneticsCubit>()
-                                      //           .backToMainAvatar();
-
-                                      //       // await context
-                                      //       //     .read<BingoCubit>()
-                                      //       //     .getTheRandomWord(awaitTime: false);
-                                      //     }
-                                      //     // int countOfCorrect = await context
-                                      //     //     .read<BingoCubit>()
-                                      //     //     .increaseCountOfCorrectAnswers();
                                     } else {
-                                      await context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .addWrongAnswer(
-                                              actionOfWrongAnswer: () async {});
-                                      //     context
-                                      //         .read<CurrentGamePhoneticsCubit>()
-                                      //         .addWrongAnswer(actionOfWrongAnswer: () {
-                                      //       // TalkTts.startTalk(text: gameData.mainLetter ?? '');
-                                      //     },
-                                      //         actionWhenTriesBeZero: () {
-                                      //
-                                      //           context.read<CurrentGamePhoneticsCubit>().sendStars(
-                                      //               gamesId: [gameState.gameData?.id ?? 0],
-                                      //               actionOfStars: (int countOfStars, List<int> listOfIds) {
-                                      //                 context
-                                      //                     .read<JourneyBarCubit>()
-                                      //                     .sendStars(gamesId: listOfIds, countOfStar: countOfStars);
-                                      //               });
-                                      //         });
+                                      context.read<DiceCubit>().playTheDice(
+                                          context: context,
+                                          functionOfSaveWords:
+                                              (String currentAlphabet) {
+                                            context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .saveTheStringWillSay(
+                                                    stateOfStringIsWord: false,
+                                                    stateOfStringWillSay:
+                                                        currentAlphabet);
+
+                                            context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .saveCurrentStringOfDice(
+                                                    letter: currentAlphabet);
+                                          });
                                     }
-                                  }
-                                },
+                                  });
+                                } else {
+                                  await context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .addWrongAnswer(
+                                          actionOfWrongAnswer: () async {});
+                                }
+                              }
+                            }
+                          },
                           body: (gameState.gameImages)?[index].image ?? '',
                           maxHeight: (((gameState.gameImages)?.length ?? 0) /
                                       4 ==
@@ -228,33 +148,19 @@ class _DiceGamePage extends State<DiceGamePage> {
                                   4
                               : (MediaQuery.of(context).size.height - (85.h)) /
                                   4),
-                          maxWidth: (((gameState.gameData.gameImages)?.length ??
-                                          0) /
-                                      4 ==
-                                  4
-                              ? (MediaQuery.of(context).size.width - (115.w)) /
-                                  4
-                              : (MediaQuery.of(context).size.width - (115.w)) /
-                                  5),
+                          maxWidth:
+                              (((gameState.gameImages)?.length ?? 0) / 4 == 4
+                                  ? (MediaQuery.of(context).size.width -
+                                          (115.w)) /
+                                      4
+                                  : (MediaQuery.of(context).size.width -
+                                          (115.w)) /
+                                      5),
                           hide: gameState.correctIndexes
                               .contains((gameState.gameImages)?[index].id),
                           index: index,
                           countOfImages: (gameState.gameImages)?.length ?? 0,
                         );
-
-                        // return CachedNetworkImage(
-                        //   imageUrl:
-                        //       (gameState.gameData?.gameImages)?[index].image ??
-                        //           '',
-                        //   width:
-                        //       (MediaQuery.of(context).size.width - (110.w)) / 4,
-                        //   height:
-                        //       (MediaQuery.of(context).size.height - 60.h) / 5,
-                        //
-                        //   // height: (MediaQuery.of(context).size.height -
-                        //   //         (50.h + 90 + 20)) /
-                        //   //     2,
-                        // );
                       })),
             ),
           );

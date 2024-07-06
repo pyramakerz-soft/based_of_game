@@ -12,21 +12,25 @@ class DicePopUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final diceLetters = context.watch<DiceCubit>().state.letterDices;
-    int countOfPlayed = context
-        .select((DiceCubit value) => value.state.correctIndexes.length);
+    int countOfPlayed =
+        context.select((DiceCubit value) => value.state.correctIndexes.length);
 
-    return AlertDialog(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      content: Container(
-        margin: EdgeInsets.only(left: (70.w), top: 100.h),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: DiceWidget3(
-            diceLetters: diceLetters ?? [],
-            countOfPlayed: countOfPlayed,
-            functionOfSaveWords: functionOfSaveWords),
-      ),
-    );
+    return WillPopScope(
+        onWillPop: () {
+          return Future.value(false);
+        },
+        child: AlertDialog(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          content: Container(
+            margin: EdgeInsets.only(left: (70.w), top: 100.h),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: DiceWidget3(
+                diceLetters: diceLetters ?? [],
+                countOfPlayed: countOfPlayed,
+                functionOfSaveWords: functionOfSaveWords),
+          ),
+        ));
   }
 }

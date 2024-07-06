@@ -53,6 +53,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
           }, builder: (context, gameState) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 20.ph,
                 ...List.generate(
@@ -83,6 +84,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                 //     (Velocity velocity, Offset offset) {},
                                 // onDragStarted: () {},
                                 data: item.value,
+                                maxSimultaneousDrags: 1,
                                 childWhenDragging: SizedBox(
                                   width: (MediaQuery.of(context).size.width -
                                           (5)) /
@@ -150,6 +152,11 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                 }),
                 SizedBox(
                   // height: MediaQuery.of(context).size.height / 4,
+                  width:
+                      ((gameState.gameData.mainLetter?.split('').length ?? 0) >
+                              4)
+                          ? (MediaQuery.of(context).size.width - 100.w)
+                          : MediaQuery.of(context).size.width,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
@@ -170,9 +177,9 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                         '');
                               },
                               onAcceptWithDetails: (item) async {
-                                if(context
+                                if (context
                                     .read<CurrentGamePhoneticsCubit>()
-                                    .ableButton()){
+                                    .ableButton()) {
                                   debugPrint(
                                       "##:${gameState.gameData.mainLetter?.split('')[index].toLowerCase()}");
 
@@ -282,8 +289,10 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addWrongAnswer(
                                             actionOfWrongAnswer: () async {
-                                              context.read<SortingCupsCubit>().sayTheLetter();
-                                            });
+                                      context
+                                          .read<SortingCupsCubit>()
+                                          .sayTheLetter();
+                                    });
                                   }
                                 }
                               },

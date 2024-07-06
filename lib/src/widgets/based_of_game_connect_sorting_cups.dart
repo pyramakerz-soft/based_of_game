@@ -26,6 +26,7 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
     return Expanded(
       child: Stack(
         alignment: Alignment.topCenter,
+        clipBehavior: Clip.none,
         children: [
           /////////////////////game title//////////////////
           Row(
@@ -43,7 +44,7 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
           ),
 
           Positioned(
-            top: 0,
+            top: -10,
             left: 0,
             child: Container(
                 width: 120.w,

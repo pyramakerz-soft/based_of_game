@@ -18,7 +18,7 @@ widgetOfTries(
   return Dialog(
     backgroundColor: Colors.transparent,
     child: SizedBox(
-      height: 335.h,
+      height: 335,
       width: 100.w,
       child: Stack(
         clipBehavior: Clip.none,

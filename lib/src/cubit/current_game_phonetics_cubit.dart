@@ -6,11 +6,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../based_of_eng_game.dart';
 import '../core/assets_game_sound.dart';
 import '../core/audio_player_game.dart';
 import '../core/audio_player_letters.dart';
 import '../core/talk_tts.dart';
+import '../widgets/widget_of_tries.dart';
 
 part 'current_game_phonetics_state.dart';
 
@@ -18,9 +20,14 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   CurrentGamePhoneticsCubit(
       {required MainDataOfChapters basicData,
       required void Function(int) actionOfCompleteGame,
+      required void Function() backButton,
+      required BuildContext context,
       required List<GameFinalModel> gameData})
       : super(CurrentGamePhoneticsState(
-            index: 0, actionWhenTriesBeZero: actionOfCompleteGame)) {
+            index: 0,
+            backButton: backButton,
+            actionWhenTriesBeZero: actionOfCompleteGame,
+            context: context)) {
     _checkDataOfCubit();
     updateDataOfCurrentGame(
         basicData: basicData, gameData: gameData, gameIndex: 0);
@@ -147,8 +154,33 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     debugPrint(
         'state.countOfTries:${state.countOfTries}, stars:${state.countOfStar}');
     if (state.countOfTries == 0) {
+      BuildContext context = state.context;
       emit(state.copyWith(countOfStar: 0));
-
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (alertContext) => WillPopScope(
+            onWillPop: () {
+              return Future.value(false);
+            },
+            child: AlertDialog(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                content: widgetOfTries(
+                  context: context,
+                  stateOfGame: state,
+                  actionOfDone: () {
+                    updateDataOfCurrentGame(
+                        basicData: state.basicData!,
+                        gameData: state.gameData!,
+                        gameIndex: 0);
+                    Navigator.of(context).pop();
+                  },
+                  backButton: () {
+                    state.backButton();
+                  },
+                ))),
+      );
       state.actionWhenTriesBeZero(state.countOfStar ?? 0);
     }
   }

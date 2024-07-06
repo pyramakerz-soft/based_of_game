@@ -214,9 +214,9 @@ class _ClickTheWordScreen extends State<ClickTheWordScreen> {
                                           color:
                                               AppColorPhonetics.darkBorderColor,
 
-                                borderType : BorderType.RRect,
-                                radius: const Radius.circular(7),
-                                // padding: const EdgeInsets.all(6),
+                                          borderType: BorderType.RRect,
+                                          radius: const Radius.circular(7),
+                                          // padding: const EdgeInsets.all(6),
                                           child: SizedBox(
                                             width: 25.w,
                                             height: 30.h,

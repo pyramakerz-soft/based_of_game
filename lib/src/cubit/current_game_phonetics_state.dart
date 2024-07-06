@@ -7,6 +7,7 @@ class CurrentGamePhoneticsState extends Equatable {
   Artboard? avatarCurrentArtboard;
   bool? touchPositions = false;
   String? stateOfAvatar;
+  BuildContext context;
   String? stateOfStringWillSay;
   bool? stateOfStringIsWord;
   bool beeTalking;
@@ -14,6 +15,7 @@ class CurrentGamePhoneticsState extends Equatable {
   int countOfCorrectAnswers;
   String? currentStringOfDice;
   void Function(int x) actionWhenTriesBeZero;
+  void Function() backButton;
   String? currentAvatar;
   int index;
   int? countOfTries;
@@ -28,9 +30,11 @@ class CurrentGamePhoneticsState extends Equatable {
       this.stateOfStringIsWord,
       this.stateOfStringWillSay,
       required this.actionWhenTriesBeZero,
+      required this.backButton,
       this.stateOfAvatar,
       this.avatarArtboardIdle,
       this.avatarArtboardSad,
+      required this.context,
       this.beeTalking = false,
       this.touchPositions,
       this.currentStringOfDice,
@@ -50,11 +54,13 @@ class CurrentGamePhoneticsState extends Equatable {
       Artboard? avatarArtboardSad,
       bool? touchPositions,
       bool? stateOfStringIsWord,
+      BuildContext? context,
       bool? beeTalking,
       Artboard? avatarCurrentArtboard,
       String? stateOfStringWillSay,
       String? currentStringOfDice,
       void Function(int x)? actionWhenTriesBeZero,
+      void Function()? backButton,
       String? currentAvatar,
       String? stateOfAvatar,
       List<GameFinalModel>? gameData,
@@ -70,6 +76,8 @@ class CurrentGamePhoneticsState extends Equatable {
         index: index ?? this.index,
         currentStringOfDice: currentStringOfDice ?? this.currentStringOfDice,
         touchPositions: touchPositions ?? this.touchPositions,
+        context: context ?? this.context,
+        backButton: backButton ?? this.backButton,
         actionWhenTriesBeZero:
             actionWhenTriesBeZero ?? this.actionWhenTriesBeZero,
         stateOfStringWillSay: stateOfStringWillSay ?? this.stateOfStringWillSay,
@@ -99,7 +107,9 @@ class CurrentGamePhoneticsState extends Equatable {
         currentStringOfDice: null,
         touchPositions: touchPositions ?? touchPositions,
         actionWhenTriesBeZero: actionWhenTriesBeZero,
+        backButton: backButton,
         stateOfStringWillSay: stateOfStringWillSay ?? stateOfStringWillSay,
+        context: context ?? context,
         avatarCurrentArtboard: avatarCurrentArtboard ?? avatarCurrentArtboard,
         gameData: gameData ?? gameData,
         countOfWrongAnswers: countOfWrongAnswers,
@@ -119,6 +129,8 @@ class CurrentGamePhoneticsState extends Equatable {
   CurrentGamePhoneticsState clearAllData() {
     return CurrentGamePhoneticsState(
       index: 0,
+      context: context,
+      backButton: backButton,
       actionWhenTriesBeZero: actionWhenTriesBeZero,
     );
   }
@@ -128,6 +140,8 @@ class CurrentGamePhoneticsState extends Equatable {
         basicData,
         currentAvatar,
         avatarArtboardIdle,
+        context,
+        backButton,
         stateOfStringIsWord,
         stateOfStringWillSay,
         avatarArtboardSad,

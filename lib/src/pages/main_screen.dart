@@ -12,11 +12,13 @@ class MainScreenOfGames extends StatefulWidget {
   final MainDataOfChapters? dataOfBasesGame;
   final bool showTheEditedGames;
   final void Function(int countOfStars) actionOfCompleteGame;
+  final void Function() backButton;
 
   const MainScreenOfGames(
       {super.key,
       required this.stateOfGameData,
       required this.dataOfBasesGame,
+      required this.backButton,
       required this.actionOfCompleteGame,
       required this.showTheEditedGames});
   @override
@@ -52,7 +54,9 @@ class _MainScreenOfGames extends State<MainScreenOfGames> {
             create: (_) => CurrentGamePhoneticsCubit(
                 basicData: widget.dataOfBasesGame!,
                 gameData: widget.stateOfGameData,
-                actionOfCompleteGame: widget.actionOfCompleteGame),
+                backButton: widget.backButton,
+                actionOfCompleteGame: widget.actionOfCompleteGame,
+                context: context),
             child: BlocConsumer<CurrentGamePhoneticsCubit,
                     CurrentGamePhoneticsState>(
                 listener: (context, state) {},

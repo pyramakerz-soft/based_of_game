@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
             builder: (_, child) {
               return BlocProvider<ContactLessonBloc>(
                   create: (_) => di.sl<ContactLessonBloc>()
-                    ..add(GetContactLessonRequest(lessonId: 102, gameId: 1246)),
-                    // ..add(GetContactLessonRequest(lessonId: 4, gameId: 168)),
+                    ..add(GetContactLessonRequest(lessonId: 90, gameId: 1163)),
+                  // ..add(GetContactLessonRequest(lessonId: 4, gameId: 168)),
 
                   // ..add(GetContactLessonRequest(lessonId: 102, gameId: 1252)),
                   child: BlocConsumer<ContactLessonBloc, ContactLessonState>(
@@ -76,6 +76,13 @@ class MyApp extends StatelessWidget {
                                 '#########################################');
                           },
                           showTheEditedGames: false,
+                          backButton: () {
+                            debugPrint(
+                                'backButton#########################################');
+
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          },
                         );
                       } else {
                         return const CircularProgressIndicator();

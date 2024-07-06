@@ -23,6 +23,7 @@ abstract class AppImagesPhonetics {
       "${mainPathOfImages}backGroundOfShortVowels.png";
   static const String loadingVideo = "${mainPathOfImages}loading_video.png";
   static const String iconEmptyStar = "${mainPathOfImages}empty_star.png";
+  static const String iconEmptyStar2 = "${mainPathOfImages}empty_star2.png";
   static const String iconUnselectedCheckBox =
       "${mainPathOfImages}unselected_check_box.png";
   static const String iconSelectedCheckBox =
@@ -55,7 +56,8 @@ abstract class AppImagesPhonetics {
   static const String spellingNameGame =
       "${mainPathOfImages}spellingNameGame.png";
   static const String xOutGameName = "${mainPathOfImages}xOutGameName.png";
-  static const String chooseTheCorrectGame = "${mainPathOfImages}chooseTheCorrectGame.png";
+  static const String chooseTheCorrectGame =
+      "${mainPathOfImages}chooseTheCorrectGame.png";
   static const String letterOfClickPic =
       "${mainPathOfImages}letter_of_click_pic.png";
   static const String backGroundOfF = "${mainPathOfImages}backGroundOfF.png";

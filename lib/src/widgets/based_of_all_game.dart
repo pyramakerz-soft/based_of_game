@@ -26,34 +26,9 @@ class BasedOfAllGame extends StatelessWidget {
       // alignment: Alignment.center,
       children: [
         GameBar(stateOfGame: stateOfGame),
-        if (stateOfGame.countOfTries == 0) ...{
-          widgetOfTries(
-            context: context,
-            stateOfGame: stateOfGame,
-            actionOfDone: () {
-              context
-                  .read<CurrentGamePhoneticsCubit>()
-                  .state
-                  .actionWhenTriesBeZero(context
-                          .read<CurrentGamePhoneticsCubit>()
-                          .state
-                          .countOfStar ??
-                      0);
-              Navigator.of(context).pop();
-            },
-            backButton: () {
-              context
-                  .read<CurrentGamePhoneticsCubit>()
-                  .state
-                  .actionWhenTriesBeZero(context
-                          .read<CurrentGamePhoneticsCubit>()
-                          .state
-                          .countOfStar ??
-                      0);
-              Navigator.of(context).pop();
-            },
-          )
-        } else ...{
+        if (stateOfGame.countOfTries == 0)
+          ...{}
+        else ...{
           SizedBox(
             height: (MediaQuery.of(context).size.height - (50.h + 5)),
             child: Column(

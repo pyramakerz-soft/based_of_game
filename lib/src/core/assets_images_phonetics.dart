@@ -28,6 +28,8 @@ abstract class AppImagesPhonetics {
       "${mainPathOfImages}unselected_check_box.png";
   static const String iconSelectedCheckBox =
       "${mainPathOfImages}selected_check_box.png";
+  static const String popUpBackground =
+      '${mainPathOfImages}pop_up_background.png';
 
   static const String position2Finger =
       "${mainPathOfImages}position_2_finger.png";

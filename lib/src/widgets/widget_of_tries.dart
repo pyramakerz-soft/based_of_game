@@ -18,58 +18,28 @@ widgetOfTries(
   return Dialog(
     backgroundColor: Colors.transparent,
     child: SizedBox(
-      height: 335,
-      width: 286,
+      height: 335.h,
+      width: 100.w,
       child: Stack(
+        clipBehavior: Clip.none,
         alignment: Alignment.center,
         children: [
           PositionedDirectional(
-            top: 20,
+            top: -(40.h),
             end: 0,
             child: SvgPicture.asset(
               AppSvgImages.beeAlert,
-              width: 80,
-              height: 80,
+              width: 80.w,
+              height: 80.h,
               fit: BoxFit.contain,
             ),
           ),
-          Positioned.fill(
-            child: SvgPicture.asset(
-              AppSvgImages.popUpBackground,
-              width: 300,
-              height: 300,
-              fit: BoxFit.contain,
-            ),
-          ),
-          PositionedDirectional(
-              top: 80,
-              // end: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                    3,
-                    (index) => Image.asset(
-                          AppImagesPhonetics.iconEmptyStar2,
-                          height: 40,
-                        )),
-              )),
-          PositionedDirectional(
-            top: 90,
-            start: 0,
-            child: GestureDetector(
-              onTap: () => backButton(),
-              child: SvgPicture.asset(
-                AppSvgImages.exitButton,
-                width: 50,
-                height: 50,
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 130,
-            right: 0,
-            left: 0,
+          Container(
+            width: 300.w,
+            height: 300.h,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImagesPhonetics.popUpBackground))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -88,6 +58,45 @@ widgetOfTries(
               ],
             ),
           ),
+          // Positioned.fill(
+          //   child: SvgPicture.asset(
+          //     AppSvgImages.popUpBackground,
+          //     width: 300.w,
+          //     height: 300.h,
+          //     fit: BoxFit.contain,
+          //   ),
+          // ),
+          PositionedDirectional(
+              top: 10.h,
+              // end: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                    3,
+                    (index) => Image.asset(
+                          AppImagesPhonetics.iconEmptyStar2,
+                          height: 40.h,
+                        )),
+              )),
+          PositionedDirectional(
+            top: 20.h,
+            start: 0,
+            child: GestureDetector(
+              onTap: () => backButton(),
+              child: SvgPicture.asset(
+                AppSvgImages.exitButton,
+                width: 50.w,
+                height: 50.h,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+          // Positioned(
+          //   top: 80,
+          //   right: 0,
+          //   left: 0,
+          //   child: ,
+          // ),
         ],
       ),
     ),

@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../src_model/export_models.dart';
+import '../manager/sorting_cubit.dart';
 
 class ItemCardWidget extends StatelessWidget {
   final void Function()? onTap;
@@ -21,7 +25,8 @@ class ItemCardWidget extends StatelessWidget {
     return Draggable<GameImagesGameFinalModel>(
       // Data is the value this Draggable stores.
       data: data,
-
+      maxSimultaneousDrags: 1,
+      //     context.read<SortingCubit>().hasAccessToDrag(index) ? 1 : 0,
       feedback: Transform.translate(
           offset:
               const Offset(30, 0), // Adjust the offset to center the feedback
@@ -50,6 +55,7 @@ class ItemCardWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: Container(
+          height: (MediaQuery.of(context).size.height * 0.6) / 6,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
           ),

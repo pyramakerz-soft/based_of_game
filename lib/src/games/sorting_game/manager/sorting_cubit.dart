@@ -69,6 +69,7 @@ class SortingCubit extends Cubit<SortingInitial> {
     changeImages();
     debugPrint('updateTheCurrentGame:${state.gameData.id}');
   }
+
   bool _checkIds(List<int> ids, List<GameImagesGameFinalModel> objs) {
     for (var obj in objs) {
       if (ids.contains(obj.id)) {
@@ -79,12 +80,14 @@ class SortingCubit extends Cubit<SortingInitial> {
     }
     return true;
   }
+
   bool checkIfIsTheLastQuestionOfGame() {
     // int x= state.correctAnswersIds.where(test)
     // state.listGameData[state.index].gameImages.where((test)=> test.id == )
     // state.listGameData[state.index].gameLetters.
     // _checkIds(state.correctAnswersIds,state.listGameData[state.index].gameImages??[]);
-    if (_checkIds(state.correctAnswersIds,state.listGameData[state.index].gameImages??[])) {
+    if (_checkIds(state.correctAnswersIds,
+        state.listGameData[state.index].gameImages ?? [])) {
       return true;
     } else {
       return false;

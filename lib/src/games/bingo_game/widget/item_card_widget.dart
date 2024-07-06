@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/phonetics_color.dart';
 import '../../../widgets/stroke_text.dart';
@@ -54,10 +55,7 @@ class ItemCardWidget extends StatelessWidget {
                 ),
               ),
               alignment: Alignment.center,
-              child: StrokeText(
-                text: body,
-                isDisabled: false,
-              ),
+              child: StrokeText(text: body, isDisabled: false, fontSize: 23.sp),
             ),
           ),
           if (hide == true) ...{

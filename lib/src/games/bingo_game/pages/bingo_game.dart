@@ -68,7 +68,7 @@ class _BingoGameScreen extends State<BingoGameScreen> {
                         child: Text(
                           'Bingo',
                           style: TextStyle(
-                              fontSize: 39,
+                              fontSize: 23.sp,
                               fontFamily: AppTheme.getFontFamily5(),
                               color: Colors.white),
                         ))
@@ -86,74 +86,71 @@ class _BingoGameScreen extends State<BingoGameScreen> {
                             hide: gameState.correctIndexes.contains(
                                 (gameState.cardsLetters)?[rowIndex].id),
                             index: rowIndex,
-                            onTap: isInteracting != null &&
-                                    isInteracting != BasicOfGameData.stateOIdle
-                                ? null
-                                : () async {
-                                    if ((gameState.correctIndexes.isEmpty) ||
-                                        gameState.correctIndexes.contains(
+                            onTap: () async {
+                              if (context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .ableButton()) {
+                                if ((gameState.correctIndexes.isEmpty) ||
+                                    gameState.correctIndexes.contains(
+                                            (gameState.cardsLetters)?[rowIndex]
+                                                .id) ==
+                                        false) {
+                                  if ((gameState.chooseWord?.letter ==
+                                      (gameState.cardsLetters)?[rowIndex]
+                                          .letter)) {
+                                    await context
+                                        .read<BingoCubit>()
+                                        .addTheCorrectAnswer(
+                                            idOfUserAnswer:
                                                 (gameState.cardsLetters)?[
-                                                        rowIndex]
-                                                    .id) ==
-                                            false) {
-                                      if ((gameState.chooseWord?.letter ==
-                                          (gameState.cardsLetters)?[rowIndex]
-                                              .letter)) {
-                                        await context
-                                            .read<BingoCubit>()
-                                            .addTheCorrectAnswer(
-                                                idOfUserAnswer:
-                                                    (gameState.cardsLetters)?[
-                                                                rowIndex]
-                                                            .id ??
-                                                        0);
-                                        await context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .addSuccessAnswer(
-                                                subAction: () async {
-                                                  await context
-                                                      .read<BingoCubit>()
-                                                      .getTheRandomWord();
-                                                },
-                                                questions: gameState
-                                                        .cardsLetters
-                                                        ?.where((element) =>
-                                                            element.id != null)
-                                                        .length ??
-                                                    0,
-                                                correctAnswers: gameState
-                                                    .correctIndexes.length)
-                                            .whenComplete(() async {
-                                          bool isLastQuestion = context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .checkIfIsTheLastQuestionOfGame(
-                                                  queations: gameState
-                                                          .cardsLetters
-                                                          ?.where((element) =>
-                                                              element.id !=
-                                                              null)
-                                                          .length ??
-                                                      0);
-                                          if (isLastQuestion) {
-                                            Future.delayed(
-                                                const Duration(seconds: 2),
-                                                () async {
-                                              Navigator.of(context).pop();
-                                            });
-                                          } else {}
+                                                            rowIndex]
+                                                        .id ??
+                                                    0);
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addSuccessAnswer(
+                                            subAction: () async {
+                                              await context
+                                                  .read<BingoCubit>()
+                                                  .getTheRandomWord();
+                                            },
+                                            questions: gameState.cardsLetters
+                                                    ?.where((element) =>
+                                                        element.id != null)
+                                                    .length ??
+                                                0,
+                                            correctAnswers:
+                                                gameState.correctIndexes.length)
+                                        .whenComplete(() async {
+                                      bool isLastQuestion = context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .checkIfIsTheLastQuestionOfGame(
+                                              queations: gameState.cardsLetters
+                                                      ?.where((element) =>
+                                                          element.id != null)
+                                                      .length ??
+                                                  0);
+                                      if (isLastQuestion) {
+                                        Future.delayed(
+                                            const Duration(seconds: 2),
+                                            () async {
+                                          Navigator.of(context).pop();
                                         });
-                                      } else {
-                                        await context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .addWrongAnswer(
-                                                actionOfWrongAnswer: () async {
-                                          await context
-                                              .read<BingoCubit>()
-                                              .sayTheLetter();
-                                        });
-                                      }
-                                    }
-                                  },
+                                      } else {}
+                                    });
+                                  } else {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addWrongAnswer(
+                                            actionOfWrongAnswer: () async {
+                                      await context
+                                          .read<BingoCubit>()
+                                          .sayTheLetter();
+                                    });
+                                  }
+                                }
+                              }
+                            },
                           );
                         })),
           ));

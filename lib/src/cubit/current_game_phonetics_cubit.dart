@@ -346,16 +346,71 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   _increaseCountOfWrongAnswer() {
     int countOfWrongAnswers = state.countOfWrongAnswers;
-    int countOfStar = state.countOfStar ?? 0;
     countOfWrongAnswers++;
-    countOfStar--;
     // countOfCorrectAnswers = countOfCorrectAnswers-countOfWrongAnswers;
 
     emit(state.copyWith(
-        countOfWrongAnswers: countOfWrongAnswers,
-        countOfStar: countOfStar < 0 ? 0 : countOfStar));
+        countOfWrongAnswers: countOfWrongAnswers));
+    _checkTheStateOfStarForWrong();
   }
 
+  _checkTheStateOfStarForWrong() {
+    int stateOfGameStar = state.basicData?.gameData?.countOfMinimizeStar ?? 0;
+    int countOfStar = state.countOfStar ?? 0;
+    int countOfWrongAnswers = state.countOfWrongAnswers;
+    List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
+
+    if (stateOfGameStar == 1) {
+      if (countOfStar > 0) {
+        countOfStar = countOfStar - 1;
+        emit(state.copyWith(countOfStar: countOfStar < 0 ? 0 : countOfStar));
+      }
+    } else if (stateOfGameStar == 2) {
+      if (countOfStar > 0) {
+        // int mainCountOfStar = _mainCountOfStar();
+        if (countOfWrongAnswers == 1 ) {
+          countOfStar = countOfStar - 1;
+          emit(state.copyWith(countOfStar: countOfStar < 0 ? 0 : countOfStar));
+
+        } else if (countOfWrongAnswers == 3) {
+          countOfStar = countOfStar - 1;
+          emit(state.copyWith(countOfStar: countOfStar < 0 ? 0 : countOfStar));
+
+        }
+      }
+    }
+  }
+
+  // int _mainCountOfStar(){
+  //   List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
+  //   int countOfCorrectAnswers = state.countOfCorrectAnswers;
+  //
+  //   if ((mainCountOfQuestion) > 2) {
+  //     if (stateOfStarsAdd[0] <= stateOfCountOfCorrectAnswer) {
+  //       emit(state.copyWith(countOfStar: 1));
+  //     } else {
+  //       emit(state.copyWith(countOfStar: (0)));
+  //     }
+  //     if ((stateOfStarsAdd[1] + stateOfStarsAdd[0]) <=
+  //         stateOfCountOfCorrectAnswer) {
+  //       emit(state.copyWith(countOfStar: 2));
+  //     }
+  //     if ((stateOfStarsAdd[2] + stateOfStarsAdd[0] + stateOfStarsAdd[1]) <=
+  //         stateOfCountOfCorrectAnswer) {
+  //       emit(state.copyWith(countOfStar: 3));
+  //     }
+  //   } else {
+  //     if (mainCountOfQuestion == 1) {
+  //       emit(state.copyWith(countOfStar: 3));
+  //     } else if (mainCountOfQuestion == 2) {
+  //       if (stateOfCountOfCorrectAnswer == 1) {
+  //         emit(state.copyWith(countOfStar: 1));
+  //       } else if (stateOfCountOfCorrectAnswer == 2) {
+  //         emit(state.copyWith(countOfStar: 3));
+  //       }
+  //     }
+  //   }
+  // }
   _animationOfWrongAnswer() {
     emit(state.copyWith(
         avatarCurrentArtboard: state.avatarArtboardSad,

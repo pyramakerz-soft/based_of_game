@@ -86,7 +86,7 @@ class SpellingCubit extends Cubit<SpellingInitial> {
 
   updateTheCurrentGame({required int index}) async {
     await Future.delayed(const Duration(seconds: 2));
-    clearAnswers();
     emit(state.copyWith(gameData: state.allGames[index], index: index));
+    clearAnswers();
   }
 }

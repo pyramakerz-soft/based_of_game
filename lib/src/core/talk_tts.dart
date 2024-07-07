@@ -1,4 +1,3 @@
-
 import 'package:flutter_tts/flutter_tts.dart';
 
 enum StateOfTalk { talking, stopped }
@@ -6,7 +5,7 @@ enum StateOfTalk { talking, stopped }
 abstract class TalkTts {
   static FlutterTts flutterTts = FlutterTts();
 
-  static StateOfTalk data = StateOfTalk.stopped;
+  static StateOfTalk data = StateOfTalk.talking;
   static Future startTalk(
       {required String text,
       Function? actionOfStart,
@@ -50,7 +49,6 @@ abstract class TalkTts {
     flutterTts.awaitSpeakCompletion(true);
     await flutterTts.speak(text);
     data = StateOfTalk.stopped;
-
   }
 
   static stopTalk() async {

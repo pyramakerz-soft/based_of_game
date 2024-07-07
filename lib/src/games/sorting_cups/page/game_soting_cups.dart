@@ -216,7 +216,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                         .whenComplete(() async {
                                       bool isLastQuestion = context
                                           .read<CurrentGamePhoneticsCubit>()
-                                          .checkIfIsTheLastQuestionOfGame(
+                                          .secondWayToCheckIfIsTheLastQuestionOfGame(
                                               queations: gameState
                                                       .cardsLetters?.length ??
                                                   0);

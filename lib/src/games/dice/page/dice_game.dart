@@ -98,7 +98,7 @@ class _DiceGamePage extends State<DiceGamePage> {
                                       .whenComplete(() async {
                                     bool isLastQuestion = context
                                         .read<CurrentGamePhoneticsCubit>()
-                                        .checkIfIsTheLastQuestionOfGame(
+                                        .secondWayToCheckIfIsTheLastQuestionOfGame(
                                             queations:
                                                 gameState.gameImages?.length ??
                                                     0);

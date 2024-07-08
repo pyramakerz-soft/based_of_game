@@ -161,9 +161,9 @@ class ClickPicture implements BasicOfGameData {
   String? completeBasket;
 
   List<String> backgroundImages = [
-    AppImagesPhonetics.circleShape,
-    AppImagesPhonetics.cloudShape,
-    AppImagesPhonetics.diamondShape,
+    // AppImagesPhonetics.circleShape,
+    // AppImagesPhonetics.cloudShape,
+    // AppImagesPhonetics.diamondShape,
     AppImagesPhonetics.hexagonShape,
   ];
 
@@ -273,9 +273,9 @@ class ClickPictureOfWord implements BasicOfGameData {
   String? completeBasket;
 
   List<String> backgroundImages = [
-    AppImagesPhonetics.circleShape,
-    AppImagesPhonetics.cloudShape,
-    AppImagesPhonetics.diamondShape,
+    // AppImagesPhonetics.circleShape,
+    // AppImagesPhonetics.cloudShape,
+    // AppImagesPhonetics.diamondShape,
     AppImagesPhonetics.hexagonShape,
   ];
 

@@ -31,6 +31,7 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
         stateOfStringWillSay: gameData.first.inst ?? '');
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final isInteracting =
@@ -49,8 +50,7 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
                     color: AppColorPhonetics.boarderColor, width: 5)),
-            child:
-            Column(
+            child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -67,62 +67,61 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
                           )
                         },
                         GestureDetector(
-                          onTap: isInteracting != null &&
-                                  isInteracting != BasicOfGameData.stateOIdle
-                              ? null
-                              : () async {
-                                  bool stateOfAnswer = context
-                                      .read<ListenChooseCubit>()
-                                      .addAnswer(
-                                          userChoose:
-                                              gameState.choose[index].letter ??
-                                                  '');
-                                  if (stateOfAnswer == true) {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addSuccessAnswer(
-                                            questions:
-                                                gameState.listGameData.length,
-                                            correctAnswers:
-                                                gameState.countCorrectAnswers+1)
-                                        .whenComplete(() {
-                                          print('listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
-                                      bool isLastQuestion = context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .checkIfIsTheLastQuestionOfGame(
-                                              queations: gameState
-                                                  .listGameData.length);
-                                      if (isLastQuestion) {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                            () async {
-                                          Navigator.of(context).pop();
-                                        });
-                                      } else {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                            () async {
-                                          await context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .updateIndexOfCurrentGame();
-                                          context
-                                              .read<ListenChooseCubit>()
-                                              .updateTheCurrentGame(
-                                                  index: context
-                                                      .read<
-                                                          CurrentGamePhoneticsCubit>()
-                                                      .state
-                                                      .index);
-                                        });
-                                      }
+                          onTap: () async {
+                            if (context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .ableButton()) {
+                              bool stateOfAnswer = context
+                                  .read<ListenChooseCubit>()
+                                  .addAnswer(
+                                      userChoose:
+                                          gameState.choose[index].letter ?? '');
+                              if (stateOfAnswer == true) {
+                                await context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .addSuccessAnswer(
+                                        questions:
+                                            gameState.listGameData.length,
+                                        correctAnswers:
+                                            gameState.countCorrectAnswers + 1)
+                                    .whenComplete(() {
+                                  print(
+                                      'listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
+                                  bool isLastQuestion = context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .checkIfIsTheLastQuestionOfGame(
+                                          queations:
+                                              gameState.listGameData.length);
+                                  if (isLastQuestion) {
+                                    Future.delayed(const Duration(seconds: 2),
+                                        () async {
+                                      Navigator.of(context).pop();
                                     });
                                   } else {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addWrongAnswer(
-                                            actionOfWrongAnswer: () async {});
+                                    Future.delayed(const Duration(seconds: 2),
+                                        () async {
+                                      await context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .updateIndexOfCurrentGame();
+                                      context
+                                          .read<ListenChooseCubit>()
+                                          .updateTheCurrentGame(
+                                              index: context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .state
+                                                  .index);
+                                    });
                                   }
-                                },
+                                });
+                              } else {
+                                await context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .addWrongAnswer(
+                                        actionOfWrongAnswer: () async {});
+                              }
+                            }
+                          },
                           child: Text(
                             gameState.choose[index].letter ?? '',
                             style: TextStyle(
@@ -168,7 +167,9 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
                       ),
                     ),
                     Text(
-                     gameState.isCorrect?(gameState.gameData.inst??''): gameState.images.first.word ?? '',
+                      gameState.isCorrect
+                          ? (gameState.gameData.inst ?? '')
+                          : gameState.images.first.word ?? '',
                       style: TextStyle(
                           fontSize: 20,
                           fontFamily: AppTheme.getFontFamily5(),

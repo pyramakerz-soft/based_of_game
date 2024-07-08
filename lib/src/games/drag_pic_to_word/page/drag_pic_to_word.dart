@@ -105,6 +105,7 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
                             false
                         ? Draggable<GameImagesGameFinalModel>(
                             data: stateOfGameData.gameImages[index],
+                            maxSimultaneousDrags: 1,
                             childWhenDragging: Container(
                               width: 30.w,
                               margin: const EdgeInsets.symmetric(horizontal: 7),
@@ -174,6 +175,9 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
                                   : null,
                             );
                           }, onAcceptWithDetails: (item) async {
+                            if (context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .ableButton()) {
                             if (item.data.word?.toLowerCase() ==
                                 (stateOfGameData.gameImages[index].word
                                     ?.toLowerCase())) {
@@ -206,6 +210,7 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
                                   .read<CurrentGamePhoneticsCubit>()
                                   .addWrongAnswer(
                                       actionOfWrongAnswer: () async {});
+                            }
                             }
                           })),
                       8.ph,

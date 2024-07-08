@@ -105,6 +105,7 @@ class _DragWordToPicGameScreen extends State<DragWordToPicGameScreen> {
                                 false
                             ? Draggable<GameImagesGameFinalModel>(
                                 data: stateOfGameData.mainGameImages?[index],
+                                maxSimultaneousDrags: 1,
                                 childWhenDragging: SizedBox(
                                   height: 20.h,
                                   width: 20.w,

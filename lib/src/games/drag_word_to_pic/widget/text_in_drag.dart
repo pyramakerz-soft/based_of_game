@@ -12,7 +12,7 @@ class TextInDrag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 20.w,
+      width: 25.w,
       color: AppColorPhonetics.lightBlueColor,
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Text(

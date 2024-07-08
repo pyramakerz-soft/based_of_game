@@ -69,6 +69,9 @@ class RowImage extends StatelessWidget {
                         }, onAcceptWithDetails: (item) async {
                           debugPrint(
                               "+++++++++++:${item.data.word?.toLowerCase()}, ${gameImages[index].word?.toLowerCase()}");
+                          if (context
+                              .read<CurrentGamePhoneticsCubit>()
+                              .ableButton()) {
                           if (item.data.word?.toLowerCase() ==
                               (gameImages[index].word?.toLowerCase())) {
                             context.read<DragWordToPicCubit>().addCorrectAnswer(
@@ -96,6 +99,7 @@ class RowImage extends StatelessWidget {
                                 .read<CurrentGamePhoneticsCubit>()
                                 .addWrongAnswer(
                                     actionOfWrongAnswer: () async {});
+                          }
                           }
                         });
                       })

@@ -152,7 +152,7 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                   top: -60,
                   right: -60,
                   child: Container(
-                      alignment: Alignment.center,
+                      alignment: Alignment.topCenter,
                       height: 100,
                       width: 100,
                       decoration: const BoxDecoration(

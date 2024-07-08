@@ -138,7 +138,9 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                                                   .correctAnswersData.length,
                                               gridDelegate:
                                                   const SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount: 2),
+                                                      crossAxisCount: 2,
+                                                      crossAxisSpacing: 2,
+                                                      mainAxisSpacing: 2),
                                               itemBuilder: (context, i) {
                                                 try {
                                                   GameImagesGameFinalModel

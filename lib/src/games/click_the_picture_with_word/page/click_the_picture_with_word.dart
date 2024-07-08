@@ -54,7 +54,7 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
               children: List.generate(
                   (gameState.gameImages?.length ?? 0),
                   (index) => SingleElement(
-                      word: gameState.gameData.gameImages?[index].word ?? '',
+                      word: gameState.gameImages?[index].word ?? '',
                       width: (MediaQuery.of(context).size.width - (130 + 40)) /
                           (((gameState.gameImages?.length ?? 0) / 2) + 1)
                               .round(),

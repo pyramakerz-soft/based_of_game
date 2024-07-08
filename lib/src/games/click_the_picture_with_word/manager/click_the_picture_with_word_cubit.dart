@@ -14,11 +14,15 @@ class ClickThePictureWithWordCubit
       : super(ClickThePictureWithWordInitial(
             gameData: gameData, backGround: backGround, correctIndexes: [])) {
     startGame();
-    emit(state.copyWith(gameImages: gameData.gameImages));
+    // emit(state.copyWith(gameImages: gameData.gameImages));
   }
 
   startGame() async {
     await TalkTts.startTalk(text: state.gameData.inst ?? '');
+    List<GameImagesGameFinalModel> gameImages = state.gameImages ?? [];
+    gameImages.shuffle();
+    emit(state.copyWith(gameImages: gameImages));
+
     await getTheRandomWord();
   }
 

@@ -54,7 +54,7 @@ class BasedOfGameConnect extends StatelessWidget {
                           await TalkTts.startTalk(
                               text: gamesData[stateOfGame.index].inst ?? '');
                           TalkTts.flutterTts.setCompletionHandler(() async {
-                            if (stateOfGame.stateOfStringIsWord == true) {
+                            if (stateOfGame.stateOfStringIsWord == StateOfSubWord.isWord) {
                               await TalkTts.startTalk(
                                   text: stateOfGame.stateOfStringWillSay ?? '');
                             } else {
@@ -169,7 +169,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                       TalkTts.flutterTts
                                           .setCompletionHandler(() async {
                                         if (stateOfGame.stateOfStringIsWord ==
-                                            true) {
+                                            StateOfSubWord.isWord) {
                                           await TalkTts.startTalk(
                                               text: stateOfGame
                                                       .stateOfStringWillSay ??
@@ -223,7 +223,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                                 .setCompletionHandler(() async {
                                               if (stateOfGame
                                                       .stateOfStringIsWord ==
-                                                  true) {
+                                                  StateOfSubWord.isWord) {
                                                 await TalkTts.startTalk(
                                                     text: stateOfGame
                                                             .stateOfStringWillSay ??
@@ -292,7 +292,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                                 .setCompletionHandler(() async {
                                               if (stateOfGame
                                                       .stateOfStringIsWord ==
-                                                  true) {
+                                                  StateOfSubWord.isWord) {
                                                 await TalkTts.startTalk(
                                                     text: stateOfGame
                                                             .stateOfStringWillSay ??

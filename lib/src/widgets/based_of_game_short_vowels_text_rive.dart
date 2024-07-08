@@ -61,7 +61,7 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                                   text:
                                       gamesData[stateOfGame.index].inst ?? '');
                               TalkTts.flutterTts.setCompletionHandler(() async {
-                                if (stateOfGame.stateOfStringIsWord == true) {
+                                if (stateOfGame.stateOfStringIsWord == StateOfSubWord.isWord) {
                                   await TalkTts.startTalk(
                                       text: stateOfGame.stateOfStringWillSay ??
                                           '');

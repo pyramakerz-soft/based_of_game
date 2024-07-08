@@ -79,8 +79,8 @@ class _DiceGamePage extends State<DiceGamePage> {
                                   false) {
                                 if (gameState.gameImages?[index].word
                                         ?.split('')
-                                        .first ==
-                                    gameState.chooseWord) {
+                                        .first.toLowerCase() ==
+                                    gameState.chooseWord?.toLowerCase()) {
                                   await context
                                       .read<DiceCubit>()
                                       .addTheCorrectAnswer(

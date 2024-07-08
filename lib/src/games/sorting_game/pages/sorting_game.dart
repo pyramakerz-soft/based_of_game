@@ -133,7 +133,7 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                                     crossAxisCount: 2,
                                                     crossAxisSpacing: 2,
-                                                    mainAxisSpacing: 5),
+                                                    mainAxisSpacing: 2),
                                             itemBuilder: (context, i) {
                                               try {
                                                 String image = gameState
@@ -180,13 +180,8 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                                     .read<CurrentGamePhoneticsCubit>()
                                     .ableButton()) {
                                   GameImagesGameFinalModel image = details.data;
-                                  if ((gameState.gameData.gameLetters![index]
-                                              .letter)
-                                          ?.toLowerCase() ==
-                                      image.word
-                                          ?.split('')
-                                          .first
-                                          .toLowerCase()) {
+                                  if ((gameState.gameData.gameLetters?[index].id) ==
+                                      image.gameLetterId) {
                                     context
                                         .read<SortingCubit>()
                                         .addTheCorrectAnswer(answer: image);

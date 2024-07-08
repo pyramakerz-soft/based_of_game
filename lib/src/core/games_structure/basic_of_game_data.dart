@@ -165,6 +165,9 @@ class ClickPicture implements BasicOfGameData {
     // AppImagesPhonetics.cloudShape,
     // AppImagesPhonetics.diamondShape,
     AppImagesPhonetics.hexagonShape,
+    AppImagesPhonetics.hexagonShape,
+    AppImagesPhonetics.hexagonShape,
+    AppImagesPhonetics.hexagonShape,
   ];
 
   List<String> getBackGround(int length) {
@@ -276,6 +279,9 @@ class ClickPictureOfWord implements BasicOfGameData {
     // AppImagesPhonetics.circleShape,
     // AppImagesPhonetics.cloudShape,
     // AppImagesPhonetics.diamondShape,
+    AppImagesPhonetics.hexagonShape,
+    AppImagesPhonetics.hexagonShape,
+    AppImagesPhonetics.hexagonShape,
     AppImagesPhonetics.hexagonShape,
   ];
 

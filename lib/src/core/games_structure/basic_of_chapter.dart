@@ -894,7 +894,7 @@ class UPhonetics implements MainDataOfChapters {
           };
 
   @override
-  String background = AppImagesPhonetics.backGroundOfJ;
+  String background = AppImagesPhonetics.backGroundOfU;
 
   @override
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;

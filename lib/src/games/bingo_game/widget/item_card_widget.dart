@@ -31,8 +31,8 @@ class ItemCardWidget extends StatelessWidget {
           GestureDetector(
             onTap: onTap,
             child: Container(
-              width: maxWidth / 3,
-              height: maxHeight / 3,
+              // width: maxWidth / 3,
+              // height: maxHeight / 3,
               // padding: const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 36),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -55,7 +55,7 @@ class ItemCardWidget extends StatelessWidget {
                 ),
               ),
               alignment: Alignment.center,
-              child: StrokeText(text: body, isDisabled: false, fontSize: 23.sp),
+              child: StrokeText(text: body, isDisabled: false, fontSize: 20.sp),
             ),
           ),
           if (hide == true) ...{

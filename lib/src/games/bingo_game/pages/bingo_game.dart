@@ -124,7 +124,7 @@ class _BingoGameScreen extends State<BingoGameScreen> {
                                         .whenComplete(() async {
                                       bool isLastQuestion = context
                                           .read<CurrentGamePhoneticsCubit>()
-                                          .checkIfIsTheLastQuestionOfGame(
+                                          .secondWayToCheckIfIsTheLastQuestionOfGame(
                                               queations: gameState.cardsLetters
                                                       ?.where((element) =>
                                                           element.id != null)

@@ -61,7 +61,9 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                                   text:
                                       gamesData[stateOfGame.index].inst ?? '');
                               TalkTts.flutterTts.setCompletionHandler(() async {
-                                if (stateOfGame.stateOfStringIsWord == StateOfSubWord.isWord) {
+    if (stateOfGame.stateOfStringIsWord != StateOfSubWord.stopTalk) {
+
+    if (stateOfGame.stateOfStringIsWord == StateOfSubWord.isWord) {
                                   await TalkTts.startTalk(
                                       text: stateOfGame.stateOfStringWillSay ??
                                           '');
@@ -72,6 +74,7 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                                               mainGameLetter: stateOfGame
                                                       .stateOfStringWillSay ??
                                                   ''));
+                                }
                                 }
                               });
 
@@ -173,8 +176,11 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                               await TalkTts.startTalk(
                                   text:
                                       gamesData[stateOfGame.index].inst ?? '');
+
                               TalkTts.flutterTts.setCompletionHandler(() async {
-                                if (stateOfGame.stateOfStringIsWord == true) {
+    if (stateOfGame.stateOfStringIsWord != StateOfSubWord.stopTalk) {
+
+    if (stateOfGame.stateOfStringIsWord == StateOfSubWord.isWord) {
                                   await TalkTts.startTalk(
                                       text: stateOfGame.stateOfStringWillSay ??
                                           '');
@@ -185,6 +191,7 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                                               mainGameLetter: stateOfGame
                                                       .stateOfStringWillSay ??
                                                   ''));
+                                }
                                 }
                               });
 

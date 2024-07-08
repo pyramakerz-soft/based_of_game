@@ -25,7 +25,7 @@ class ItemCardWordWidget extends StatelessWidget {
     return Draggable<GameImagesGameFinalModel>(
       // Data is the value this Draggable stores.
       data: data,
-
+maxSimultaneousDrags: 1,
       feedback: Transform.translate(
           offset:
               const Offset(30, 0), // Adjust the offset to center the feedback
@@ -61,8 +61,10 @@ class ItemCardWordWidget extends StatelessWidget {
 
         borderType : BorderType.RRect,
         radius: const Radius.circular(7),
+
         // padding: const EdgeInsets.all(6),
-        child: Center(
+        child: Container(
+          alignment: Alignment.center,
           child: Text(
             body.word ?? '',
             style: TextStyle(

@@ -31,7 +31,7 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
         mainCountOfQuestion:
             context.read<SortingCubit>().state.countOfQuestion);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: StateOfSubWord.isWord,
+        stateOfStringIsWord: StateOfSubWord.stopTalk,
         stateOfStringWillSay: gameData.first.mainLetter ?? '');
     super.initState();
   }
@@ -68,7 +68,7 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               mainAxisSpacing: 20,
                               crossAxisCount: 2,
-                              childAspectRatio: 2,
+                              childAspectRatio: 1.5,
                               crossAxisSpacing: 35,
                             ),
                             itemBuilder: (context, index) {
@@ -108,7 +108,10 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                         itemBuilder: (context, index) {
                           return Container(
                               height: 0.8.sw,
-                              width: 0.12.sw,
+                              width: MediaQuery.of(context).size.longestSide /
+                                  ((gameState.gameData.gameLetters?.length ??
+                                          1) *
+                                      2),
                               padding: const EdgeInsets.only(top: 30),
                               child: DragTarget<GameImagesGameFinalModel>(
                                 builder: (
@@ -138,7 +141,8 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                                                       crossAxisCount: 2),
                                               itemBuilder: (context, i) {
                                                 try {
-                                                  GameImagesGameFinalModel image = gameState
+                                                  GameImagesGameFinalModel
+                                                      image = gameState
                                                           .correctAnswersData
                                                           .where((element) =>
                                                               element
@@ -150,14 +154,16 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                                                                   .id)
                                                           .toList()[i];
 
-                                                  return  Text(
-                                                        image.word ?? '',
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontFamily: AppTheme.getFontFamily5(),
-                                                            color: AppColorPhonetics.darkBorderColor),
-                                                        textAlign: TextAlign.center,
-                                                      );
+                                                  return Text(
+                                                    image.word ?? '',
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontFamily: AppTheme
+                                                            .getFontFamily5(),
+                                                        color: AppColorPhonetics
+                                                            .darkBorderColor),
+                                                    textAlign: TextAlign.center,
+                                                  );
                                                 } catch (e) {
                                                   return const SizedBox();
                                                 }
@@ -169,65 +175,72 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                                 onAcceptWithDetails:
                                     (DragTargetDetails<GameImagesGameFinalModel>
                                         details) async {
-                                  GameImagesGameFinalModel image = details.data;
-                                  print('###:${(gameState.gameData.gameLetters![index]
-                                      .letter)
-                                      ?.toLowerCase()}');
-                                  print('##:${image.word}');
-                                  if (image.word?.toLowerCase().contains(
-                                      gameState.gameData.gameLetters![index].letter
-                                      ?.toLowerCase()??"")??false) {
-                                    context
-                                        .read<SortingCubit>()
-                                        .addTheCorrectAnswer(answer: image);
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addSuccessAnswer(
-                                            questions:
-                                                gameState.countOfQuestion,
-                                            correctAnswers: gameState
-                                                .correctAnswersIds.length)
-                                        .whenComplete(() async {
-
-                                      bool isLastQuestion = context
+                                  if (context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .ableButton()) {
+                                    GameImagesGameFinalModel image =
+                                        details.data;
+                                    print(
+                                        '###:${(gameState.gameData.gameLetters![index].letter)?.toLowerCase()}');
+                                    print('##:${image.word}');
+                                    if (image.word?.toLowerCase().contains(
+                                            gameState.gameData
+                                                    .gameLetters![index].letter
+                                                    ?.toLowerCase() ??
+                                                "") ??
+                                        false) {
+                                      context
                                           .read<SortingCubit>()
-                                          .checkIfIsTheLastQuestionOfGame();
-                                      print('isLastQuestion:$isLastQuestion');
+                                          .addTheCorrectAnswer(answer: image);
+                                      await context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .addSuccessAnswer(
+                                              questions:
+                                                  gameState.countOfQuestion,
+                                              correctAnswers: gameState
+                                                  .correctAnswersIds.length)
+                                          .whenComplete(() async {
+                                        bool isLastQuestion = context
+                                            .read<SortingCubit>()
+                                            .checkIfIsTheLastQuestionOfGame();
+                                        print('isLastQuestion:$isLastQuestion');
 
-                                      if (isLastQuestion) {
-                                        bool isLastGame = context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .checkIfIsTheLastQuestionOfGame(
-                                                queations: gameState
-                                                    .listGameData.length);
-                                        print('isLastGame:$isLastGame');
-
-                                        if (isLastGame) {
-                                          Future.delayed(
-                                              const Duration(seconds: 2),
-                                              () async {
-                                            Navigator.of(context).pop();
-                                          });
-                                        } else {
-                                          await context
+                                        if (isLastQuestion) {
+                                          bool isLastGame = context
                                               .read<CurrentGamePhoneticsCubit>()
-                                              .updateIndexOfCurrentGame();
-                                          gameContext
-                                              .read<SortingCubit>()
-                                              .updateTheCurrentGame(
-                                                  index: context
-                                                      .read<
-                                                          CurrentGamePhoneticsCubit>()
-                                                      .state
-                                                      .index);
+                                              .checkIfIsTheLastQuestionOfGame(
+                                                  queations: gameState
+                                                      .listGameData.length);
+                                          print('isLastGame:$isLastGame');
+
+                                          if (isLastGame) {
+                                            Future.delayed(
+                                                const Duration(seconds: 2),
+                                                () async {
+                                              Navigator.of(context).pop();
+                                            });
+                                          } else {
+                                            await context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .updateIndexOfCurrentGame();
+                                            gameContext
+                                                .read<SortingCubit>()
+                                                .updateTheCurrentGame(
+                                                    index: context
+                                                        .read<
+                                                            CurrentGamePhoneticsCubit>()
+                                                        .state
+                                                        .index);
+                                          }
                                         }
-                                      }
-                                    });
-                                  } else {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addWrongAnswer(
-                                            actionOfWrongAnswer: () async {});
+                                      });
+                                    } else {
+                                      await context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .addWrongAnswer(
+                                              actionOfWrongAnswer: () async {});
+                                    }
                                   }
                                 },
                               ));

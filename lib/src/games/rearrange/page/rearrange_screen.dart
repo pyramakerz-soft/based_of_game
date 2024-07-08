@@ -29,7 +29,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: StateOfSubWord.isLetter,
+        stateOfStringIsWord: StateOfSubWord.stopTalk,
         stateOfStringWillSay: gameData.first.mainLetter ?? '');
     super.initState();
   }
@@ -53,18 +53,17 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                     color: AppColorPhonetics.boarderColor, width: 5)),
             child: Row(
               children: [
-                if(gameState.gameData.gameImages?.first.image!=null && gameState.gameData.gameImages?.first.image!='')...{
+                if (gameState.gameData.gameImages?.first.image != null &&
+                    gameState.gameData.gameImages?.first.image != '') ...{
                   Expanded(
                     child: CachedNetworkImage(
-                      imageUrl: gameState.gameData.gameImages?.first.image ??
-                          '',
+                      imageUrl:
+                          gameState.gameData.gameImages?.first.image ?? '',
                       height: 0.33.sh,
-                      placeholder: (context, url) =>
-                      const Center(
+                      placeholder: (context, url) => const Center(
                         child: CupertinoActivityIndicator(),
                       ),
-                      errorWidget: (context, url, error) =>
-                      const Icon(
+                      errorWidget: (context, url, error) => const Icon(
                         Icons.error,
                         color: Colors.red,
                       ),
@@ -95,7 +94,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                     dashPattern: [8, 4],
                                     color: AppColorPhonetics.darkBorderColor,
 
-                                    borderType : BorderType.RRect,
+                                    borderType: BorderType.RRect,
                                     radius: const Radius.circular(7),
                                     // padding: const EdgeInsets.all(6),
                                     child: SizedBox(
@@ -114,54 +113,59 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                     ),
                                   );
                                 }, onAcceptWithDetails: (item) async {
-                                  bool? answerState = context
-                                      .read<RearrangeCubit>()
-                                      .addUserAnswer(
-                                          index: index, answer: item.data);
-                                  if (answerState != null) {
-                                    if (answerState == true) {
-                                      await context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .addSuccessAnswer(
-                                              questions:
-                                                  gameState.listGameData.length,
-                                              correctAnswers:
-                                                  (gameState.index) + 1)
-                                          .whenComplete(() async {
-                                        bool isLastQuestion = context
+                                  if (context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .ableButton()) {
+                                    bool? answerState = context
+                                        .read<RearrangeCubit>()
+                                        .addUserAnswer(
+                                            index: index, answer: item.data);
+                                    if (answerState != null) {
+                                      if (answerState == true) {
+                                        await context
                                             .read<CurrentGamePhoneticsCubit>()
-                                            .checkIfIsTheLastQuestionOfGame(
-                                                queations: gameState
-                                                    .listGameData.length);
-                                        if (isLastQuestion) {
-                                          Future.delayed(
-                                              const Duration(seconds: 2),
-                                              () async {
-                                            Navigator.of(context).pop();
-                                          });
-                                        } else {
-                                          await context
+                                            .addSuccessAnswer(
+                                                questions: gameState
+                                                    .listGameData.length,
+                                                correctAnswers:
+                                                    (gameState.index) + 1)
+                                            .whenComplete(() async {
+                                          bool isLastQuestion = context
                                               .read<CurrentGamePhoneticsCubit>()
-                                              .updateIndexOfCurrentGame();
+                                              .checkIfIsTheLastQuestionOfGame(
+                                                  queations: gameState
+                                                      .listGameData.length);
+                                          if (isLastQuestion) {
+                                            Future.delayed(
+                                                const Duration(seconds: 2),
+                                                () async {
+                                              Navigator.of(context).pop();
+                                            });
+                                          } else {
+                                            await context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .updateIndexOfCurrentGame();
+                                            context
+                                                .read<RearrangeCubit>()
+                                                .updateTheCurrentGame(
+                                                    index: context
+                                                        .read<
+                                                            CurrentGamePhoneticsCubit>()
+                                                        .state
+                                                        .index);
+                                          }
+                                        });
+                                      } else {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addWrongAnswer(
+                                                actionOfWrongAnswer: () async {
                                           context
                                               .read<RearrangeCubit>()
-                                              .updateTheCurrentGame(
-                                                  index: context
-                                                      .read<
-                                                          CurrentGamePhoneticsCubit>()
-                                                      .state
-                                                      .index);
-                                        }
-                                      });
-                                    } else {
-                                      await context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .addWrongAnswer(
-                                              actionOfWrongAnswer: () async {
-                                        context
-                                            .read<RearrangeCubit>()
-                                            .clearUserAnswer();
-                                      });
+                                              .clearUserAnswer();
+                                        });
+                                      }
                                     }
                                   }
                                 })),
@@ -173,6 +177,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                           children: List.generate(
                               gameState.correctAnswers.length,
                               (index) => Draggable<String>(
+                                maxSimultaneousDrags: 1,
                                     data: gameState.correctAnswers[index] ?? '',
                                     childWhenDragging: Container(
                                       padding: const EdgeInsets.symmetric(
@@ -207,7 +212,8 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                                 AppTheme.getFontFamily5(),
                                             decoration:
                                                 TextDecoration.underline,
-                                            decorationColor:  AppColorPhonetics.darkBorderColor,
+                                            decorationColor: AppColorPhonetics
+                                                .darkBorderColor,
                                             color: AppColorPhonetics.white),
                                         textAlign: TextAlign.center,
                                       ),

@@ -19,6 +19,8 @@ class RearrangeCubit extends Cubit<RearrangeInitial> {
           finalAnswer: '',
           userAnswers: [],
         )) {
+    TalkTts.startTalk(text: state.gameData.inst??'');
+
     reFormatAnswers();
   }
 

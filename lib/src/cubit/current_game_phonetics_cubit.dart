@@ -114,7 +114,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   saveTheStringWillSay(
-      {required bool stateOfStringIsWord,
+      {required StateOfSubWord stateOfStringIsWord,
       required String stateOfStringWillSay}) {
     emit(state.copyWith(
         stateOfStringIsWord: stateOfStringIsWord,

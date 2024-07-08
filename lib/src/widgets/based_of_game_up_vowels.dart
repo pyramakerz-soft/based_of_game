@@ -142,19 +142,31 @@ class BasedOfGameUpVowels extends StatelessWidget {
                         await context
                             .read<CurrentGamePhoneticsCubit>()
                             .beeTalkingTrue();
-                        await TalkTts.startTalk(
-                            text: gamesData[stateOfGame.index].inst ?? '');
+                        await TalkTts.startTalk(text: '');
                         TalkTts.flutterTts.setCompletionHandler(() async {
-                          if (stateOfGame.stateOfStringIsWord == true) {
+                          // if (stateOfGame.stateOfStringIsWord !=
+                          //     StateOfSubWord.stopTalk) {
+                          if (stateOfGame.stateOfStringIsWord ==
+                              StateOfSubWord.isWord) {
                             await TalkTts.startTalk(
-                                text: stateOfGame.stateOfStringWillSay ?? '');
+                                text:
+                                    "${gamesData[stateOfGame.index].inst ?? ''} ${(stateOfGame.stateOfStringIsWord != StateOfSubWord.stopTalk) ? stateOfGame.stateOfStringWillSay ?? '' : ''}");
                           } else {
-                            await AudioPlayerLetters.startPlaySound(
-                                soundPath: AssetsSoundLetters.getSoundOfLetter(
-                                    mainGameLetter:
-                                        stateOfGame.stateOfStringWillSay ??
-                                            ''));
+                            await TalkTts.startTalk(
+                                text: gamesData[stateOfGame.index].inst ?? '');
+                            if (stateOfGame.stateOfStringIsWord !=
+                                StateOfSubWord.stopTalk) {
+                              TalkTts.flutterTts.setCompletionHandler(() async {
+                                await AudioPlayerLetters.startPlaySound(
+                                    soundPath:
+                                        AssetsSoundLetters.getSoundOfLetter(
+                                            mainGameLetter: stateOfGame
+                                                    .stateOfStringWillSay ??
+                                                ''));
+                              });
+                            }
                           }
+                          // }
                         });
 
                         await context

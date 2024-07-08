@@ -31,7 +31,7 @@ class _ClickPictureGame extends State<ClickPictureGame> {
             0);
 
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: false,
+        stateOfStringIsWord: StateOfSubWord.isLetter,
         stateOfStringWillSay: gameData.mainLetter ?? '');
     super.initState();
   }

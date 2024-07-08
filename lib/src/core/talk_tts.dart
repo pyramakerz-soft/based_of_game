@@ -13,6 +13,7 @@ abstract class TalkTts {
       Function? actionCancel,
       bool? isArabic,
       Function? actionComplete}) async {
+    print('object:$text');
     if (isArabic == true) {
       await flutterTts.setLanguage("ar");
     } else {

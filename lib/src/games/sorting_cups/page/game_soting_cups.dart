@@ -28,7 +28,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
         mainCountOfQuestion: gameData.gameLetters?.length ?? 0);
 
     // context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-    //     stateOfStringIsWord: false,
+    //     stateOfStringIsWord: StateOfSubWord.isLetter,
     //     stateOfStringWillSay: gameData.mainLetter ?? '');
     super.initState();
   }
@@ -48,7 +48,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
           child: BlocConsumer<SortingCupsCubit, SortingCupsInitial>(
               listener: (context, state) {
             context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-                stateOfStringIsWord: false,
+                stateOfStringIsWord: StateOfSubWord.isLetter,
                 stateOfStringWillSay: state.chooseWord?.letter ?? '');
           }, builder: (context, gameState) {
             return Column(

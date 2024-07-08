@@ -28,7 +28,7 @@ class _XOutGameScreen extends State<XOutGameScreen> {
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: false,
+        stateOfStringIsWord: StateOfSubWord.isLetter,
         stateOfStringWillSay: gameData.first.mainLetter ?? '');
     super.initState();
   }
@@ -47,7 +47,7 @@ class _XOutGameScreen extends State<XOutGameScreen> {
     return BlocConsumer<XOutCubit, XOutInitial>(
       listener: (context, state) {
         context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-            stateOfStringIsWord: false,
+            stateOfStringIsWord: StateOfSubWord.isLetter,
             stateOfStringWillSay: state.gameData?.mainLetter ?? '');
       },
       builder: (context, state) {

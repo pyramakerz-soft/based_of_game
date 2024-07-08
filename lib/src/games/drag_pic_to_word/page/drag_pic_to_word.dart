@@ -31,7 +31,7 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
         .getStateOfStars(mainCountOfQuestion: gameData.gameImages?.length ?? 0);
 
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: false,
+        stateOfStringIsWord: StateOfSubWord.isLetter,
         stateOfStringWillSay: gameData.mainLetter ?? '');
     super.initState();
   }
@@ -61,7 +61,7 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
       // }
     }, builder: (context, stateOfGameData) {
       // context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-      //     stateOfStringIsWord: false,
+      //     stateOfStringIsWord: StateOfSubWord.isLetter,
       //     stateOfStringWillSay: stateOfGameData.gameData.mainLetter ?? '');
       return Expanded(
         child: Column(

@@ -1,5 +1,5 @@
 part of 'current_game_phonetics_cubit.dart';
-
+enum StateOfSubWord{ isWord, isLetter, stopTalk}
 class CurrentGamePhoneticsState extends Equatable {
   Artboard? avatarArtboardIdle;
   Artboard? avatarArtboardSuccess;
@@ -9,7 +9,7 @@ class CurrentGamePhoneticsState extends Equatable {
   String? stateOfAvatar;
   BuildContext context;
   String? stateOfStringWillSay;
-  bool? stateOfStringIsWord;
+  StateOfSubWord? stateOfStringIsWord;
   bool beeTalking;
   int countOfWrongAnswers;
   int countOfCorrectAnswers;
@@ -53,7 +53,7 @@ class CurrentGamePhoneticsState extends Equatable {
       Artboard? avatarArtboardIdle,
       Artboard? avatarArtboardSad,
       bool? touchPositions,
-      bool? stateOfStringIsWord,
+        StateOfSubWord? stateOfStringIsWord,
       BuildContext? context,
       bool? beeTalking,
       Artboard? avatarCurrentArtboard,

@@ -28,7 +28,7 @@ class _DragOutGame extends State<DragOutGame> {
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: false,
+        stateOfStringIsWord: StateOfSubWord.isLetter,
         stateOfStringWillSay: gameData.first.mainLetter ?? '');
     super.initState();
   }

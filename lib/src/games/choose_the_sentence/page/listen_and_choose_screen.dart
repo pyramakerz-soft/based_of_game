@@ -31,7 +31,7 @@ class _ChooseTheSentenceScreen extends State<ChooseTheSentenceScreen> {
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: true,
+        stateOfStringIsWord: StateOfSubWord.isWord,
         stateOfStringWillSay: gameData.first.inst ?? '');
     super.initState();
   }

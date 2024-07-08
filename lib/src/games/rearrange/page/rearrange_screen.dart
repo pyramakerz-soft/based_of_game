@@ -29,7 +29,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: false,
+        stateOfStringIsWord: StateOfSubWord.isLetter,
         stateOfStringWillSay: gameData.first.mainLetter ?? '');
     super.initState();
   }

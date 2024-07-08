@@ -29,7 +29,7 @@ class _SortingGameScreen extends State<SortingGameScreen> {
         mainCountOfQuestion:
             context.read<SortingCubit>().state.countOfQuestion);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: true,
+        stateOfStringIsWord: StateOfSubWord.isWord,
         stateOfStringWillSay: gameData.first.mainLetter ?? '');
     super.initState();
   }

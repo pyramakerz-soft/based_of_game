@@ -22,7 +22,7 @@ class _TracingGame extends State<TracingGame> {
         .getStateOfStars(mainCountOfQuestion: 3);
 
     // context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-    //     stateOfStringIsWord: false,
+    //     stateOfStringIsWord: StateOfSubWord.isLetter,
     //     stateOfStringWillSay: gameData.mainLetter ?? '');
     super.initState();
   }

@@ -31,7 +31,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: false, stateOfStringWillSay: '');
+        stateOfStringIsWord: StateOfSubWord.isLetter, stateOfStringWillSay: '');
     super.initState();
   }
 

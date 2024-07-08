@@ -31,7 +31,7 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
             0);
 
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: false,
+        stateOfStringIsWord: StateOfSubWord.isLetter,
         stateOfStringWillSay: gameData.mainLetter ?? '');
     super.initState();
   }

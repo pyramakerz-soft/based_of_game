@@ -44,7 +44,7 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
         child: BlocConsumer<ClickThePictureWithWordCubit,
             ClickThePictureWithWordInitial>(listener: (context, state) {
           context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-              stateOfStringIsWord: true,
+              stateOfStringIsWord: StateOfSubWord.isWord,
               stateOfStringWillSay: state.chooseWord?.word ?? '');
         }, builder: (context, gameState) {
           return Wrap(

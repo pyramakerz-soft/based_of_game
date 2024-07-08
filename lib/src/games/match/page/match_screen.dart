@@ -31,7 +31,7 @@ class _MatchScreen extends State<MatchScreen> {
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.gameImages?.length ?? 0);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: false,
+        stateOfStringIsWord: StateOfSubWord.isLetter,
         stateOfStringWillSay: gameData.mainLetter ?? '');
     super.initState();
   }

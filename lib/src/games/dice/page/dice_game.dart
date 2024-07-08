@@ -26,7 +26,7 @@ class _DiceGamePage extends State<DiceGamePage> {
           context: context,
           functionOfSaveWords: (String currentAlphabet) {
             context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-                stateOfStringIsWord: false,
+                stateOfStringIsWord: StateOfSubWord.isLetter,
                 stateOfStringWillSay: currentAlphabet);
             context
                 .read<CurrentGamePhoneticsCubit>()
@@ -119,7 +119,7 @@ class _DiceGamePage extends State<DiceGamePage> {
                                                 .read<
                                                     CurrentGamePhoneticsCubit>()
                                                 .saveTheStringWillSay(
-                                                    stateOfStringIsWord: false,
+                                                    stateOfStringIsWord: StateOfSubWord.isLetter,
                                                     stateOfStringWillSay:
                                                         currentAlphabet);
 

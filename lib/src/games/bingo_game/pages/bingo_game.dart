@@ -50,7 +50,7 @@ class _BingoGameScreen extends State<BingoGameScreen> {
         child:
             BlocConsumer<BingoCubit, BingoInitial>(listener: (context, state) {
           context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-              stateOfStringIsWord: false,
+              stateOfStringIsWord: StateOfSubWord.isLetter,
               stateOfStringWillSay: state.chooseWord?.letter ?? '');
         }, builder: (context, gameState) {
           return Center(

@@ -25,7 +25,7 @@ class ListenChooseCubit extends Cubit<ListenChooseInitial> {
     emit(state.copyWith(
         choose: state.listGameData[state.index].gameLetters,
         images: state.listGameData[state.index].gameImages,
-        isCorrect:false,
+        isCorrect: false,
         gameData: state.listGameData[state.index]));
     String choose = state.gameData.correctAns ?? '';
     emit(state.copyWith(correctAnswer: choose));
@@ -34,17 +34,21 @@ class ListenChooseCubit extends Cubit<ListenChooseInitial> {
   }
 
   updateTheCurrentGame({required int index}) {
-    debugPrint('updateTheCurrentGame:${state.gameData.id}, $index');
+    // debugPrint('updateTheCurrentGame:${state.gameData.id}, $index');
     emit(state.copyWith(gameData: state.listGameData[index], index: index));
-    debugPrint('updateTheCurrentGame:${state.gameData.id}');
+    // debugPrint('updateTheCurrentGame:${state.gameData.id}');
     reForMateGame();
   }
 
   bool addAnswer({required String userChoose}) {
     String choose = state.gameData.correctAns ?? '';
+    print('choose:$choose , $userChoose , ${state.gameData.inst}');
+    debugPrint('updateTheCurrentGame:${state.gameData.id}, ${state.index}');
+
     if (userChoose == choose) {
-      int countCorrectAnswers = state.countCorrectAnswers+1;
-      emit(state.copyWith(countCorrectAnswers: countCorrectAnswers, isCorrect:true));
+      int countCorrectAnswers = state.countCorrectAnswers + 1;
+      emit(state.copyWith(
+          countCorrectAnswers: countCorrectAnswers, isCorrect: true));
       return true;
     } else {
       return false;
@@ -53,6 +57,5 @@ class ListenChooseCubit extends Cubit<ListenChooseInitial> {
 
   _sayLetter() async {
     await TalkTts.startTalk(text: state.gameData.inst ?? '');
-
   }
 }

@@ -27,7 +27,7 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: StateOfSubWord.isWord,
+        stateOfStringIsWord: StateOfSubWord.stopTalk,
         stateOfStringWillSay: gameData.first.inst ?? '');
     super.initState();
   }
@@ -38,148 +38,149 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
         context.watch<CurrentGamePhoneticsCubit>().state.stateOfAvatar;
 
     return BlocConsumer<ListenChooseCubit, ListenChooseInitial>(
-        listener: (context, state) {},
-        builder: (context, gameState) {
-          return Container(
-            margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            width: MediaQuery.of(context).size.width - (130 + 50 + 130),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(
-                    color: AppColorPhonetics.boarderColor, width: 5)),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(gameState.choose.length, (index) {
-                    return Wrap(
-                      children: [
-                        if (index == 0) ...{
-                          Text(
-                            '(',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: AppTheme.getFontFamily5(),
-                                color: AppColorPhonetics.darkBorderColor),
-                          )
-                        },
-                        GestureDetector(
-                          onTap: () async {
-                            if (context
+        listener: (context, state) {
+      context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
+          stateOfStringIsWord: StateOfSubWord.stopTalk,
+          stateOfStringWillSay: state.gameData.inst ?? '');
+    }, builder: (context, gameState) {
+      return Container(
+        margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        width: MediaQuery.of(context).size.width - (130 + 50 + 130),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            border:
+                Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(gameState.choose.length, (index) {
+                return Wrap(
+                  children: [
+                    if (index == 0) ...{
+                      Text(
+                        '(',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: AppTheme.getFontFamily5(),
+                            color: AppColorPhonetics.darkBorderColor),
+                      )
+                    },
+                    GestureDetector(
+                      onTap: () async {
+                        if (context
                                 .read<CurrentGamePhoneticsCubit>()
-                                .ableButton()) {
-                              bool stateOfAnswer = context
-                                  .read<ListenChooseCubit>()
-                                  .addAnswer(
-                                      userChoose:
-                                          gameState.choose[index].letter ?? '');
-                              if (stateOfAnswer == true) {
-                                await context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .addSuccessAnswer(
-                                        questions:
-                                            gameState.listGameData.length,
-                                        correctAnswers:
-                                            gameState.countCorrectAnswers + 1)
-                                    .whenComplete(() {
-                                  print(
-                                      'listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
-                                  bool isLastQuestion = context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .checkIfIsTheLastQuestionOfGame(
-                                          queations:
-                                              gameState.listGameData.length);
-                                  if (isLastQuestion) {
-                                    Future.delayed(const Duration(seconds: 2),
-                                        () async {
-                                      Navigator.of(context).pop();
-                                    });
-                                  } else {
-                                    Future.delayed(const Duration(seconds: 2),
-                                        () async {
-                                      await context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .updateIndexOfCurrentGame();
-                                      context
-                                          .read<ListenChooseCubit>()
-                                          .updateTheCurrentGame(
-                                              index: context
-                                                  .read<
-                                                      CurrentGamePhoneticsCubit>()
-                                                  .state
-                                                  .index);
-                                    });
-                                  }
+                                .ableButton() &&
+                            gameState.isCorrect == false) {
+                          bool stateOfAnswer = context
+                              .read<ListenChooseCubit>()
+                              .addAnswer(
+                                  userChoose:
+                                      gameState.choose[index].letter ?? '');
+                          if (stateOfAnswer == true) {
+                            await context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .addSuccessAnswer(
+                                    questions: gameState.listGameData.length,
+                                    correctAnswers:
+                                        gameState.countCorrectAnswers + 1)
+                                .whenComplete(() {
+                              print(
+                                  'listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
+                              bool isLastQuestion = context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .checkIfIsTheLastQuestionOfGame(
+                                      queations: gameState.listGameData.length);
+                              if (isLastQuestion) {
+                                Future.delayed(const Duration(seconds: 2),
+                                    () async {
+                                  Navigator.of(context).pop();
                                 });
                               } else {
-                                await context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .addWrongAnswer(
-                                        actionOfWrongAnswer: () async {});
+                                Future.delayed(const Duration(seconds: 2),
+                                    () async {
+                                  await context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .updateIndexOfCurrentGame();
+                                  context
+                                      .read<ListenChooseCubit>()
+                                      .updateTheCurrentGame(
+                                          index: context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .state
+                                              .index);
+                                });
                               }
-                            }
-                          },
-                          child: Text(
-                            gameState.choose[index].letter ?? '',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: AppTheme.getFontFamily5(),
-                                color: AppColorPhonetics.darkBorderColor),
-                          ),
-                        ),
-                        if (index == (gameState.choose.length - 1)) ...{
-                          Text(
-                            ')',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: AppTheme.getFontFamily5(),
-                                color: AppColorPhonetics.darkBorderColor),
-                          )
-                        } else ...{
-                          Text(
-                            ' - ',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: AppTheme.getFontFamily5(),
-                                color: AppColorPhonetics.darkBorderColor),
-                          )
+                            });
+                          } else {
+                            await context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .addWrongAnswer(
+                                    actionOfWrongAnswer: () async {});
+                          }
                         }
-                      ],
-                    );
-                  }),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl: gameState.images.first.image ?? '',
-                      height: 0.31.sh,
-                      placeholder: (context, url) => const Center(
-                        child: CupertinoActivityIndicator(),
-                      ),
-                      errorWidget: (context, url, error) => const Icon(
-                        Icons.error,
-                        color: Colors.red,
+                      },
+                      child: Text(
+                        gameState.choose[index].letter ?? '',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: AppTheme.getFontFamily5(),
+                            color: AppColorPhonetics.darkBorderColor),
                       ),
                     ),
-                    Text(
-                      gameState.isCorrect
-                          ? (gameState.gameData.inst ?? '')
-                          : gameState.images.first.word ?? '',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: AppTheme.getFontFamily5(),
-                          color: AppColorPhonetics.darkBorderColor),
-                    )
+                    if (index == (gameState.choose.length - 1)) ...{
+                      Text(
+                        ')',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: AppTheme.getFontFamily5(),
+                            color: AppColorPhonetics.darkBorderColor),
+                      )
+                    } else ...{
+                      Text(
+                        ' - ',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: AppTheme.getFontFamily5(),
+                            color: AppColorPhonetics.darkBorderColor),
+                      )
+                    }
                   ],
+                );
+              }),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CachedNetworkImage(
+                  imageUrl: gameState.images.first.image ?? '',
+                  height: 0.31.sh,
+                  placeholder: (context, url) => const Center(
+                    child: CupertinoActivityIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  ),
+                ),
+                Text(
+                  gameState.isCorrect
+                      ? (gameState.gameData.inst ?? '')
+                      : gameState.images.first.word ?? '',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: AppTheme.getFontFamily5(),
+                      color: AppColorPhonetics.darkBorderColor),
                 )
               ],
-            ),
-          );
-        });
+            )
+          ],
+        ),
+      );
+    });
   }
 }

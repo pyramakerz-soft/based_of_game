@@ -26,8 +26,8 @@ class RowImage extends StatelessWidget {
           (index) => Column(
                 children: [
                   CachedNetworkImage(
-                    height: 50.h,
-                    width: 50.w,
+                    height: 70.h,
+                    // width: 50.w,
                     imageUrl: gameImages[index].image ?? '',
                     placeholder: (context, url) => const Center(
                       child: CupertinoActivityIndicator(),
@@ -47,10 +47,10 @@ class RowImage extends StatelessWidget {
                           List<dynamic> rejected,
                         ) {
                           return Container(
+                            alignment: Alignment.center,
                             color: AppColorPhonetics.lightBlueColor,
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-
-                            // padding: const EdgeInsets.symmetric(horizontal: 5),
+                            width: 25.w,
+                            padding: EdgeInsets.symmetric(vertical: 5.h),
                             child: Text(
                               gameImages[index].word ?? '',
                               style: Theme.of(context)
@@ -85,7 +85,7 @@ class RowImage extends StatelessWidget {
                                 .whenComplete(() async {
                               bool isLastQuestion = context
                                   .read<CurrentGamePhoneticsCubit>()
-                                  .checkIfIsTheLastQuestionOfGame(
+                                  .secondWayToCheckIfIsTheLastQuestionOfGame(
                                       queations: mainGameImages.length);
                               if (isLastQuestion) {
                                 Future.delayed(const Duration(seconds: 2),

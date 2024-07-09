@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../src_model/export_models.dart';
+import '../../../core/talk_tts.dart';
 
 part 'drag_word_to_pic_state.dart';
 
@@ -21,6 +22,7 @@ class DragWordToPicCubit extends Cubit<DragWordToPicInitial> {
         gameImages2: _splitListIntoTwo(gameData.gameImages ?? []).last
             as List<GameImagesGameFinalModel>,
         mainGameImages: gameImages));
+    TalkTts.startTalk(text: state.gameData.inst??'');
   }
   List<List<GameImagesGameFinalModel>>
       _splitListIntoTwo<GameImagesGameFinalModel>(

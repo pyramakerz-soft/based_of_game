@@ -14,7 +14,7 @@ class TextInDrag extends StatelessWidget {
     return Container(
       width: 25.w,
       color: AppColorPhonetics.lightBlueColor,
-      padding: const EdgeInsets.symmetric(horizontal: 5),
+      padding: EdgeInsets.symmetric(vertical: 5.h),
       child: Text(
         image.word ?? '',
         style: Theme.of(context).textTheme.displayLarge?.copyWith(

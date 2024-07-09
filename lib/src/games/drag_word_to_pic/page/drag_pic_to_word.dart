@@ -27,7 +27,7 @@ class _DragWordToPicGameScreen extends State<DragWordToPicGameScreen> {
         .getStateOfStars(mainCountOfQuestion: gameData.gameImages?.length ?? 0);
 
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: StateOfSubWord.isLetter,
+        stateOfStringIsWord: StateOfSubWord.stopTalk,
         stateOfStringWillSay: gameData.mainLetter ?? '');
     super.initState();
   }
@@ -67,78 +67,84 @@ class _DragWordToPicGameScreen extends State<DragWordToPicGameScreen> {
               children: [
                 10.pw,
                 // 10.ph,
-                Container(
-                    alignment: Alignment.center,
-                    height: MediaQuery.of(context).size.height - 0.4.sh,
-                    padding: const EdgeInsets.all(24),
-                    decoration: ShapeDecoration(
-                      color: Colors.white.withOpacity(0.8199999928474426),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(4),
-                          topRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(4),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                      alignment: Alignment.center,
+                      height: MediaQuery.of(context).size.height - 0.4.sh,
+                      padding: const EdgeInsets.all(15),
+                      decoration: ShapeDecoration(
+                        color: Colors.white.withOpacity(0.8199999928474426),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(4),
+                            topRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(4),
+                          ),
                         ),
+                        shadows: const [
+                          BoxShadow(
+                            color: Color(0x3F000000),
+                            blurRadius: 14,
+                            offset: Offset(0, 4),
+                            spreadRadius: 0,
+                          )
+                        ],
                       ),
-                      shadows: const [
-                        BoxShadow(
-                          color: Color(0x3F000000),
-                          blurRadius: 14,
-                          offset: Offset(0, 4),
-                          spreadRadius: 0,
+                      child: Wrap(
+                        direction: Axis.vertical,
+                        // mainAxisSize: MainAxisSize.min,
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        spacing: 8,
+                        runSpacing: 7,
+                        children: List.generate(
+                          stateOfGameData.mainGameImages?.length ?? 0,
+                          (index) => stateOfGameData.correctedAnswers.contains(
+                                      stateOfGameData
+                                          .mainGameImages?[index].id) ==
+                                  false
+                              ? Draggable<GameImagesGameFinalModel>(
+                                  data: stateOfGameData.mainGameImages?[index],
+                                  maxSimultaneousDrags: 1,
+                                  childWhenDragging: SizedBox(
+                                    height: 30.h,
+                                    width: 25.w,
+                                  ),
+                                  feedback: TextInDrag(
+                                      image:
+                                          stateOfGameData.mainGameImages![index]),
+                                  child: TextInDrag(
+                                      image:
+                                          stateOfGameData.mainGameImages![index]),
+                                )
+                              : SizedBox(
+                            height: 30.h,
+                            width: 25.w,
+                                ),
+                        ),
+                      )),
+                ),
+
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height - 0.4.sh,
+
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        RowImage(
+                          gameImages: stateOfGameData.gameImages ?? [],
+                          mainGameImages: stateOfGameData.mainGameImages ?? [],
+                        ),
+                        RowImage(
+                          gameImages: stateOfGameData.gameImages2 ?? [],
+                          mainGameImages: stateOfGameData.mainGameImages ?? [],
                         )
                       ],
                     ),
-                    child: Wrap(
-                      direction: Axis.vertical,
-                      // mainAxisSize: MainAxisSize.min,
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: 8,
-                      runSpacing: 7,
-                      children: List.generate(
-                        stateOfGameData.mainGameImages?.length ?? 0,
-                        (index) => stateOfGameData.correctedAnswers.contains(
-                                    stateOfGameData
-                                        .mainGameImages?[index].id) ==
-                                false
-                            ? Draggable<GameImagesGameFinalModel>(
-                                data: stateOfGameData.mainGameImages?[index],
-                                maxSimultaneousDrags: 1,
-                                childWhenDragging: SizedBox(
-                                  height: 20.h,
-                                  width: 20.w,
-                                ),
-                                feedback: TextInDrag(
-                                    image:
-                                        stateOfGameData.mainGameImages![index]),
-                                child: TextInDrag(
-                                    image:
-                                        stateOfGameData.mainGameImages![index]),
-                              )
-                            : SizedBox(
-                                height: 20.h,
-                                width: 20.w,
-                              ),
-                      ),
-                    )),
-
-                SizedBox(
-                  height: MediaQuery.of(context).size.height - 0.4.sh,
-                  width: (MediaQuery.of(context).size.width - 170),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      RowImage(
-                        gameImages: stateOfGameData.gameImages ?? [],
-                        mainGameImages: stateOfGameData.mainGameImages ?? [],
-                      ),
-                      RowImage(
-                        gameImages: stateOfGameData.gameImages2 ?? [],
-                        mainGameImages: stateOfGameData.mainGameImages ?? [],
-                      )
-                    ],
                   ),
                 ),
                 10.pw,

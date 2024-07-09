@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/core/talk_tts.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,9 @@ class DragPicToWordCubit extends Cubit<DragPicToWordInitial> {
           gameData: gameData,
           gameImages: gameData.gameImages ?? [],
           correctedAnswers: [],
-        ));
+        )){
+   TalkTts.startTalk(text: state.gameData.inst??'');
+  }
 
   addCorrectAnswer({required int correctAnswerId}) {
     List<int> correctedAnswers = state.correctedAnswers;

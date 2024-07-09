@@ -31,7 +31,7 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
         .getStateOfStars(mainCountOfQuestion: gameData.gameImages?.length ?? 0);
 
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: StateOfSubWord.isLetter,
+        stateOfStringIsWord: StateOfSubWord.stopTalk,
         stateOfStringWillSay: gameData.mainLetter ?? '');
     super.initState();
   }
@@ -39,30 +39,8 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<DragPicToWordCubit, DragPicToWordInitial>(
-        listener: (context, state) {
-      // int success = state.correctIndexes.length;
-      // if (success ==
-      //     (gameData.gameImages?.where((e) => e.correct == 1).toList().length ??
-      //         1)) {
-      //   Future.delayed(Duration(seconds: 2), () {
-      //     // context.read<CurrentGamePhoneticsCubit>().sendStars(
-      //     //     gamesId: [state.gameData.id ?? 0],
-      //     //     actionOfStars: (int countOfStars, List<int> listOfIds) {
-      //     //       context
-      //     //           .read<JourneyBarCubit>()
-      //     //           .sendStars(gamesId: listOfIds, countOfStar: countOfStars);
-      //     //     });
-      //
-      //     Navigator.pop(context);
-      //   });
-      // }
-      // if (success == 2 || success == 4 || success ==5) {
-      //   context.read<CurrentGamePhoneticsCubit>().increaseDirectlyCountOfStar();
-      // }
-    }, builder: (context, stateOfGameData) {
-      // context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-      //     stateOfStringIsWord: StateOfSubWord.isLetter,
-      //     stateOfStringWillSay: stateOfGameData.gameData.mainLetter ?? '');
+        listener: (context, state) {},
+        builder: (context, stateOfGameData) {
       return Expanded(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,

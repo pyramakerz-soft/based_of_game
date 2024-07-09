@@ -43,10 +43,7 @@ class ItemCardWidget extends StatelessWidget {
                 placeholder: (context, url) => const Center(
                   child: CupertinoActivityIndicator(),
                 ),
-                errorWidget: (context, url, error) => const Icon(
-                  Icons.error,
-                  color: Colors.red,
-                ),
+                errorWidget: (context, url, error) => Text(body.word ?? ''),
                 // height: ,
               ),
             ),

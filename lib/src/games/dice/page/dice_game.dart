@@ -77,10 +77,8 @@ class _DiceGamePage extends State<DiceGamePage> {
                               if (gameState.correctIndexes.contains(
                                       gameState.gameImages?[index].id) ==
                                   false) {
-                                if (gameState.gameImages?[index].word
-                                        ?.split('')
-                                        .first.toLowerCase() ==
-                                    gameState.chooseWord?.toLowerCase()) {
+                                if (gameState.gameImages?[index].gameLetterId ==
+                                    gameState.chooseWordId) {
                                   await context
                                       .read<DiceCubit>()
                                       .addTheCorrectAnswer(
@@ -119,7 +117,8 @@ class _DiceGamePage extends State<DiceGamePage> {
                                                 .read<
                                                     CurrentGamePhoneticsCubit>()
                                                 .saveTheStringWillSay(
-                                                    stateOfStringIsWord: StateOfSubWord.isLetter,
+                                                    stateOfStringIsWord:
+                                                        StateOfSubWord.isLetter,
                                                     stateOfStringWillSay:
                                                         currentAlphabet);
 

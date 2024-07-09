@@ -92,7 +92,13 @@ class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
   }
 
   updateSelectedLetter({required String newSelectedLetter}) async {
-    emit(state.copyWith(chooseWord: newSelectedLetter));
+    emit(state.copyWith(
+        chooseWord: newSelectedLetter,
+        chooseWordId: (state.gameData.gameLetters
+            ?.where((ele) =>
+                ele.letter?.toLowerCase() == newSelectedLetter.toLowerCase())
+            .first
+            .id)));
     await AudioPlayerLetters.startPlaySound(
         soundPath: AssetsSoundLetters.getSoundOfLetter(
             mainGameLetter: newSelectedLetter));

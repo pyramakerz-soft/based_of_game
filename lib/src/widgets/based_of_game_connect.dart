@@ -42,7 +42,7 @@ class BasedOfGameConnect extends StatelessWidget {
           children: [
             if (stateOfGame.basicData!.gameData!.isRound) ...{
               PositionedDirectional(
-                top: 0,
+                top: -10,
                 start: 90.w,
                 child: GestureDetector(
                   onTap: stateOfGame.beeTalking == true
@@ -54,7 +54,8 @@ class BasedOfGameConnect extends StatelessWidget {
                           await TalkTts.startTalk(
                               text: gamesData[stateOfGame.index].inst ?? '');
                           TalkTts.flutterTts.setCompletionHandler(() async {
-                            if (stateOfGame.stateOfStringIsWord == StateOfSubWord.isWord) {
+                            if (stateOfGame.stateOfStringIsWord ==
+                                StateOfSubWord.isWord) {
                               await TalkTts.startTalk(
                                   text: stateOfGame.stateOfStringWillSay ?? '');
                             } else {

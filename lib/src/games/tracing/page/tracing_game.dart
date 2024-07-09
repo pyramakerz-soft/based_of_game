@@ -87,7 +87,9 @@ class _TracingGame extends State<TracingGame> {
                               .whenComplete(() async {
                             bool isLastQuestion = context
                                 .read<CurrentGamePhoneticsCubit>()
-                                .checkIfIsTheLastQuestionOfGame(queations: 3);
+                                .secondWayToCheckIfIsTheLastQuestionOfGame(
+                                    queations: 3);
+                            print('isLastQuestion:$isLastQuestion');
                             if (isLastQuestion) {
                               Future.delayed(const Duration(seconds: 2),
                                   () async {

@@ -17,7 +17,7 @@ class DragTargetWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           color: AppColorPhonetics.dragContainerColor,
           border: Border.all(width: 2, color: AppColorPhonetics.strokeColor)),
-      child: Center(
+      child: FittedBox(
         child: Text(
           title,
           style: TextStyle(

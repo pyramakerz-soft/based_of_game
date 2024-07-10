@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/core/talk_tts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +45,7 @@ class _MainScreenOfGames extends State<MainScreenOfGames> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    TalkTts.reBackTheDefaultValue();
     super.dispose();
   }
 

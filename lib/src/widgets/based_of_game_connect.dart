@@ -45,9 +45,7 @@ class BasedOfGameConnect extends StatelessWidget {
                 top: -10,
                 start: 90.w,
                 child: GestureDetector(
-                  onTap: stateOfGame.beeTalking == true
-                      ? null
-                      : () async {
+                  onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
                           await context
                               .read<CurrentGamePhoneticsCubit>()
                               .beeTalkingTrue();
@@ -71,7 +69,7 @@ class BasedOfGameConnect extends StatelessWidget {
                           await context
                               .read<CurrentGamePhoneticsCubit>()
                               .beeTalkingFalse();
-                        },
+                        }:null,
                   child: Container(
                       alignment: Alignment.center,
                       child: stateOfGame.avatarCurrentArtboard == null
@@ -208,9 +206,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                 Positioned(
                                   top: 0,
                                   child: GestureDetector(
-                                    onTap: stateOfGame.beeTalking == true
-                                        ? null
-                                        : () async {
+                                    onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
                                             await context
                                                 .read<
                                                     CurrentGamePhoneticsCubit>()
@@ -244,7 +240,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                                 .read<
                                                     CurrentGamePhoneticsCubit>()
                                                 .beeTalkingFalse();
-                                          },
+                                          }:null,
                                     child: Container(
                                         alignment: Alignment.center,
                                         child: stateOfGame

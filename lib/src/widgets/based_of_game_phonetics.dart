@@ -119,9 +119,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                   children: [
                     const SizedBox(),
                     GestureDetector(
-                      onTap: stateOfGame.beeTalking == true
-                          ? null
-                          : () async {
+                      onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
                               await context
                                   .read<CurrentGamePhoneticsCubit>()
                                   .beeTalkingTrue();
@@ -146,7 +144,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                               await context
                                   .read<CurrentGamePhoneticsCubit>()
                                   .beeTalkingFalse();
-                            },
+                            }:null,
                       child: Container(
                           child: stateOfGame.avatarCurrentArtboard == null
                               ? SizedBox(

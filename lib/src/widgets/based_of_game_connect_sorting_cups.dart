@@ -88,12 +88,7 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
             bottom: 20,
             left: 20,
             child: GestureDetector(
-              onTap: stateOfGame.beeTalking == true ||
-                      AudioPlayerGame.playerCorrect.state ==
-                          PlayerState.playing ||
-                      AudioPlayerGame.playerWrong.state == PlayerState.playing
-                  ? null
-                  : () async {
+              onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
                       await context
                           .read<CurrentGamePhoneticsCubit>()
                           .beeTalkingTrue();
@@ -114,7 +109,7 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
                       await context
                           .read<CurrentGamePhoneticsCubit>()
                           .beeTalkingFalse();
-                    },
+                    }:null,
               child: Container(
                   alignment: Alignment.center,
                   child: stateOfGame.avatarCurrentArtboard == null

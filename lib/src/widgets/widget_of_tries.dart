@@ -43,6 +43,15 @@ widgetOfTries(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                      3,
+                          (index) => Image.asset(
+                        AppImagesPhonetics.iconEmptyStar2,
+                        height: 40.h,
+                      )),
+                ),
                 Text(
                   '"Try again?"',
                   style: TextStyle(
@@ -66,20 +75,12 @@ widgetOfTries(
           //     fit: BoxFit.contain,
           //   ),
           // ),
+          // PositionedDirectional(
+          //     top: 30.h,
+          //     // end: 0,
+          //     child: ),
           PositionedDirectional(
-              top: 10.h,
-              // end: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                    3,
-                    (index) => Image.asset(
-                          AppImagesPhonetics.iconEmptyStar2,
-                          height: 40.h,
-                        )),
-              )),
-          PositionedDirectional(
-            top: 20.h,
+            top: 35.h,
             start: 0,
             child: GestureDetector(
               onTap: () => backButton(),

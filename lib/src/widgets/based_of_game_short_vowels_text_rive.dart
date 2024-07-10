@@ -51,9 +51,7 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
-                      onTap: stateOfGame.beeTalking == true
-                          ? null
-                          : () async {
+                      onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
                               await context
                                   .read<CurrentGamePhoneticsCubit>()
                                   .beeTalkingTrue();
@@ -81,7 +79,7 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                               await context
                                   .read<CurrentGamePhoneticsCubit>()
                                   .beeTalkingFalse();
-                            },
+                            }:null,
                       child: Container(
                           alignment: Alignment.center,
                           child: stateOfGame.avatarCurrentArtboard == null

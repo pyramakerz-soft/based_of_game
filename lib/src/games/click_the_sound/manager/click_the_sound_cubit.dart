@@ -27,8 +27,8 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
   }
 
   Future<void> generateRandomLetters() async {
-    List<String> gameLetters =
-        state.gameData.gameLetters?.map((e) => e.letter.toString()).toList() ??
+    List<GameLettersGameFinalModel> gameLetters =
+        state.gameData.gameLetters??
             [];
     gameLetters.shuffle();
     emit(state.copyWith(letters: gameLetters));

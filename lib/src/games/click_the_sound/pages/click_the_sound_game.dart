@@ -62,171 +62,98 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                 builder: (context, stateOfGame) {
                   int count = ((stateOfGame.gameData.gameLetters?.length ?? 0) / 2)
                       .round();
-                  List<String> firstLetters = stateOfGame.letters?.sublist(0, count)??[];
-                  List<String> secondLetters = stateOfGame.letters?.sublist(count, stateOfGame.gameData.gameLetters?.length)??[];
+                  List<GameLettersGameFinalModel> firstLetters = stateOfGame.letters?.sublist(0, count)??[];
+                  List<GameLettersGameFinalModel> secondLetters = stateOfGame.letters?.sublist(count, stateOfGame.gameData.gameLetters?.length)??[];
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                  SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child:Row(
-                        children: List.generate(
-                          (firstLetters.length ?? 0),
-                              (index) => Expanded(
-                            child: _buildBubbleWidget(
-                              letter: firstLetters[index] ?? '',
-                              viewModel: context.read<ClickTheSoundCubit>(),
-                              index: index,
-                              onPress: (context
-                                  .read<ClickTheSoundCubit>()
-                                  .state
-                                  .correctIndexes
-                                  ?.contains(index) ??
-                                  false)
-                                  ? null
-                                  : () async {
-                                if (context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .ableButton()) {
-                                  print(
-                                      '###:${(context.read<CurrentGamePhoneticsCubit>().ableButton())}');
-                                  if (firstLetters[index] ==
-                                      stateOfGame.gameData.mainLetter) {
-                                    await context
-                                        .read<ClickTheSoundCubit>()
-                                        .incrementCorrectAnswerCount(index);
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addSuccessAnswer(
-                                        questions: stateOfGame.letters
-                                            ?.where((element) =>
-                                        element ==
-                                            stateOfGame.gameData
-                                                .mainLetter)
-                                            .length ??
-                                            0,
-                                        correctAnswers: ((stateOfGame
-                                            .correctIndexes?.length ??
-                                            0)))
-                                        .whenComplete(() {
-                                      bool isLastQuestion = context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .secondWayToCheckIfIsTheLastQuestionOfGame(
-                                          queations: stateOfGame.letters
-                                              ?.where((element) =>
-                                          element ==
-                                              stateOfGame.gameData
-                                                  .mainLetter)
-                                              .length ??
-                                              0);
-                                      if (isLastQuestion) {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                                () async {
-                                              Navigator.of(context).pop();
-                                            });
-                                      }
-                                    });
-                                  } else {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addWrongAnswer(
-                                        actionOfWrongAnswer: () async {
-                                          await context
-                                              .read<ClickTheSoundCubit>()
-                                              .sayTheLetter();
-                                        });
-                                  }
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                      )),
+                      _subRow(firstLetters, stateOfGame),
                       20.ph,
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child:Row(
-                        children: List.generate(
-                          (secondLetters.length ?? 0),
-                              (index) => Expanded(
-                            child: _buildBubbleWidget(
-                              letter: secondLetters[index] ?? '',
-                              viewModel: context.read<ClickTheSoundCubit>(),
-                              index: index,
-                              onPress: (context
-                                  .read<ClickTheSoundCubit>()
-                                  .state
-                                  .correctIndexes
-                                  ?.contains(index) ??
-                                  false)
-                                  ? null
-                                  : () async {
-                                if (context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .ableButton()) {
-                                  print(
-                                      '###:${(context.read<CurrentGamePhoneticsCubit>().ableButton())}');
-                                  if (secondLetters[index] ==
-                                      stateOfGame.gameData.mainLetter) {
-                                    await context
-                                        .read<ClickTheSoundCubit>()
-                                        .incrementCorrectAnswerCount(index);
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addSuccessAnswer(
-                                        questions: stateOfGame.letters
-                                            ?.where((element) =>
-                                        element ==
-                                            stateOfGame.gameData
-                                                .mainLetter)
-                                            .length ??
-                                            0,
-                                        correctAnswers: ((stateOfGame
-                                            .correctIndexes?.length ??
-                                            0)))
-                                        .whenComplete(() {
-                                      bool isLastQuestion = context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .secondWayToCheckIfIsTheLastQuestionOfGame(
-                                          queations: stateOfGame.letters
-                                              ?.where((element) =>
-                                          element ==
-                                              stateOfGame.gameData
-                                                  .mainLetter)
-                                              .length ??
-                                              0);
-                                      if (isLastQuestion) {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                                () async {
-                                              Navigator.of(context).pop();
-                                            });
-                                      }
-                                    });
-                                  } else {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addWrongAnswer(
-                                        actionOfWrongAnswer: () async {
-                                          await context
-                                              .read<ClickTheSoundCubit>()
-                                              .sayTheLetter();
-                                        });
-                                  }
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                      )),
+                      _subRow(secondLetters, stateOfGame),
                     ],
                   );
                 })),
       ),
     );
   }
-
+_subRow(List<GameLettersGameFinalModel> firstLetters,ClickTheSoundInitial stateOfGame ){
+    return SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child:Row(
+          children: List.generate(
+            (firstLetters.length ?? 0),
+                (index) => Expanded(
+              child: _buildBubbleWidget(
+                letter: firstLetters[index].letter ?? '',
+                viewModel: context.read<ClickTheSoundCubit>(),
+                index: firstLetters[index].id??0,
+                onPress: (context
+                    .read<ClickTheSoundCubit>()
+                    .state
+                    .correctIndexes
+                    ?.contains(firstLetters[index].id??0) ??
+                    false)
+                    ? null
+                    : () async {
+                  if (context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .ableButton()) {
+                    print(
+                        '###:${(context.read<CurrentGamePhoneticsCubit>().ableButton())}');
+                    if (firstLetters[index].letter ==
+                        stateOfGame.gameData.mainLetter) {
+                      await context
+                          .read<ClickTheSoundCubit>()
+                          .incrementCorrectAnswerCount(firstLetters[index].id??0);
+                      await context
+                          .read<CurrentGamePhoneticsCubit>()
+                          .addSuccessAnswer(
+                          questions: stateOfGame.letters
+                              ?.where((element) =>
+                          element.letter ==
+                              stateOfGame.gameData
+                                  .mainLetter)
+                              .length ??
+                              0,
+                          correctAnswers: ((stateOfGame
+                              .correctIndexes?.length ??
+                              0)))
+                          .whenComplete(() {
+                        bool isLastQuestion = context
+                            .read<CurrentGamePhoneticsCubit>()
+                            .secondWayToCheckIfIsTheLastQuestionOfGame(
+                            queations: stateOfGame.letters
+                                ?.where((element) =>
+                            element.letter ==
+                                stateOfGame.gameData
+                                    .mainLetter)
+                                .length ??
+                                0);
+                        if (isLastQuestion) {
+                          Future.delayed(
+                              const Duration(seconds: 2),
+                                  () async {
+                                Navigator.of(context).pop();
+                              });
+                        }
+                      });
+                    } else {
+                      await context
+                          .read<CurrentGamePhoneticsCubit>()
+                          .addWrongAnswer(
+                          actionOfWrongAnswer: () async {
+                            await context
+                                .read<ClickTheSoundCubit>()
+                                .sayTheLetter();
+                          });
+                    }
+                  }
+                },
+              ),
+            ),
+          ),
+        ));
+}
   Widget _buildBubbleWidget({
     required String letter,
     required VoidCallback? onPress,

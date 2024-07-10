@@ -61,8 +61,10 @@ class _ClickTheWordScreen extends State<ClickTheWordScreen> {
           children: [
             MasterWord(word: gameState.headOfQuestion ?? ''),
             25.ph,
-            Row(
-                mainAxisSize: MainAxisSize.min,
+            Wrap(
+                runSpacing:10,
+                // mainAxisSize: MainAxisSize.min,
+              alignment: WrapAlignment.center,
                 children: List.generate(
                     gameState.choose?.length ?? 0,
                     (index) => Container(

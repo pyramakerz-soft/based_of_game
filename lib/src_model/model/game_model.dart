@@ -17,6 +17,7 @@ class GameFinalModel extends Equatable {
   final int? numOfTrials;
   final String? createdAt;
   final String? inst;
+  final String? name;
   final String? mainLetter;
   final String? updatedAt;
   final String? correctAns;
@@ -38,6 +39,7 @@ class GameFinalModel extends Equatable {
       this.lessonId,
       this.gameTypeId,
       this.audioFlag,
+      this.name,
       this.numOfLetters,
       this.numOfLetterRepeat,
       this.video,
@@ -66,7 +68,7 @@ class GameFinalModel extends Equatable {
   List<Object?> get props => [
         id,
         lessonId,
-        gameTypeId,
+        gameTypeId,name,
         mainLetter,
         audioFlag,
         video,
